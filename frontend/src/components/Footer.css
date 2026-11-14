@@ -1,0 +1,178 @@
+/* ==========================================================================
+   Footer.css - Voyara Footer
+   ========================================================================== */
+
+.voyara-footer {
+  width: 100%;
+  background-color: #faf9f6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  padding: 80px 40px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.voyara-footer-content {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 48px;
+  margin-top: 16px;
+}
+
+.voyara-footer-brand {
+  flex: 1 1 260px;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.voyara-footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.voyara-footer-logo-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background-color: #17191c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.voyara-footer-logo-text {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  color: #17191c;
+}
+
+.voyara-footer-tagline {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(13, 13, 13, 0.62);
+  margin: 0;
+}
+
+.voyara-footer-socials {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.voyara-footer-social-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background-color: rgba(13, 13, 13, 0.05);
+  border: 1px solid rgba(13, 13, 13, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+
+.voyara-footer-social-btn:hover {
+  background-color: rgba(13, 13, 13, 0.1);
+  transform: translateY(-2px);
+}
+
+.voyara-footer-nav-grid {
+  flex: 2 1 500px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 32px;
+}
+
+.voyara-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.voyara-footer-col-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(13, 13, 13, 0.5);
+}
+
+.voyara-footer-col-link {
+  font-size: 15px;
+  color: rgba(13, 13, 13, 0.72);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.voyara-footer-col-link:hover {
+  color: #17191c;
+}
+
+.voyara-footer-col-text {
+  font-size: 15px;
+  color: rgba(13, 13, 13, 0.72);
+}
+
+.voyara-footer-divider {
+  width: 100%;
+  max-width: 1100px;
+  height: 1px;
+  background-color: rgba(13, 13, 13, 0.08);
+}
+
+.voyara-footer-bottom {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.voyara-footer-copyright {
+  font-size: 13px;
+  color: rgba(13, 13, 13, 0.5);
+}
+
+.voyara-footer-credits {
+  font-size: 13px;
+  font-weight: 500;
+  color: #17191c;
+}
+
+.voyara-footer-back-to-top {
+  border: none;
+  cursor: pointer;
+}
+
+.voyara-footer-watermark {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(90px, 18vw, 240px);
+  fontWeight: 500;
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  color: rgba(13, 13, 13, 0.04);
+  user-select: none;
+  pointer-events: none;
+  margin-top: 10px;
+  margin-bottom: -20px;
+}
+

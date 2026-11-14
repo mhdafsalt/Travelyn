@@ -1,0 +1,17 @@
+[
+  {
+    "id": "bk-1001",
+    "destinationId": "dest-1",
+    "destinationTitle": "Santorini",
+    "travelerName": "Emma Watson",
+    "travelerEmail": "emma.w@example.com",
+    "phone": "+1 415 555 2671",
+    "startDate": "2026-06-12",
+    "guests": 2,
+    "roomType": "Caldera Sunset Cave Suite",
+    "specialRequests": "Celebrating 5th anniversary, preference for private sunset catamaran.",
+    "totalEstimatedPrice": 6900,
+    "status": "confirmed",
+    "createdAt": "2026-01-15T10:30:00.000Z"
+  }
+]

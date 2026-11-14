@@ -1,0 +1,992 @@
+/* ==========================================================================
+   HeroSection.css - Nomia Style Hero Section
+   ========================================================================== */
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0c0d10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* 1. Backdrop layers */
+.hero-backdrop-img {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://framerusercontent.com/images/TSiGMGJHmapQIwKIzHneadv3LM.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.hero-overlay-radial {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(12, 13, 16, 0.4) 60%,
+    rgba(12, 13, 16, 0.85) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-overlay-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, rgba(12, 13, 16, 0.75) 0%, rgba(12, 13, 16, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-overlay-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(
+    to bottom,
+    rgba(12, 13, 16, 0) 0%,
+    rgba(250, 249, 246, 0.25) 50%,
+    #faf9f6 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 2. Framing Wireframe Shapes */
+.hero-wireframe-box {
+  position: absolute;
+  top: 119px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(542px, 86vw);
+  height: 270px;
+  border: 1.6px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.hero-wireframe-pill {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 165px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 100px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* 3. Center Digital Clock & Date */
+.hero-clock-container {
+  position: absolute;
+  top: 88px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-date-badge {
+  font-family: 'Inter', var(--font-sans), sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  background-image: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.6) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-transform: capitalize;
+  padding-bottom: 6px;
+  margin-bottom: 46px;
+}
+
+.hero-clock-digits-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  transform: scaleY(1.7);
+  transform-origin: center center;
+}
+
+.hero-clock-digits {
+  font-family: 'Inter', var(--font-sans), sans-serif;
+  font-size: clamp(88px, 14vw, 180px);
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.14) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-clock-colon {
+  font-family: 'Inter', var(--font-sans), sans-serif;
+  font-size: clamp(88px, 14vw, 180px);
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.14) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  margin: 0 4px;
+  opacity: 0.7;
+}
+
+/* 4. Foreground Subject Cutout (Woman with headphones / Traveler) */
+.hero-cutout-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(520px, 76vw, 1280px);
+  height: clamp(620px, 88vh, 1060px);
+  max-height: 92vh;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.hero-cutout-img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 24px 54px rgba(0, 0, 0, 0.45));
+}
+
+/* 4b. Bottom Shade (Seamless match with next section: #faf9f6) */
+.hero-bottom-white-shade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(60px, 8vh, 95px);
+  background: linear-gradient(
+    to bottom,
+    rgba(250, 249, 246, 0) 0%,
+    rgba(250, 249, 246, 0.18) 30%,
+    rgba(250, 249, 246, 0.58) 65%,
+    rgba(250, 249, 246, 0.92) 88%,
+    #faf9f6 100%
+  );
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* 5. Main Hero Content Overlays */
+.hero-content-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1440px;
+  padding: 128px 36px 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.hero-top-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  width: 100%;
+}
+
+.hero-left-block {
+  max-width: 530px;
+}
+
+.hero-title {
+  font-family: 'Inter', var(--font-display), sans-serif;
+  font-size: clamp(36px, 5.2vw, 74px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  color: #ffffff;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.hero-subtitle {
+  font-family: 'Inter', var(--font-sans), sans-serif;
+  font-size: clamp(15px, 1.25vw, 17.5px);
+  line-height: 1.48;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 380px;
+  margin-top: 16px;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+/* Right Glass Widget: Lisbon Live Card */
+.hero-glass-card {
+  width: 100%;
+  max-width: 300px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(20, 20, 20, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.hero-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-card-city {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.hero-card-today-badge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.hero-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hero-card-museum {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.hero-card-status {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.hero-card-divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.hero-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-card-pace-text {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 450;
+}
+
+/* 6. Bottom Controls: Chips, Prompt Bar, Live Beacon */
+.hero-bottom-controls {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: clamp(60px, 10vh, 160px);
+  margin-bottom: 40px;
+}
+
+.hero-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.hero-chip-btn {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 100px;
+  padding: 7px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.hero-chip-btn:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.hero-chip-time {
+  opacity: 0.72;
+  font-weight: 400;
+}
+
+.hero-chip-dot {
+  opacity: 0.4;
+}
+
+.hero-chip-title {
+  font-weight: 500;
+}
+
+/* Prompt Bar */
+.hero-prompt-bar {
+  width: 100%;
+  max-width: 560px;
+  height: 60px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background-color: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 18px;
+  padding: 6px 8px 6px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.38);
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero-prompt-bar.is-focused {
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.55);
+}
+
+.hero-prompt-input-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-sparkle-icon {
+  flex-shrink: 0;
+  opacity: 0.9;
+  animation: heroTwinkle 2.4s ease-in-out infinite;
+}
+
+.hero-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.hero-prompt-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 14.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  font-family: inherit;
+}
+
+.hero-typewriter-overlay {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14.5px;
+  font-weight: 500;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.hero-cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  margin-left: 3px;
+  background-color: #ffffff;
+  animation: heroCursorBlink 1s step-start infinite;
+}
+
+.hero-prompt-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.hero-mic-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ffffff;
+  transition: background-color 0.2s;
+}
+
+.hero-mic-btn:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+}
+
+.hero-build-btn {
+  background-color: #ffffff;
+  color: #17191c;
+  border: none;
+  border-radius: 12px;
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+  font-family: inherit;
+}
+
+.hero-build-btn:hover {
+  transform: scale(1.02);
+}
+
+/* 7. Live Pulsing Status Beacon */
+.hero-status-beacon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-top: 4px;
+  padding: 5px 14px;
+  border-radius: 100px;
+  background: rgba(12, 13, 16, 0.48);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.hero-beacon-dot-wrapper {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hero-beacon-ring {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  opacity: 0.5;
+  animation: heroPulse 2s ease-out infinite;
+}
+
+.hero-beacon-core {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 0 6px #ffffff;
+}
+
+.hero-beacon-label {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.hero-beacon-value {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Keyframe Animations */
+@keyframes heroTwinkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes heroCursorBlink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes heroPulse {
+  0% {
+    transform: scale(0.3);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+/* 1. Large Laptops & Medium Desktops (1024px - 1280px) */
+@media (max-width: 1280px) {
+  .hero-content-wrapper {
+    padding: 110px 28px 0;
+  }
+
+  .hero-left-block {
+    max-width: 460px;
+  }
+
+  .hero-title {
+    font-size: clamp(34px, 4.4vw, 56px);
+  }
+
+  .hero-glass-card {
+    max-width: 260px;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .hero-wireframe-box {
+    width: min(460px, 46vw);
+    height: 240px;
+  }
+
+  .hero-cutout-container {
+    width: clamp(480px, 72vw, 980px);
+    height: clamp(560px, 82vh, 880px);
+    max-height: 86vh;
+  }
+}
+
+/* 2. Tablets & Small Laptops (769px - 1023px) */
+@media (max-width: 1023px) {
+  .hero-section {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .hero-content-wrapper {
+    padding: 100px 24px 0;
+  }
+
+  .hero-top-row {
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .hero-left-block {
+    max-width: 420px;
+  }
+
+  .hero-title {
+    font-size: clamp(30px, 4vw, 44px);
+  }
+
+  .hero-subtitle {
+    font-size: 14.5px;
+    max-width: 340px;
+    margin-top: 12px;
+  }
+
+  .hero-glass-card {
+    max-width: 240px;
+    padding: 14px;
+    gap: 10px;
+    border-radius: 14px;
+  }
+
+  .hero-card-today-badge {
+    font-size: 10px;
+    padding: 2px 7px;
+  }
+
+  .hero-wireframe-box,
+  .hero-wireframe-pill {
+    display: none;
+  }
+
+  .hero-clock-container {
+    top: 96px;
+    opacity: 0.55;
+  }
+
+  .hero-clock-digits,
+  .hero-clock-colon {
+    font-size: clamp(70px, 11vw, 130px);
+  }
+
+  .hero-cutout-container {
+    width: clamp(420px, 80vw, 800px);
+    height: clamp(480px, 75vh, 720px);
+    max-height: 78vh;
+  }
+
+  .hero-bottom-controls {
+    margin-top: clamp(40px, 7vh, 100px);
+    margin-bottom: 32px;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 920px) {
+  .hero-clock-container {
+    display: none !important;
+  }
+}
+
+/* 3. Mobile Landscape & Portrait Tablets (<= 768px) */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 100vh;
+    min-height: 100svh;
+    justify-content: space-between;
+  }
+
+  /* Hide clock, wireframes & desktop card on mobile to prevent any text overlap with centered title */
+  .hero-clock-container,
+  .hero-wireframe-box,
+  .hero-wireframe-pill,
+  .hero-glass-card {
+    display: none !important;
+  }
+
+  .hero-content-wrapper {
+    padding: 85px 16px 0;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero-top-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+    width: 100%;
+  }
+
+  .hero-left-block {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 7.2vw, 40px);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+    line-height: 1.45;
+    max-width: 330px;
+    margin: 10px auto 0;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  /* Prominent centered traveler cutout on mobile */
+  .hero-cutout-container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(560px, 145vw, 840px);
+    max-width: none;
+    height: clamp(380px, 58vh, 520px);
+    max-height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .hero-cutout-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
+    filter: drop-shadow(0 20px 42px rgba(0, 0, 0, 0.45));
+  }
+
+  /* Bottom Controls on Mobile */
+  .hero-bottom-controls {
+    margin-top: auto;
+    margin-bottom: 20px;
+    gap: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+  }
+
+  /* Sleek single-row horizontal swipeable chips */
+  .hero-chips-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    padding: 4px 16px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hero-chips-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero-chip-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 6px 13px;
+    font-size: 12px;
+    gap: 6px;
+    border-radius: 9999px;
+  }
+
+  /* Sleek, single-row mobile prompt bar */
+  .hero-prompt-bar {
+    max-width: 100%;
+    width: calc(100% - 24px);
+    max-width: 440px;
+    height: 52px;
+    padding: 4px 6px 4px 14px;
+    border-radius: 16px;
+    gap: 8px;
+    margin: 0 auto;
+  }
+
+  .hero-prompt-input-group {
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .hero-input-wrapper {
+    min-width: 0;
+  }
+
+  .hero-prompt-input {
+    font-size: 16px; /* Prevents iOS auto-zoom on focus */
+  }
+
+  .hero-typewriter-overlay {
+    font-size: 14px;
+  }
+
+  .hero-prompt-actions {
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .hero-mic-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  .hero-build-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+    border-radius: 10px;
+    gap: 5px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .hero-status-beacon {
+    font-size: 12px;
+    padding: 4px 12px;
+    margin-top: 2px;
+  }
+
+  .hero-bottom-white-shade {
+    height: clamp(50px, 7vh, 70px);
+  }
+}
+
+/* 4. Small Phones (<= 480px) */
+@media (max-width: 480px) {
+  .hero-content-wrapper {
+    padding: 78px 12px 0;
+  }
+
+  .hero-title {
+    font-size: clamp(26px, 7.5vw, 34px);
+    letter-spacing: -0.03em;
+  }
+
+  .hero-subtitle {
+    font-size: 13.5px;
+    max-width: 295px;
+    margin-top: 8px;
+  }
+
+  .hero-cutout-container {
+    width: clamp(520px, 150vw, 760px);
+    height: clamp(350px, 56vh, 480px);
+    max-height: 60vh;
+  }
+
+  .hero-bottom-controls {
+    margin-bottom: 16px;
+    gap: 8px;
+  }
+
+  .hero-chips-row {
+    gap: 6px;
+    padding: 4px 12px;
+  }
+
+  .hero-chip-btn {
+    padding: 5px 11px;
+    font-size: 11.5px;
+  }
+
+  .hero-prompt-bar {
+    width: calc(100% - 16px);
+    height: 50px;
+    padding: 4px 5px 4px 12px;
+    border-radius: 14px;
+  }
+
+  .hero-build-btn {
+    padding: 8px 12px;
+    font-size: 12.5px;
+  }
+
+  .hero-status-beacon {
+    font-size: 11.5px;
+    padding: 3px 10px;
+  }
+
+  .hero-bottom-white-shade {
+    height: 52px;
+  }
+}
+
+/* 5. Ultra-compact Phones (<= 360px) */
+@media (max-width: 360px) {
+  .hero-content-wrapper {
+    padding: 72px 8px 0;
+  }
+
+  .hero-title {
+    font-size: 23px;
+  }
+
+  .hero-subtitle {
+    font-size: 12px;
+    max-width: 260px;
+  }
+
+  .hero-cutout-container {
+    width: clamp(480px, 155vw, 680px);
+    height: clamp(320px, 52vh, 420px);
+  }
+
+  .hero-mic-btn {
+    display: none;
+  }
+
+  .hero-chip-btn {
+    padding: 4px 9px;
+    font-size: 11px;
+  }
+
+  .hero-build-btn {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+}
+

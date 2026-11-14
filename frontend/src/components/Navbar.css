@@ -1,0 +1,559 @@
+/* ==========================================================================
+   Navbar.css - Travelyn Two-Sided Luxury Minimal Navbar
+   Style: Left Brand Name ("travelyn.") & Right MENU with 2 Horizontal Lines ("MENU =")
+   ========================================================================== */
+
+.travelyn-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 0;
+  background: transparent;
+  transform: translateY(0);
+  transition: padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.35s ease,
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.35s ease;
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+/* Scrolled State: Sleek Frosted Dark Glass for Contrast over Any Section */
+.travelyn-navbar.is-scrolled {
+  padding: 16px 0;
+  background: rgba(12, 14, 18, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Hidden State: Smoothly slides up out of viewport when scrolling down */
+.travelyn-navbar.is-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Fade original navbar when fullscreen overlay menu is active */
+.travelyn-navbar.is-menu-open {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Inner Container: Perfectly aligned with the 1440px Hero Section Grid */
+.travelyn-navbar-inner {
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 36px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   1. Brand Logo (Left Side: "travelyn.")
+   -------------------------------------------------------------------------- */
+.travelyn-brand {
+  display: inline-flex;
+  align-items: baseline;
+  text-decoration: none;
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(23px, 2.2vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  user-select: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+}
+
+.travelyn-brand:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.travelyn-brand-text {
+  color: #ffffff;
+}
+
+.travelyn-brand-dot {
+  color: #ffffff;
+  font-weight: 800;
+  margin-left: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   2. Menu Button (Right Side: "MENU =")
+   -------------------------------------------------------------------------- */
+.travelyn-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 0;
+  color: #ffffff;
+  text-decoration: none;
+  user-select: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.travelyn-menu-btn:hover {
+  opacity: 0.82;
+  transform: translateY(-1px);
+}
+
+.travelyn-menu-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* Two Parallel Horizontal Lines Icon */
+.travelyn-menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 22px;
+  height: 18px;
+  position: relative;
+}
+
+.travelyn-icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease;
+  transform-origin: center center;
+}
+
+/* Morph 2 parallel lines into sleek X when active */
+.travelyn-menu-btn.is-active .top-bar {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.travelyn-menu-btn.is-active .bottom-bar {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* --------------------------------------------------------------------------
+   3. Fullscreen / Luxury Overlay Menu
+   -------------------------------------------------------------------------- */
+.travelyn-overlay-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: visibility 0.35s ease, opacity 0.35s ease;
+}
+
+.travelyn-overlay-menu.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.travelyn-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 11, 15, 0.96);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  z-index: 1;
+}
+
+.travelyn-overlay-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px 36px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Overlay Top Header (Aligns with closed navbar) */
+.travelyn-overlay-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 24px;
+}
+
+/* Overlay Main Content Grid */
+.travelyn-overlay-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 72px;
+  align-items: center;
+  margin: auto 0;
+  padding: 24px 0;
+}
+
+.travelyn-section-tag {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 24px;
+}
+
+/* Left Column: Navigation Links */
+.travelyn-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.travelyn-nav-anchor {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.25s ease;
+}
+
+.travelyn-nav-anchor:hover {
+  color: #ffffff;
+  padding-left: 12px;
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.travelyn-nav-anchor.is-active {
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.35);
+}
+
+.travelyn-nav-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.4);
+  min-width: 28px;
+}
+
+.travelyn-nav-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(28px, 3.8vw, 48px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  flex: 1;
+}
+
+.travelyn-nav-arrow {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.25s ease;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+.travelyn-nav-anchor:hover .travelyn-nav-arrow,
+.travelyn-nav-anchor.is-active .travelyn-nav-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Right Column: Curator Manifesto & Details */
+.travelyn-details-col {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.travelyn-details-card {
+  padding: 32px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.travelyn-card-headline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  line-height: 1.25;
+  margin: 0 0 12px;
+}
+
+.travelyn-card-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 24px;
+}
+
+.travelyn-plan-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #0c0e12;
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.15);
+}
+
+.travelyn-plan-cta:hover {
+  transform: scale(1.03);
+  background: #f2f2f2;
+  box-shadow: 0 6px 24px rgba(255, 255, 255, 0.25);
+}
+
+.travelyn-cta-arrow {
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.travelyn-plan-cta:hover .travelyn-cta-arrow {
+  transform: translateX(3px);
+}
+
+.travelyn-contact-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-left: 8px;
+}
+
+.travelyn-contact-unit {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.travelyn-contact-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.travelyn-contact-val {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.travelyn-contact-val:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.travelyn-social-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.travelyn-social-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.travelyn-social-tag:hover {
+  color: #ffffff;
+}
+
+.travelyn-dot-sep {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   4. Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .travelyn-navbar-inner {
+    padding: 0 28px;
+  }
+
+  .travelyn-overlay-content {
+    padding: 28px 28px 40px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .travelyn-navbar-inner {
+    padding: 0 24px;
+  }
+
+  .travelyn-overlay-content {
+    padding: 24px 24px 36px;
+  }
+
+  .travelyn-overlay-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin: 20px 0;
+  }
+
+  .travelyn-details-col {
+    gap: 24px;
+  }
+
+  .travelyn-details-card {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .travelyn-navbar {
+    padding: 18px 0;
+  }
+
+  .travelyn-navbar.is-scrolled {
+    padding: 14px 0;
+  }
+
+  .travelyn-navbar-inner {
+    padding: 0 16px;
+  }
+
+  .travelyn-overlay-content {
+    padding: 18px 16px 32px;
+  }
+
+  .travelyn-overlay-header {
+    padding-bottom: 16px;
+  }
+
+  .travelyn-brand {
+    font-size: 22px;
+  }
+
+  .travelyn-menu-label {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+  }
+
+  .travelyn-nav-title {
+    font-size: clamp(24px, 6.5vw, 34px);
+  }
+
+  .travelyn-nav-anchor {
+    padding: 10px 0;
+    gap: 14px;
+  }
+
+  .travelyn-details-card {
+    padding: 20px;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .travelyn-navbar {
+    padding: 16px 0;
+  }
+
+  .travelyn-navbar.is-scrolled {
+    padding: 12px 0;
+  }
+
+  .travelyn-navbar-inner {
+    padding: 0 12px;
+  }
+
+  .travelyn-overlay-content {
+    padding: 16px 12px 24px;
+  }
+
+  .travelyn-brand {
+    font-size: 21px;
+  }
+
+  .travelyn-menu-btn {
+    gap: 9px;
+  }
+
+  .travelyn-menu-icon {
+    width: 20px;
+    height: 16px;
+  }
+
+  .travelyn-icon-bar {
+    width: 20px;
+  }
+
+  .travelyn-nav-title {
+    font-size: 22px;
+  }
+
+  .travelyn-plan-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .travelyn-navbar-inner {
+    padding: 0 8px;
+  }
+
+  .travelyn-overlay-content {
+    padding: 14px 8px 20px;
+  }
+}

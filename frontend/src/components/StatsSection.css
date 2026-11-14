@@ -1,0 +1,167 @@
+/* ==========================================================================
+   StatsSection.css - Voyara Stats & Breathe Section
+   ========================================================================== */
+
+.stats-breathe-section {
+  width: 100%;
+  height: 720px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 120px 24px;
+}
+
+.stats-breathe-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://framerusercontent.com/images/PMSlK6mTGdx9DcWYaJZiAMBFv4.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.stats-breathe-overlay-dark {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(12, 18, 22, 0.12) 12%, rgba(12, 18, 22, 0.45) 50%, rgba(12, 18, 22, 0.12) 88%);
+}
+
+.stats-breathe-overlay-top {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #faf9f6 0%, rgba(250, 249, 246, 0.6) 12%, transparent 28%);
+}
+
+.stats-breathe-overlay-bottom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #faf9f6 0%, rgba(250, 249, 246, 0.7) 12%, transparent 28%);
+}
+
+.stats-breathe-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.stats-breathe-heading {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6vw, 84px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+.stats-breathe-subtext {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* About Section */
+.stats-about-section {
+  width: 100%;
+  background-color: #faf9f6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+  padding: 80px 40px 96px;
+}
+
+.stats-about-content {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.stats-about-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  flex: 1 1 240px;
+  max-width: 280px;
+}
+
+.stats-about-est {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(13, 13, 13, 0.62);
+}
+
+.stats-about-right {
+  flex: 2 1 360px;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.stats-about-statement {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.8vw, 50px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  color: #17191c;
+  margin: 0;
+}
+
+.stats-about-statement-muted {
+  color: rgba(13, 13, 13, 0.38);
+}
+
+/* 4 Stats Grid */
+.stats-grid {
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 28px;
+  margin-top: 20px;
+}
+
+.stats-item {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stats-item-divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(13, 13, 13, 0.1);
+}
+
+.stats-item-number {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 5.5vw, 76px);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: #17191c;
+}
+
+.stats-item-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(13, 13, 13, 0.62);
+}
+

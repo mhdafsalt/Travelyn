@@ -1,0 +1,262 @@
+/* ==========================================================================
+   BookingModal.css - Voyara Booking & Inquire Modal
+   ========================================================================== */
+
+.booking-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(13, 18, 22, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: bookingFadeIn 0.25s ease;
+}
+
+.booking-modal-container {
+  width: 100%;
+  max-width: 620px;
+  background-color: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+.booking-modal-header {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.booking-modal-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.booking-modal-banner-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.booking-modal-banner-content {
+  position: absolute;
+  bottom: 16px;
+  left: 24px;
+  right: 24px;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.booking-modal-country {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.booking-modal-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.booking-modal-price-box {
+  text-align: right;
+}
+
+.booking-modal-price-from {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.booking-modal-price-val {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.booking-modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.booking-modal-close-btn:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.booking-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* Success View */
+.booking-modal-success {
+  text-align: center;
+  padding: 30px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.booking-modal-success-check {
+  width: 60px;
+  height: 60px;
+  border-radius: 999px;
+  background-color: rgba(47, 133, 90, 0.12);
+  color: #2f855a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.booking-modal-success-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1e262a;
+  margin: 0;
+}
+
+.booking-modal-success-msg {
+  font-size: 15px;
+  color: rgba(13, 13, 13, 0.65);
+  max-width: 420px;
+  line-height: 1.5;
+}
+
+/* Form */
+.booking-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.booking-modal-row-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.booking-modal-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-modal-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e262a;
+  margin-bottom: 6px;
+}
+
+.booking-modal-input,
+.booking-modal-select {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(13, 13, 13, 0.15);
+  font-size: 14px;
+  color: #1e262a;
+  background-color: #ffffff;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.booking-modal-input:focus,
+.booking-modal-select:focus,
+.booking-modal-textarea:focus {
+  border-color: #1e262a;
+}
+
+.booking-modal-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(13, 13, 13, 0.15);
+  font-size: 14px;
+  color: #1e262a;
+  resize: none;
+  background-color: #ffffff;
+  outline: none;
+  font-family: inherit;
+}
+
+.booking-modal-summary {
+  padding: 14px 18px;
+  border-radius: 16px;
+  background-color: #f2efe9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.booking-modal-summary-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e262a;
+}
+
+.booking-modal-summary-sub {
+  font-size: 12px;
+  color: rgba(13, 13, 13, 0.6);
+}
+
+.booking-modal-summary-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #17191c;
+}
+
+.booking-modal-error {
+  font-size: 13px;
+  color: #c53030;
+  font-weight: 500;
+}
+
+.booking-modal-submit-btn {
+  width: 100%;
+  justify-content: center;
+  height: 52px;
+  margin-top: 8px;
+}
+
+@keyframes bookingFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+

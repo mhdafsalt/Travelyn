@@ -1,0 +1,44 @@
+[
+  {
+    "id": "story-1",
+    "title": "Mornings above the clouds",
+    "description": "Coffee on a wooden balcony, the valley still asleep below and snowy peaks catching the first light.",
+    "destinationSlug": "swiss-alps",
+    "destinationTitle": "Swiss Alps",
+    "author": "Claire & Tom",
+    "trip": "Swiss Alps",
+    "year": 2026,
+    "quote": "Slow trains, quiet villages and the best fondue of our lives. We didn’t want to come home.",
+    "avatarUrl": "https://framerusercontent.com/images/cwjju4oQ9SWH1nkXN95LfTNt94.jpg",
+    "imageUrl": "https://framerusercontent.com/images/8guYiCRSdUDmndFojnqAvFpGNk.jpg",
+    "rating": 5.0
+  },
+  {
+    "id": "story-2",
+    "title": "Evenings by the fire",
+    "description": "Wool blankets, crackling logs and fondue shared slowly while the snow falls outside the window.",
+    "destinationSlug": "swiss-alps",
+    "destinationTitle": "Swiss Alps",
+    "author": "Julian & Mei",
+    "trip": "Swiss Alps",
+    "year": 2026,
+    "quote": "Standing beneath the Matterhorn at dusk with hot wine in hand is something we will remember forever.",
+    "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80",
+    "imageUrl": "https://framerusercontent.com/images/Y5iOG5ie06PAZjqXQFJGD5em94.jpg",
+    "rating": 4.9
+  },
+  {
+    "id": "story-3",
+    "title": "Kyoto at twilight",
+    "description": "Walking ancient stone alleyways in Gion as paper lanterns softly illuminated the quiet rain.",
+    "destinationSlug": "kyoto",
+    "destinationTitle": "Kyoto",
+    "author": "Arthur & Eleanor",
+    "trip": "Kyoto",
+    "year": 2025,
+    "quote": "Every temple gate and tea ceremony felt deeply intentional. Voyara unlocked places we could never have found on our own.",
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
+    "imageUrl": "https://framerusercontent.com/images/1i1SYez5flXAysor3K8yCCzcuo0.jpg",
+    "rating": 5.0
+  }
+]

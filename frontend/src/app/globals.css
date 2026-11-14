@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&display=swap');
+
+:root {
+  --bg-primary: #faf9f6;
+  --bg-secondary: #f2efe9;
+  --bg-surface: #ffffff;
+  --text-primary: #1e262a;
+  --text-muted: rgba(30, 38, 42, 0.65);
+  --text-subtle: rgba(30, 38, 42, 0.4);
+  --border-subtle: rgba(13, 13, 13, 0.08);
+  --border-medium: rgba(13, 13, 13, 0.16);
+  --accent-blue: #5b8291;
+  --accent-orange: #ff4f00;
+  --btn-dark: #17191c;
+  --btn-dark-hover: #000000;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Inter', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+}
+
+/* Reusable luxury tag pill */
+.voyara-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(23, 25, 28, 0.12);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s ease;
+}
+
+.voyara-tag-dark {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.voyara-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background-color: var(--accent-blue);
+  flex-shrink: 0;
+}
+
+.voyara-dot-orange {
+  background-color: var(--accent-orange);
+}
+
+/* Luxury rounded pill button with arrow circle */
+.voyara-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 6px 6px 20px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.voyara-btn-dark {
+  background-color: var(--btn-dark);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(23, 25, 28, 0.15);
+}
+
+.voyara-btn-dark:hover {
+  background-color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(23, 25, 28, 0.22);
+}
+
+.voyara-btn-dark .voyara-arrow-circle {
+  background-color: #ffffff;
+  color: var(--btn-dark);
+}
+
+.voyara-btn-light {
+  background-color: #ffffff;
+  color: var(--text-primary);
+  box-shadow: 0 4px 20px rgba(13, 13, 13, 0.08);
+}
+
+.voyara-btn-light:hover {
+  background-color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(13, 13, 13, 0.14);
+}
+
+.voyara-btn-light .voyara-arrow-circle {
+  background-color: var(--btn-dark);
+  color: #ffffff;
+}
+
+.voyara-btn-glass {
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--text-primary);
+}
+
+.voyara-btn-glass:hover {
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-1px);
+}
+
+.voyara-btn-glass .voyara-arrow-circle {
+  background-color: var(--btn-dark);
+  color: #ffffff;
+}
+
+.voyara-arrow-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.voyara-btn:hover .voyara-arrow-circle {
+  transform: translateX(2px) translateY(-1px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(30, 38, 42, 0.2);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(30, 38, 42, 0.35);
+}

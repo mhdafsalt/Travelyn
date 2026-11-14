@@ -1,0 +1,231 @@
+/* ==========================================================================
+   HikeBookingCard.css - Expedition & Hike Booking Card (Nomia Style)
+   ========================================================================== */
+
+.hike-card-wrap {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 22px 20px 24px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: inherit;
+}
+
+/* 1. Top Map Illustration */
+.hike-map-container {
+  width: 100%;
+  height: 200px;
+  border-radius: 18px;
+  overflow: hidden;
+  background-color: #edf2ea;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hike-map-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 2. Route Endpoints Row */
+.hike-route-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 4px 6px;
+}
+
+.hike-route-endpoint {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hike-route-endpoint.left {
+  text-align: left;
+  flex: 1;
+}
+
+.hike-route-endpoint.right {
+  text-align: right;
+  flex: 1;
+}
+
+.hike-endpoint-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #17191c;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hike-endpoint-sub {
+  font-size: 12.5px;
+  color: #71717a;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+/* Dashed Route Divider */
+.hike-route-divider {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  padding: 0 4px;
+}
+
+.hike-divider-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #1c3a27;
+  flex-shrink: 0;
+}
+
+.hike-divider-line {
+  width: 38px;
+  border-top: 1.5px dashed #1c3a27;
+  opacity: 0.65;
+}
+
+/* 3. Form Section */
+.hike-form {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.hike-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hike-form-label {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #27272a;
+  line-height: 1.2;
+}
+
+.hike-form-input {
+  width: 100%;
+  height: 46px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background-color: #f0f2ee;
+  border: 1px solid transparent;
+  font-size: 14.5px;
+  color: #17191c;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.hike-form-input::placeholder {
+  color: #8b9287;
+  font-weight: 400;
+}
+
+.hike-form-input:focus {
+  background-color: #ffffff;
+  border-color: #1c3a27;
+}
+
+.hike-input-with-icon {
+  position: relative;
+  width: 100%;
+}
+
+.hike-calendar-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #71717a;
+}
+
+/* 4. Price Row */
+.hike-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  padding-top: 4px;
+}
+
+.hike-price-val {
+  font-family: var(--font-display), sans-serif;
+  font-size: 38px;
+  font-weight: 500;
+  color: #17191c;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.hike-price-unit {
+  font-size: 15px;
+  font-weight: 500;
+  color: #17191c;
+}
+
+/* 5. Submit Button */
+.hike-submit-btn {
+  width: 100%;
+  height: 52px;
+  border-radius: 12px;
+  background-color: #1c3a27;
+  color: #ffffff;
+  border: none;
+  font-size: 15.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(28, 58, 39, 0.18);
+  margin-top: 4px;
+}
+
+.hike-submit-btn:hover {
+  background-color: #142d1d;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(28, 58, 39, 0.28);
+}
+
+.hike-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Success notification message */
+.hike-success-msg {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background-color: #eaf3eb;
+  border: 1px solid #cce4ce;
+  color: #1c3a27;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-align: center;
+  animation: hikeFadeIn 0.25s ease;
+}
+
+@keyframes hikeFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+

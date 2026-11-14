@@ -1,0 +1,145 @@
+/* ==========================================================================
+   NewsletterSection.css - Voyara Newsletter Subscription Card
+   ========================================================================== */
+
+.newsletter-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  background-color: #ffffff;
+  border-radius: 32px;
+  border: 1px solid rgba(13, 13, 13, 0.08);
+  padding: 44px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+}
+
+.newsletter-left {
+  flex: 1 1 300px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newsletter-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ff4f00;
+}
+
+.newsletter-heading {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  color: #17191c;
+  margin: 0;
+}
+
+.newsletter-heading-muted {
+  color: rgba(13, 13, 13, 0.4);
+}
+
+.newsletter-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(13, 13, 13, 0.62);
+  margin: 0;
+}
+
+.newsletter-right {
+  flex: 1 1 320px;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.newsletter-input-wrap {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.newsletter-input {
+  width: 100%;
+  height: 52px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(13, 13, 13, 0.12);
+  background-color: rgba(13, 13, 13, 0.04);
+  color: #1e262a;
+  font-size: 15px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.newsletter-input:focus {
+  border-color: #17191c;
+}
+
+.newsletter-submit-btn {
+  height: 52px;
+  padding: 0 8px 0 22px;
+  border-radius: 999px;
+  border: 0;
+  background-color: #17191c;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  font-family: inherit;
+}
+
+.newsletter-submit-btn:hover {
+  background-color: #000000;
+}
+
+.newsletter-submit-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background-color: #ffffff;
+  color: #17191c;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.newsletter-msg {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.newsletter-msg.is-success {
+  color: #2f855a;
+}
+
+.newsletter-msg.is-error {
+  color: #c53030;
+}
+
+.newsletter-disclaimer {
+  font-size: 12px;
+  color: rgba(13, 13, 13, 0.45);
+  line-height: 1.4;
+}
+

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "cat-1",
+    "name": "Trending",
+    "slug": "trending",
+    "icon": "compass",
+    "count": 5
+  },
+  {
+    "id": "cat-2",
+    "name": "Islands",
+    "slug": "islands",
+    "icon": "spark",
+    "count": 2
+  },
+  {
+    "id": "cat-3",
+    "name": "Nature",
+    "slug": "nature",
+    "icon": "leaf",
+    "count": 3
+  },
+  {
+    "id": "cat-4",
+    "name": "Culture",
+    "slug": "culture",
+    "icon": "globe",
+    "count": 3
+  },
+  {
+    "id": "cat-5",
+    "name": "Romantic",
+    "slug": "romantic",
+    "icon": "heart",
+    "count": 4
+  },
+  {
+    "id": "cat-6",
+    "name": "Adventure",
+    "slug": "adventure",
+    "icon": "plane",
+    "count": 2
+  },
+  {
+    "id": "cat-7",
+    "name": "Wellness",
+    "slug": "wellness",
+    "icon": "shield",
+    "count": 3
+  },
+  {
+    "id": "cat-8",
+    "name": "Luxury",
+    "slug": "luxury",
+    "icon": "star",
+    "count": 6
+  }
+]

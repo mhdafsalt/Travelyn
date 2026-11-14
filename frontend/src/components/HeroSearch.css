@@ -1,0 +1,270 @@
+/* ==========================================================================
+   HeroSearch.css - Voyara Capsule Search
+   ========================================================================== */
+
+.hero-search-wrapper {
+  width: 100%;
+  max-width: 920px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.hero-search-capsule {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 8px;
+  box-shadow: 0 20px 60px rgba(13, 13, 13, 0.12), 0 1px 3px rgba(13, 13, 13, 0.06);
+  border: 1px solid rgba(13, 13, 13, 0.1);
+  position: relative;
+  z-index: 20;
+}
+
+.hero-search-tab {
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 12px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  justify-content: center;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.hero-search-tab.is-where {
+  flex: 1.25 1 0%;
+  min-width: 0;
+}
+
+.hero-search-tab.is-when {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.hero-search-tab.is-who {
+  flex: 1 1 0%;
+  min-width: 0;
+  padding: 12px 20px;
+}
+
+.hero-search-tab.is-active {
+  background-color: rgba(13, 13, 13, 0.04);
+}
+
+.hero-search-tab-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #1e262a;
+  line-height: 1.2;
+}
+
+.hero-search-tab-value {
+  font-size: 14px;
+  color: rgba(13, 13, 13, 0.55);
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hero-search-tab-value.has-value {
+  color: #1e262a;
+}
+
+.hero-search-divider {
+  width: 1px;
+  align-self: stretch;
+  margin: 14px 0;
+  background-color: rgba(13, 13, 13, 0.1);
+}
+
+.hero-search-who-group {
+  display: flex;
+  align-items: center;
+  flex: 1.2 1 0%;
+  min-width: 0;
+  gap: 8px;
+}
+
+.hero-search-submit-btn {
+  border: 0;
+  cursor: pointer;
+  background-color: #1e262a;
+  color: #ffffff;
+  border-radius: 999px;
+  height: 52px;
+  padding: 0 24px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  font-family: inherit;
+}
+
+.hero-search-submit-btn:hover {
+  background-color: #000000;
+}
+
+/* Dropdown Panels */
+.hero-search-dropdown-where {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  width: 360px;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid rgba(13, 13, 13, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  z-index: 30;
+  animation: searchFadeIn 0.2s ease;
+}
+
+.hero-search-dropdown-when {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 25%;
+  width: 340px;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid rgba(13, 13, 13, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  z-index: 30;
+  animation: searchFadeIn 0.2s ease;
+}
+
+.hero-search-dropdown-who {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 300px;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid rgba(13, 13, 13, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  padding: 22px;
+  z-index: 30;
+  animation: searchFadeIn 0.2s ease;
+}
+
+.hero-search-dropdown-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(30, 38, 42, 0.5);
+  margin-bottom: 12px;
+}
+
+.hero-search-dest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-search-dest-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+}
+
+.hero-search-dest-item:hover,
+.hero-search-dest-item.is-selected {
+  background-color: rgba(13, 13, 13, 0.05);
+}
+
+.hero-search-dest-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background-color: rgba(91, 130, 145, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5b8291;
+}
+
+.hero-search-dest-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e262a;
+}
+
+.hero-search-season-item {
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: transparent;
+  color: #1e262a;
+  transition: background-color 0.15s ease;
+}
+
+.hero-search-season-item:hover,
+.hero-search-season-item.is-selected {
+  background-color: rgba(13, 13, 13, 0.05);
+}
+
+.hero-search-counter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-search-counter-btns {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-search-counter-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(13, 13, 13, 0.2);
+  background: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.hero-search-counter-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.hero-search-counter-val {
+  font-size: 15px;
+  font-weight: 600;
+  min-width: 18px;
+  text-align: center;
+}
+
+@keyframes searchFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

@@ -1,0 +1,67 @@
+/* ==========================================================================
+   PerksSection.css - Voyara Luxury Travel Perks
+   ========================================================================== */
+
+.perks-section-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 24px 24px 48px;
+}
+
+.perks-card-grid {
+  width: 100%;
+  max-width: 1100px;
+  background-color: #ffffff;
+  border-radius: 28px;
+  border: 1px solid rgba(13, 13, 13, 0.08);
+  box-shadow: 0 10px 30px rgba(23, 25, 28, 0.05);
+  padding: 10px 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.perk-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  transition: background-color 0.2s ease;
+}
+
+.perk-item:hover {
+  background-color: rgba(13, 13, 13, 0.02);
+}
+
+.perk-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background-color: #5b8291;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.perk-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.perk-title {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: #1e262a;
+  line-height: 1.2;
+}
+
+.perk-description {
+  font-size: 13px;
+  color: rgba(13, 13, 13, 0.62);
+  line-height: 1.3;
+}
+
