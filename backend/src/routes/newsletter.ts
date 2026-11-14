@@ -5,7 +5,7 @@ const router = Router();
 const subscribers: NewsletterSubscription[] = [
   {
     id: 'sub-1',
-    email: 'traveler@voyara.travel',
+    email: 'traveler@travelyn.com',
     subscribedAt: '2026-01-01T00:00:00.000Z',
     status: 'active'
   }
@@ -29,7 +29,7 @@ router.post('/subscribe', (req: Request, res: Response) => {
   if (existing) {
     res.json({
       success: true,
-      message: 'You are already subscribed to Voyara Travel stories! Check your inbox soon.'
+      message: 'You are already subscribed to Travelyn stories! Check your inbox soon.'
     });
     return;
   }
@@ -45,7 +45,7 @@ router.post('/subscribe', (req: Request, res: Response) => {
 
   res.status(201).json({
     success: true,
-    message: 'Welcome to the Voyara community. Your first journey inspiration is on its way.',
+    message: 'Welcome to the Travelyn community. Your first journey inspiration is on its way.',
     data: newSub
   });
 });

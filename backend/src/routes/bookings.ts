@@ -73,7 +73,7 @@ router.post('/', (req: Request, res: Response) => {
 
     res.status(201).json({
       success: true,
-      message: 'Booking request received successfully! A Voyara travel designer will contact you within 24 hours.',
+      message: 'Booking request received successfully! A Travelyn travel designer will contact you within 24 hours.',
       data: newBooking
     });
   } catch (error) {

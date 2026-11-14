@@ -232,7 +232,7 @@ export const INITIAL_DESTINATIONS = [
       "Dedicated Balinese private chauffeur and certified English docent",
       "All daily gourmet breakfasts and 3 bespoke cultural dining feasts",
       "Private yacht day excursion to Nusa Penida with snorkeling gear",
-      "24/7 dedicated Voyara concierge"
+      "24/7 dedicated Travelyn concierge"
     ],
     featured: true
   },
@@ -306,7 +306,7 @@ export const INITIAL_DESTINATIONS = [
       "Daily artisan breakfast and select gourmet dinners",
       "Private yacht charter with onboard chef",
       "Private chauffeured transfers throughout the stay",
-      "Dedicated 24/7 Voyara concierge"
+      "Dedicated 24/7 Travelyn concierge"
     ],
     featured: true
   },
@@ -464,7 +464,7 @@ export const INITIAL_DESTINATIONS = [
       "All park permits, specialist gear, and expert mountain guides",
       "Private 4x4 overland transfers and glacier navigation boats",
       "All meals, premium Chilean vintages and trail picnics",
-      "Voyara round-the-clock expedition support"
+      "Travelyn round-the-clock expedition support"
     ],
     featured: true
   },
@@ -607,7 +607,7 @@ export const INITIAL_DESTINATIONS = [
       "Full-day private Riva boat charter with skipper and champagne",
       "Chauffeured Mercedes transfers along the Amalfi Drive",
       "Daily breakfast and handpicked Michelin-level dinners",
-      "Voyara 24/7 dedicated Italian concierge"
+      "Travelyn 24/7 dedicated Italian concierge"
     ],
     featured: true
   },
@@ -671,7 +671,7 @@ export const INITIAL_DESTINATIONS = [
       "Private mahogany water limousine transfers",
       "Private guide and skip-the-line villa tickets",
       "Daily breakfast and lakeside dining experiences",
-      "24/7 Voyara concierge service"
+      "24/7 Travelyn concierge service"
     ],
     featured: true
   }

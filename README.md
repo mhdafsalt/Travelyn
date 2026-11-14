@@ -1,6 +1,6 @@
-# Voyara — Tailor-Made Luxury Travel & Journeys
+# Travelyn — Tailor-Made Luxury Travel & Journeys
 
-A fullstack luxury travel platform inspired by **Voyara**, crafted with **Next.js (App Router)** for the frontend and **Node.js / Express (TypeScript)** for the backend REST API.
+A fullstack luxury travel platform inspired by **Travelyn**, crafted with **Next.js (App Router)** for the frontend and **Node.js / Express (TypeScript)** for the backend REST API.
 
 ---
 
@@ -30,7 +30,7 @@ A fullstack luxury travel platform inspired by **Voyara**, crafted with **Next.j
   - `/destinations` (Searchable catalog with region, theme, and price filters)
   - `/destinations/[slug]` (Deep-dive itinerary, highlights, and sticky booking card)
   - `/experiences` (Curated travel style collections)
-  - `/about` (Voyara studio manifesto, founding history in Lisbon)
+  - `/about` (Travelyn studio manifesto, founding history in Lisbon)
   - `/contact` (Bespoke journey inquiry concierge form)
 
 ### 🚀 Backend (Node.js & Express in TypeScript)
@@ -81,15 +81,15 @@ Travel/
         ├── app/
         │   ├── globals.css      # Luxury design tokens & animations
         │   ├── layout.tsx       # Root layout, fonts & navigation
-        │   ├── page.tsx         # Main Voyara homepage
+        │   ├── page.jsx         # Main Travelyn homepage
         │   ├── destinations/
-        │   │   ├── page.tsx     # Destination catalog
+        │   │   ├── page.jsx     # Destination catalog
         │   │   └── [slug]/
-        │   │       └── page.tsx # Destination detail with itinerary
+        │   │       └── page.jsx # Destination detail with itinerary
         │   ├── experiences/
-        │   │   └── page.tsx     # Curated experience collections
+        │   │   └── page.jsx     # Curated experience collections
         │   ├── about/
-        │   │   └── page.tsx     # Voyara story & philosophy
+        │   │   └── page.jsx     # Travelyn story & philosophy
         │   ├── contact/
         │   │   └── page.tsx     # Concierge inquiry form
         │   └── api/             # Built-in Next.js route handlers
@@ -168,7 +168,7 @@ npm run dev
     "destinationId": "dest-1",
     "destinationTitle": "Santorini",
     "travelerName": "Julian Vance",
-    "travelerEmail": "julian@voyara.travel",
+    "travelerEmail": "julian@travelyn.com",
     "startDate": "2026-07-10",
     "guests": 2,
     "roomType": "Caldera Sunset Cave Suite"
@@ -178,4 +178,4 @@ npm run dev
 ---
 
 ## 💎 Design Credits & Inspiration
-Inspired by the **Voyara Luxury Travel Studio** aesthetic (Est. 2014 — Lisbon).
+Inspired by the **Travelyn Luxury Travel Studio** aesthetic (Est. 2014 — Lisbon).

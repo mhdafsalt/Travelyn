@@ -1,7 +1,7 @@
 {
-  "name": "voyara-backend",
+  "name": "travelyn-backend",
   "version": "1.0.0",
-  "description": "Express TypeScript REST API for Voyara Luxury Travel",
+  "description": "Express TypeScript REST API for Travelyn Luxury Travel",
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",

@@ -19,8 +19,8 @@ export default function Footer() {
         {/* Brand Info */}
         <div className="voyara-footer-brand">
           <a href="/" className="voyara-footer-logo">
-            <div className="voyara-footer-logo-mark">V</div>
-            <span className="voyara-footer-logo-text">VOYARA</span>
+            <div className="voyara-footer-logo-mark">T</div>
+            <span className="voyara-footer-logo-text">TRAVELYN</span>
           </a>
 
           <p className="voyara-footer-tagline">
@@ -63,7 +63,7 @@ export default function Footer() {
               },
               {
                 name: 'Email',
-                href: 'mailto:hello@voyara.travel',
+                href: 'mailto:hello@travelyn.com',
                 svg: (
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#17191c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -138,8 +138,8 @@ export default function Footer() {
           {/* Contact */}
           <div className="voyara-footer-col">
             <div className="voyara-footer-col-title">Contact</div>
-            <a href="mailto:hello@voyara.travel" className="voyara-footer-col-link">
-              hello@voyara.travel
+            <a href="mailto:hello@travelyn.com" className="voyara-footer-col-link">
+              hello@travelyn.com
             </a>
             <span className="voyara-footer-col-text">+1 (555) 012 3456</span>
             <span className="voyara-footer-col-text">Mon – Fri · 9am – 6pm</span>
@@ -154,7 +154,7 @@ export default function Footer() {
       {/* 4. Bottom Row: Copyright, Credits & Back to Top */}
       <div className="voyara-footer-bottom">
         <div className="voyara-footer-copyright">
-          © 2026 Voyara Journeys. All rights reserved.
+          © 2026 Travelyn. All rights reserved.
         </div>
         <div className="voyara-footer-credits">
           Designed with luxury craftsmanship
@@ -178,7 +178,7 @@ export default function Footer() {
 
       {/* 5. Huge Voyara Watermark */}
       <div className="voyara-footer-watermark">
-        Voyara
+        Travelyn
       </div>
     </footer>
   );

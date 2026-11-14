@@ -26,7 +26,7 @@ app.use((req, _res, next) => {
 app.get('/api/health', (_req, res) => {
   res.json({
     status: 'ok',
-    service: 'Voyara Luxury Travel API',
+    service: 'Travelyn Luxury Travel API',
     timestamp: new Date().toISOString()
   });
 });
@@ -47,7 +47,7 @@ app.use((req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`✨ Voyara Travel Backend API listening on http://localhost:${PORT}`);
+  console.log(`✨ Travelyn Travel Backend API listening on http://localhost:${PORT}`);
   console.log(`📍 Health Check: http://localhost:${PORT}/api/health`);
   console.log(`📍 Destinations: http://localhost:${PORT}/api/destinations`);
 });

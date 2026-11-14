@@ -147,7 +147,7 @@ export default function DestinationDetailPage() {
           {/* Narrative Overview */}
           <div>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '28px', fontWeight: 600, color: '#17191c', marginBottom: '14px' }}>
-              The Voyara Perspective
+              The Travelyn Perspective
             </h2>
             <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'rgba(30, 38, 42, 0.75)', margin: 0 }}>
               {destination.description}

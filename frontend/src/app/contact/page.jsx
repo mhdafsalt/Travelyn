@@ -286,8 +286,8 @@ export default function ContactPage() {
                   <div style={{ fontSize: '11px', textTransform: 'uppercase', fontWeight: 600, color: '#5b8291' }}>
                     Email
                   </div>
-                  <a href="mailto:hello@voyara.travel" style={{ color: '#17191c', fontWeight: 600 }}>
-                    hello@voyara.travel
+                  <a href="mailto:hello@travelyn.com" style={{ color: '#17191c', fontWeight: 600 }}>
+                    hello@travelyn.com
                   </a>
                 </div>
 
@@ -320,7 +320,7 @@ export default function ContactPage() {
             gap: '14px',
         }}>
               <div style={{ fontSize: '14px', fontWeight: 700, color: '#17191c' }}>
-                The Voyara Guarantee
+                The Travelyn Guarantee
               </div>
               <ul style={{ margin: 0, paddingLeft: '18px', display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: 'rgba(30, 38, 42, 0.75)' }}>
                 <li>Dedicated personal travel designer assigned within 24 hours</li>

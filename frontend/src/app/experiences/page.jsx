@@ -55,7 +55,7 @@ export default function ExperiencesPage() {
             Curated Experiences
           </h1>
           <p style={{ fontSize: '19px', color: 'rgba(30, 38, 42, 0.7)', maxWidth: '640px', lineHeight: 1.6, margin: 0 }}>
-            Every Voyara journey is designed around feelings, not checklists. Explore our curated collections tailored for slow contemplation, culinary discovery, and sublime nature.
+            Every Travelyn journey is designed around feelings, not checklists. Explore our curated collections tailored for slow contemplation, culinary discovery, and sublime nature.
           </p>
         </div>
 

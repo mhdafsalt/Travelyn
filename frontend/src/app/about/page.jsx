@@ -7,7 +7,7 @@ export default function AboutPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div className="voyara-tag">
             <div className="voyara-dot"/>
-            <span>About Voyara Studio</span>
+            <span>About Travelyn Studio</span>
           </div>
           <h1 style={{
             fontFamily: 'var(--font-display)',
@@ -29,7 +29,7 @@ export default function AboutPage() {
 
         {/* Hero Narrative Image */}
         <div style={{ height: '480px', borderRadius: '32px', overflow: 'hidden', position: 'relative', boxShadow: '0 20px 50px rgba(0,0,0,0.08)' }}>
-          <img src="https://framerusercontent.com/images/PMSlK6mTGdx9DcWYaJZiAMBFv4.jpg" alt="Voyara travel philosophy" style={{ width: '100%', height: '100%', objectFit: 'cover' }}/>
+          <img src="https://framerusercontent.com/images/PMSlK6mTGdx9DcWYaJZiAMBFv4.jpg" alt="Travelyn travel philosophy" style={{ width: '100%', height: '100%', objectFit: 'cover' }}/>
         </div>
 
         {/* Studio Manifesto */}
@@ -38,7 +38,7 @@ export default function AboutPage() {
             We started with a simple belief: travel should leave you grounded, not exhausted.
           </h2>
           <p style={{ fontSize: '18px', lineHeight: 1.7, color: 'rgba(30, 38, 42, 0.75)' }}>
-            Founded in Lisbon in 2014, Voyara began as a small collective of architects, writers, and cultural historians who longed for travel that prioritized atmosphere over bucket lists. Instead of rushing between landmarks, we wanted mornings where you linger on a wooden balcony above the clouds, afternoons spent learning the rhythm of an ancient tea ritual, and evenings by the fire sharing fondue with local vintners.
+            Founded in Lisbon in 2014, Travelyn began as a small collective of architects, writers, and cultural historians who longed for travel that prioritized atmosphere over bucket lists. Instead of rushing between landmarks, we wanted mornings where you linger on a wooden balcony above the clouds, afternoons spent learning the rhythm of an ancient tea ritual, and evenings by the fire sharing fondue with local vintners.
           </p>
           <p style={{ fontSize: '18px', lineHeight: 1.7, color: 'rgba(30, 38, 42, 0.75)' }}>
             Today, our travel designers work intimately with just a handful of travellers each month. We maintain deep personal friendships with private boat captains, family vineyard owners, and mountain guides across Europe, Asia, South America, and Africa.

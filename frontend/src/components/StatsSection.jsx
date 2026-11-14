@@ -45,7 +45,7 @@ export default function StatsSection() {
           <div className="stats-about-left">
             <div className="voyara-tag">
               <div className="voyara-dot" />
-              <span>About Voyara</span>
+              <span>About Travelyn</span>
             </div>
             <div className="stats-about-est">Est. 2014 — Lisbon</div>
           </div>

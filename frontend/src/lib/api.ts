@@ -85,7 +85,7 @@ export async function submitBooking(data: BookingInput): Promise<ApiResponse<Boo
 
     return {
       success: true,
-      message: 'Booking request received successfully! A Voyara travel designer will contact you within 24 hours.',
+      message: 'Booking request received successfully! A Travelyn travel designer will contact you within 24 hours.',
       data: mockBooking,
     };
   }
@@ -117,7 +117,7 @@ export async function submitContact(data: ContactInput): Promise<ApiResponse> {
     console.warn('Backend API unavailable, fallback response for contact:', error);
     return {
       success: true,
-      message: 'Thank you for reaching out to Voyara. A personal travel designer will tailor an itinerary and respond within 24 hours.',
+      message: 'Thank you for reaching out to Travelyn. A personal travel designer will tailor an itinerary and respond within 24 hours.',
       data: {
         id: `inq-${Date.now()}`,
         ...data,
@@ -128,7 +128,7 @@ export async function submitContact(data: ContactInput): Promise<ApiResponse> {
 }
 
 /**
- * Subscribe to the Voyara newsletter
+ * Subscribe to the Travelyn newsletter
  */
 export async function subscribeNewsletter(email: string): Promise<ApiResponse> {
   const baseUrl = getApiBaseUrl();
@@ -153,7 +153,7 @@ export async function subscribeNewsletter(email: string): Promise<ApiResponse> {
     console.warn('Backend API unavailable, fallback response for newsletter:', error);
     return {
       success: true,
-      message: 'Welcome to the Voyara community. Your first journey inspiration is on its way.',
+      message: 'Welcome to the Travelyn community. Your first journey inspiration is on its way.',
       data: {
         id: `sub-${Date.now()}`,
         email,

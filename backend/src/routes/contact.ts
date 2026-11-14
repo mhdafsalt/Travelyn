@@ -42,7 +42,7 @@ router.post('/', (req: Request, res: Response) => {
 
   res.status(201).json({
     success: true,
-    message: 'Thank you for reaching out to Voyara. A personal travel designer will tailor an itinerary and respond within 24 hours.',
+    message: 'Thank you for reaching out to Travelyn. A personal travel designer will tailor an itinerary and respond within 24 hours.',
     data: newInquiry
   });
 });
