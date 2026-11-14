@@ -1,39 +1,6 @@
 import { INITIAL_DESTINATIONS, CATEGORIES, STORIES } from './data';
-import { Destination, Category, Booking, Story } from '@/types';
 
-export interface BookingInput {
-  destinationId: string;
-  destinationTitle?: string;
-  travelerName: string;
-  travelerEmail: string;
-  phone?: string;
-  startDate: string;
-  guests: number;
-  roomType?: string;
-  specialRequests?: string;
-  totalEstimatedPrice?: number;
-}
-
-export interface ContactInput {
-  fullName: string;
-  email: string;
-  phone?: string;
-  destinationPreference?: string;
-  travelDates?: string;
-  budgetRange?: string;
-  guestCount?: number;
-  message: string;
-}
-
-export interface ApiResponse<T = any> {
-  success: boolean;
-  message?: string;
-  data?: T;
-  total?: number;
-  error?: any;
-}
-
-const getApiBaseUrl = (): string => {
+const getApiBaseUrl = () => {
   if (typeof window !== 'undefined') {
     // Client-side: use Next.js rewrite /backend-api or NEXT_PUBLIC_API_URL
     return process.env.NEXT_PUBLIC_API_URL || '/backend-api';
@@ -45,7 +12,7 @@ const getApiBaseUrl = (): string => {
 /**
  * Submit a travel booking inquiry
  */
-export async function submitBooking(data: BookingInput): Promise<ApiResponse<Booking>> {
+export async function submitBooking(data) {
   const baseUrl = getApiBaseUrl();
   try {
     const res = await fetch(`${baseUrl}/bookings`, {
@@ -67,7 +34,7 @@ export async function submitBooking(data: BookingInput): Promise<ApiResponse<Boo
   } catch (error) {
     console.warn('Backend API unavailable, saving booking locally in session:', error);
     // Graceful offline/demo fallback
-    const mockBooking: Booking = {
+    const mockBooking = {
       id: `bk-${Date.now()}`,
       destinationId: data.destinationId,
       destinationTitle: data.destinationTitle || 'Luxury Expedition',
@@ -94,7 +61,7 @@ export async function submitBooking(data: BookingInput): Promise<ApiResponse<Boo
 /**
  * Submit a tailor-made concierge contact inquiry
  */
-export async function submitContact(data: ContactInput): Promise<ApiResponse> {
+export async function submitContact(data) {
   const baseUrl = getApiBaseUrl();
   try {
     const res = await fetch(`${baseUrl}/contact`, {
@@ -130,7 +97,7 @@ export async function submitContact(data: ContactInput): Promise<ApiResponse> {
 /**
  * Subscribe to the Travelyn newsletter
  */
-export async function subscribeNewsletter(email: string): Promise<ApiResponse> {
+export async function subscribeNewsletter(email) {
   const baseUrl = getApiBaseUrl();
   try {
     const res = await fetch(`${baseUrl}/newsletter/subscribe`, {
@@ -167,14 +134,7 @@ export async function subscribeNewsletter(email: string): Promise<ApiResponse> {
 /**
  * Fetch all destinations with optional filtering
  */
-export async function fetchDestinations(params?: {
-  search?: string;
-  category?: string;
-  region?: string;
-  minPrice?: number;
-  maxPrice?: number;
-  sort?: string;
-}): Promise<Destination[]> {
+export async function fetchDestinations(params) {
   const baseUrl = getApiBaseUrl();
   try {
     const query = new URLSearchParams();
@@ -192,14 +152,14 @@ export async function fetchDestinations(params?: {
     return result.data || INITIAL_DESTINATIONS;
   } catch (error) {
     console.warn('Using local fallback for destinations:', error);
-    return INITIAL_DESTINATIONS as Destination[];
+    return INITIAL_DESTINATIONS;
   }
 }
 
 /**
  * Fetch a single destination by slug or id
  */
-export async function fetchDestinationBySlug(slug: string): Promise<Destination | null> {
+export async function fetchDestinationBySlug(slug) {
   const baseUrl = getApiBaseUrl();
   try {
     const res = await fetch(`${baseUrl}/destinations/${slug}`);
@@ -208,7 +168,7 @@ export async function fetchDestinationBySlug(slug: string): Promise<Destination 
     return result.data || null;
   } catch (error) {
     console.warn('Using local fallback for single destination:', error);
-    const found = (INITIAL_DESTINATIONS as Destination[]).find(
+    const found = INITIAL_DESTINATIONS.find(
       (d) => d.slug.toLowerCase() === slug.toLowerCase() || d.id === slug
     );
     return found || null;
@@ -218,7 +178,7 @@ export async function fetchDestinationBySlug(slug: string): Promise<Destination 
 /**
  * Fetch categories
  */
-export async function fetchCategories(): Promise<Category[]> {
+export async function fetchCategories() {
   const baseUrl = getApiBaseUrl();
   try {
     const res = await fetch(`${baseUrl}/destinations/categories/all`);
@@ -226,14 +186,14 @@ export async function fetchCategories(): Promise<Category[]> {
     const result = await res.json();
     return result.data || CATEGORIES;
   } catch (error) {
-    return CATEGORIES as Category[];
+    return CATEGORIES;
   }
 }
 
 /**
  * Fetch stories
  */
-export async function fetchStories(): Promise<Story[]> {
+export async function fetchStories() {
   const baseUrl = getApiBaseUrl();
   try {
     const res = await fetch(`${baseUrl}/destinations/stories/all`);
@@ -241,7 +201,6 @@ export async function fetchStories(): Promise<Story[]> {
     const result = await res.json();
     return result.data || STORIES;
   } catch (error) {
-    return STORIES as Story[];
+    return STORIES;
   }
 }
-
