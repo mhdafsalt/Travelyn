@@ -1,11 +1,16 @@
-import { INITIAL_DESTINATIONS, CATEGORIES, STORIES } from './data';
+import {
+  getStoredDestinations,
+  getStoredDestinationBySlug,
+  addStoredBooking,
+  addStoredInquiry,
+  addStoredSubscriber,
+} from './store';
+import { CATEGORIES, STORIES } from './data';
 
 const getApiBaseUrl = () => {
   if (typeof window !== 'undefined') {
-    // Client-side: use Next.js rewrite /backend-api or NEXT_PUBLIC_API_URL
     return process.env.NEXT_PUBLIC_API_URL || '/backend-api';
   }
-  // Server-side
   return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 };
 
@@ -23,39 +28,34 @@ export async function submitBooking(data) {
       body: JSON.stringify(data),
     });
 
-    const result = await res.json();
-    if (!res.ok) {
-      return {
-        success: false,
-        message: result.message || 'Booking submission failed. Please try again.',
-      };
+    if (res.ok) {
+      const result = await res.json();
+      addStoredBooking(result.data || data);
+      return result;
     }
-    return result;
   } catch (error) {
-    console.warn('Backend API unavailable, saving booking locally in session:', error);
-    // Graceful offline/demo fallback
-    const mockBooking = {
-      id: `bk-${Date.now()}`,
-      destinationId: data.destinationId,
-      destinationTitle: data.destinationTitle || 'Luxury Expedition',
-      travelerName: data.travelerName,
-      travelerEmail: data.travelerEmail,
-      phone: data.phone || '',
-      startDate: data.startDate,
-      guests: Number(data.guests) || 2,
-      roomType: data.roomType || 'Signature Luxury Suite',
-      specialRequests: data.specialRequests || '',
-      totalEstimatedPrice: data.totalEstimatedPrice || 3500,
-      status: 'pending',
-      createdAt: new Date().toISOString(),
-    };
-
-    return {
-      success: true,
-      message: 'Booking request received successfully! A Travelyn travel designer will contact you within 24 hours.',
-      data: mockBooking,
-    };
+    // API unavailable - save into local reactive store
   }
+
+  // Reactive store fallback
+  const saved = addStoredBooking({
+    destinationId: data.destinationId,
+    destinationTitle: data.destinationTitle || 'Luxury Expedition',
+    travelerName: data.travelerName,
+    travelerEmail: data.travelerEmail,
+    phone: data.phone || '',
+    startDate: data.startDate,
+    guests: Number(data.guests) || 2,
+    roomType: data.roomType || 'Signature Luxury Suite',
+    specialRequests: data.specialRequests || '',
+    totalEstimatedPrice: data.totalEstimatedPrice || 3500,
+  });
+
+  return {
+    success: true,
+    message: 'Booking request received successfully! A Travelyn travel designer will contact you within 24 hours.',
+    data: saved,
+  };
 }
 
 /**
@@ -72,26 +72,22 @@ export async function submitContact(data) {
       body: JSON.stringify(data),
     });
 
-    const result = await res.json();
-    if (!res.ok) {
-      return {
-        success: false,
-        message: result.message || 'Contact inquiry submission failed.',
-      };
+    if (res.ok) {
+      const result = await res.json();
+      addStoredInquiry(result.data || data);
+      return result;
     }
-    return result;
   } catch (error) {
-    console.warn('Backend API unavailable, fallback response for contact:', error);
-    return {
-      success: true,
-      message: 'Thank you for reaching out to Travelyn. A personal travel designer will tailor an itinerary and respond within 24 hours.',
-      data: {
-        id: `inq-${Date.now()}`,
-        ...data,
-        createdAt: new Date().toISOString(),
-      },
-    };
+    // API unavailable - save into local reactive store
   }
+
+  // Reactive store fallback
+  const saved = addStoredInquiry(data);
+  return {
+    success: true,
+    message: 'Thank you for reaching out to Travelyn. A personal travel designer will tailor an itinerary and respond within 24 hours.',
+    data: saved,
+  };
 }
 
 /**
@@ -108,27 +104,21 @@ export async function subscribeNewsletter(email) {
       body: JSON.stringify({ email }),
     });
 
-    const result = await res.json();
-    if (!res.ok) {
-      return {
-        success: false,
-        message: result.message || 'Subscription failed. Please check the email provided.',
-      };
+    if (res.ok) {
+      const result = await res.json();
+      addStoredSubscriber(email);
+      return result;
     }
-    return result;
   } catch (error) {
-    console.warn('Backend API unavailable, fallback response for newsletter:', error);
-    return {
-      success: true,
-      message: 'Welcome to the Travelyn community. Your first journey inspiration is on its way.',
-      data: {
-        id: `sub-${Date.now()}`,
-        email,
-        subscribedAt: new Date().toISOString(),
-        status: 'active',
-      },
-    };
+    // API unavailable - save into local reactive store
   }
+
+  const res = addStoredSubscriber(email);
+  return {
+    success: true,
+    message: 'Welcome to the Travelyn community. Your first journey inspiration is on its way.',
+    data: res.subscriber,
+  };
 }
 
 /**
@@ -147,13 +137,31 @@ export async function fetchDestinations(params) {
 
     const queryString = query.toString() ? `?${query.toString()}` : '';
     const res = await fetch(`${baseUrl}/destinations${queryString}`);
-    if (!res.ok) throw new Error('Failed to fetch destinations');
-    const result = await res.json();
-    return result.data || INITIAL_DESTINATIONS;
+    if (res.ok) {
+      const result = await res.json();
+      if (result.data && result.data.length) return result.data;
+    }
   } catch (error) {
-    console.warn('Using local fallback for destinations:', error);
-    return INITIAL_DESTINATIONS;
+    // API unavailable, use local store
   }
+
+  let list = getStoredDestinations();
+  if (params?.search) {
+    const q = params.search.toLowerCase();
+    list = list.filter(
+      (d) =>
+        d.title.toLowerCase().includes(q) ||
+        d.country.toLowerCase().includes(q) ||
+        d.region.toLowerCase().includes(q)
+    );
+  }
+  if (params?.category && params.category !== 'all') {
+    list = list.filter((d) => d.category?.includes(params.category.toLowerCase()));
+  }
+  if (params?.region && params.region !== 'all') {
+    list = list.filter((d) => d.region?.toLowerCase() === params.region.toLowerCase());
+  }
+  return list;
 }
 
 /**
@@ -163,45 +171,27 @@ export async function fetchDestinationBySlug(slug) {
   const baseUrl = getApiBaseUrl();
   try {
     const res = await fetch(`${baseUrl}/destinations/${slug}`);
-    if (!res.ok) throw new Error('Destination not found');
-    const result = await res.json();
-    return result.data || null;
+    if (res.ok) {
+      const result = await res.json();
+      if (result.data) return result.data;
+    }
   } catch (error) {
-    console.warn('Using local fallback for single destination:', error);
-    const found = INITIAL_DESTINATIONS.find(
-      (d) => d.slug.toLowerCase() === slug.toLowerCase() || d.id === slug
-    );
-    return found || null;
+    // Fallback to store
   }
+
+  return getStoredDestinationBySlug(slug);
 }
 
 /**
  * Fetch categories
  */
 export async function fetchCategories() {
-  const baseUrl = getApiBaseUrl();
-  try {
-    const res = await fetch(`${baseUrl}/destinations/categories/all`);
-    if (!res.ok) throw new Error('Failed to fetch categories');
-    const result = await res.json();
-    return result.data || CATEGORIES;
-  } catch (error) {
-    return CATEGORIES;
-  }
+  return CATEGORIES;
 }
 
 /**
  * Fetch stories
  */
 export async function fetchStories() {
-  const baseUrl = getApiBaseUrl();
-  try {
-    const res = await fetch(`${baseUrl}/destinations/stories/all`);
-    if (!res.ok) throw new Error('Failed to fetch stories');
-    const result = await res.json();
-    return result.data || STORIES;
-  } catch (error) {
-    return STORIES;
-  }
+  return STORIES;
 }
-

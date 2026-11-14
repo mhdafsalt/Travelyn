@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import HeroSection from '@/components/HeroSection';
 import CategoryBar from '@/components/CategoryBar';
 import DestinationCard from '@/components/DestinationCard';
@@ -11,16 +11,23 @@ import StatsSection from '@/components/StatsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import BookingModal from '@/components/BookingModal';
 import { INITIAL_DESTINATIONS } from '@/lib/data';
+import { getStoredDestinations } from '@/lib/store';
 
 export default function HomePage() {
+  const [destinations, setDestinations] = useState(INITIAL_DESTINATIONS);
   const [selectedCategory, setSelectedCategory] = useState('trending');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBookingDest, setSelectedBookingDest] = useState(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
+  // Sync with dynamic store on client
+  useEffect(() => {
+    setDestinations(getStoredDestinations());
+  }, []);
+
   // Filter destinations based on category and search
   const filteredDestinations = useMemo(() => {
-    return INITIAL_DESTINATIONS.filter((d) => {
+    return destinations.filter((d) => {
       const matchesCategory =
         selectedCategory === 'trending' ||
         d.category.includes(selectedCategory.toLowerCase());
@@ -33,7 +40,7 @@ export default function HomePage() {
 
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [destinations, selectedCategory, searchQuery]);
 
   const handleHeroSearch = (params) => {
     if (params?.destination) {

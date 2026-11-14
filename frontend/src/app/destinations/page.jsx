@@ -1,18 +1,26 @@
 'use client';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import DestinationCard from '@/components/DestinationCard';
 import BookingModal from '@/components/BookingModal';
 import { INITIAL_DESTINATIONS, CATEGORIES } from '@/lib/data';
+import { getStoredDestinations } from '@/lib/store';
+
 export default function DestinationsPage() {
+    const [destinations, setDestinations] = useState(INITIAL_DESTINATIONS);
     const [search, setSearch] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [selectedRegion, setSelectedRegion] = useState('all');
     const [sortBy, setSortBy] = useState('featured');
     const [bookingDest, setBookingDest] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        setDestinations(getStoredDestinations());
+    }, []);
+
     const regions = ['all', 'Europe', 'Asia', 'South America', 'Africa', 'Indian Ocean'];
     const filtered = useMemo(() => {
-        let result = [...INITIAL_DESTINATIONS];
+        let result = [...destinations];
         if (search.trim()) {
             const q = search.toLowerCase();
             result = result.filter((d) => d.title.toLowerCase().includes(q) ||

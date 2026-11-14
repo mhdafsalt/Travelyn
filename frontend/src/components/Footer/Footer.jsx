@@ -1,13 +1,19 @@
 'use client';
 
 import React from 'react';
+import { usePathname } from 'next/navigation';
 import NewsletterSection from '@/components/NewsletterSection';
 import './Footer.css';
 
 export default function Footer() {
+  const pathname = usePathname();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <footer className="voyara-footer">

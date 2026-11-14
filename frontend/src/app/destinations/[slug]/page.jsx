@@ -1,18 +1,26 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { INITIAL_DESTINATIONS } from '@/lib/data';
+import { getStoredDestinations } from '@/lib/store';
 import BookingModal from '@/components/BookingModal';
 import HikeBookingCard from '@/components/HikeBookingCard';
+
 export default function DestinationDetailPage() {
     const params = useParams();
     const slug = params?.slug;
-    const destination = INITIAL_DESTINATIONS.find((d) => 
+    const [destinations, setDestinations] = useState(INITIAL_DESTINATIONS);
+
+    useEffect(() => {
+        setDestinations(getStoredDestinations());
+    }, []);
+
+    const destination = destinations.find((d) => 
       d.slug.toLowerCase() === slug?.toLowerCase() || 
       d.id === slug ||
       (slug?.toLowerCase() === 'switzerland' && d.slug === 'swiss-alps') ||
       d.title.toLowerCase() === slug?.toLowerCase()
-    ) || INITIAL_DESTINATIONS[0];
+    ) || destinations[0] || INITIAL_DESTINATIONS[0];
     const [activeImage, setActiveImage] = useState(destination.imageUrl);
     const [isBookingOpen, setIsBookingOpen] = useState(false);
     const [activeDay, setActiveDay] = useState(1);
