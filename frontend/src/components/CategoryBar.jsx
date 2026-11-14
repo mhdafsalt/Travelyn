@@ -43,6 +43,7 @@ export default function CategoryBar({
             <button
               key={cat.id}
               type="button"
+              suppressHydrationWarning
               onClick={() => onSelectCategory(cat.id)}
               className={`category-tab-btn ${
                 isActive ? 'is-active' : ''

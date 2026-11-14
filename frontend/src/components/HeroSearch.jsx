@@ -107,6 +107,8 @@ export default function HeroSearch({ onSearch }) {
 
           {/* Search Trigger Button */}
           <button
+            type="button"
+            suppressHydrationWarning
             onClick={handleSearchSubmit}
             aria-label="Search"
             className="hero-search-submit-btn"
@@ -182,6 +184,7 @@ export default function HeroSearch({ onSearch }) {
               <div className="hero-search-counter-btns">
                 <button
                   type="button"
+                  suppressHydrationWarning
                   disabled={adults <= 1}
                   onClick={() => setAdults(Math.max(1, adults - 1))}
                   className="hero-search-counter-btn"
@@ -191,6 +194,7 @@ export default function HeroSearch({ onSearch }) {
                 <span className="hero-search-counter-val">{adults}</span>
                 <button
                   type="button"
+                  suppressHydrationWarning
                   onClick={() => setAdults(adults + 1)}
                   className="hero-search-counter-btn"
                 >
@@ -208,6 +212,7 @@ export default function HeroSearch({ onSearch }) {
               <div className="hero-search-counter-btns">
                 <button
                   type="button"
+                  suppressHydrationWarning
                   disabled={children <= 0}
                   onClick={() => setChildren(Math.max(0, children - 1))}
                   className="hero-search-counter-btn"
@@ -217,6 +222,7 @@ export default function HeroSearch({ onSearch }) {
                 <span className="hero-search-counter-val">{children}</span>
                 <button
                   type="button"
+                  suppressHydrationWarning
                   onClick={() => setChildren(children + 1)}
                   className="hero-search-counter-btn"
                 >

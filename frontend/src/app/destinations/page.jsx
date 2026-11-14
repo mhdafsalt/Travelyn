@@ -167,11 +167,16 @@ export default function DestinationsPage() {
 
         {filtered.length === 0 && (<div style={{ padding: '80px 20px', textAlign: 'center', color: 'rgba(30, 38, 42, 0.5)' }}>
             <p style={{ fontSize: '18px', margin: '0 0 12px 0' }}>No matching journeys found.</p>
-            <button onClick={() => {
+            <button
+              type="button"
+              suppressHydrationWarning
+              onClick={() => {
                 setSearch('');
                 setSelectedCategory('all');
                 setSelectedRegion('all');
-            }} className="voyara-btn voyara-btn-dark">
+              }}
+              className="voyara-btn voyara-btn-dark"
+            >
               <span>Reset All Filters</span>
             </button>
           </div>)}

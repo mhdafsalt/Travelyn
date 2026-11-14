@@ -33,6 +33,8 @@ export default function GlobalError({ error, reset }) {
             {error?.message || 'An unexpected error occurred.'}
           </p>
           <button
+            type="button"
+            suppressHydrationWarning
             onClick={() => reset()}
             style={{
               padding: '12px 28px',

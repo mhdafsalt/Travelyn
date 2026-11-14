@@ -36,6 +36,8 @@ export default function Error({ error, reset }) {
         {error?.message || 'A client navigation error occurred.'}
       </p>
       <button
+        type="button"
+        suppressHydrationWarning
         onClick={() => reset()}
         style={{
           padding: '12px 28px',

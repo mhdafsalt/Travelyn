@@ -250,7 +250,12 @@ export default function ContactPage() {
                     {statusMessage}
                   </div>)}
 
-                <button type="submit" disabled={status === 'loading'} className="voyara-btn voyara-btn-dark" style={{
+                <button
+                  type="submit"
+                  suppressHydrationWarning
+                  disabled={status === 'loading'}
+                  className="voyara-btn voyara-btn-dark"
+                  style={{
                 height: '54px',
                 justifyContent: 'center',
                 marginTop: '8px',

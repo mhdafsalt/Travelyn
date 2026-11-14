@@ -139,6 +139,8 @@ export default function HomePage() {
               Showing results for: <strong>"{searchQuery}"</strong> ({filteredDestinations.length} found)
             </span>
             <button
+              type="button"
+              suppressHydrationWarning
               onClick={() => setSearchQuery('')}
               style={{
                 background: 'none',
