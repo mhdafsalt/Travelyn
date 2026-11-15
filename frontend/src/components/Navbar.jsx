@@ -90,7 +90,6 @@ export default function Navbar() {
     { num: '03', label: 'Curated Experiences', href: '/experiences' },
     { num: '04', label: 'About Travelyn', href: '/about' },
     { num: '05', label: 'Plan a Journey', href: '/contact' },
-    { num: '06', label: 'Admin Studio', href: '/admin' },
   ];
 
   if (pathname?.startsWith('/admin')) {

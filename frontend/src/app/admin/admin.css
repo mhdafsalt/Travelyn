@@ -670,14 +670,14 @@
 .admin-modal-card {
   background: #ffffff;
   width: 100%;
-  max-width: 660px;
+  max-width: 760px;
   border-radius: 28px;
   padding: 34px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   gap: 22px;
-  max-height: 90vh;
+  max-height: 92vh;
   overflow-y: auto;
 }
 
@@ -778,6 +778,218 @@
 .admin-checkbox-chip.is-selected {
   background: #17191c;
   color: #ffffff;
+}
+
+/* ==========================================================================
+   IMAGE MANAGEMENT (THUMBNAIL & DETAILED GALLERY)
+   ========================================================================== */
+
+.admin-image-box {
+  background: #fbfbf9;
+  border: 1px solid rgba(13, 13, 13, 0.08);
+  border-radius: 18px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-image-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.admin-image-box-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #17191c;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-image-count-pill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.admin-thumb-preview-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-thumb-preview {
+  width: 120px;
+  height: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: #e2e8f0;
+  flex-shrink: 0;
+  border: 1px solid rgba(13, 13, 13, 0.1);
+}
+
+.admin-thumb-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-gallery-add-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.admin-gallery-add-btn {
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: #17191c;
+  color: #ffffff;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.admin-gallery-add-btn:hover {
+  background: #2d3748;
+}
+
+.admin-gallery-sample-btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.admin-gallery-sample-btn:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.admin-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.admin-gallery-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(13, 13, 13, 0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.admin-gallery-card:hover {
+  border-color: rgba(13, 13, 13, 0.25);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.admin-gallery-card.is-cover {
+  border: 2px solid #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.admin-gallery-card-img-wrap {
+  width: 100%;
+  height: 95px;
+  position: relative;
+  background: #f1f5f9;
+}
+
+.admin-gallery-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-gallery-cover-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.admin-gallery-delete-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.75);
+  color: #ffffff;
+  border: none;
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.admin-gallery-delete-btn:hover {
+  background: #ef4444;
+}
+
+.admin-gallery-card-footer {
+  padding: 6px 8px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-gallery-set-cover-btn {
+  font-size: 11px;
+  font-weight: 600;
+  color: #2563eb;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.admin-gallery-set-cover-btn:hover {
+  text-decoration: underline;
+}
+
+.admin-gallery-empty {
+  padding: 20px;
+  text-align: center;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 14px;
+  font-size: 12.5px;
+  color: #64748b;
 }
 
 /* Mobile Sidebar Overlay */

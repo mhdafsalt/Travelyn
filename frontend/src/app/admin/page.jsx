@@ -29,6 +29,15 @@ const AVAILABLE_CATEGORIES = [
 
 const REGIONS = ['Europe', 'Asia', 'South America', 'Africa', 'Indian Ocean', 'North America'];
 
+const SAMPLE_TRAVEL_PHOTOS = [
+  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80'
+];
+
 export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState('overview');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -45,6 +54,9 @@ export default function AdminDashboardPage() {
   const [selectedBookingDetails, setSelectedBookingDetails] = useState(null);
   const [selectedInquiryDetails, setSelectedInquiryDetails] = useState(null);
 
+  // New gallery image URL input state
+  const [newGalleryUrl, setNewGalleryUrl] = useState('');
+
   // Form State for Destination (Add / Edit)
   const [destForm, setDestForm] = useState({
     title: '',
@@ -56,6 +68,7 @@ export default function AdminDashboardPage() {
     tagline: '',
     description: '',
     imageUrl: '',
+    gallery: [],
     category: ['luxury', 'nature'],
     featured: true,
   });
@@ -80,6 +93,8 @@ export default function AdminDashboardPage() {
   // Open Add Destination Modal
   const handleOpenAddModal = () => {
     setEditingDest(null);
+    setNewGalleryUrl('');
+    const defaultCover = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80';
     setDestForm({
       title: '',
       country: '',
@@ -89,7 +104,12 @@ export default function AdminDashboardPage() {
       rating: 4.9,
       tagline: '',
       description: '',
-      imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+      imageUrl: defaultCover,
+      gallery: [
+        defaultCover,
+        'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=80'
+      ],
       category: ['luxury', 'nature'],
       featured: true,
     });
@@ -99,6 +119,11 @@ export default function AdminDashboardPage() {
   // Open Edit Destination Modal
   const handleOpenEditModal = (dest) => {
     setEditingDest(dest);
+    setNewGalleryUrl('');
+    const existingGallery = Array.isArray(dest.gallery) && dest.gallery.length > 0
+      ? dest.gallery
+      : (dest.imageUrl ? [dest.imageUrl] : []);
+
     setDestForm({
       title: dest.title || '',
       country: dest.country || '',
@@ -108,11 +133,85 @@ export default function AdminDashboardPage() {
       rating: dest.rating || 4.9,
       tagline: dest.tagline || '',
       description: dest.description || '',
-      imageUrl: dest.imageUrl || '',
+      imageUrl: dest.imageUrl || existingGallery[0] || '',
+      gallery: [...existingGallery],
       category: dest.category || ['luxury'],
       featured: Boolean(dest.featured),
     });
     setIsDestModalOpen(true);
+  };
+
+  // Add an image (or multiple comma-separated images) to gallery
+  const handleAddGalleryImage = (customUrl = null) => {
+    const raw = (customUrl || newGalleryUrl).trim();
+    if (!raw) return;
+
+    const splitUrls = raw
+      .split(/[\n,]+/)
+      .map((u) => u.trim())
+      .filter((u) => u.length > 0 && (u.startsWith('http://') || u.startsWith('https://') || u.startsWith('/')));
+
+    if (splitUrls.length === 0) {
+      alert('Please enter a valid image URL starting with http://, https://, or /');
+      return;
+    }
+
+    setDestForm((prev) => {
+      const current = prev.gallery || [];
+      const updatedGallery = [...current];
+      splitUrls.forEach((u) => {
+        if (!updatedGallery.includes(u)) {
+          updatedGallery.push(u);
+        }
+      });
+
+      const updatedCover = prev.imageUrl || updatedGallery[0] || '';
+      return {
+        ...prev,
+        imageUrl: updatedCover,
+        gallery: updatedGallery,
+      };
+    });
+
+    setNewGalleryUrl('');
+    showToast(`Added ${splitUrls.length} image${splitUrls.length > 1 ? 's' : ''} to gallery`);
+  };
+
+  // Remove image from gallery
+  const handleRemoveGalleryImage = (indexToRemove) => {
+    setDestForm((prev) => {
+      const itemToRemove = prev.gallery[indexToRemove];
+      const updatedGallery = prev.gallery.filter((_, idx) => idx !== indexToRemove);
+      let updatedCover = prev.imageUrl;
+      if (prev.imageUrl === itemToRemove) {
+        updatedCover = updatedGallery[0] || '';
+      }
+      return {
+        ...prev,
+        imageUrl: updatedCover,
+        gallery: updatedGallery,
+      };
+    });
+  };
+
+  // Set an image from gallery as primary thumbnail/cover
+  const handleSetCoverImage = (imgUrl) => {
+    setDestForm((prev) => ({
+      ...prev,
+      imageUrl: imgUrl,
+    }));
+    showToast('Updated primary card thumbnail');
+  };
+
+  // Add sample travel photo from presets
+  const handleAddSamplePhoto = () => {
+    const unused = SAMPLE_TRAVEL_PHOTOS.filter(
+      (p) => !destForm.gallery.includes(p) && destForm.imageUrl !== p
+    );
+    const photoToAdd = unused.length > 0
+      ? unused[Math.floor(Math.random() * unused.length)]
+      : SAMPLE_TRAVEL_PHOTOS[Math.floor(Math.random() * SAMPLE_TRAVEL_PHOTOS.length)];
+    handleAddGalleryImage(photoToAdd);
   };
 
   // Save Destination Submit
@@ -128,6 +227,11 @@ export default function AdminDashboardPage() {
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
 
+    const finalGallery = Array.isArray(destForm.gallery) && destForm.gallery.length > 0
+      ? destForm.gallery
+      : (destForm.imageUrl ? [destForm.imageUrl] : []);
+    const finalCover = destForm.imageUrl || finalGallery[0] || '';
+
     const newOrUpdated = {
       ...(editingDest || {}),
       id: editingDest?.id || `dest-${Date.now()}`,
@@ -140,8 +244,8 @@ export default function AdminDashboardPage() {
       rating: Number(destForm.rating),
       tagline: destForm.tagline || 'Bespoke journey through extraordinary landscapes.',
       description: destForm.description || 'Curated journey designed for slow contemplation and luxury.',
-      imageUrl: destForm.imageUrl,
-      gallery: editingDest?.gallery?.length ? editingDest.gallery : [destForm.imageUrl],
+      imageUrl: finalCover,
+      gallery: finalGallery,
       category: destForm.category,
       featured: destForm.featured,
     };
@@ -1147,16 +1251,151 @@ export default function AdminDashboardPage() {
                 </div>
               </div>
 
-              <div className="admin-form-group">
-                <label className="admin-form-label">Cover Image URL</label>
-                <input
-                  type="url"
-                  required
-                  value={destForm.imageUrl}
-                  onChange={(e) => setDestForm({ ...destForm, imageUrl: e.target.value })}
-                  placeholder="https://images.unsplash.com/..."
-                  className="admin-form-input"
-                />
+              {/* Image Management: Primary Thumbnail & Detailed Gallery */}
+              <div className="admin-image-box">
+                <div className="admin-image-box-header">
+                  <div className="admin-image-box-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Thumbnail & Detailed Images</span>
+                  </div>
+                  <span className="admin-image-count-pill">
+                    {(destForm.gallery || []).length} detailed {(destForm.gallery || []).length === 1 ? 'photo' : 'photos'}
+                  </span>
+                </div>
+
+                {/* 1. Primary Card Thumbnail */}
+                <div className="admin-form-group">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <label className="admin-form-label" style={{ margin: 0 }}>
+                      Primary Thumbnail / Cover Image *
+                    </label>
+                    <span style={{ fontSize: '11px', color: '#718096' }}>
+                      Used for Homepage Cards & Search
+                    </span>
+                  </div>
+                  <div className="admin-thumb-preview-container">
+                    <div className="admin-thumb-preview">
+                      {destForm.imageUrl ? (
+                        <img src={destForm.imageUrl} alt="Thumbnail preview" onError={(e) => { e.target.style.opacity = '0.3'; }} />
+                      ) : (
+                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', color: '#94a3b8' }}>
+                          No image
+                        </div>
+                      )}
+                    </div>
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <input
+                        type="url"
+                        required
+                        value={destForm.imageUrl}
+                        onChange={(e) => setDestForm({ ...destForm, imageUrl: e.target.value })}
+                        placeholder="https://images.unsplash.com/photo-..."
+                        className="admin-form-input"
+                      />
+                      <div style={{ fontSize: '11.5px', color: '#64748b' }}>
+                        Tip: You can also select any photo from the Detailed Gallery below to set as the primary thumbnail.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Detailed Gallery Images */}
+                <div className="admin-form-group" style={{ marginTop: '4px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                    <label className="admin-form-label" style={{ margin: 0 }}>
+                      Detailed Gallery Images (Multiple Photos)
+                    </label>
+                    <span style={{ fontSize: '11px', color: '#718096' }}>
+                      Used for Journey Detail Page & Photo Carousel
+                    </span>
+                  </div>
+
+                  {/* Add Image Input Bar */}
+                  <div className="admin-gallery-add-row">
+                    <input
+                      type="text"
+                      value={newGalleryUrl}
+                      onChange={(e) => setNewGalleryUrl(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleAddGalleryImage();
+                        }
+                      }}
+                      placeholder="Paste image URL (or multiple comma-separated URLs)..."
+                      className="admin-form-input"
+                      style={{ flex: 1 }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleAddGalleryImage()}
+                      className="admin-gallery-add-btn"
+                    >
+                      + Add Image
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleAddSamplePhoto}
+                      className="admin-gallery-sample-btn"
+                      title="Quickly add a sample travel photo"
+                    >
+                      + Sample Photo
+                    </button>
+                  </div>
+
+                  {/* Gallery Grid Preview */}
+                  {destForm.gallery && destForm.gallery.length > 0 ? (
+                    <div className="admin-gallery-grid">
+                      {destForm.gallery.map((url, idx) => {
+                        const isCover = destForm.imageUrl === url;
+                        return (
+                          <div key={idx} className={`admin-gallery-card ${isCover ? 'is-cover' : ''}`}>
+                            <div className="admin-gallery-card-img-wrap">
+                              <img src={url} alt={`Gallery detail ${idx + 1}`} onError={(e) => { e.target.style.opacity = '0.3'; }} />
+                              {isCover && (
+                                <span className="admin-gallery-cover-badge">
+                                  ★ Thumbnail
+                                </span>
+                              )}
+                              <button
+                                type="button"
+                                onClick={() => handleRemoveGalleryImage(idx)}
+                                className="admin-gallery-delete-btn"
+                                title="Remove from gallery"
+                              >
+                                ✕
+                              </button>
+                            </div>
+                            <div className="admin-gallery-card-footer">
+                              <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 500 }}>
+                                #{idx + 1}
+                              </span>
+                              {!isCover ? (
+                                <button
+                                  type="button"
+                                  onClick={() => handleSetCoverImage(url)}
+                                  className="admin-gallery-set-cover-btn"
+                                >
+                                  Set Thumbnail
+                                </button>
+                              ) : (
+                                <span style={{ fontSize: '11px', color: '#2563eb', fontWeight: 600 }}>Active</span>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="admin-gallery-empty">
+                      No detailed gallery photos added yet. Paste image URLs above or click <strong>+ Sample Photo</strong> to build the destination's photo story.
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div className="admin-form-group">

@@ -12,8 +12,18 @@ export default function DestinationDetailPage() {
     const [destinations, setDestinations] = useState(INITIAL_DESTINATIONS);
 
     useEffect(() => {
-        setDestinations(getStoredDestinations());
-    }, []);
+        const stored = getStoredDestinations();
+        setDestinations(stored);
+        const match = stored.find((d) => 
+          d.slug.toLowerCase() === slug?.toLowerCase() || 
+          d.id === slug ||
+          (slug?.toLowerCase() === 'switzerland' && d.slug === 'swiss-alps') ||
+          d.title.toLowerCase() === slug?.toLowerCase()
+        );
+        if (match?.imageUrl) {
+          setActiveImage(match.imageUrl);
+        }
+    }, [slug]);
 
     const destination = destinations.find((d) => 
       d.slug.toLowerCase() === slug?.toLowerCase() || 
@@ -168,7 +178,7 @@ export default function DestinationDetailPage() {
               Journey Gallery
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '14px' }}>
-              {destination.gallery.map((img, i) => (<div key={i} onClick={() => setActiveImage(img)} style={{
+              {(destination.gallery && destination.gallery.length > 0 ? destination.gallery : [destination.imageUrl]).filter(Boolean).map((img, i) => (<div key={i} onClick={() => setActiveImage(img)} style={{
                 height: '110px',
                 borderRadius: '16px',
                 overflow: 'hidden',
