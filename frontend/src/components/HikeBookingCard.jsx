@@ -235,7 +235,7 @@ export default function HikeBookingCard({ destination, onBookClick }) {
         {/* Price Row */}
         <div className="hike-price-row">
           <span className="hike-price-val" suppressHydrationWarning>
-            ${(destination?.price || 890).toLocaleString()}
+            ₹{(destination?.price || 145000).toLocaleString('en-IN')}
           </span>
           <span className="hike-price-unit">/Per Person</span>
         </div>

@@ -15,7 +15,6 @@ import {
   deleteStoredInquiry,
   getStoredSubscribers,
 } from '@/lib/store';
-import { INITIAL_DESTINATIONS } from '@/lib/data';
 
 const AVAILABLE_CATEGORIES = [
   'trending',
@@ -32,6 +31,7 @@ const REGIONS = ['Europe', 'Asia', 'South America', 'Africa', 'Indian Ocean', 'N
 
 export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState('overview');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [destinations, setDestinations] = useState([]);
   const [bookings, setBookings] = useState([]);
   const [inquiries, setInquiries] = useState([]);
@@ -50,7 +50,7 @@ export default function AdminDashboardPage() {
     title: '',
     country: '',
     region: 'Europe',
-    price: 1850,
+    price: 145000,
     durationDays: 7,
     rating: 4.9,
     tagline: '',
@@ -84,7 +84,7 @@ export default function AdminDashboardPage() {
       title: '',
       country: '',
       region: 'Europe',
-      price: 1850,
+      price: 145000,
       durationDays: 7,
       rating: 4.9,
       tagline: '',
@@ -103,7 +103,7 @@ export default function AdminDashboardPage() {
       title: dest.title || '',
       country: dest.country || '',
       region: dest.region || 'Europe',
-      price: dest.price || 1500,
+      price: dest.price || 145000,
       durationDays: dest.durationDays || 7,
       rating: dest.rating || 4.9,
       tagline: dest.tagline || '',
@@ -235,7 +235,7 @@ export default function AdminDashboardPage() {
 
     return {
       totalBookings,
-      grossRevenue: `$${grossRevenue.toLocaleString()}`,
+      grossRevenue: `₹${grossRevenue.toLocaleString('en-IN')}`,
       activeInquiries,
       totalDestinations,
       subscriberCount
@@ -276,631 +276,780 @@ export default function AdminDashboardPage() {
     );
   }, [inquiries, searchQuery]);
 
+  const getBreadcrumbTitle = () => {
+    switch (activeTab) {
+      case 'destinations': return 'Destinations Portfolio';
+      case 'bookings': return 'Reservations & Bookings';
+      case 'inquiries': return 'Concierge Inquiries';
+      case 'subscribers': return 'Newsletter Audience';
+      default: return 'Overview & Analytics';
+    }
+  };
+
   return (
-    <div className="admin-layout" suppressHydrationWarning>
-      {/* 1. Header Bar */}
-      <header className="admin-header">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <Link href="/admin" className="admin-header-brand">
-            <span className="admin-brand-logo">travelyn.</span>
-            <span className="admin-badge">Admin Studio</span>
-          </Link>
+    <div className="admin-shell" suppressHydrationWarning>
+      {/* Mobile Drawer Backdrop */}
+      <div
+        className={`admin-mobile-backdrop ${isSidebarOpen ? 'is-open' : ''}`}
+        onClick={() => setIsSidebarOpen(false)}
+      />
+
+      {/* ============================================================== */}
+      {/* 1. MODERN FIXED SIDEBAR */}
+      {/* ============================================================== */}
+      <aside className={`admin-sidebar ${isSidebarOpen ? 'is-open' : ''}`}>
+        <div className="admin-sidebar-top">
+          {/* Brand & Badge */}
+          <div className="admin-sidebar-brand">
+            <Link href="/admin" className="admin-brand-link" onClick={() => setIsSidebarOpen(false)}>
+              <span className="admin-brand-title">
+                travelyn<span className="admin-brand-dot">.</span>
+              </span>
+              <span className="admin-brand-badge">
+                <span className="admin-live-dot" /> Studio Console
+              </span>
+            </Link>
+
+            <button
+              type="button"
+              className="admin-sidebar-close-btn"
+              onClick={() => setIsSidebarOpen(false)}
+              aria-label="Close sidebar"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Navigation Section: Core Management */}
+          <div className="admin-nav-section">
+            <div className="admin-nav-header">Platform</div>
+
+            {/* Tab: Overview */}
+            <button
+              type="button"
+              onClick={() => { setActiveTab('overview'); setSearchQuery(''); setIsSidebarOpen(false); }}
+              className={`admin-nav-button ${activeTab === 'overview' ? 'is-active' : ''}`}
+            >
+              <div className="admin-nav-left">
+                <span className="admin-nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                  </svg>
+                </span>
+                <span>Overview</span>
+              </div>
+            </button>
+
+            {/* Tab: Destinations */}
+            <button
+              type="button"
+              onClick={() => { setActiveTab('destinations'); setSearchQuery(''); setIsSidebarOpen(false); }}
+              className={`admin-nav-button ${activeTab === 'destinations' ? 'is-active' : ''}`}
+            >
+              <div className="admin-nav-left">
+                <span className="admin-nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
+                    <line x1="9" y1="3" x2="9" y2="18" />
+                    <line x1="15" y1="6" x2="15" y2="21" />
+                  </svg>
+                </span>
+                <span>Destinations</span>
+              </div>
+              <span className="admin-nav-pill">{destinations.length}</span>
+            </button>
+          </div>
+
+          {/* Navigation Section: Operations */}
+          <div className="admin-nav-section">
+            <div className="admin-nav-header">Guest Operations</div>
+
+            {/* Tab: Bookings */}
+            <button
+              type="button"
+              onClick={() => { setActiveTab('bookings'); setSearchQuery(''); setIsSidebarOpen(false); }}
+              className={`admin-nav-button ${activeTab === 'bookings' ? 'is-active' : ''}`}
+            >
+              <div className="admin-nav-left">
+                <span className="admin-nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                </span>
+                <span>Bookings</span>
+              </div>
+              <span className="admin-nav-pill">{bookings.length}</span>
+            </button>
+
+            {/* Tab: Inquiries */}
+            <button
+              type="button"
+              onClick={() => { setActiveTab('inquiries'); setSearchQuery(''); setIsSidebarOpen(false); }}
+              className={`admin-nav-button ${activeTab === 'inquiries' ? 'is-active' : ''}`}
+            >
+              <div className="admin-nav-left">
+                <span className="admin-nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                </span>
+                <span>Inquiries</span>
+              </div>
+              <span className="admin-nav-pill">
+                {inquiries.filter((i) => i.status === 'new').length || inquiries.length}
+              </span>
+            </button>
+
+            {/* Tab: Subscribers */}
+            <button
+              type="button"
+              onClick={() => { setActiveTab('subscribers'); setSearchQuery(''); setIsSidebarOpen(false); }}
+              className={`admin-nav-button ${activeTab === 'subscribers' ? 'is-active' : ''}`}
+            >
+              <div className="admin-nav-left">
+                <span className="admin-nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </span>
+                <span>Subscribers</span>
+              </div>
+              <span className="admin-nav-pill">{subscribers.length}</span>
+            </button>
+          </div>
         </div>
 
-        <div className="admin-header-actions">
-          <button
-            type="button"
-            onClick={handleResetDemoData}
-            title="Reset to sample data"
-            className="admin-btn admin-btn-secondary"
-            style={{ height: '36px', fontSize: '12.5px', padding: '0 12px' }}
-          >
-            ↻ Reset Sample
-          </button>
+        {/* Sidebar Bottom / Profile & Quick Links */}
+        <div className="admin-sidebar-bottom">
+          <div className="admin-user-card">
+            <div className="admin-user-avatar">TS</div>
+            <div className="admin-user-info">
+              <span className="admin-user-name">Travelyn Lead</span>
+              <span className="admin-user-role">Chiado Studio · Lisbon</span>
+            </div>
+          </div>
 
-          <Link href="/" className="admin-public-link" target="_blank">
-            <span>View Public Site</span>
-            <span style={{ fontSize: '14px' }}>↗</span>
-          </Link>
+          <div className="admin-sidebar-actions">
+            <Link href="/" target="_blank" className="admin-sidebar-link-btn">
+              <span>View Public Site</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </Link>
+
+            <button
+              type="button"
+              onClick={handleResetDemoData}
+              className="admin-sidebar-link-btn"
+              style={{ background: 'transparent', cursor: 'pointer', textAlign: 'left', width: '100%' }}
+            >
+              <span>Reset Sample Data</span>
+              <span>↻</span>
+            </button>
+          </div>
         </div>
-      </header>
+      </aside>
 
-      {/* 2. Navigation Tabs */}
-      <nav className="admin-nav-bar">
-        <button
-          type="button"
-          onClick={() => { setActiveTab('overview'); setSearchQuery(''); }}
-          className={`admin-nav-tab ${activeTab === 'overview' ? 'is-active' : ''}`}
-        >
-          <span>📊 Overview</span>
-        </button>
+      {/* ============================================================== */}
+      {/* 2. MAIN APPLICATION WORKSPACE */}
+      {/* ============================================================== */}
+      <div className="admin-main-wrap">
+        {/* Topbar */}
+        <header className="admin-topbar">
+          <div className="admin-topbar-left">
+            {/* Hamburger Button for Mobile */}
+            <button
+              type="button"
+              onClick={() => setIsSidebarOpen(true)}
+              className="admin-mobile-menu-btn"
+              aria-label="Open sidebar menu"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
 
-        <button
-          type="button"
-          onClick={() => { setActiveTab('destinations'); setSearchQuery(''); }}
-          className={`admin-nav-tab ${activeTab === 'destinations' ? 'is-active' : ''}`}
-        >
-          <span>🗺️ Destinations</span>
-          <span className="admin-nav-count">{destinations.length}</span>
-        </button>
+            {/* Breadcrumbs */}
+            <div className="admin-breadcrumbs">
+              <span className="admin-breadcrumb-root">Console</span>
+              <span className="admin-breadcrumb-divider">/</span>
+              <span className="admin-breadcrumb-current">{getBreadcrumbTitle()}</span>
+            </div>
+          </div>
 
-        <button
-          type="button"
-          onClick={() => { setActiveTab('bookings'); setSearchQuery(''); }}
-          className={`admin-nav-tab ${activeTab === 'bookings' ? 'is-active' : ''}`}
-        >
-          <span>📅 Bookings</span>
-          <span className="admin-nav-count">{bookings.length}</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => { setActiveTab('inquiries'); setSearchQuery(''); }}
-          className={`admin-nav-tab ${activeTab === 'inquiries' ? 'is-active' : ''}`}
-        >
-          <span>✉️ Concierge Inquiries</span>
-          <span className="admin-nav-count">{inquiries.length}</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => { setActiveTab('subscribers'); setSearchQuery(''); }}
-          className={`admin-nav-tab ${activeTab === 'subscribers' ? 'is-active' : ''}`}
-        >
-          <span>📰 Subscribers</span>
-          <span className="admin-nav-count">{subscribers.length}</span>
-        </button>
-      </nav>
-
-      {/* Toast Notification */}
-      {toastMessage && (
-        <div style={{
-          position: 'fixed',
-          bottom: '24px',
-          right: '24px',
-          backgroundColor: '#17191c',
-          color: '#ffffff',
-          padding: '12px 22px',
-          borderRadius: '12px',
-          boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
-          zIndex: 2000,
-          fontSize: '14px',
-          fontWeight: 500,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px'
-        }}>
-          <span>✓</span>
-          <span>{toastMessage}</span>
-        </div>
-      )}
-
-      {/* 3. Main Dashboard Content */}
-      <main className="admin-container">
-
-        {/* ============================================================== */}
-        {/* TAB 1: OVERVIEW METRICS & ACTIVITY */}
-        {/* ============================================================== */}
-        {activeTab === 'overview' && (
-          <>
-            {/* Metric Cards Row */}
-            <div className="admin-metrics-grid">
-              <div className="admin-metric-card">
-                <div className="admin-metric-header">
-                  <span>Gross Pipeline</span>
-                  <div className="admin-metric-icon">💵</div>
-                </div>
-                <div className="admin-metric-value">{metrics.grossRevenue}</div>
-                <div className="admin-metric-sub">
-                  <span>↑ Across {metrics.totalBookings} reservation requests</span>
-                </div>
-              </div>
-
-              <div className="admin-metric-card">
-                <div className="admin-metric-header">
-                  <span>Reservations</span>
-                  <div className="admin-metric-icon">📅</div>
-                </div>
-                <div className="admin-metric-value">{metrics.totalBookings}</div>
-                <div className="admin-metric-sub">
-                  <span>Active & pending guest journeys</span>
-                </div>
-              </div>
-
-              <div className="admin-metric-card">
-                <div className="admin-metric-header">
-                  <span>Concierge Inquiries</span>
-                  <div className="admin-metric-icon">💬</div>
-                </div>
-                <div className="admin-metric-value">{metrics.activeInquiries}</div>
-                <div className="admin-metric-sub">
-                  <span>Awaiting bespoke itineraries</span>
-                </div>
-              </div>
-
-              <div className="admin-metric-card">
-                <div className="admin-metric-header">
-                  <span>Destinations</span>
-                  <div className="admin-metric-icon">🌍</div>
-                </div>
-                <div className="admin-metric-value">{metrics.totalDestinations}</div>
-                <div className="admin-metric-sub">
-                  <span>Live destinations in portfolio</span>
-                </div>
-              </div>
+          <div className="admin-topbar-right">
+            {/* Quick Search */}
+            <div className="admin-topbar-search">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="admin-topbar-search-icon">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Quick search records..."
+                className="admin-topbar-search-input"
+              />
             </div>
 
-            {/* Quick Actions & Recent Activity */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px' }}>
-              {/* Recent Bookings Card */}
-              <div className="admin-card">
-                <div className="admin-card-header">
-                  <div>
-                    <h3 className="admin-card-title">Recent Reservations</h3>
-                    <p className="admin-card-desc">Latest requests from travellers worldwide</p>
+            {/* Quick Add Destination CTA */}
+            <button
+              type="button"
+              onClick={handleOpenAddModal}
+              className="admin-topbar-cta"
+            >
+              <span>+ New Destination</span>
+            </button>
+          </div>
+        </header>
+
+        {/* Toast Notification */}
+        {toastMessage && (
+          <div style={{
+            position: 'fixed',
+            bottom: '24px',
+            right: '24px',
+            backgroundColor: '#17191c',
+            color: '#ffffff',
+            padding: '12px 20px',
+            borderRadius: '12px',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
+            zIndex: 2000,
+            fontSize: '13.5px',
+            fontWeight: 500,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px'
+          }}>
+            <span style={{ color: '#10b981' }}>✓</span>
+            <span>{toastMessage}</span>
+          </div>
+        )}
+
+        {/* Viewport Content */}
+        <main className="admin-viewport">
+
+          {/* ============================================================== */}
+          {/* TAB 1: OVERVIEW METRICS & ACTIVITY */}
+          {/* ============================================================== */}
+          {activeTab === 'overview' && (
+            <>
+              {/* Metric Cards Row */}
+              <div className="admin-metrics-grid">
+                <div className="admin-metric-card">
+                  <div className="admin-metric-header">
+                    <span>Pipeline Value</span>
+                    <div className="admin-metric-icon-wrap">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="12" y1="1" x2="12" y2="23" />
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                      </svg>
+                    </div>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => setActiveTab('bookings')}
-                    className="admin-btn admin-btn-secondary"
-                    style={{ height: '34px', fontSize: '13px' }}
-                  >
-                    View All →
-                  </button>
+                  <div className="admin-metric-value">{metrics.grossRevenue}</div>
+                  <div className="admin-metric-footer">
+                    <span>↑ Estimated across {metrics.totalBookings} guest reservations</span>
+                  </div>
                 </div>
 
-                <div className="admin-table-wrap">
-                  <table className="admin-table">
-                    <thead>
-                      <tr>
-                        <th>Traveler</th>
-                        <th>Journey</th>
-                        <th>Estimated</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {bookings.slice(0, 4).map((b) => (
-                        <tr key={b.id}>
-                          <td>
-                            <div style={{ fontWeight: 600 }}>{b.travelerName}</div>
-                            <div style={{ fontSize: '12px', color: '#718096' }}>{b.travelerEmail}</div>
-                          </td>
-                          <td>{b.destinationTitle}</td>
-                          <td style={{ fontWeight: 600 }}>${(b.totalEstimatedPrice || 0).toLocaleString()}</td>
-                          <td>
-                            <span className={`status-pill is-${b.status}`}>
-                              {b.status}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                <div className="admin-metric-card">
+                  <div className="admin-metric-header">
+                    <span>Reservations</span>
+                    <div className="admin-metric-icon-wrap">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="admin-metric-value">{metrics.totalBookings}</div>
+                  <div className="admin-metric-footer">
+                    <span>Active & pending guest journeys</span>
+                  </div>
+                </div>
+
+                <div className="admin-metric-card">
+                  <div className="admin-metric-header">
+                    <span>Concierge Inquiries</span>
+                    <div className="admin-metric-icon-wrap">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="admin-metric-value">{metrics.activeInquiries}</div>
+                  <div className="admin-metric-footer">
+                    <span>Awaiting tailor-made itineraries</span>
+                  </div>
+                </div>
+
+                <div className="admin-metric-card">
+                  <div className="admin-metric-header">
+                    <span>Destinations</span>
+                    <div className="admin-metric-icon-wrap">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="admin-metric-value">{metrics.totalDestinations}</div>
+                  <div className="admin-metric-footer">
+                    <span>Live journeys in collection</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Quick Actions & Portfolio Highlight */}
-              <div className="admin-card">
-                <div className="admin-card-header">
-                  <div>
-                    <h3 className="admin-card-title">Portfolio Actions</h3>
-                    <p className="admin-card-desc">Quick management shortcuts</p>
+              {/* Recent Bookings & Quick Actions Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px' }}>
+                {/* Recent Bookings Card */}
+                <div className="admin-card">
+                  <div className="admin-card-header">
+                    <div>
+                      <h3 className="admin-card-title">Recent Guest Reservations</h3>
+                      <p className="admin-card-subtitle">Real-time requests submitted through Travelyn</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab('bookings')}
+                      className="admin-btn admin-btn-secondary"
+                      style={{ height: '34px', fontSize: '13px' }}
+                    >
+                      View All →
+                    </button>
+                  </div>
+
+                  <div className="admin-table-wrap">
+                    <table className="admin-table">
+                      <thead>
+                        <tr>
+                          <th>Traveler</th>
+                          <th>Journey</th>
+                          <th>Estimated</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {bookings.slice(0, 4).map((b) => (
+                          <tr key={b.id}>
+                            <td>
+                              <div style={{ fontWeight: 600 }}>{b.travelerName}</div>
+                              <div style={{ fontSize: '12px', color: '#718096' }}>{b.travelerEmail}</div>
+                            </td>
+                            <td>{b.destinationTitle}</td>
+                            <td style={{ fontWeight: 600 }}>₹{(b.totalEstimatedPrice || 0).toLocaleString('en-IN')}</td>
+                            <td>
+                              <span className={`status-pill is-${b.status}`}>
+                                {b.status}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                {/* Quick Actions & Studio Notes Card */}
+                <div className="admin-card">
+                  <div className="admin-card-header">
+                    <div>
+                      <h3 className="admin-card-title">Studio Shortcuts</h3>
+                      <p className="admin-card-subtitle">Quick administration actions</p>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    <button
+                      type="button"
+                      onClick={handleOpenAddModal}
+                      className="admin-btn admin-btn-primary"
+                      style={{ width: '100%', justifyContent: 'center', height: '42px' }}
+                    >
+                      <span>+ Create New Luxury Journey</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab('inquiries')}
+                      className="admin-btn admin-btn-secondary"
+                      style={{ width: '100%', justifyContent: 'center', height: '42px' }}
+                    >
+                      <span>✉ Review {inquiries.filter((i) => i.status === 'new').length} New Bespoke Inquiries</span>
+                    </button>
+
+                    <div style={{
+                      marginTop: '6px',
+                      padding: '16px',
+                      borderRadius: '16px',
+                      backgroundColor: '#faf9f6',
+                      border: '1px solid rgba(13, 13, 13, 0.06)'
+                    }}>
+                      <div style={{ fontSize: '13px', fontWeight: 600, color: '#17191c', marginBottom: '4px' }}>
+                        Newsletter Community
+                      </div>
+                      <div style={{ fontSize: '13.5px', color: '#718096', lineHeight: 1.5 }}>
+                        {subscribers.length} curious travellers subscribed to slow travel releases and journal essays.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* ============================================================== */}
+          {/* TAB 2: DESTINATIONS MANAGER */}
+          {/* ============================================================== */}
+          {activeTab === 'destinations' && (
+            <div className="admin-card">
+              <div className="admin-card-header">
+                <div>
+                  <h3 className="admin-card-title">Destinations Portfolio</h3>
+                  <p className="admin-card-subtitle">Manage journeys, featured highlights, pricing, and itineraries</p>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <button
                     type="button"
                     onClick={handleOpenAddModal}
                     className="admin-btn admin-btn-primary"
-                    style={{ width: '100%', justifyContent: 'center' }}
                   >
-                    <span>+ Add New Luxury Destination</span>
+                    <span>+ Add Destination</span>
                   </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setActiveTab('inquiries')}
-                    className="admin-btn admin-btn-secondary"
-                    style={{ width: '100%', justifyContent: 'center' }}
-                  >
-                    <span>✉ Review {inquiries.filter(i => i.status === 'new').length} New Guest Inquiries</span>
-                  </button>
-
-                  <div style={{
-                    marginTop: '8px',
-                    padding: '16px',
-                    borderRadius: '16px',
-                    backgroundColor: '#faf9f6',
-                    border: '1px solid rgba(13, 13, 13, 0.06)'
-                  }}>
-                    <div style={{ fontSize: '13px', fontWeight: 600, color: '#17191c', marginBottom: '6px' }}>
-                      Newsletter Subscribers
-                    </div>
-                    <div style={{ fontSize: '14px', color: '#718096' }}>
-                      {subscribers.length} luxury travellers have opted in for monthly storytelling.
-                    </div>
-                  </div>
                 </div>
               </div>
-            </div>
-          </>
-        )}
 
-        {/* ============================================================== */}
-        {/* TAB 2: DESTINATIONS MANAGER */}
-        {/* ============================================================== */}
-        {activeTab === 'destinations' && (
-          <div className="admin-card">
-            <div className="admin-card-header">
-              <div>
-                <h3 className="admin-card-title">Destinations Portfolio</h3>
-                <p className="admin-card-desc">Add, edit, and organize all journeys displayed on Travelyn</p>
-              </div>
-
-              <div className="admin-toolbar">
-                <div className="admin-search-wrap">
-                  <span className="admin-search-icon">🔍</span>
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search destination, country..."
-                    className="admin-search-input"
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  onClick={handleOpenAddModal}
-                  className="admin-btn admin-btn-primary"
-                >
-                  <span>+ Add Destination</span>
-                </button>
-              </div>
-            </div>
-
-            <div className="admin-table-wrap">
-              <table className="admin-table">
-                <thead>
-                  <tr>
-                    <th>Destination</th>
-                    <th>Region</th>
-                    <th>Price</th>
-                    <th>Duration</th>
-                    <th>Rating</th>
-                    <th>Featured</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredDestinations.map((dest) => (
-                    <tr key={dest.id}>
-                      <td>
-                        <div className="admin-dest-cell">
-                          <img
-                            src={dest.imageUrl}
-                            alt={dest.title}
-                            className="admin-dest-thumb"
-                          />
-                          <div>
-                            <div className="admin-dest-name">{dest.title}</div>
-                            <div className="admin-dest-sub">{dest.country} · /{dest.slug}</div>
+              <div className="admin-table-wrap">
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Destination</th>
+                      <th>Region</th>
+                      <th>Price (₹)</th>
+                      <th>Duration</th>
+                      <th>Rating</th>
+                      <th>Featured</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredDestinations.map((dest) => (
+                      <tr key={dest.id}>
+                        <td>
+                          <div className="admin-dest-cell">
+                            <img
+                              src={dest.imageUrl}
+                              alt={dest.title}
+                              className="admin-dest-thumb"
+                            />
+                            <div>
+                              <div className="admin-dest-name">{dest.title}</div>
+                              <div className="admin-dest-sub">{dest.country} · /{dest.slug}</div>
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                      <td>{dest.region}</td>
-                      <td style={{ fontWeight: 600 }}>${dest.price.toLocaleString()}</td>
-                      <td>{dest.durationDays} days</td>
-                      <td>★ {dest.rating}</td>
-                      <td>
-                        <button
-                          type="button"
-                          onClick={() => handleToggleFeatured(dest)}
-                          style={{
-                            background: dest.featured ? '#d1fae5' : '#f1f5f9',
-                            color: dest.featured ? '#065f46' : '#64748b',
-                            border: 'none',
-                            padding: '4px 10px',
-                            borderRadius: '999px',
-                            fontSize: '12px',
-                            fontWeight: 600,
-                            cursor: 'pointer'
-                          }}
-                        >
-                          {dest.featured ? '★ Featured' : 'Standard'}
-                        </button>
-                      </td>
-                      <td>
-                        <div style={{ display: 'flex', gap: '8px' }}>
+                        </td>
+                        <td>{dest.region}</td>
+                        <td style={{ fontWeight: 600 }}>₹{dest.price.toLocaleString('en-IN')}</td>
+                        <td>{dest.durationDays} days</td>
+                        <td>★ {dest.rating}</td>
+                        <td>
                           <button
                             type="button"
-                            onClick={() => handleOpenEditModal(dest)}
-                            className="admin-btn admin-btn-secondary"
-                            style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
+                            onClick={() => handleToggleFeatured(dest)}
+                            style={{
+                              background: dest.featured ? '#d1fae5' : '#f1f5f9',
+                              color: dest.featured ? '#065f46' : '#64748b',
+                              border: 'none',
+                              padding: '4px 10px',
+                              borderRadius: '999px',
+                              fontSize: '12px',
+                              fontWeight: 600,
+                              cursor: 'pointer'
+                            }}
                           >
-                            Edit
+                            {dest.featured ? '★ Featured' : 'Standard'}
                           </button>
-                          <Link
-                            href={`/destinations/${dest.slug}`}
-                            target="_blank"
-                            className="admin-btn admin-btn-secondary"
-                            style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
-                          >
-                            View
-                          </Link>
-                          <button
-                            type="button"
-                            onClick={() => handleDeleteDestination(dest.id, dest.title)}
-                            className="admin-btn admin-btn-danger"
-                            style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                  {filteredDestinations.length === 0 && (
-                    <tr>
-                      <td colSpan={7} style={{ textAlign: 'center', padding: '40px', color: '#718096' }}>
-                        No destinations found matching "{searchQuery}"
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-
-        {/* ============================================================== */}
-        {/* TAB 3: BOOKINGS & RESERVATIONS */}
-        {/* ============================================================== */}
-        {activeTab === 'bookings' && (
-          <div className="admin-card">
-            <div className="admin-card-header">
-              <div>
-                <h3 className="admin-card-title">Bookings & Reservations</h3>
-                <p className="admin-card-desc">Review traveler reservations and manage journey statuses</p>
+                        </td>
+                        <td>
+                          <div style={{ display: 'flex', gap: '8px' }}>
+                            <button
+                              type="button"
+                              onClick={() => handleOpenEditModal(dest)}
+                              className="admin-btn admin-btn-secondary"
+                              style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
+                            >
+                              Edit
+                            </button>
+                            <Link
+                              href={`/destinations/${dest.slug}`}
+                              target="_blank"
+                              className="admin-btn admin-btn-secondary"
+                              style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
+                            >
+                              View ↗
+                            </Link>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteDestination(dest.id, dest.title)}
+                              className="admin-btn admin-btn-danger"
+                              style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                    {filteredDestinations.length === 0 && (
+                      <tr>
+                        <td colSpan={7} style={{ textAlign: 'center', padding: '40px', color: '#718096' }}>
+                          No destinations found matching "{searchQuery}"
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
               </div>
+            </div>
+          )}
 
-              <div className="admin-toolbar">
-                <div className="admin-search-wrap">
-                  <span className="admin-search-icon">🔍</span>
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search traveler, journey..."
-                    className="admin-search-input"
-                  />
+          {/* ============================================================== */}
+          {/* TAB 3: BOOKINGS & RESERVATIONS */}
+          {/* ============================================================== */}
+          {activeTab === 'bookings' && (
+            <div className="admin-card">
+              <div className="admin-card-header">
+                <div>
+                  <h3 className="admin-card-title">Bookings & Reservations</h3>
+                  <p className="admin-card-subtitle">Review incoming reservations and update journey statuses</p>
                 </div>
               </div>
-            </div>
 
-            <div className="admin-table-wrap">
-              <table className="admin-table">
-                <thead>
-                  <tr>
-                    <th>Traveler</th>
-                    <th>Destination</th>
-                    <th>Start Date</th>
-                    <th>Guests</th>
-                    <th>Estimated Value</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredBookings.map((b) => (
-                    <tr key={b.id}>
-                      <td>
-                        <div style={{ fontWeight: 600 }}>{b.travelerName}</div>
-                        <div style={{ fontSize: '12px', color: '#718096' }}>{b.travelerEmail}</div>
-                        {b.phone && <div style={{ fontSize: '11px', color: '#a0aec0' }}>{b.phone}</div>}
-                      </td>
-                      <td>
-                        <div style={{ fontWeight: 500 }}>{b.destinationTitle}</div>
-                        <div style={{ fontSize: '12px', color: '#718096' }}>{b.roomType || 'Luxury Suite'}</div>
-                      </td>
-                      <td>{b.startDate}</td>
-                      <td>{b.guests} guests</td>
-                      <td style={{ fontWeight: 700 }}>${(b.totalEstimatedPrice || 0).toLocaleString()}</td>
-                      <td>
-                        <select
-                          value={b.status}
-                          onChange={(e) => handleBookingStatusChange(b.id, e.target.value)}
-                          className={`status-pill is-${b.status}`}
-                          style={{ border: 'none', outline: 'none', cursor: 'pointer' }}
-                        >
-                          <option value="pending">Pending</option>
-                          <option value="confirmed">Confirmed</option>
-                          <option value="cancelled">Cancelled</option>
-                        </select>
-                      </td>
-                      <td>
-                        <div style={{ display: 'flex', gap: '8px' }}>
-                          <button
-                            type="button"
-                            onClick={() => setSelectedBookingDetails(b)}
-                            className="admin-btn admin-btn-secondary"
-                            style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
-                          >
-                            Details
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleDeleteBooking(b.id)}
-                            className="admin-btn admin-btn-danger"
-                            style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                  {filteredBookings.length === 0 && (
+              <div className="admin-table-wrap">
+                <table className="admin-table">
+                  <thead>
                     <tr>
-                      <td colSpan={7} style={{ textAlign: 'center', padding: '40px', color: '#718096' }}>
-                        No reservations found.
-                      </td>
+                      <th>Traveler</th>
+                      <th>Destination</th>
+                      <th>Start Date</th>
+                      <th>Guests</th>
+                      <th>Estimated Value</th>
+                      <th>Status</th>
+                      <th>Actions</th>
                     </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-
-        {/* ============================================================== */}
-        {/* TAB 4: CONCIERGE INQUIRIES */}
-        {/* ============================================================== */}
-        {activeTab === 'inquiries' && (
-          <div className="admin-card">
-            <div className="admin-card-header">
-              <div>
-                <h3 className="admin-card-title">Tailor-Made Inquiries</h3>
-                <p className="admin-card-desc">Messages submitted through the Plan Your Journey contact form</p>
+                  </thead>
+                  <tbody>
+                    {filteredBookings.map((b) => (
+                      <tr key={b.id}>
+                        <td>
+                          <div style={{ fontWeight: 600 }}>{b.travelerName}</div>
+                          <div style={{ fontSize: '12px', color: '#718096' }}>{b.travelerEmail}</div>
+                          {b.phone && <div style={{ fontSize: '11px', color: '#a0aec0' }}>{b.phone}</div>}
+                        </td>
+                        <td>
+                          <div style={{ fontWeight: 500 }}>{b.destinationTitle}</div>
+                          <div style={{ fontSize: '12px', color: '#718096' }}>{b.roomType || 'Luxury Suite'}</div>
+                        </td>
+                        <td>{b.startDate}</td>
+                        <td>{b.guests} guests</td>
+                        <td style={{ fontWeight: 700 }}>₹{(b.totalEstimatedPrice || 0).toLocaleString('en-IN')}</td>
+                        <td>
+                          <select
+                            value={b.status}
+                            onChange={(e) => handleBookingStatusChange(b.id, e.target.value)}
+                            className={`status-pill is-${b.status}`}
+                            style={{ border: 'none', outline: 'none', cursor: 'pointer' }}
+                          >
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="cancelled">Cancelled</option>
+                          </select>
+                        </td>
+                        <td>
+                          <div style={{ display: 'flex', gap: '8px' }}>
+                            <button
+                              type="button"
+                              onClick={() => setSelectedBookingDetails(b)}
+                              className="admin-btn admin-btn-secondary"
+                              style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
+                            >
+                              Details
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteBooking(b.id)}
+                              className="admin-btn admin-btn-danger"
+                              style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                    {filteredBookings.length === 0 && (
+                      <tr>
+                        <td colSpan={7} style={{ textAlign: 'center', padding: '40px', color: '#718096' }}>
+                          No reservations found.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
               </div>
+            </div>
+          )}
 
-              <div className="admin-toolbar">
-                <div className="admin-search-wrap">
-                  <span className="admin-search-icon">🔍</span>
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search guest or destination..."
-                    className="admin-search-input"
-                  />
+          {/* ============================================================== */}
+          {/* TAB 4: CONCIERGE INQUIRIES */}
+          {/* ============================================================== */}
+          {activeTab === 'inquiries' && (
+            <div className="admin-card">
+              <div className="admin-card-header">
+                <div>
+                  <h3 className="admin-card-title">Tailor-Made Concierge Inquiries</h3>
+                  <p className="admin-card-subtitle">Custom itinerary requests submitted through the Plan Journey form</p>
                 </div>
               </div>
-            </div>
 
-            <div className="admin-table-wrap">
-              <table className="admin-table">
-                <thead>
-                  <tr>
-                    <th>Guest</th>
-                    <th>Preference</th>
-                    <th>Dates / Budget</th>
-                    <th>Message Excerpt</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredInquiries.map((inq) => (
-                    <tr key={inq.id}>
-                      <td>
-                        <div style={{ fontWeight: 600 }}>{inq.fullName}</div>
-                        <div style={{ fontSize: '12px', color: '#718096' }}>{inq.email}</div>
-                        {inq.phone && <div style={{ fontSize: '11px', color: '#a0aec0' }}>{inq.phone}</div>}
-                      </td>
-                      <td style={{ fontWeight: 500 }}>{inq.destinationPreference}</td>
-                      <td>
-                        <div>{inq.travelDates || 'Flexible'}</div>
-                        <div style={{ fontSize: '12px', color: '#718096' }}>{inq.budgetRange}</div>
-                      </td>
-                      <td style={{ maxWidth: '300px' }}>
-                        <p style={{ margin: 0, fontSize: '13px', color: '#4a5568', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                          {inq.message}
-                        </p>
-                      </td>
-                      <td>
-                        <select
-                          value={inq.status}
-                          onChange={(e) => handleInquiryStatusChange(inq.id, e.target.value)}
-                          className={`status-pill is-${inq.status}`}
-                          style={{ border: 'none', outline: 'none', cursor: 'pointer' }}
-                        >
-                          <option value="new">New</option>
-                          <option value="contacted">Contacted</option>
-                          <option value="closed">Closed</option>
-                        </select>
-                      </td>
-                      <td>
-                        <div style={{ display: 'flex', gap: '8px' }}>
-                          <button
-                            type="button"
-                            onClick={() => setSelectedInquiryDetails(inq)}
-                            className="admin-btn admin-btn-secondary"
-                            style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
-                          >
-                            Read Full
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleDeleteInquiry(inq.id)}
-                            className="admin-btn admin-btn-danger"
-                            style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                  {filteredInquiries.length === 0 && (
+              <div className="admin-table-wrap">
+                <table className="admin-table">
+                  <thead>
                     <tr>
-                      <td colSpan={6} style={{ textAlign: 'center', padding: '40px', color: '#718096' }}>
-                        No guest inquiries found.
-                      </td>
+                      <th>Guest</th>
+                      <th>Preference</th>
+                      <th>Dates / Budget</th>
+                      <th>Message Excerpt</th>
+                      <th>Status</th>
+                      <th>Actions</th>
                     </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-
-        {/* ============================================================== */}
-        {/* TAB 5: NEWSLETTER SUBSCRIBERS */}
-        {/* ============================================================== */}
-        {activeTab === 'subscribers' && (
-          <div className="admin-card">
-            <div className="admin-card-header">
-              <div>
-                <h3 className="admin-card-title">Newsletter Audience</h3>
-                <p className="admin-card-desc">Travelers subscribed to Travelyn journal and early access</p>
+                  </thead>
+                  <tbody>
+                    {filteredInquiries.map((inq) => (
+                      <tr key={inq.id}>
+                        <td>
+                          <div style={{ fontWeight: 600 }}>{inq.fullName}</div>
+                          <div style={{ fontSize: '12px', color: '#718096' }}>{inq.email}</div>
+                          {inq.phone && <div style={{ fontSize: '11px', color: '#a0aec0' }}>{inq.phone}</div>}
+                        </td>
+                        <td style={{ fontWeight: 500 }}>{inq.destinationPreference}</td>
+                        <td>
+                          <div>{inq.travelDates || 'Flexible'}</div>
+                          <div style={{ fontSize: '12px', color: '#718096' }}>{inq.budgetRange}</div>
+                        </td>
+                        <td style={{ maxWidth: '300px' }}>
+                          <p style={{ margin: 0, fontSize: '13px', color: '#4a5568', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {inq.message}
+                          </p>
+                        </td>
+                        <td>
+                          <select
+                            value={inq.status}
+                            onChange={(e) => handleInquiryStatusChange(inq.id, e.target.value)}
+                            className={`status-pill is-${inq.status}`}
+                            style={{ border: 'none', outline: 'none', cursor: 'pointer' }}
+                          >
+                            <option value="new">New</option>
+                            <option value="contacted">Contacted</option>
+                            <option value="closed">Closed</option>
+                          </select>
+                        </td>
+                        <td>
+                          <div style={{ display: 'flex', gap: '8px' }}>
+                            <button
+                              type="button"
+                              onClick={() => setSelectedInquiryDetails(inq)}
+                              className="admin-btn admin-btn-secondary"
+                              style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
+                            >
+                              Read Full
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteInquiry(inq.id)}
+                              className="admin-btn admin-btn-danger"
+                              style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                    {filteredInquiries.length === 0 && (
+                      <tr>
+                        <td colSpan={6} style={{ textAlign: 'center', padding: '40px', color: '#718096' }}>
+                          No guest inquiries found.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
               </div>
+            </div>
+          )}
 
-              <div className="admin-toolbar">
-                <span style={{ fontSize: '14px', fontWeight: 600, color: '#718096' }}>
+          {/* ============================================================== */}
+          {/* TAB 5: NEWSLETTER SUBSCRIBERS */}
+          {/* ============================================================== */}
+          {activeTab === 'subscribers' && (
+            <div className="admin-card">
+              <div className="admin-card-header">
+                <div>
+                  <h3 className="admin-card-title">Newsletter Audience</h3>
+                  <p className="admin-card-subtitle">Travellers subscribed to Travelyn monthly journeys and insights</p>
+                </div>
+
+                <div style={{ fontSize: '14px', fontWeight: 600, color: '#718096' }}>
                   Total: {subscribers.length} subscribers
-                </span>
+                </div>
+              </div>
+
+              <div className="admin-table-wrap">
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Email Address</th>
+                      <th>Subscribed On</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {subscribers.map((s) => (
+                      <tr key={s.id}>
+                        <td style={{ fontWeight: 600 }}>{s.email}</td>
+                        <td>{new Date(s.subscribedAt).toLocaleDateString()}</td>
+                        <td>
+                          <span className="status-pill is-confirmed">Active</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
+          )}
 
-            <div className="admin-table-wrap">
-              <table className="admin-table">
-                <thead>
-                  <tr>
-                    <th>Email Address</th>
-                    <th>Subscribed On</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {subscribers.map((s) => (
-                    <tr key={s.id}>
-                      <td style={{ fontWeight: 600 }}>{s.email}</td>
-                      <td>{new Date(s.subscribedAt).toLocaleDateString()}</td>
-                      <td>
-                        <span className="status-pill is-confirmed">Active</span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-
-      </main>
+        </main>
+      </div>
 
       {/* ============================================================== */}
       {/* MODAL 1: ADD / EDIT DESTINATION */}
@@ -921,7 +1070,7 @@ export default function AdminDashboardPage() {
               </button>
             </div>
 
-            <form onSubmit={handleSaveDestination} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <form onSubmit={handleSaveDestination} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
               <div className="admin-form-grid">
                 <div className="admin-form-group">
                   <label className="admin-form-label">Destination Title *</label>
@@ -961,7 +1110,7 @@ export default function AdminDashboardPage() {
                 </div>
 
                 <div className="admin-form-group">
-                  <label className="admin-form-label">Price ($ USD per person)</label>
+                  <label className="admin-form-label">Price (₹ INR per person)</label>
                   <input
                     type="number"
                     required
@@ -1059,7 +1208,7 @@ export default function AdminDashboardPage() {
                 </label>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '10px' }}>
                 <button
                   type="button"
                   onClick={() => setIsDestModalOpen(false)}
@@ -1124,7 +1273,7 @@ export default function AdminDashboardPage() {
                 <div>
                   <div style={{ fontSize: '12px', color: '#718096' }}>Estimated Total Value</div>
                   <div style={{ fontSize: '24px', fontWeight: 700 }}>
-                    ${(selectedBookingDetails.totalEstimatedPrice || 0).toLocaleString()}
+                    ₹{(selectedBookingDetails.totalEstimatedPrice || 0).toLocaleString('en-IN')}
                   </div>
                 </div>
 

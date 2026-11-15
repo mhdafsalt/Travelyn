@@ -69,3 +69,4 @@ export async function DELETE(_request, { params }) {
     message: 'Destination deleted successfully',
   });
 }
+

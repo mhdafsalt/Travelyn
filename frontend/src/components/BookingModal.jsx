@@ -64,7 +64,7 @@ export default function BookingModal({ destination, isOpen, onClose }) {
             </div>
             <div className="booking-modal-price-box">
               <div className="booking-modal-price-from">From</div>
-              <div suppressHydrationWarning className="booking-modal-price-val">${destination.price.toLocaleString()}</div>
+              <div suppressHydrationWarning className="booking-modal-price-val">₹{destination.price.toLocaleString('en-IN')}</div>
             </div>
           </div>
 
@@ -125,8 +125,8 @@ export default function BookingModal({ destination, isOpen, onClose }) {
                   className="booking-modal-select"
                 >
                   <option value="Signature Luxury Suite">Signature Luxury Suite (Included)</option>
-                  <option value="Panoramic View Penthouse">Panoramic View Penthouse (+ $800)</option>
-                  <option value="Private Villa / Chalet Exclusive">Private Villa / Chalet Exclusive (+ $1,600)</option>
+                  <option value="Panoramic View Penthouse">Panoramic View Penthouse (+ ₹25,000)</option>
+                  <option value="Private Villa / Chalet Exclusive">Private Villa / Chalet Exclusive (+ ₹50,000)</option>
                 </select>
               </div>
 
@@ -164,7 +164,7 @@ export default function BookingModal({ destination, isOpen, onClose }) {
                 <input
                   type="tel"
                   suppressHydrationWarning
-                  placeholder="+1 (555) 000-0000"
+                  placeholder="+91 98765 43210"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   className="booking-modal-input"
@@ -188,11 +188,11 @@ export default function BookingModal({ destination, isOpen, onClose }) {
                 <div>
                   <div className="booking-modal-summary-title">Estimated Journey Total</div>
                   <div className="booking-modal-summary-sub">
-                    ${destination.price.toLocaleString()} × {guests} {guests === 1 ? 'guest' : 'guests'} (includes taxes & concierge)
+                    ₹{destination.price.toLocaleString('en-IN')} × {guests} {guests === 1 ? 'guest' : 'guests'} (includes taxes & concierge)
                   </div>
                 </div>
                 <div suppressHydrationWarning className="booking-modal-summary-price">
-                  ${estimatedTotal.toLocaleString()}
+                  ₹{estimatedTotal.toLocaleString('en-IN')}
                 </div>
               </div>
 

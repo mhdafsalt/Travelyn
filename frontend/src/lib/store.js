@@ -18,7 +18,7 @@ const INITIAL_BOOKINGS = [
     guests: 2,
     roomType: 'Caldera Sunset Cave Suite',
     specialRequests: 'Champagne on arrival & sunset catamaran booking',
-    totalEstimatedPrice: 5900,
+    totalEstimatedPrice: 570000,
     status: 'confirmed',
     createdAt: '2026-11-12T14:32:00.000Z'
   },
@@ -33,7 +33,7 @@ const INITIAL_BOOKINGS = [
     guests: 2,
     roomType: 'Imperial Garden Pavilion',
     specialRequests: 'Private tea master ceremony in Gion',
-    totalEstimatedPrice: 4800,
+    totalEstimatedPrice: 250000,
     status: 'pending',
     createdAt: '2026-11-13T09:15:00.000Z'
   },
@@ -48,7 +48,7 @@ const INITIAL_BOOKINGS = [
     guests: 2,
     roomType: 'Sunset Pool Villa Overwater',
     specialRequests: 'Private sandbank dinner on Day 3',
-    totalEstimatedPrice: 7200,
+    totalEstimatedPrice: 990000,
     status: 'confirmed',
     createdAt: '2026-11-14T11:45:00.000Z'
   },
@@ -63,7 +63,7 @@ const INITIAL_BOOKINGS = [
     guests: 4,
     roomType: 'Private Alpine Penthouse Suite',
     specialRequests: 'Glacier Express first-class panoramic car tickets',
-    totalEstimatedPrice: 8400,
+    totalEstimatedPrice: 620000,
     status: 'pending',
     createdAt: '2026-11-14T16:20:00.000Z'
   }
@@ -78,7 +78,7 @@ const INITIAL_INQUIRIES = [
     phone: '+1 (555) 987-6543',
     destinationPreference: 'Lake Como & Amalfi Coast',
     travelDates: 'September 2026',
-    budgetRange: '$10,000 – $25,000',
+    budgetRange: '₹8,00,000 – ₹20,00,000',
     guestCount: 2,
     message: 'We are planning our 10th anniversary journey. We want private vintage Riva boat charters on Como and a cliffside villa in Positano.',
     status: 'new',
@@ -91,7 +91,7 @@ const INITIAL_INQUIRIES = [
     phone: '+41 22 555 0199',
     destinationPreference: 'Kyoto & Naoshima Art Island',
     travelDates: 'October 2026',
-    budgetRange: '$25,000+',
+    budgetRange: '₹20,00,000+',
     guestCount: 3,
     message: 'Looking for access to private historic machiya residences and private architectural docents for modern art museums.',
     status: 'contacted',
@@ -137,7 +137,28 @@ function setLocalItem(key, value) {
    ========================================================================== */
 
 export function getStoredDestinations() {
-  return getLocalItem(DESTINATIONS_KEY, INITIAL_DESTINATIONS);
+  const list = getLocalItem(DESTINATIONS_KEY, INITIAL_DESTINATIONS);
+  // Auto-migrate any legacy USD records in localStorage to INR
+  let needsUpdate = false;
+  const migrated = list.map((d) => {
+    if (d.currency === 'USD' || (d.price && d.price < 10000)) {
+      needsUpdate = true;
+      const initialMatch = INITIAL_DESTINATIONS.find((init) => init.id === d.id || init.slug === d.slug);
+      return {
+        ...d,
+        currency: 'INR',
+        price: initialMatch ? initialMatch.price : (d.price ? Math.round(d.price * 85) : 145000)
+      };
+    }
+    return {
+      ...d,
+      currency: d.currency || 'INR'
+    };
+  });
+  if (needsUpdate) {
+    setLocalItem(DESTINATIONS_KEY, migrated);
+  }
+  return migrated;
 }
 
 export function getStoredDestinationBySlug(slug) {
@@ -163,7 +184,7 @@ export function saveDestination(destination) {
       id: destination.id || `dest-${Date.now()}`,
       rating: destination.rating || 4.9,
       reviewCount: destination.reviewCount || 1,
-      currency: destination.currency || 'USD',
+      currency: destination.currency || 'INR',
       gallery: destination.gallery && destination.gallery.length ? destination.gallery : [destination.imageUrl],
       highlights: destination.highlights || ['Private luxury concierge', 'Handpicked 5-star accommodations'],
       itinerary: destination.itinerary || [
@@ -190,7 +211,22 @@ export function deleteStoredDestination(id) {
    ========================================================================== */
 
 export function getStoredBookings() {
-  return getLocalItem(BOOKINGS_KEY, INITIAL_BOOKINGS);
+  const list = getLocalItem(BOOKINGS_KEY, INITIAL_BOOKINGS);
+  let needsUpdate = false;
+  const migrated = list.map((b) => {
+    if (b.totalEstimatedPrice && b.totalEstimatedPrice < 20000) {
+      needsUpdate = true;
+      return {
+        ...b,
+        totalEstimatedPrice: Math.round(b.totalEstimatedPrice * 85)
+      };
+    }
+    return b;
+  });
+  if (needsUpdate) {
+    setLocalItem(BOOKINGS_KEY, migrated);
+  }
+  return migrated;
 }
 
 export function addStoredBooking(bookingData) {
@@ -225,7 +261,22 @@ export function deleteStoredBooking(id) {
    ========================================================================== */
 
 export function getStoredInquiries() {
-  return getLocalItem(INQUIRIES_KEY, INITIAL_INQUIRIES);
+  const list = getLocalItem(INQUIRIES_KEY, INITIAL_INQUIRIES);
+  let needsUpdate = false;
+  const migrated = list.map((i) => {
+    if (i.budgetRange && i.budgetRange.includes('$')) {
+      needsUpdate = true;
+      return {
+        ...i,
+        budgetRange: i.budgetRange.replace(/\$10,000 – \$25,000/g, '₹8,00,000 – ₹20,00,000').replace(/\$25,000\+/g, '₹20,00,000+').replace(/\$/g, '₹')
+      };
+    }
+    return i;
+  });
+  if (needsUpdate) {
+    setLocalItem(INQUIRIES_KEY, migrated);
+  }
+  return migrated;
 }
 
 export function addStoredInquiry(inquiryData) {
@@ -279,3 +330,4 @@ export function addStoredSubscriber(email) {
   setLocalItem(SUBSCRIBERS_KEY, updated);
   return { success: true, subscriber: newSub };
 }
+

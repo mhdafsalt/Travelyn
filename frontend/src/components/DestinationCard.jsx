@@ -21,9 +21,9 @@ export default function DestinationCard({ destination, onBookClick }) {
   // Short description / tagline
   const descText = destination.tagline || destination.description || '';
 
-  // Formatted price
-  const formattedPrice = destination.price ? destination.price.toLocaleString() : '1,850';
-  const currencySymbol = destination.currency === 'EUR' ? '€' : destination.currency === 'GBP' ? '£' : '$';
+  // Formatted price (Indian Rupee default)
+  const formattedPrice = destination.price ? destination.price.toLocaleString('en-IN') : '1,45,000';
+  const currencySymbol = destination.currency === 'EUR' ? '€' : destination.currency === 'GBP' ? '£' : '₹';
 
   const handleActionClick = (e) => {
     e.stopPropagation();

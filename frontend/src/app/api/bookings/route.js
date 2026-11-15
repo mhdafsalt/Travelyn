@@ -12,7 +12,7 @@ let serverBookings = [
     guests: 2,
     roomType: 'Caldera Sunset Cave Suite',
     specialRequests: 'Champagne on arrival & sunset catamaran booking',
-    totalEstimatedPrice: 5900,
+    totalEstimatedPrice: 570000,
     status: 'confirmed',
     createdAt: '2026-11-12T14:32:00.000Z'
   },
@@ -27,7 +27,7 @@ let serverBookings = [
     guests: 2,
     roomType: 'Imperial Garden Pavilion',
     specialRequests: 'Private tea master ceremony in Gion',
-    totalEstimatedPrice: 4800,
+    totalEstimatedPrice: 250000,
     status: 'pending',
     createdAt: '2026-11-13T09:15:00.000Z'
   },
@@ -42,7 +42,7 @@ let serverBookings = [
     guests: 2,
     roomType: 'Sunset Pool Villa Overwater',
     specialRequests: 'Private sandbank dinner on Day 3',
-    totalEstimatedPrice: 7200,
+    totalEstimatedPrice: 990000,
     status: 'confirmed',
     createdAt: '2026-11-14T11:45:00.000Z'
   }
@@ -96,3 +96,4 @@ export async function POST(request) {
     );
   }
 }
+

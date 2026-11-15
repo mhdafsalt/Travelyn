@@ -7,7 +7,7 @@ export default function ContactPage() {
     const [phone, setPhone] = useState('');
     const [destinationPreference, setDestinationPreference] = useState('Swiss Alps');
     const [travelDates, setTravelDates] = useState('');
-    const [budgetRange, setBudgetRange] = useState('$5,000 – $10,000 per person');
+    const [budgetRange, setBudgetRange] = useState('₹50,000 – ₹1,50,000 per person');
     const [guestCount, setGuestCount] = useState(2);
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState('idle');
@@ -221,9 +221,9 @@ export default function ContactPage() {
                 color: '#1e262a',
                 cursor: 'pointer',
             }}>
-                      <option value="$3,000 – $5,000 per person">$3,000 – $5,000 per person</option>
-                      <option value="$5,000 – $10,000 per person">$5,000 – $10,000 per person</option>
-                      <option value="$10,000+ per person (Ultra-Luxury / Private Charter)">$10,000+ per person (Ultra-Luxury / Private Charter)</option>
+                      <option value="₹25,000 – ₹50,000 per person">₹25,000 – ₹50,000 per person</option>
+                      <option value="₹50,000 – ₹1,50,000 per person">₹50,000 – ₹1,50,000 per person</option>
+                      <option value="₹1,50,000+ per person (Ultra-Luxury / Private Charter)">₹1,50,000+ per person (Ultra-Luxury / Private Charter)</option>
                     </select>
                   </div>
                 </div>

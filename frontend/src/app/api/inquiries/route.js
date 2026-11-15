@@ -8,7 +8,7 @@ let serverInquiries = [
     phone: '+1 (555) 987-6543',
     destinationPreference: 'Lake Como & Amalfi Coast',
     travelDates: 'September 2026',
-    budgetRange: '$10,000 – $25,000',
+    budgetRange: '₹8,00,000 – ₹20,00,000',
     guestCount: 2,
     message: 'We are planning our 10th anniversary journey. We want private vintage Riva boat charters on Como and a cliffside villa in Positano.',
     status: 'new',
@@ -21,7 +21,7 @@ let serverInquiries = [
     phone: '+41 22 555 0199',
     destinationPreference: 'Kyoto & Naoshima Art Island',
     travelDates: 'October 2026',
-    budgetRange: '$25,000+',
+    budgetRange: '₹20,00,000+',
     guestCount: 3,
     message: 'Looking for access to private historic machiya residences and private architectural docents for modern art museums.',
     status: 'contacted',
@@ -54,7 +54,7 @@ export async function POST(request) {
       phone: body.phone || '',
       destinationPreference: body.destinationPreference || 'Open to recommendations',
       travelDates: body.travelDates || 'Flexible',
-      budgetRange: body.budgetRange || '$10,000 – $25,000',
+      budgetRange: body.budgetRange || '₹8,00,000 – ₹20,00,000',
       guestCount: Number(body.guestCount) || 2,
       message: body.message,
       status: 'new',
@@ -75,3 +75,4 @@ export async function POST(request) {
     );
   }
 }
+

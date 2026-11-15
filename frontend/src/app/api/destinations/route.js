@@ -54,8 +54,8 @@ export async function POST(request) {
       region: body.region || 'Europe',
       tagline: body.tagline || 'Extraordinary journeys designed slowly.',
       description: body.description || '',
-      price: Number(body.price) || 1200,
-      currency: body.currency || 'USD',
+      price: Number(body.price) || 145000,
+      currency: body.currency || 'INR',
       durationDays: Number(body.durationDays) || 7,
       rating: Number(body.rating) || 4.9,
       reviewCount: Number(body.reviewCount) || 12,
@@ -86,3 +86,4 @@ export async function POST(request) {
     );
   }
 }
+
