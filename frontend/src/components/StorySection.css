@@ -50,6 +50,12 @@
   margin-top: 20px;
 }
 
+@media (min-width: 768px) {
+  .story-row.is-reversed {
+    flex-direction: row-reverse;
+  }
+}
+
 .story-photo-box {
   flex: 1 1 320px;
   max-width: 560px;

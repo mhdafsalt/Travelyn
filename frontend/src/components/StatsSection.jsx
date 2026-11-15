@@ -1,65 +1,99 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './StatsSection.css';
+import { getStoredAboutStatsSettings, DEFAULT_ABOUT_STATS_SETTINGS } from '@/lib/store';
 
 export default function StatsSection() {
-  const stats = [
-    { number: '250+', label: 'Unique destinations' },
-    { number: '50K+', label: 'Happy travellers' },
-    { number: '1,200+', label: 'Curated experiences' },
-    { number: '4.9/5', label: 'Average rating' },
-  ];
+  const [config, setConfig] = useState(DEFAULT_ABOUT_STATS_SETTINGS);
+
+  useEffect(() => {
+    const loadSettings = () => {
+      setConfig(getStoredAboutStatsSettings());
+    };
+
+    loadSettings();
+
+    const handleUpdate = (e) => {
+      if (e.detail) {
+        setConfig(e.detail);
+      } else {
+        loadSettings();
+      }
+    };
+
+    window.addEventListener('travelyn_about_stats_updated', handleUpdate);
+    window.addEventListener('storage', loadSettings);
+
+    return () => {
+      window.removeEventListener('travelyn_about_stats_updated', handleUpdate);
+      window.removeEventListener('storage', loadSettings);
+    };
+  }, []);
+
+  const stats = config.stats && config.stats.length > 0
+    ? config.stats
+    : DEFAULT_ABOUT_STATS_SETTINGS.stats;
 
   return (
     <>
-      {/* Breathe Section */}
-      <section className="stats-breathe-section">
-        {/* Background Image */}
-        <div className="stats-breathe-bg" />
+      {/* Breathe Section (Optional Ambient Banner) */}
+      {config.showBreatheBanner !== false && (
+        <section className="stats-breathe-section" id="breathe-section">
+          {/* Background Image */}
+          <div
+            className="stats-breathe-bg"
+            style={{
+              backgroundImage: `url(${config.breatheBgUrl || 'https://framerusercontent.com/images/PMSlK6mTGdx9DcWYaJZiAMBFv4.jpg'})`
+            }}
+          />
 
-        {/* Ambient Dark Shades */}
-        <div className="stats-breathe-overlay-dark" />
-        <div className="stats-breathe-overlay-top" />
-        <div className="stats-breathe-overlay-bottom" />
+          {/* Ambient Dark Shades */}
+          <div className="stats-breathe-overlay-dark" />
+          <div className="stats-breathe-overlay-top" />
+          <div className="stats-breathe-overlay-bottom" />
 
-        {/* Content */}
-        <div className="stats-breathe-content">
-          <div className="voyara-tag voyara-tag-dark">
-            <div className="voyara-dot" />
-            <span>Breathe</span>
+          {/* Content */}
+          <div className="stats-breathe-content">
+            <div className="voyara-tag voyara-tag-dark">
+              <div className="voyara-dot" />
+              <span>{config.breatheTag || 'Breathe'}</span>
+            </div>
+
+            <h2 className="stats-breathe-heading">
+              {config.breatheHeading || 'Slow down.'}
+              <br />
+              <span className="stats-breathe-subtext">{config.breatheSubtext || 'The world will wait.'}</span>
+            </h2>
           </div>
+        </section>
+      )}
 
-          <h2 className="stats-breathe-heading">
-            Slow down.
-            <br />
-            <span className="stats-breathe-subtext">The world will wait.</span>
-          </h2>
-        </div>
-      </section>
-
-      {/* About Intro Section */}
-      <section className="stats-about-section">
+      {/* About Intro & Stats Section */}
+      <section className="stats-about-section" id="about-stats-section">
         <div className="stats-about-content">
           {/* Left Column */}
           <div className="stats-about-left">
             <div className="voyara-tag">
               <div className="voyara-dot" />
-              <span>About Travelyn</span>
+              <span>{config.aboutTag || 'About Travelyn'}</span>
             </div>
-            <div className="stats-about-est">Est. 2014 — Lisbon</div>
+            <div className="stats-about-est">{config.aboutEst || 'Est. 2014 — Lisbon'}</div>
           </div>
 
           {/* Right Column Statement */}
           <div className="stats-about-right">
             <p className="stats-about-statement">
-              A boutique travel studio crafting{' '}
-              <span className="stats-about-statement-muted">tailor-made journeys</span> for curious travellers who would rather feel a place than simply see it.
+              {config.statementPrefix || 'A boutique travel studio crafting '}
+              <span className="stats-about-statement-muted">
+                {config.statementHighlight || 'tailor-made journeys'}
+              </span>
+              {config.statementSuffix || ' for curious travellers who would rather feel a place than simply see it.'}
             </p>
 
             <div>
-              <a href="/about" className="voyara-btn voyara-btn-dark">
-                <span>Our Story</span>
+              <a href={config.buttonLink || '/about'} className="voyara-btn voyara-btn-dark">
+                <span>{config.buttonText || 'Our Story'}</span>
                 <span className="voyara-arrow-circle">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M7 17L17 7" />
@@ -71,10 +105,10 @@ export default function StatsSection() {
           </div>
         </div>
 
-        {/* 4 Stats Grid */}
+        {/* Dynamic Stats Grid */}
         <div className="stats-grid">
           {stats.map((s, idx) => (
-            <div key={idx} className="stats-item">
+            <div key={s.id || idx} className="stats-item">
               <div className="stats-item-divider" />
               <div className="stats-item-number">{s.number}</div>
               <div className="stats-item-label">{s.label}</div>

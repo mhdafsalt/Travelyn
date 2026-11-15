@@ -2,23 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import './HeroSection.css';
-
-const TYPEWRITER_PHRASES = [
-  'a week in Lisbon...',
-  '4 days in Kyoto cherry blossoms...',
-  'weekend on the Amalfi coast...',
-  'Swiss Alps alpine retreat...',
-  'hidden coves in Santorini...',
-];
-
-const STOP_CHIPS = [
-  { time: 'Thu 9:30', title: 'Alfama on foot', query: 'Lisbon' },
-  { time: '1:00 PM', title: 'Time Out Market', query: 'Lisbon' },
-  { time: '6:40 PM', title: 'sunset over the river', query: 'Lisbon' },
-  { time: '', title: '9 more places', query: 'Europe' },
-];
+import { getStoredHeroSettings, DEFAULT_HERO_SETTINGS } from '@/lib/store';
 
 export default function HeroSection({ onSearch, onOpenBooking }) {
+  const [heroConfig, setHeroConfig] = useState(DEFAULT_HERO_SETTINGS);
+
   // Live Clock & Date with hydration safety
   const [currentDate, setCurrentDate] = useState('Fri 13 nov');
   const [currentTime, setCurrentTime] = useState({ hours: '20', minutes: '19' });
@@ -28,6 +16,31 @@ export default function HeroSection({ onSearch, onOpenBooking }) {
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+
+  // Load dynamic hero settings & listen for live updates
+  useEffect(() => {
+    const loadSettings = () => {
+      setHeroConfig(getStoredHeroSettings());
+    };
+
+    loadSettings();
+
+    const handleUpdate = (e) => {
+      if (e.detail) {
+        setHeroConfig(e.detail);
+      } else {
+        loadSettings();
+      }
+    };
+
+    window.addEventListener('travelyn_hero_updated', handleUpdate);
+    window.addEventListener('storage', loadSettings);
+
+    return () => {
+      window.removeEventListener('travelyn_hero_updated', handleUpdate);
+      window.removeEventListener('storage', loadSettings);
+    };
+  }, []);
 
   // Update clock live on client
   useEffect(() => {
@@ -53,10 +66,14 @@ export default function HeroSection({ onSearch, onOpenBooking }) {
   }, []);
 
   // Typewriter effect for search prompt
-  useEffect(() => {
-    if (isFocused || promptText.length > 0) return;
+  const phrases = heroConfig.typewriterPhrases && heroConfig.typewriterPhrases.length > 0
+    ? heroConfig.typewriterPhrases
+    : DEFAULT_HERO_SETTINGS.typewriterPhrases;
 
-    const currentPhrase = TYPEWRITER_PHRASES[phraseIndex];
+  useEffect(() => {
+    if (isFocused || promptText.length > 0 || !phrases.length) return;
+
+    const currentPhrase = phrases[phraseIndex % phrases.length] || phrases[0];
     const speed = isDeleting ? 40 : 80;
 
     const timeout = setTimeout(() => {
@@ -70,12 +87,12 @@ export default function HeroSection({ onSearch, onOpenBooking }) {
         setCharIndex((prev) => prev - 1);
       } else if (isDeleting && charIndex === 0) {
         setIsDeleting(false);
-        setPhraseIndex((prev) => (prev + 1) % TYPEWRITER_PHRASES.length);
+        setPhraseIndex((prev) => (prev + 1) % phrases.length);
       }
     }, speed);
 
     return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting, phraseIndex, isFocused, promptText]);
+  }, [charIndex, isDeleting, phraseIndex, isFocused, promptText, phrases]);
 
   const handleSubmit = (e) => {
     if (e) e.preventDefault();
@@ -110,10 +127,20 @@ export default function HeroSection({ onSearch, onOpenBooking }) {
     }
   };
 
+  const chips = heroConfig.stopChips && heroConfig.stopChips.length > 0
+    ? heroConfig.stopChips
+    : DEFAULT_HERO_SETTINGS.stopChips;
+
+  const rawTitle = heroConfig.title || DEFAULT_HERO_SETTINGS.title;
+  const titleLines = rawTitle.split('\n');
+
   return (
     <section id="top" className="hero-section">
       {/* 1. Full-Bleed Atmospheric Background Image */}
-      <div className="hero-backdrop-img" />
+      <div
+        className="hero-backdrop-img"
+        style={heroConfig.backdropImageUrl ? { backgroundImage: `url(${heroConfig.backdropImageUrl})` } : {}}
+      />
 
       {/* Ambient lighting overlays */}
       <div className="hero-overlay-radial" />
@@ -135,19 +162,21 @@ export default function HeroSection({ onSearch, onOpenBooking }) {
       </div>
 
       {/* 4. Foreground Subject Cutout */}
-      <div className="hero-cutout-container">
-        <img
-          src="/images/hero.png"
-          alt="Hero cutout"
-          className="hero-cutout-img"
-          onError={(e) => {
-            if (!e.currentTarget.dataset.retried) {
-              e.currentTarget.dataset.retried = 'true';
-              e.currentTarget.src = './images/hero.png';
-            }
-          }}
-        />
-      </div>
+      {heroConfig.showCutout !== false && (
+        <div className="hero-cutout-container">
+          <img
+            src={heroConfig.cutoutImageUrl || "/images/hero.png"}
+            alt="Hero cutout"
+            className="hero-cutout-img"
+            onError={(e) => {
+              if (!e.currentTarget.dataset.retried) {
+                e.currentTarget.dataset.retried = 'true';
+                e.currentTarget.src = './images/hero.png';
+              }
+            }}
+          />
+        </div>
+      )}
 
       {/* Bottom Small White Shade */}
       <div className="hero-bottom-white-shade" />
@@ -159,52 +188,57 @@ export default function HeroSection({ onSearch, onOpenBooking }) {
           {/* Left Block */}
           <div className="hero-left-block">
             <h1 className="hero-title">
-              Say it once.
-              <br />
-              We build the trip.
+              {titleLines.map((line, idx) => (
+                <React.Fragment key={idx}>
+                  {line}
+                  {idx < titleLines.length - 1 && <br />}
+                </React.Fragment>
+              ))}
             </h1>
             <p className="hero-subtitle">
-              One phrase, and a living itinerary builds itself around the city: weather, pace, your mood.
+              {heroConfig.subtitle || DEFAULT_HERO_SETTINGS.subtitle}
             </p>
           </div>
 
-          {/* Right Glass Widget: Lisbon Live Card */}
-          <div className="hero-glass-card">
-            <div className="hero-card-header">
-              <span className="hero-card-city">LISBON</span>
-              <span className="hero-card-today-badge">TODAY</span>
-            </div>
+          {/* Right Glass Widget: Live Card */}
+          {heroConfig.showGlassCard !== false && (
+            <div className="hero-glass-card">
+              <div className="hero-card-header">
+                <span className="hero-card-city">{heroConfig.glassCardCity || 'LISBON'}</span>
+                <span className="hero-card-today-badge">{heroConfig.glassCardBadge || 'TODAY'}</span>
+              </div>
 
-            <div className="hero-card-body">
-              <div className="hero-card-museum">4:00 PM · Azulejo Museum</div>
-              <div className="hero-card-status">rerouted · dry and on the way</div>
-            </div>
+              <div className="hero-card-body">
+                <div className="hero-card-museum">{heroConfig.glassCardMuseum || '4:00 PM · Azulejo Museum'}</div>
+                <div className="hero-card-status">{heroConfig.glassCardStatus || 'rerouted · dry and on the way'}</div>
+              </div>
 
-            <div className="hero-card-divider" />
+              <div className="hero-card-divider" />
 
-            <div className="hero-card-footer">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="rgba(255,255,255,0.85)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-              </svg>
-              <span className="hero-card-pace-text">evening: easy pace</span>
+              <div className="hero-card-footer">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="rgba(255,255,255,0.85)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                </svg>
+                <span className="hero-card-pace-text">{heroConfig.glassCardPace || 'evening: easy pace'}</span>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* 6. Bottom Controls Section (Chips, Prompt Bar, Live Beacon) */}
         <div className="hero-bottom-controls">
           {/* Horizontal Stop Chips Row */}
           <div className="hero-chips-row">
-            {STOP_CHIPS.map((chip, idx) => (
+            {chips.map((chip, idx) => (
               <button
                 key={idx}
                 type="button"
@@ -256,19 +290,19 @@ export default function HeroSection({ onSearch, onOpenBooking }) {
                     onClick={() => setIsFocused(true)}
                     className="hero-typewriter-overlay"
                   >
-                    <span>{placeholderText || 'a week in Lisbon...'}</span>
+                    <span>{placeholderText || (phrases[0] || 'a week in Lisbon...')}</span>
                     <span className="hero-cursor-blink" />
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Right side: Mic button + "Build it →" Action Button */}
+            {/* Right side: Mic button + Action Button */}
             <div className="hero-prompt-actions">
               <button
                 type="button"
                 suppressHydrationWarning
-                onClick={() => setPromptText('Lisbon architectural tour')}
+                onClick={() => setPromptText(chips[0]?.query || 'Lisbon architectural tour')}
                 title="Voice prompt"
                 className="hero-mic-btn"
               >
@@ -289,7 +323,7 @@ export default function HeroSection({ onSearch, onOpenBooking }) {
               </button>
 
               <button type="submit" suppressHydrationWarning className="hero-build-btn">
-                <span>Build it</span>
+                <span>{heroConfig.buildButtonText || 'Build it'}</span>
                 <svg
                   width="16"
                   height="16"
@@ -314,8 +348,8 @@ export default function HeroSection({ onSearch, onOpenBooking }) {
               <div className="hero-beacon-core" />
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-              <span className="hero-beacon-label">Nomia right now:</span>
-              <span className="hero-beacon-value">watching the weather shift</span>
+              <span className="hero-beacon-label">{heroConfig.beaconLabel || 'Nomia right now:'}</span>
+              <span className="hero-beacon-value">{heroConfig.beaconValue || 'watching the weather shift'}</span>
             </div>
           </div>
         </div>
@@ -323,4 +357,3 @@ export default function HeroSection({ onSearch, onOpenBooking }) {
     </section>
   );
 }
-

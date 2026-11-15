@@ -331,3 +331,248 @@ export function addStoredSubscriber(email) {
   return { success: true, subscriber: newSub };
 }
 
+/* ==========================================================================
+   HERO SECTION API & DYNAMIC SETTINGS
+   ========================================================================== */
+
+export const DEFAULT_HERO_SETTINGS = {
+  title: "Say it once.\nWe build the trip.",
+  subtitle: "One phrase, and a living itinerary builds itself around the city: weather, pace, your mood.",
+  backdropImageUrl: "https://framerusercontent.com/images/TSiGMGJHmapQIwKIzHneadv3LM.png",
+  cutoutImageUrl: "/images/hero.png",
+  showCutout: true,
+  showGlassCard: true,
+  glassCardCity: "LISBON",
+  glassCardBadge: "TODAY",
+  glassCardMuseum: "4:00 PM · Azulejo Museum",
+  glassCardStatus: "rerouted · dry and on the way",
+  glassCardPace: "evening: easy pace",
+  typewriterPhrases: [
+    "a week in Lisbon...",
+    "4 days in Kyoto cherry blossoms...",
+    "weekend on the Amalfi coast...",
+    "Swiss Alps alpine retreat...",
+    "hidden coves in Santorini..."
+  ],
+  stopChips: [
+    { time: "Thu 9:30", title: "Alfama on foot", query: "Lisbon" },
+    { time: "1:00 PM", title: "Time Out Market", query: "Lisbon" },
+    { time: "6:40 PM", title: "sunset over the river", query: "Lisbon" },
+    { time: "", title: "9 more places", query: "Europe" }
+  ],
+  beaconLabel: "Nomia right now:",
+  beaconValue: "watching the weather shift",
+  buildButtonText: "Build it"
+};
+
+const HERO_KEY = 'travelyn_hero_settings';
+
+export function getStoredHeroSettings() {
+  return getLocalItem(HERO_KEY, DEFAULT_HERO_SETTINGS);
+}
+
+export function saveStoredHeroSettings(settings) {
+  const current = getStoredHeroSettings();
+  const merged = { ...current, ...settings };
+  setLocalItem(HERO_KEY, merged);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_hero_updated', { detail: merged }));
+  }
+  return merged;
+}
+
+export function resetStoredHeroSettings() {
+  setLocalItem(HERO_KEY, DEFAULT_HERO_SETTINGS);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_hero_updated', { detail: DEFAULT_HERO_SETTINGS }));
+  }
+  return DEFAULT_HERO_SETTINGS;
+}
+
+/* ==========================================================================
+   STORIES SHOWCASE API & DYNAMIC SETTINGS
+   ========================================================================== */
+
+export const DEFAULT_STORY_SETTINGS = {
+  sectionTag: "Swiss Alps",
+  titlePrimary: "Feel the mountains",
+  titleMuted: "before you go",
+  stories: [
+    {
+      id: "story-1",
+      tag: "Swiss Alps",
+      title: "Mornings above the clouds",
+      description: "Coffee on a wooden balcony, the valley still asleep below and snowy peaks catching the first light.",
+      imageUrl: "https://framerusercontent.com/images/8guYiCRSdUDmndFojnqAvFpGNk.jpg",
+      buttonText: "Discover Swiss Alps",
+      link: "/destinations/swiss-alps",
+      reversed: false
+    },
+    {
+      id: "story-2",
+      tag: "Swiss Alps",
+      title: "Evenings by the fire",
+      description: "Wool blankets, crackling logs and fondue shared slowly while the snow falls outside the window.",
+      imageUrl: "https://framerusercontent.com/images/Y5iOG5ie06PAZjqXQFJGD5em94.jpg",
+      buttonText: "Discover Swiss Alps",
+      link: "/destinations/swiss-alps",
+      reversed: true
+    }
+  ]
+};
+
+const STORIES_KEY = 'travelyn_story_settings';
+
+export function getStoredStorySettings() {
+  return getLocalItem(STORIES_KEY, DEFAULT_STORY_SETTINGS);
+}
+
+export function saveStoredStorySettings(settings) {
+  const current = getStoredStorySettings();
+  const merged = { ...current, ...settings };
+  setLocalItem(STORIES_KEY, merged);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_stories_updated', { detail: merged }));
+  }
+  return merged;
+}
+
+export function resetStoredStorySettings() {
+  setLocalItem(STORIES_KEY, DEFAULT_STORY_SETTINGS);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_stories_updated', { detail: DEFAULT_STORY_SETTINGS }));
+  }
+  return DEFAULT_STORY_SETTINGS;
+}
+
+/* ==========================================================================
+   ABOUT STUDIO & STATS SETTINGS (DYNAMIC MANIFESTO & METRICS)
+   ========================================================================== */
+
+export const DEFAULT_ABOUT_STATS_SETTINGS = {
+  // Atmospheric Breathe Banner
+  showBreatheBanner: true,
+  breatheTag: "Breathe",
+  breatheHeading: "Slow down.",
+  breatheSubtext: "The world will wait.",
+  breatheBgUrl: "https://framerusercontent.com/images/PMSlK6mTGdx9DcWYaJZiAMBFv4.jpg",
+
+  // About Studio Intro
+  aboutTag: "About Travelyn",
+  aboutEst: "Est. 2014 — Lisbon",
+  statementPrefix: "A boutique travel studio crafting ",
+  statementHighlight: "tailor-made journeys",
+  statementSuffix: " for curious travellers who would rather feel a place than simply see it.",
+  buttonText: "Our Story",
+  buttonLink: "/about",
+
+  // Stats Counters
+  stats: [
+    { id: "stat-1", number: "250+", label: "Unique destinations" },
+    { id: "stat-2", number: "50K+", label: "Happy travellers" },
+    { id: "stat-3", number: "1,200+", label: "Curated experiences" },
+    { id: "stat-4", number: "4.9/5", label: "Average rating" },
+  ]
+};
+
+const ABOUT_STATS_KEY = 'travelyn_about_stats_settings';
+
+export function getStoredAboutStatsSettings() {
+  return getLocalItem(ABOUT_STATS_KEY, DEFAULT_ABOUT_STATS_SETTINGS);
+}
+
+export function saveStoredAboutStatsSettings(settings) {
+  const current = getStoredAboutStatsSettings();
+  const merged = { ...current, ...settings };
+  setLocalItem(ABOUT_STATS_KEY, merged);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_about_stats_updated', { detail: merged }));
+  }
+  if (typeof fetch !== 'undefined') {
+    fetch('/api/about-stats', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(merged)
+    }).catch(() => {});
+  }
+  return merged;
+}
+
+export function resetStoredAboutStatsSettings() {
+  setLocalItem(ABOUT_STATS_KEY, DEFAULT_ABOUT_STATS_SETTINGS);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_about_stats_updated', { detail: DEFAULT_ABOUT_STATS_SETTINGS }));
+  }
+  return DEFAULT_ABOUT_STATS_SETTINGS;
+}
+
+/* ==========================================================================
+   TESTIMONIALS & TRAVELLER STORIES SETTINGS (DYNAMIC REVIEWS & SCORECARD)
+   ========================================================================== */
+
+export const DEFAULT_TESTIMONIALS_SETTINGS = {
+  sectionTag: "Traveller stories",
+  ratingScore: "4.9",
+  ratingStars: 5,
+  verifiedReviewsText: "2,400+ verified reviews",
+  testimonials: [
+    {
+      id: "testimonial-1",
+      quote: "Slow trains, quiet villages and the best fondue of our lives. We didn’t want to come home.",
+      authorName: "Claire & Tom",
+      authorLocation: "Swiss Alps · 2026",
+      authorAvatar: "https://framerusercontent.com/images/cwjju4oQ9SWH1nkXN95LfTNt94.jpg",
+      photoUrl: "https://framerusercontent.com/images/OQDgLum0GfExeAWydcWtw46xVGk.jpg"
+    },
+    {
+      id: "testimonial-2",
+      quote: "Waking up to the morning bells of Gion and drinking matcha in a 300-year-old teahouse changed how we see time.",
+      authorName: "Elena & Marcus",
+      authorLocation: "Kyoto · 2026",
+      authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      photoUrl: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      id: "testimonial-3",
+      quote: "Sailing the Caldera at dusk with local wine and no rush in the world. Travelyn created pure poetry for us.",
+      authorName: "Sofia & Liam",
+      authorLocation: "Santorini · 2026",
+      authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+      photoUrl: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=80"
+    }
+  ]
+};
+
+const TESTIMONIALS_KEY = 'travelyn_testimonials_settings';
+
+export function getStoredTestimonialsSettings() {
+  return getLocalItem(TESTIMONIALS_KEY, DEFAULT_TESTIMONIALS_SETTINGS);
+}
+
+export function saveStoredTestimonialsSettings(settings) {
+  const current = getStoredTestimonialsSettings();
+  const merged = { ...current, ...settings };
+  setLocalItem(TESTIMONIALS_KEY, merged);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_testimonials_updated', { detail: merged }));
+  }
+  if (typeof fetch !== 'undefined') {
+    fetch('/api/testimonials', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(merged)
+    }).catch(() => {});
+  }
+  return merged;
+}
+
+export function resetStoredTestimonialsSettings() {
+  setLocalItem(TESTIMONIALS_KEY, DEFAULT_TESTIMONIALS_SETTINGS);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_testimonials_updated', { detail: DEFAULT_TESTIMONIALS_SETTINGS }));
+  }
+  return DEFAULT_TESTIMONIALS_SETTINGS;
+}
+
+
+

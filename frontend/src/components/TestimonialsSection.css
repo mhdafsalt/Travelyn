@@ -201,3 +201,58 @@
   margin-top: 10px;
 }
 
+/* ==========================================================================
+   DYNAMIC TESTIMONIALS SLIDER CONTROLS
+   ========================================================================== */
+.testimonials-nav-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.testimonials-nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(13, 13, 13, 0.15);
+  background: #ffffff;
+  color: #17191c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.testimonials-nav-btn:hover {
+  background: #17191c;
+  color: #ffffff;
+  border-color: #17191c;
+  transform: translateY(-1px);
+}
+
+.testimonials-dots-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.testimonials-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(13, 13, 13, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.testimonials-dot.is-active {
+  width: 24px;
+  background: #17191c;
+}
+
+
