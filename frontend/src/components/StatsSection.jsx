@@ -39,7 +39,7 @@ export default function StatsSection() {
     <>
       {/* Breathe Section (Optional Ambient Banner) */}
       {config.showBreatheBanner !== false && (
-        <section className="stats-breathe-section" id="breathe-section">
+        <section className="stats-breathe-section" id="breathe-section" suppressHydrationWarning>
           {/* Background Image */}
           <div
             className="stats-breathe-bg"
@@ -70,7 +70,7 @@ export default function StatsSection() {
       )}
 
       {/* About Intro & Stats Section */}
-      <section className="stats-about-section" id="about-stats-section">
+      <section className="stats-about-section" id="about-stats-section" suppressHydrationWarning>
         <div className="stats-about-content">
           {/* Left Column */}
           <div className="stats-about-left">

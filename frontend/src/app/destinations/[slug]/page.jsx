@@ -70,18 +70,19 @@ export default function DestinationDetailPage() {
             color: '#ffffff',
             display: 'flex',
             flexDirection: 'column',
-            gap: '16px',
+            alignItems: 'flex-start',
+            gap: '14px',
         }}>
           {/* Breadcrumb */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', opacity: 0.8 }}>
-            <a href="/" style={{ color: '#fff', textDecoration: 'none' }}>Home</a>
-            <span>/</span>
-            <a href="/destinations" style={{ color: '#fff', textDecoration: 'none' }}>Destinations</a>
-            <span>/</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', opacity: 0.85, fontWeight: 500 }}>
+            <a href="/" style={{ color: '#fff', textDecoration: 'none', transition: 'opacity 0.2s' }}>Home</a>
+            <span style={{ opacity: 0.5 }}>/</span>
+            <a href="/destinations" style={{ color: '#fff', textDecoration: 'none', transition: 'opacity 0.2s' }}>Destinations</a>
+            <span style={{ opacity: 0.5 }}>/</span>
             <span>{destination.title}</span>
           </div>
 
-          <div className="voyara-tag voyara-tag-dark">
+          <div className="voyara-tag voyara-tag-dark" style={{ alignSelf: 'flex-start', width: 'fit-content', marginTop: '2px' }}>
             <div className="voyara-dot"/>
             <span>{destination.country} · {destination.region}</span>
           </div>

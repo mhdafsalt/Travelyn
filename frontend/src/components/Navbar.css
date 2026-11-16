@@ -95,8 +95,59 @@
 }
 
 /* --------------------------------------------------------------------------
-   2. Menu Button (Right Side: "MENU =")
+   2. Menu Button & Auth Actions (Right Side)
    -------------------------------------------------------------------------- */
+.travelyn-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.travelyn-nav-auth-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.travelyn-nav-auth-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+.travelyn-nav-user-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #17191c;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
 .travelyn-menu-btn {
   display: inline-flex;
   align-items: center;
@@ -420,6 +471,145 @@
 .travelyn-dot-sep {
   color: rgba(255, 255, 255, 0.25);
   font-size: 12px;
+}
+
+/* Member Lounge Card in Overlay Menu */
+.travelyn-member-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.travelyn-member-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.travelyn-member-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #17191c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.travelyn-member-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.travelyn-member-tier {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.04em;
+}
+
+.travelyn-member-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 10px;
+}
+
+.travelyn-member-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.travelyn-member-logout-btn {
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.travelyn-member-logout-btn:hover {
+  color: #ffffff;
+}
+
+.travelyn-member-guest-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.travelyn-member-guest-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.travelyn-member-guest-desc {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.travelyn-member-guest-btns {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.travelyn-member-signin-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #17191c;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.travelyn-member-signin-link:hover {
+  opacity: 0.88;
+}
+
+.travelyn-member-signup-link {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.travelyn-member-signup-link:hover {
+  color: #ffffff;
 }
 
 /* --------------------------------------------------------------------------

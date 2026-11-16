@@ -7,8 +7,11 @@ import { getStoredTestimonialsSettings, DEFAULT_TESTIMONIALS_SETTINGS } from '@/
 export default function TestimonialsSection() {
   const [config, setConfig] = useState(DEFAULT_TESTIMONIALS_SETTINGS);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+
     const loadSettings = () => {
       const data = getStoredTestimonialsSettings();
       setConfig(data);
@@ -52,8 +55,8 @@ export default function TestimonialsSection() {
   const starsCount = Math.max(1, Math.min(5, parseInt(config.ratingStars || 5, 10)));
 
   return (
-    <section className="testimonials-wrapper" id="testimonials-section">
-      <div className="testimonials-container">
+    <section className="testimonials-wrapper" id="testimonials-section" suppressHydrationWarning>
+      <div className="testimonials-container" suppressHydrationWarning>
         {/* Photo Left with Floating Scorecard */}
         <div className="testimonials-photo-frame">
           <img
@@ -68,7 +71,7 @@ export default function TestimonialsSection() {
           />
 
           {/* Floating Glass Scorecard */}
-          <div className="testimonials-floating-scorecard">
+          <div className="testimonials-floating-scorecard" suppressHydrationWarning>
             <div className="testimonials-score-val">{config.ratingScore || '4.9'}</div>
 
             {/* Stars Row */}
@@ -87,7 +90,7 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Right Column: Quote and Author */}
-        <div className="testimonials-text-col">
+        <div className="testimonials-text-col" suppressHydrationWarning>
           <div className="voyara-tag">
             <div className="voyara-dot" />
             <span>{config.sectionTag || 'Traveller stories'}</span>
@@ -123,21 +126,22 @@ export default function TestimonialsSection() {
             </div>
           </div>
 
-          {/* Navigation Controls (when multiple testimonials exist) */}
-          {items.length > 1 && (
-            <div className="testimonials-nav-row">
+          {/* Navigation Controls (mount-guarded & suppressed against browser extensions injecting fdprocessedid) */}
+          {isMounted && items.length > 1 && (
+            <div className="testimonials-nav-row" suppressHydrationWarning>
               <button
                 type="button"
                 onClick={handlePrev}
                 className="testimonials-nav-btn"
                 aria-label="Previous traveller story"
+                suppressHydrationWarning
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="15 18 9 12 15 6" />
                 </svg>
               </button>
 
-              <div className="testimonials-dots-wrap">
+              <div className="testimonials-dots-wrap" suppressHydrationWarning>
                 {items.map((_, dotIdx) => (
                   <button
                     key={dotIdx}
@@ -145,6 +149,7 @@ export default function TestimonialsSection() {
                     onClick={() => setCurrentIndex(dotIdx)}
                     className={`testimonials-dot ${dotIdx === activeIdx ? 'is-active' : ''}`}
                     aria-label={`Go to slide ${dotIdx + 1}`}
+                    suppressHydrationWarning
                   />
                 ))}
               </div>
@@ -154,6 +159,7 @@ export default function TestimonialsSection() {
                 onClick={handleNext}
                 className="testimonials-nav-btn"
                 aria-label="Next traveller story"
+                suppressHydrationWarning
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="9 18 15 12 9 6" />

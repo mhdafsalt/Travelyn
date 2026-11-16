@@ -502,50 +502,161 @@
   margin: 4px 0 0 0;
 }
 
+/* ==========================================================================
+   4. BUTTONS, BADGES & INTERACTIVE SMALL COMPONENTS
+   ========================================================================== */
+
 /* Buttons */
 .admin-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  height: 38px;
-  padding: 0 16px;
-  border-radius: 10px;
-  font-size: 13.5px;
+  height: 36px;
+  padding: 0 15px;
+  border-radius: 9px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  border: none;
-  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   white-space: nowrap;
+  user-select: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.admin-btn:active {
+  transform: scale(0.98);
 }
 
 .admin-btn-primary {
-  background-color: #17191c;
+  background-color: #0f172a;
   color: #ffffff;
+  border-color: #0f172a;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.15), 0 1px 2px rgba(15, 23, 42, 0.1);
 }
 
 .admin-btn-primary:hover {
-  background-color: #2b3138;
+  background-color: #1e293b;
+  border-color: #1e293b;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+  transform: translateY(-1px);
 }
 
 .admin-btn-secondary {
-  background-color: #f7f6f2;
-  color: #17191c;
-  border: 1px solid rgba(13, 13, 13, 0.09);
+  background-color: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
 }
 
 .admin-btn-secondary:hover {
-  background-color: #ede9e0;
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+  transform: translateY(-1px);
 }
 
 .admin-btn-danger {
-  background-color: rgba(239, 68, 68, 0.1);
+  background-color: #fef2f2;
   color: #dc2626;
+  border: 1px solid #fecaca;
 }
 
 .admin-btn-danger:hover {
   background-color: #dc2626;
   color: #ffffff;
+  border-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+.admin-btn-sm {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 11.5px;
+  border-radius: 7px;
+  gap: 5px;
+}
+
+/* Icon Buttons (Trash, Edit, Preview) */
+.admin-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.admin-icon-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+}
+
+.admin-icon-btn:active {
+  transform: scale(0.96);
+}
+
+.admin-icon-btn-danger {
+  background: #fff1f2;
+  border-color: #ffe4e6;
+  color: #e11d48;
+}
+
+.admin-icon-btn-danger:hover {
+  background: #ffe4e6;
+  border-color: #fecdd3;
+  color: #be123c;
+}
+
+/* Custom Checkbox Design */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 5px;
+  background-color: #ffffff;
+  cursor: pointer;
+  display: inline-grid;
+  place-content: center;
+  transition: all 0.15s ease;
+  vertical-align: middle;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+input[type="checkbox"]:hover {
+  border-color: #94a3b8;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+input[type="checkbox"]:checked::before {
+  content: '';
+  width: 10px;
+  height: 5px;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+
+input[type="checkbox"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
 /* Tables */
@@ -589,39 +700,55 @@
   gap: 6px;
   padding: 4px 10px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
-  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.status-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
 }
 
 .status-pill.is-pending {
-  background-color: #fef3c7;
-  color: #92400e;
+  background-color: #fffbeb;
+  color: #b45309;
+  border-color: #fde68a;
 }
 
 .status-pill.is-confirmed {
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
 }
 
 .status-pill.is-cancelled {
-  background-color: #fee2e2;
-  color: #991b1b;
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
 }
 
 .status-pill.is-new {
-  background-color: #e0f2fe;
-  color: #0369a1;
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
 }
 
 .status-pill.is-contacted {
-  background-color: #fef3c7;
-  color: #b45309;
+  background-color: #faf5ff;
+  color: #7e22ce;
+  border-color: #e9d5ff;
 }
 
 .status-pill.is-closed {
   background-color: #f1f5f9;
   color: #475569;
+  border-color: #cbd5e1;
 }
 
 /* Destination Cell */
@@ -1213,18 +1340,27 @@ textarea.admin-input,
 }
 
 .admin-hero-preset-btn {
-  padding: 6px 12px;
-  border-radius: 8px;
-  background: #f1f5f9;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #ffffff;
   border: 1px solid #cbd5e1;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #334155;
   cursor: pointer;
   transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 .admin-hero-preset-btn:hover {
-  background: #e2e8f0;
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.14);
 }
 
 .admin-hero-chip-pill {
@@ -1317,4 +1453,38 @@ textarea.admin-input,
   flex-direction: column;
   gap: 8px;
 }
+
+/* ==========================================================================
+   TOAST BANNER NOTIFICATION
+   ========================================================================== */
+.admin-toast-banner {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #0f172a;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.25);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  animation: adminToastSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes adminToastSlideIn {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 

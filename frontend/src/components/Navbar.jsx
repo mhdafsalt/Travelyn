@@ -2,14 +2,26 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import { getStoredUser, logoutUser } from '../lib/store';
 import './Navbar.css';
 
 export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const lastScrollY = useRef(0);
   const pathname = usePathname();
+
+  // Load and subscribe to auth changes
+  useEffect(() => {
+    setCurrentUser(getStoredUser());
+    const handleAuthChange = (e) => {
+      setCurrentUser(e.detail || null);
+    };
+    window.addEventListener('travelyn_auth_changed', handleAuthChange);
+    return () => window.removeEventListener('travelyn_auth_changed', handleAuthChange);
+  }, []);
 
   // Smart Hide on Scroll Down, Reveal on Scroll Up
   useEffect(() => {
@@ -92,7 +104,7 @@ export default function Navbar() {
     { num: '05', label: 'Plan a Journey', href: '/contact' },
   ];
 
-  if (pathname?.startsWith('/admin')) {
+  if (pathname?.startsWith('/admin') || pathname === '/login' || pathname === '/signup') {
     return null;
   }
 
@@ -109,23 +121,52 @@ export default function Navbar() {
             <span className="travelyn-brand-dot">.</span>
           </a>
 
-          {/* Right: MENU Button with 2 Horizontal Lines */}
-          <button
-            type="button"
-            suppressHydrationWarning
-            onClick={() => setMenuOpen(!menuOpen)}
-            className={`travelyn-menu-btn ${menuOpen ? 'is-active' : ''}`}
-            aria-label={menuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
-            aria-expanded={menuOpen}
-          >
-            <span className="travelyn-menu-label">
-              {menuOpen ? 'CLOSE' : 'MENU'}
-            </span>
-            <span className="travelyn-menu-icon" aria-hidden="true">
-              <span className="travelyn-icon-bar top-bar" />
-              <span className="travelyn-icon-bar bottom-bar" />
-            </span>
-          </button>
+          {/* Right: Auth Action & MENU Button */}
+          <div className="travelyn-navbar-actions">
+            {currentUser ? (
+              <a
+                href={currentUser.role === 'admin' ? '/admin' : '#'}
+                onClick={(e) => {
+                  if (currentUser.role !== 'admin') {
+                    e.preventDefault();
+                    setMenuOpen(true);
+                  }
+                }}
+                className="travelyn-nav-auth-btn"
+                title={`Signed in as ${currentUser.name}`}
+              >
+                <span className="travelyn-nav-user-avatar">
+                  {currentUser.name ? currentUser.name.trim().charAt(0).toUpperCase() : 'U'}
+                </span>
+                <span>{currentUser.name ? currentUser.name.split(' ')[0] : 'Member'}</span>
+              </a>
+            ) : (
+              <a href="/login" className="travelyn-nav-auth-btn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span>Sign In</span>
+              </a>
+            )}
+
+            <button
+              type="button"
+              suppressHydrationWarning
+              onClick={() => setMenuOpen(!menuOpen)}
+              className={`travelyn-menu-btn ${menuOpen ? 'is-active' : ''}`}
+              aria-label={menuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
+              aria-expanded={menuOpen}
+            >
+              <span className="travelyn-menu-label">
+                {menuOpen ? 'CLOSE' : 'MENU'}
+              </span>
+              <span className="travelyn-menu-icon" aria-hidden="true">
+                <span className="travelyn-icon-bar top-bar" />
+                <span className="travelyn-icon-bar bottom-bar" />
+              </span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -207,6 +248,65 @@ export default function Navbar() {
 
             {/* Right Side Info & Quick Contact */}
             <div className="travelyn-details-col">
+              {/* Member Lounge Card */}
+              {currentUser ? (
+                <div className="travelyn-member-card">
+                  <div className="travelyn-member-header">
+                    <div className="travelyn-member-avatar">
+                      {currentUser.name ? currentUser.name.trim().charAt(0).toUpperCase() : 'U'}
+                    </div>
+                    <div>
+                      <div className="travelyn-member-name">{currentUser.name}</div>
+                      <div className="travelyn-member-tier">{currentUser.tier || 'Voyager Member'}</div>
+                    </div>
+                  </div>
+                  <div className="travelyn-member-actions">
+                    {currentUser.role === 'admin' && (
+                      <a
+                        href="/admin"
+                        onClick={() => setMenuOpen(false)}
+                        className="travelyn-member-link"
+                      >
+                        Admin Studio →
+                      </a>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        logoutUser();
+                        setMenuOpen(false);
+                      }}
+                      className="travelyn-member-logout-btn"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="travelyn-member-guest-card">
+                  <div className="travelyn-member-guest-title">Member Access</div>
+                  <p className="travelyn-member-guest-desc">
+                    Sign in to access bespoke itineraries and dedicated concierge services.
+                  </p>
+                  <div className="travelyn-member-guest-btns">
+                    <a
+                      href="/login"
+                      onClick={() => setMenuOpen(false)}
+                      className="travelyn-member-signin-link"
+                    >
+                      Sign In
+                    </a>
+                    <a
+                      href="/signup"
+                      onClick={() => setMenuOpen(false)}
+                      className="travelyn-member-signup-link"
+                    >
+                      Join Collective
+                    </a>
+                  </div>
+                </div>
+              )}
+
               <div className="travelyn-details-card">
                 <span className="travelyn-section-tag">BESPOKE TRAVEL</span>
                 <h3 className="travelyn-card-headline">

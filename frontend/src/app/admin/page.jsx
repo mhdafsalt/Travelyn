@@ -1079,23 +1079,8 @@ export default function AdminDashboardPage() {
 
         {/* Toast Notification */}
         {toastMessage && (
-          <div style={{
-            position: 'fixed',
-            bottom: '24px',
-            right: '24px',
-            backgroundColor: '#17191c',
-            color: '#ffffff',
-            padding: '12px 20px',
-            borderRadius: '12px',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
-            zIndex: 2000,
-            fontSize: '13.5px',
-            fontWeight: 500,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px'
-          }}>
-            <span style={{ color: '#10b981' }}>✓</span>
+          <div className="admin-toast-banner">
+            <span style={{ color: '#10b981', fontWeight: 'bold' }}>✓</span>
             <span>{toastMessage}</span>
           </div>
         )}
@@ -3312,8 +3297,7 @@ export default function AdminDashboardPage() {
                               <button
                                 type="button"
                                 onClick={() => setPreviewTestimonialIdx(index)}
-                                className="admin-btn admin-btn-secondary"
-                                style={{ fontSize: '11px', padding: '4px 10px' }}
+                                className="admin-btn admin-btn-secondary admin-btn-sm"
                               >
                                 Preview 👁
                               </button>

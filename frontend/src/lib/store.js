@@ -574,5 +574,155 @@ export function resetStoredTestimonialsSettings() {
   return DEFAULT_TESTIMONIALS_SETTINGS;
 }
 
+/* ==========================================================================
+   AUTHENTICATION & USER STATE
+   ========================================================================== */
+
+const AUTH_USER_KEY = 'travelyn_auth_user';
+const USERS_LIST_KEY = 'travelyn_registered_users';
+
+export const DEMO_USERS = [
+  {
+    id: 'user-demo-traveller',
+    name: 'Eleanor Vance',
+    email: 'traveller@travelyn.com',
+    password: 'password123',
+    role: 'traveller',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+    memberSince: '2024',
+    tier: 'Patron of Travelyn'
+  },
+  {
+    id: 'user-demo-admin',
+    name: 'Laurent de Valois',
+    email: 'admin@travelyn.com',
+    password: 'admin',
+    role: 'admin',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+    memberSince: '2022',
+    tier: 'Executive Concierge'
+  }
+];
+
+export function getStoredUser() {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = window.localStorage.getItem(AUTH_USER_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+export function getRegisteredUsers() {
+  return getLocalItem(USERS_LIST_KEY, DEMO_USERS);
+}
+
+export function saveStoredUser(user) {
+  if (typeof window === 'undefined') return;
+  try {
+    if (user) {
+      window.localStorage.setItem(AUTH_USER_KEY, JSON.stringify(user));
+    } else {
+      window.localStorage.removeItem(AUTH_USER_KEY);
+    }
+    window.dispatchEvent(new CustomEvent('travelyn_auth_changed', { detail: user }));
+  } catch (e) {
+    console.warn('Failed to save user session:', e);
+  }
+}
+
+export function loginUser({ email, password, rememberMe = true }) {
+  if (!email || !password) {
+    return { success: false, error: 'Please provide both email and password.' };
+  }
+  const users = getRegisteredUsers();
+  const trimmedEmail = email.trim().toLowerCase();
+  
+  let matched = users.find(u => u.email.toLowerCase() === trimmedEmail);
+  
+  if (!matched) {
+    if (trimmedEmail === 'admin@travelyn.com') {
+      matched = DEMO_USERS[1];
+    } else if (trimmedEmail === 'traveller@travelyn.com') {
+      matched = DEMO_USERS[0];
+    } else {
+      // Auto-provision or allow guest traveller sign in if password is provided
+      matched = {
+        id: `user-${Date.now()}`,
+        name: trimmedEmail.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+        email: trimmedEmail,
+        password: password,
+        role: trimmedEmail.includes('admin') ? 'admin' : 'traveller',
+        avatar: `https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=400&q=80`,
+        memberSince: new Date().getFullYear().toString(),
+        tier: 'Voyager Member'
+      };
+      setLocalItem(USERS_LIST_KEY, [...users, matched]);
+    }
+  }
+
+  // Create session user object (omits password)
+  const sessionUser = {
+    id: matched.id,
+    name: matched.name,
+    email: matched.email,
+    role: matched.role || (matched.email.includes('admin') ? 'admin' : 'traveller'),
+    avatar: matched.avatar,
+    memberSince: matched.memberSince || '2026',
+    tier: matched.tier || 'Voyager Member',
+    loggedInAt: new Date().toISOString()
+  };
+
+  saveStoredUser(sessionUser);
+  return { success: true, user: sessionUser };
+}
+
+export function registerUser({ name, email, password }) {
+  if (!email || !password) {
+    return { success: false, error: 'Please provide a valid email and password.' };
+  }
+  const users = getRegisteredUsers();
+  const trimmedEmail = email.trim().toLowerCase();
+
+  const existing = users.find(u => u.email.toLowerCase() === trimmedEmail);
+  if (existing) {
+    return { success: false, error: 'An account with this email already exists. Please sign in.' };
+  }
+
+  const newUser = {
+    id: `user-${Date.now()}`,
+    name: (name && name.trim()) || trimmedEmail.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+    email: trimmedEmail,
+    password: password,
+    role: trimmedEmail.includes('admin') ? 'admin' : 'traveller',
+    avatar: `https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80`,
+    memberSince: new Date().getFullYear().toString(),
+    tier: 'Voyager Member'
+  };
+
+  setLocalItem(USERS_LIST_KEY, [...users, newUser]);
+
+  const sessionUser = {
+    id: newUser.id,
+    name: newUser.name,
+    email: newUser.email,
+    role: newUser.role,
+    avatar: newUser.avatar,
+    memberSince: newUser.memberSince,
+    tier: newUser.tier,
+    loggedInAt: new Date().toISOString()
+  };
+
+  saveStoredUser(sessionUser);
+  return { success: true, user: sessionUser };
+}
+
+export function logoutUser() {
+  saveStoredUser(null);
+  return true;
+}
+
+
 
 

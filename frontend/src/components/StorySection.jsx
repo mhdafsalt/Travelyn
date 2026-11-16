@@ -36,7 +36,7 @@ export default function StorySection() {
     : DEFAULT_STORY_SETTINGS.stories;
 
   return (
-    <section className="story-section-wrapper" id="stories-section">
+    <section className="story-section-wrapper" id="stories-section" suppressHydrationWarning>
       {/* Header with Tag and Dual Headline */}
       <div className="story-header">
         <div className="voyara-tag">
