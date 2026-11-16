@@ -1,24 +1,17 @@
 {
   "name": "travelyn-backend",
   "version": "1.0.0",
-  "description": "Express TypeScript REST API for Travelyn Luxury Travel",
-  "main": "dist/server.js",
+  "description": "Express REST API for Travelyn Luxury Travel",
+  "main": "src/server.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js"
+    "dev": "node --watch src/server.js",
+    "build": "node -e \"console.log('Build OK: Pure JavaScript backend requires no transpilation')\"",
+    "start": "node src/server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^9.12.1"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.13.4",
-    "tsx": "^4.19.3",
-    "typescript": "^5.7.3"
   }
 }

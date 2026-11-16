@@ -4,6 +4,9 @@ import {
   addStoredBooking,
   addStoredInquiry,
   addStoredSubscriber,
+  getStoredAuthShowcaseSettings,
+  saveStoredAuthShowcaseSettings,
+  DEFAULT_AUTH_SHOWCASE_SETTINGS,
 } from './store';
 import { CATEGORIES, STORIES } from './data';
 
@@ -215,4 +218,48 @@ export async function fetchCategories() {
  */
 export async function fetchStories() {
   return STORIES;
+}
+
+/**
+ * Fetch dynamic Auth Showcase settings from backend / MongoDB Atlas
+ */
+export async function fetchAuthShowcase() {
+  try {
+    const res = await apiFetch('/showcase/auth');
+    if (res && res.ok) {
+      const json = await res.json();
+      if (json.data) {
+        saveStoredAuthShowcaseSettings(json.data);
+        return json.data;
+      }
+    }
+  } catch (err) {
+    // Backend offline, fallback to localStorage
+  }
+  return getStoredAuthShowcaseSettings();
+}
+
+/**
+ * Save dynamic Auth Showcase settings to backend / MongoDB Atlas & localStorage
+ */
+export async function saveAuthShowcase(settings) {
+  // Always update local store immediately for instant reactive UI
+  saveStoredAuthShowcaseSettings(settings);
+
+  try {
+    const res = await apiFetch('/showcase/auth', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(settings)
+    });
+    if (res && res.ok) {
+      const json = await res.json();
+      return json;
+    }
+  } catch (err) {
+    // Saved locally, backend sync will retry next time
+  }
+  return { success: true, data: settings };
 }

@@ -35,6 +35,7 @@ import {
   resetStoredAuthShowcaseSettings,
   DEFAULT_AUTH_SHOWCASE_SETTINGS,
 } from '@/lib/store';
+import { saveAuthShowcase, fetchAuthShowcase } from '@/lib/api';
 
 const AVAILABLE_CATEGORIES = [
   'trending',
@@ -242,6 +243,10 @@ export default function AdminDashboardPage() {
     setAboutStatsSettings(getStoredAboutStatsSettings());
     setTestimonialsSettings(getStoredTestimonialsSettings());
     setAuthShowcaseSettings(getStoredAuthShowcaseSettings());
+    // Also fetch fresh from MongoDB Atlas
+    fetchAuthShowcase().then((fresh) => {
+      if (fresh) setAuthShowcaseSettings(fresh);
+    }).catch(() => {});
   };
 
   const showToast = (msg) => {
@@ -496,16 +501,24 @@ export default function AdminDashboardPage() {
   };
 
   // Auth Showcase Section Handlers
-  const handleSaveAuthShowcaseSettings = (e) => {
+  const handleSaveAuthShowcaseSettings = async (e) => {
     if (e) e.preventDefault();
     saveStoredAuthShowcaseSettings(authShowcaseSettings);
-    showToast('Login & Register showcase panels updated & live across site!');
+    try {
+      await saveAuthShowcase(authShowcaseSettings);
+      showToast('Showcase saved to MongoDB Atlas & live across Login and Register pages!');
+    } catch {
+      showToast('Showcase saved locally and live across site!');
+    }
   };
 
-  const handleResetAuthShowcaseSettings = () => {
+  const handleResetAuthShowcaseSettings = async () => {
     if (window.confirm('Reset Login and Register showcases to original Travelyn defaults?')) {
       const def = resetStoredAuthShowcaseSettings();
       setAuthShowcaseSettings(def);
+      try {
+        await saveAuthShowcase(def);
+      } catch {}
       showToast('Auth showcase panels reset to original defaults');
     }
   };

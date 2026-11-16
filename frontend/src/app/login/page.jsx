@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { loginUser, getStoredUser, getStoredAuthShowcaseSettings, DEFAULT_AUTH_SHOWCASE_SETTINGS } from '../../lib/store';
+import { fetchAuthShowcase } from '../../lib/api';
 import '../auth.css';
 
 export default function LoginPage() {
@@ -37,6 +38,13 @@ export default function LoginPage() {
     };
 
     loadSettings();
+
+    // Also fetch fresh settings from MongoDB Atlas
+    fetchAuthShowcase().then((data) => {
+      if (data?.login) {
+        setShowcase(data.login);
+      }
+    }).catch(() => {});
 
     const handleUpdate = (e) => {
       if (e.detail?.login) {
