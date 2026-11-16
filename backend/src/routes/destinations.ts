@@ -115,8 +115,9 @@ router.get('/meta/stats', (_req: Request, res: Response) => {
 // GET destination by slug or ID
 router.get('/:identifier', (req: Request, res: Response) => {
   const { identifier } = req.params;
+  const idStr = Array.isArray(identifier) ? identifier[0] : identifier;
   const match = destinations.find(
-    d => d.slug.toLowerCase() === identifier.toLowerCase() || d.id === identifier
+    d => d.slug.toLowerCase() === idStr.toLowerCase() || d.id === idStr
   );
 
   if (!match) {

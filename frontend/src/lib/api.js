@@ -8,19 +8,44 @@ import {
 import { CATEGORIES, STORIES } from './data';
 
 const getApiBaseUrl = () => {
-  if (typeof window !== 'undefined') {
-    return process.env.NEXT_PUBLIC_API_URL || '/backend-api';
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
   }
-  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+  if (typeof window !== 'undefined') {
+    return '/backend-api';
+  }
+  return process.env.BACKEND_URL ? `${process.env.BACKEND_URL}/api` : 'http://localhost:5000/api';
 };
+
+/**
+ * Robust fetch helper that tries primary URL, then Next.js proxy / fallback ports
+ */
+async function apiFetch(endpoint, options = {}) {
+  const primary = getApiBaseUrl();
+  const candidates = Array.from(new Set([
+    primary,
+    '/backend-api',
+    'http://localhost:5000/api',
+    'http://localhost:5001/api'
+  ]));
+
+  for (const baseUrl of candidates) {
+    try {
+      const res = await fetch(`${baseUrl}${endpoint}`, options);
+      if (res.ok) return res;
+    } catch (err) {
+      // Try next candidate
+    }
+  }
+  return null;
+}
 
 /**
  * Submit a travel booking inquiry
  */
 export async function submitBooking(data) {
-  const baseUrl = getApiBaseUrl();
   try {
-    const res = await fetch(`${baseUrl}/bookings`, {
+    const res = await apiFetch('/bookings', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,7 +53,7 @@ export async function submitBooking(data) {
       body: JSON.stringify(data),
     });
 
-    if (res.ok) {
+    if (res && res.ok) {
       const result = await res.json();
       addStoredBooking(result.data || data);
       return result;
@@ -62,9 +87,8 @@ export async function submitBooking(data) {
  * Submit a tailor-made concierge contact inquiry
  */
 export async function submitContact(data) {
-  const baseUrl = getApiBaseUrl();
   try {
-    const res = await fetch(`${baseUrl}/contact`, {
+    const res = await apiFetch('/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +96,7 @@ export async function submitContact(data) {
       body: JSON.stringify(data),
     });
 
-    if (res.ok) {
+    if (res && res.ok) {
       const result = await res.json();
       addStoredInquiry(result.data || data);
       return result;
@@ -94,9 +118,8 @@ export async function submitContact(data) {
  * Subscribe to the Travelyn newsletter
  */
 export async function subscribeNewsletter(email) {
-  const baseUrl = getApiBaseUrl();
   try {
-    const res = await fetch(`${baseUrl}/newsletter/subscribe`, {
+    const res = await apiFetch('/newsletter/subscribe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -104,7 +127,7 @@ export async function subscribeNewsletter(email) {
       body: JSON.stringify({ email }),
     });
 
-    if (res.ok) {
+    if (res && res.ok) {
       const result = await res.json();
       addStoredSubscriber(email);
       return result;
@@ -125,7 +148,6 @@ export async function subscribeNewsletter(email) {
  * Fetch all destinations with optional filtering
  */
 export async function fetchDestinations(params) {
-  const baseUrl = getApiBaseUrl();
   try {
     const query = new URLSearchParams();
     if (params?.search) query.set('search', params.search);
@@ -136,8 +158,8 @@ export async function fetchDestinations(params) {
     if (params?.sort) query.set('sort', params.sort);
 
     const queryString = query.toString() ? `?${query.toString()}` : '';
-    const res = await fetch(`${baseUrl}/destinations${queryString}`);
-    if (res.ok) {
+    const res = await apiFetch(`/destinations${queryString}`);
+    if (res && res.ok) {
       const result = await res.json();
       if (result.data && result.data.length) return result.data;
     }
@@ -168,10 +190,9 @@ export async function fetchDestinations(params) {
  * Fetch a single destination by slug or id
  */
 export async function fetchDestinationBySlug(slug) {
-  const baseUrl = getApiBaseUrl();
   try {
-    const res = await fetch(`${baseUrl}/destinations/${slug}`);
-    if (res.ok) {
+    const res = await apiFetch(`/destinations/${slug}`);
+    if (res && res.ok) {
       const result = await res.json();
       if (result.data) return result.data;
     }
