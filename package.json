@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Travelyn - Luxury Travel & Journeys Fullstack Platform (Next.js Frontend + Express Backend)",
   "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:frontend": "npm --prefix frontend run dev",
@@ -13,7 +17,13 @@
     "start": "npm --prefix frontend start",
     "start:frontend": "npm --prefix frontend start",
     "start:backend": "npm --prefix backend start",
-    "install:all": "npm install && npm --prefix frontend install && npm --prefix backend install"
+    "install:all": "npm install && npm --prefix frontend install && npm --prefix backend install",
+    "postinstall": "npm --prefix frontend install"
+  },
+  "dependencies": {
+    "next": "^15.1.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
