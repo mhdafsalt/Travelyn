@@ -30,6 +30,10 @@ import {
   saveStoredTestimonialsSettings,
   resetStoredTestimonialsSettings,
   DEFAULT_TESTIMONIALS_SETTINGS,
+  getStoredAuthShowcaseSettings,
+  saveStoredAuthShowcaseSettings,
+  resetStoredAuthShowcaseSettings,
+  DEFAULT_AUTH_SHOWCASE_SETTINGS,
 } from '@/lib/store';
 
 const AVAILABLE_CATEGORIES = [
@@ -61,6 +65,23 @@ const SAMPLE_TRAVEL_PHOTOS = [
   'https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80',
   'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80',
   'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80'
+];
+
+const AUTH_BACKDROP_PRESETS = [
+  { label: 'Swiss Alps Dusk', url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=85' },
+  { label: 'Santorini Sunset', url: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1600&q=85' },
+  { label: 'Kyoto Mist & Bamboo', url: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1600&q=85' },
+  { label: 'Patagonia Mountains', url: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1600&q=85' },
+  { label: 'Maldives Lagoon', url: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1600&q=85' },
+  { label: 'Amalfi Coast Twilight', url: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1600&q=85' }
+];
+
+const AUTH_AVATAR_PRESETS = [
+  { label: 'Claire & Tom', url: 'https://framerusercontent.com/images/cwjju4oQ9SWH1nkXN95LfTNt94.jpg' },
+  { label: 'Marcus Lindqvist', url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80' },
+  { label: 'Elena Rostova', url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+  { label: 'Julian & Sophia', url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80' },
+  { label: 'David Chen', url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80' }
 ];
 
 const STORY_THEME_PRESETS = [
@@ -186,6 +207,10 @@ export default function AdminDashboardPage() {
   const [testimonialsSettings, setTestimonialsSettings] = useState(DEFAULT_TESTIMONIALS_SETTINGS);
   const [previewTestimonialIdx, setPreviewTestimonialIdx] = useState(0);
 
+  // Auth Showcase Dynamic Customizer State (Login & Register)
+  const [authShowcaseSettings, setAuthShowcaseSettings] = useState(DEFAULT_AUTH_SHOWCASE_SETTINGS);
+  const [authShowcaseTab, setAuthShowcaseTab] = useState('login'); // 'login' | 'signup'
+
   // Form State for Destination (Add / Edit)
   const [destForm, setDestForm] = useState({
     title: '',
@@ -216,6 +241,7 @@ export default function AdminDashboardPage() {
     setStorySettings(getStoredStorySettings());
     setAboutStatsSettings(getStoredAboutStatsSettings());
     setTestimonialsSettings(getStoredTestimonialsSettings());
+    setAuthShowcaseSettings(getStoredAuthShowcaseSettings());
   };
 
   const showToast = (msg) => {
@@ -467,6 +493,31 @@ export default function AdminDashboardPage() {
     });
     setPreviewTestimonialIdx(0);
     showToast('Traveller review removed');
+  };
+
+  // Auth Showcase Section Handlers
+  const handleSaveAuthShowcaseSettings = (e) => {
+    if (e) e.preventDefault();
+    saveStoredAuthShowcaseSettings(authShowcaseSettings);
+    showToast('Login & Register showcase panels updated & live across site!');
+  };
+
+  const handleResetAuthShowcaseSettings = () => {
+    if (window.confirm('Reset Login and Register showcases to original Travelyn defaults?')) {
+      const def = resetStoredAuthShowcaseSettings();
+      setAuthShowcaseSettings(def);
+      showToast('Auth showcase panels reset to original defaults');
+    }
+  };
+
+  const updateCurrentAuthShowcaseField = (field, value) => {
+    setAuthShowcaseSettings((prev) => ({
+      ...prev,
+      [authShowcaseTab]: {
+        ...(prev[authShowcaseTab] || DEFAULT_AUTH_SHOWCASE_SETTINGS[authShowcaseTab]),
+        [field]: value
+      }
+    }));
   };
 
   // Open Add Destination Modal
@@ -766,6 +817,7 @@ export default function AdminDashboardPage() {
       case 'stories': return 'Stories Showcase Studio';
       case 'about-stats': return 'About Studio & Metrics';
       case 'testimonials': return 'Traveller Stories & Reviews';
+      case 'auth-showcase': return 'Auth & Membership Showcase Studio';
       case 'bookings': return 'Reservations & Bookings';
       case 'inquiries': return 'Concierge Inquiries';
       case 'subscribers': return 'Newsletter Audience';
@@ -920,6 +972,24 @@ export default function AdminDashboardPage() {
                 <span>Testimonials</span>
               </div>
               <span className="admin-nav-pill" style={{ background: '#ec4899', color: '#ffffff', fontSize: '10px', padding: '2px 7px' }}>LIVE</span>
+            </button>
+
+            {/* Tab: Auth Showcase */}
+            <button
+              type="button"
+              onClick={() => { setActiveTab('auth-showcase'); setSearchQuery(''); setIsSidebarOpen(false); }}
+              className={`admin-nav-button ${activeTab === 'auth-showcase' ? 'is-active' : ''}`}
+            >
+              <div className="admin-nav-left">
+                <span className="admin-nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                </span>
+                <span>Auth Showcase</span>
+              </div>
+              <span className="admin-nav-pill" style={{ background: '#0284c7', color: '#ffffff', fontSize: '10px', padding: '2px 7px' }}>LIVE</span>
             </button>
           </div>
 
@@ -1238,6 +1308,15 @@ export default function AdminDashboardPage() {
                       style={{ width: '100%', justifyContent: 'center', height: '42px' }}
                     >
                       <span>✉ Review {inquiries.filter((i) => i.status === 'new').length} New Bespoke Inquiries</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab('auth-showcase')}
+                      className="admin-btn admin-btn-secondary"
+                      style={{ width: '100%', justifyContent: 'center', height: '42px' }}
+                    >
+                      <span>🎨 Edit Login &amp; Register Showcases</span>
                     </button>
 
                     <div style={{
@@ -3453,6 +3532,398 @@ export default function AdminDashboardPage() {
                           style={{ padding: '12px 28px', fontSize: '14.5px' }}
                         >
                           Save Testimonials
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ============================================================== */}
+          {/* TAB 8: AUTH & MEMBERSHIP SHOWCASE STUDIO (LOGIN & SIGNUP)     */}
+          {/* ============================================================== */}
+          {activeTab === 'auth-showcase' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              {/* Studio Header Card */}
+              <div className="admin-card">
+                <div className="admin-card-header">
+                  <div>
+                    <h3 className="admin-card-title">Auth &amp; Membership Showcase Studio</h3>
+                    <p className="admin-card-subtitle">
+                      Dynamically customize the cinematic left-side visuals, background landscapes, floating quote cards, traveller credentials, and security badges shown on the Login and Register / Join Collective pages.
+                    </p>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                    <Link
+                      href="/login"
+                      target="_blank"
+                      className="admin-btn admin-btn-secondary"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      View Login Page ↗
+                    </Link>
+                    <Link
+                      href="/signup"
+                      target="_blank"
+                      className="admin-btn admin-btn-secondary"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      View Register Page ↗
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={handleResetAuthShowcaseSettings}
+                      className="admin-btn admin-btn-secondary"
+                    >
+                      Reset Defaults
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleSaveAuthShowcaseSettings}
+                      className="admin-btn admin-btn-primary"
+                    >
+                      Save Changes
+                    </button>
+                  </div>
+                </div>
+
+                {/* Subtab Switcher: Login vs Sign Up */}
+                <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', borderTop: '1px solid #f1f5f9', paddingTop: '16px' }}>
+                  <div className="admin-auth-subtabs">
+                    <button
+                      type="button"
+                      onClick={() => setAuthShowcaseTab('login')}
+                      className={`admin-auth-subtab-btn ${authShowcaseTab === 'login' ? 'is-active' : ''}`}
+                    >
+                      <span>🔐</span>
+                      <span>Login Page Showcase</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setAuthShowcaseTab('signup')}
+                      className={`admin-auth-subtab-btn ${authShowcaseTab === 'signup' ? 'is-active' : ''}`}
+                    >
+                      <span>✨</span>
+                      <span>Register Page Showcase</span>
+                    </button>
+                  </div>
+
+                  <span style={{ fontSize: '12.5px', color: '#64748b' }}>
+                    Currently editing: <strong style={{ color: '#0f172a' }}>{authShowcaseTab === 'login' ? 'Login Page (/login)' : 'Register Page (/signup)'}</strong>
+                  </span>
+                </div>
+              </div>
+
+              {/* Grid: Left Sticky Live Preview + Right Customizer Form */}
+              <div className="admin-hero-studio-grid">
+                {/* Left: Sticky Live Preview */}
+                <div className="admin-hero-preview-card" style={{ background: '#ffffff', color: '#111827', border: '1px solid #e2e8f0' }}>
+                  <div style={{ padding: '16px 20px', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#f8fafc' }}>
+                    <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', color: '#64748b', textTransform: 'uppercase' }}>
+                      Live Storefront Preview
+                    </span>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '11px', color: '#10b981', fontWeight: 600 }}>
+                      <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
+                      Reactive Sync
+                    </span>
+                  </div>
+
+                  <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '18px', background: '#faf9f6' }}>
+                    {/* Active Screen Label Pill */}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 600, color: '#334155' }}>
+                        {authShowcaseTab === 'login' ? 'Previewing /login Split Panel' : 'Previewing /signup Split Panel'}
+                      </span>
+                      <span style={{ fontSize: '11px', color: '#64748b', background: '#e2e8f0', padding: '2px 8px', borderRadius: '6px', fontWeight: 600 }}>
+                        Desktop 50% Panel
+                      </span>
+                    </div>
+
+                    {/* Preview Mockup Frame */}
+                    {(() => {
+                      const cur = authShowcaseSettings[authShowcaseTab] || DEFAULT_AUTH_SHOWCASE_SETTINGS[authShowcaseTab] || {};
+                      return (
+                        <div className="admin-auth-preview-frame">
+                          <img
+                            src={cur.backdropImageUrl || DEFAULT_AUTH_SHOWCASE_SETTINGS[authShowcaseTab]?.backdropImageUrl}
+                            alt="Preview Backdrop"
+                            className="admin-auth-preview-backdrop"
+                          />
+                          <div className="admin-auth-preview-overlay" />
+
+                          {/* Top Brand & Badge */}
+                          <div className="admin-auth-preview-top">
+                            <span className="admin-auth-preview-brand">Travelyn.</span>
+                            <div className="admin-auth-preview-tag">
+                              <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#5b8291', display: 'inline-block', boxShadow: '0 0 6px #5b8291' }} />
+                              <span>{cur.tagText || 'Bespoke Journeys'}</span>
+                            </div>
+                          </div>
+
+                          {/* Floating Story Card */}
+                          <div className="admin-auth-preview-card">
+                            <p className="admin-auth-preview-quote">
+                              &ldquo;{cur.quote || 'Crafting extraordinary journeys with authentic local culture.'}&rdquo;
+                            </p>
+                            <div className="admin-auth-preview-author">
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                <img
+                                  src={cur.authorAvatarUrl || DEFAULT_AUTH_SHOWCASE_SETTINGS[authShowcaseTab]?.authorAvatarUrl}
+                                  alt={cur.authorName || 'Author'}
+                                  className="admin-auth-preview-avatar"
+                                />
+                                <div>
+                                  <div className="admin-auth-preview-name">{cur.authorName || 'Traveller'}</div>
+                                  <div className="admin-auth-preview-trip">{cur.authorTrip || 'Private Member'}</div>
+                                </div>
+                              </div>
+                              <div className="admin-auth-preview-rating">
+                                <span style={{ color: '#fbbf24' }}>★</span>
+                                <span>{cur.rating || '4.9'}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Footer Tags */}
+                          <div className="admin-auth-preview-footer">
+                            <span>{cur.footerLeft || 'EST. 2014 — LISBON ATELIER'}</span>
+                            <span>{cur.footerRight || 'PRIVATE MEMBER ACCESS'}</span>
+                          </div>
+                        </div>
+                      );
+                    })()}
+
+                    {/* Quick Backdrop Image Switcher */}
+                    <div>
+                      <div style={{ fontSize: '12px', fontWeight: 600, color: '#475569', marginBottom: '8px' }}>
+                        Quick Backdrop Presets (Click to apply):
+                      </div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                        {AUTH_BACKDROP_PRESETS.map((preset) => (
+                          <button
+                            key={preset.label}
+                            type="button"
+                            onClick={() => updateCurrentAuthShowcaseField('backdropImageUrl', preset.url)}
+                            className={`admin-photo-preset-chip ${
+                              (authShowcaseSettings[authShowcaseTab]?.backdropImageUrl === preset.url) ? 'is-active' : ''
+                            }`}
+                          >
+                            {preset.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right: Customizer Form */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                  {/* Card 1: Backdrop & Top Tag */}
+                  <div className="admin-card">
+                    <div className="admin-card-header">
+                      <div>
+                        <h4 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#0f172a' }}>
+                          1. Backdrop Image &amp; Brand Badge
+                        </h4>
+                        <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#64748b' }}>
+                          Cinematic high-resolution photograph and top pill tag displayed on the {authShowcaseTab === 'login' ? 'Login' : 'Register'} screen.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      <div className="admin-form-group">
+                        <label className="admin-form-label">
+                          Backdrop Image URL
+                        </label>
+                        <input
+                          type="text"
+                          value={authShowcaseSettings[authShowcaseTab]?.backdropImageUrl || ''}
+                          onChange={(e) => updateCurrentAuthShowcaseField('backdropImageUrl', e.target.value)}
+                          placeholder="https://images.unsplash.com/..."
+                          className="admin-form-input"
+                        />
+                        <span style={{ fontSize: '11.5px', color: '#64748b', marginTop: '4px' }}>
+                          Tip: High-resolution landscape images (1600x1200 or wider) look most cinematic.
+                        </span>
+                      </div>
+
+                      <div className="admin-form-group">
+                        <label className="admin-form-label">
+                          Top Brand Badge Tag
+                        </label>
+                        <input
+                          type="text"
+                          value={authShowcaseSettings[authShowcaseTab]?.tagText || ''}
+                          onChange={(e) => updateCurrentAuthShowcaseField('tagText', e.target.value)}
+                          placeholder="e.g. Bespoke Journeys or Private Collective"
+                          className="admin-form-input"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card 2: Floating Testimonial Quote & Author */}
+                  <div className="admin-card">
+                    <div className="admin-card-header">
+                      <div>
+                        <h4 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#0f172a' }}>
+                          2. Floating Testimonial Card &amp; Social Proof
+                        </h4>
+                        <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#64748b' }}>
+                          Curated guest story, reviewer name, avatar, destination, and star rating.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      <div className="admin-form-group">
+                        <label className="admin-form-label">
+                          Traveller Quote / Endorsement
+                        </label>
+                        <textarea
+                          rows={3}
+                          value={authShowcaseSettings[authShowcaseTab]?.quote || ''}
+                          onChange={(e) => updateCurrentAuthShowcaseField('quote', e.target.value)}
+                          placeholder="Write an authentic slow-travel quote..."
+                          className="admin-form-textarea"
+                          style={{ minHeight: '80px', fontSize: '14px', lineHeight: 1.5 }}
+                        />
+                      </div>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '14px' }}>
+                        <div className="admin-form-group">
+                          <label className="admin-form-label">Author Name</label>
+                          <input
+                            type="text"
+                            value={authShowcaseSettings[authShowcaseTab]?.authorName || ''}
+                            onChange={(e) => updateCurrentAuthShowcaseField('authorName', e.target.value)}
+                            placeholder="e.g. Claire &amp; Tom"
+                            className="admin-form-input"
+                          />
+                        </div>
+
+                        <div className="admin-form-group">
+                          <label className="admin-form-label">Trip or Member Title</label>
+                          <input
+                            type="text"
+                            value={authShowcaseSettings[authShowcaseTab]?.authorTrip || ''}
+                            onChange={(e) => updateCurrentAuthShowcaseField('authorTrip', e.target.value)}
+                            placeholder="e.g. Swiss Alps · 2026 Journey"
+                            className="admin-form-input"
+                          />
+                        </div>
+
+                        <div className="admin-form-group">
+                          <label className="admin-form-label">Rating Score</label>
+                          <input
+                            type="text"
+                            value={authShowcaseSettings[authShowcaseTab]?.rating || ''}
+                            onChange={(e) => updateCurrentAuthShowcaseField('rating', e.target.value)}
+                            placeholder="e.g. 4.9"
+                            className="admin-form-input"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="admin-form-group">
+                        <label className="admin-form-label">Author Avatar URL</label>
+                        <input
+                          type="text"
+                          value={authShowcaseSettings[authShowcaseTab]?.authorAvatarUrl || ''}
+                          onChange={(e) => updateCurrentAuthShowcaseField('authorAvatarUrl', e.target.value)}
+                          placeholder="https://..."
+                          className="admin-form-input"
+                        />
+                        <div style={{ marginTop: '8px' }}>
+                          <span style={{ fontSize: '12px', fontWeight: 600, color: '#475569', display: 'block', marginBottom: '6px' }}>
+                            Preset Avatars:
+                          </span>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                            {AUTH_AVATAR_PRESETS.map((av) => (
+                              <button
+                                key={av.label}
+                                type="button"
+                                onClick={() => updateCurrentAuthShowcaseField('authorAvatarUrl', av.url)}
+                                className={`admin-photo-preset-chip ${
+                                  (authShowcaseSettings[authShowcaseTab]?.authorAvatarUrl === av.url) ? 'is-active' : ''
+                                }`}
+                              >
+                                <img
+                                  src={av.url}
+                                  alt={av.label}
+                                  style={{ width: '18px', height: '18px', borderRadius: '50%', objectFit: 'cover' }}
+                                />
+                                <span>{av.label}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card 3: Footer Security & Atelier Tags */}
+                  <div className="admin-card">
+                    <div className="admin-card-header">
+                      <div>
+                        <h4 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#0f172a' }}>
+                          3. Footer Security &amp; Atelier Tags
+                        </h4>
+                        <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#64748b' }}>
+                          Subtle uppercase accreditation and security tags at the bottom of the visual panel.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div style={{ padding: '20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}>
+                      <div className="admin-form-group">
+                        <label className="admin-form-label">Footer Left Text</label>
+                        <input
+                          type="text"
+                          value={authShowcaseSettings[authShowcaseTab]?.footerLeft || ''}
+                          onChange={(e) => updateCurrentAuthShowcaseField('footerLeft', e.target.value)}
+                          placeholder="e.g. EST. 2014 — LISBON ATELIER"
+                          className="admin-form-input"
+                        />
+                      </div>
+
+                      <div className="admin-form-group">
+                        <label className="admin-form-label">Footer Right Text</label>
+                        <input
+                          type="text"
+                          value={authShowcaseSettings[authShowcaseTab]?.footerRight || ''}
+                          onChange={(e) => updateCurrentAuthShowcaseField('footerRight', e.target.value)}
+                          placeholder="e.g. PRIVATE MEMBER ACCESS"
+                          className="admin-form-input"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Save Action Bar */}
+                  <div className="admin-card">
+                    <div style={{ padding: '18px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+                      <div style={{ fontSize: '13px', color: '#64748b' }}>
+                        Saving updates will instantly broadcast live across all client browsers and refresh both <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: '4px' }}>/login</code> and <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: '4px' }}>/signup</code>.
+                      </div>
+                      <div style={{ display: 'flex', gap: '10px' }}>
+                        <button
+                          type="button"
+                          onClick={handleResetAuthShowcaseSettings}
+                          className="admin-btn admin-btn-secondary"
+                        >
+                          Reset Defaults
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleSaveAuthShowcaseSettings}
+                          className="admin-btn admin-btn-primary"
+                          style={{ padding: '12px 28px', fontSize: '14.5px' }}
+                        >
+                          Save Showcase Settings
                         </button>
                       </div>
                     </div>

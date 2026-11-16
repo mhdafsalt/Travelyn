@@ -100,8 +100,9 @@ export default function Navbar() {
     { num: '01', label: 'Home', href: '/' },
     { num: '02', label: 'Destinations', href: '/destinations' },
     { num: '03', label: 'Curated Experiences', href: '/experiences' },
-    { num: '04', label: 'About Travelyn', href: '/about' },
-    { num: '05', label: 'Plan a Journey', href: '/contact' },
+    { num: '04', label: 'AI Journey Planner', href: '/ai-planner' },
+    { num: '05', label: 'About Travelyn', href: '/about' },
+    { num: '06', label: 'Plan a Journey', href: '/contact' },
   ];
 
   if (pathname?.startsWith('/admin') || pathname === '/login' || pathname === '/signup') {
@@ -121,8 +122,32 @@ export default function Navbar() {
             <span className="travelyn-brand-dot">.</span>
           </a>
 
-          {/* Right: Auth Action & MENU Button */}
+          {/* Right: AI Planner, Auth Action & MENU Button */}
           <div className="travelyn-navbar-actions">
+            <a
+              href="/ai-planner"
+              className={`travelyn-nav-ai-btn ${pathname === '/ai-planner' ? 'is-active' : ''}`}
+              title="AI Automatic Travel Planner"
+            >
+              <span className="travelyn-ai-sparkle">✦</span>
+              <span>AI Planner</span>
+              <span className="travelyn-cta-arrow">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </span>
+            </a>
+
             {currentUser ? (
               <a
                 href={currentUser.role === 'admin' ? '/admin' : '#'}
@@ -316,11 +341,15 @@ export default function Navbar() {
                   Curated luxury itineraries shaped in real time around weather, pace, and rhythm. Designed for extraordinary global exploration.
                 </p>
                 <a
-                  href="/contact"
+                  href="/ai-planner"
                   onClick={() => setMenuOpen(false)}
                   className="travelyn-plan-cta"
+                  title="Launch AI Journey Planner"
                 >
-                  <span>Plan a Tailored Journey</span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ color: '#d97706', fontSize: '13px' }}>✦</span>
+                    <span>AI Journey Planner</span>
+                  </span>
                   <span className="travelyn-cta-arrow">
                     <svg
                       width="14"

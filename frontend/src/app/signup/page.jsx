@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { registerUser, getStoredUser } from '../../lib/store';
+import { registerUser, getStoredUser, getStoredAuthShowcaseSettings, DEFAULT_AUTH_SHOWCASE_SETTINGS } from '../../lib/store';
 import '../auth.css';
 
 export default function SignUpPage() {
@@ -17,6 +17,38 @@ export default function SignUpPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [showcase, setShowcase] = useState(DEFAULT_AUTH_SHOWCASE_SETTINGS.signup);
+
+  // Load dynamic auth showcase settings
+  useEffect(() => {
+    const loadSettings = () => {
+      try {
+        const stored = getStoredAuthShowcaseSettings();
+        if (stored?.signup) {
+          setShowcase(stored.signup);
+        }
+      } catch (err) {
+        console.error('Failed to load signup showcase settings:', err);
+      }
+    };
+
+    loadSettings();
+
+    const handleUpdate = (e) => {
+      if (e.detail?.signup) {
+        setShowcase(e.detail.signup);
+      } else {
+        loadSettings();
+      }
+    };
+
+    window.addEventListener('travelyn_auth_showcase_updated', handleUpdate);
+    window.addEventListener('storage', loadSettings);
+    return () => {
+      window.removeEventListener('travelyn_auth_showcase_updated', handleUpdate);
+      window.removeEventListener('storage', loadSettings);
+    };
+  }, []);
 
   // Redirect if already logged in
   useEffect(() => {
@@ -103,13 +135,13 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="auth-page">
+    <div className="auth-page" suppressHydrationWarning>
       <div className="auth-split-wrapper">
         {/* Left Side: Editorial Visual Showcase */}
         <aside className="auth-visual-panel" aria-label="Travelyn Showcase">
           <img
-            src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1600&q=85"
-            alt="Santorini sunset terrace"
+            src={showcase.backdropImageUrl || DEFAULT_AUTH_SHOWCASE_SETTINGS.signup.backdropImageUrl}
+            alt={showcase.authorTrip || "Luxury destination landscape"}
             className="auth-visual-backdrop"
           />
           <div className="auth-visual-overlay" />
@@ -121,7 +153,7 @@ export default function SignUpPage() {
             </Link>
             <div className="auth-visual-tag">
               <span className="auth-visual-tag-dot" />
-              <span>Membership Atelier</span>
+              <span>{showcase.tagText || "Private Collective"}</span>
             </div>
           </div>
 
@@ -129,29 +161,29 @@ export default function SignUpPage() {
           <div className="auth-visual-bottom">
             <div className="auth-testimonial-card">
               <p className="auth-quote-text">
-                &ldquo;Travelyn doesn&rsquo;t just book luxury rooms. They curate the quiet, irreplaceable memories of our lives.&rdquo;
+                &ldquo;{showcase.quote}&rdquo;
               </p>
               <div className="auth-quote-author">
                 <div className="auth-author-info">
                   <img
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
-                    alt="Marcus Lindqvist"
+                    src={showcase.authorAvatarUrl || DEFAULT_AUTH_SHOWCASE_SETTINGS.signup.authorAvatarUrl}
+                    alt={showcase.authorName || "Traveller"}
                     className="auth-author-avatar"
                   />
                   <div>
-                    <div className="auth-author-name">Marcus Lindqvist</div>
-                    <div className="auth-author-trip">Stockholm · Patron Member</div>
+                    <div className="auth-author-name">{showcase.authorName}</div>
+                    <div className="auth-author-trip">{showcase.authorTrip}</div>
                   </div>
                 </div>
                 <div className="auth-rating-pill">
-                  <span className="star">★</span> 4.9
+                  <span className="star">★</span> {showcase.rating || "4.9"}
                 </div>
               </div>
             </div>
 
             <div className="auth-visual-footer">
-              <span>GLOBAL BESPOKE NETWORK</span>
-              <span>100% PRIVATE &amp; SECURE</span>
+              <span>{showcase.footerLeft || "GLOBAL BESPOKE NETWORK"}</span>
+              <span>{showcase.footerRight || "100% PRIVATE & SECURE"}</span>
             </div>
           </div>
         </aside>
@@ -221,7 +253,7 @@ export default function SignUpPage() {
             )}
 
             {/* Registration Form */}
-            <form onSubmit={handleSubmit} className="auth-form" noValidate>
+            <form onSubmit={handleSubmit} className="auth-form" noValidate suppressHydrationWarning>
               <div className="auth-field-group">
                 <label className="auth-label" htmlFor="signup-name">
                   Full Name
@@ -230,6 +262,7 @@ export default function SignUpPage() {
                   <input
                     id="signup-name"
                     type="text"
+                    suppressHydrationWarning
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="e.g. Clara Delacroix"
@@ -254,6 +287,7 @@ export default function SignUpPage() {
                   <input
                     id="signup-email"
                     type="email"
+                    suppressHydrationWarning
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
@@ -278,6 +312,7 @@ export default function SignUpPage() {
                   <input
                     id="signup-password"
                     type={showPassword ? 'text' : 'password'}
+                    suppressHydrationWarning
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="At least 6 characters"
@@ -293,6 +328,7 @@ export default function SignUpPage() {
                   </div>
                   <button
                     type="button"
+                    suppressHydrationWarning
                     onClick={() => setShowPassword(!showPassword)}
                     className="auth-eye-btn"
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
@@ -336,6 +372,7 @@ export default function SignUpPage() {
                   <input
                     id="signup-confirm"
                     type={showPassword ? 'text' : 'password'}
+                    suppressHydrationWarning
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Repeat password"
@@ -355,6 +392,7 @@ export default function SignUpPage() {
               <label className="auth-checkbox-row">
                 <input
                   type="checkbox"
+                  suppressHydrationWarning
                   checked={agreeTerms}
                   onChange={(e) => setAgreeTerms(e.target.checked)}
                   className="auth-checkbox-input"
@@ -372,6 +410,7 @@ export default function SignUpPage() {
               {/* Submit CTA */}
               <button
                 type="submit"
+                suppressHydrationWarning
                 disabled={loading}
                 className="auth-submit-btn"
               >

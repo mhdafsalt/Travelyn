@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { loginUser, getStoredUser } from '../../lib/store';
+import { loginUser, getStoredUser, getStoredAuthShowcaseSettings, DEFAULT_AUTH_SHOWCASE_SETTINGS } from '../../lib/store';
 import '../auth.css';
 
 export default function LoginPage() {
@@ -21,6 +21,38 @@ export default function LoginPage() {
   const [forgotEmail, setForgotEmail] = useState('');
   const [forgotLoading, setForgotLoading] = useState(false);
   const [forgotMessage, setForgotMessage] = useState('');
+  const [showcase, setShowcase] = useState(DEFAULT_AUTH_SHOWCASE_SETTINGS.login);
+
+  // Load dynamic auth showcase settings
+  useEffect(() => {
+    const loadSettings = () => {
+      try {
+        const stored = getStoredAuthShowcaseSettings();
+        if (stored?.login) {
+          setShowcase(stored.login);
+        }
+      } catch (err) {
+        console.error('Failed to load login showcase settings:', err);
+      }
+    };
+
+    loadSettings();
+
+    const handleUpdate = (e) => {
+      if (e.detail?.login) {
+        setShowcase(e.detail.login);
+      } else {
+        loadSettings();
+      }
+    };
+
+    window.addEventListener('travelyn_auth_showcase_updated', handleUpdate);
+    window.addEventListener('storage', loadSettings);
+    return () => {
+      window.removeEventListener('travelyn_auth_showcase_updated', handleUpdate);
+      window.removeEventListener('storage', loadSettings);
+    };
+  }, []);
 
   // Redirect if already logged in
   useEffect(() => {
@@ -84,13 +116,13 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="auth-page">
+    <div className="auth-page" suppressHydrationWarning>
       <div className="auth-split-wrapper">
         {/* Left Side: Cinematic Luxury Visuals */}
         <aside className="auth-visual-panel" aria-label="Travelyn Showcase">
           <img
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=85"
-            alt="Alpine twilight landscape"
+            src={showcase.backdropImageUrl || DEFAULT_AUTH_SHOWCASE_SETTINGS.login.backdropImageUrl}
+            alt={showcase.authorTrip || "Luxury destination landscape"}
             className="auth-visual-backdrop"
           />
           <div className="auth-visual-overlay" />
@@ -102,7 +134,7 @@ export default function LoginPage() {
             </Link>
             <div className="auth-visual-tag">
               <span className="auth-visual-tag-dot" />
-              <span>Bespoke Journeys</span>
+              <span>{showcase.tagText || "Bespoke Journeys"}</span>
             </div>
           </div>
 
@@ -110,29 +142,29 @@ export default function LoginPage() {
           <div className="auth-visual-bottom">
             <div className="auth-testimonial-card">
               <p className="auth-quote-text">
-                &ldquo;Slow trains, quiet mountain villages, and the best fondue of our lives. We didn&rsquo;t want to come home.&rdquo;
+                &ldquo;{showcase.quote}&rdquo;
               </p>
               <div className="auth-quote-author">
                 <div className="auth-author-info">
                   <img
-                    src="https://framerusercontent.com/images/cwjju4oQ9SWH1nkXN95LfTNt94.jpg"
-                    alt="Claire & Tom"
+                    src={showcase.authorAvatarUrl || DEFAULT_AUTH_SHOWCASE_SETTINGS.login.authorAvatarUrl}
+                    alt={showcase.authorName || "Traveller"}
                     className="auth-author-avatar"
                   />
                   <div>
-                    <div className="auth-author-name">Claire &amp; Tom</div>
-                    <div className="auth-author-trip">Swiss Alps · 2026 Journey</div>
+                    <div className="auth-author-name">{showcase.authorName}</div>
+                    <div className="auth-author-trip">{showcase.authorTrip}</div>
                   </div>
                 </div>
                 <div className="auth-rating-pill">
-                  <span className="star">★</span> 4.9
+                  <span className="star">★</span> {showcase.rating || "4.9"}
                 </div>
               </div>
             </div>
 
             <div className="auth-visual-footer">
-              <span>EST. 2014 — LISBON ATELIER</span>
-              <span>PRIVATE MEMBER ACCESS</span>
+              <span>{showcase.footerLeft || "EST. 2014 — LISBON ATELIER"}</span>
+              <span>{showcase.footerRight || "PRIVATE MEMBER ACCESS"}</span>
             </div>
           </div>
         </aside>
@@ -204,7 +236,7 @@ export default function LoginPage() {
             )}
 
             {/* Email & Password Form */}
-            <form onSubmit={handleSubmit} className="auth-form" noValidate>
+            <form onSubmit={handleSubmit} className="auth-form" noValidate suppressHydrationWarning>
               <div className="auth-field-group">
                 <label className="auth-label" htmlFor="login-email">
                   Email Address
@@ -213,6 +245,7 @@ export default function LoginPage() {
                   <input
                     id="login-email"
                     type="email"
+                    suppressHydrationWarning
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
@@ -236,6 +269,7 @@ export default function LoginPage() {
                   </label>
                   <button
                     type="button"
+                    suppressHydrationWarning
                     onClick={() => setShowForgotModal(true)}
                     className="auth-forgot-link"
                   >
@@ -246,6 +280,7 @@ export default function LoginPage() {
                   <input
                     id="login-password"
                     type={showPassword ? 'text' : 'password'}
+                    suppressHydrationWarning
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••••••"
@@ -261,6 +296,7 @@ export default function LoginPage() {
                   </div>
                   <button
                     type="button"
+                    suppressHydrationWarning
                     onClick={() => setShowPassword(!showPassword)}
                     className="auth-eye-btn"
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
@@ -284,6 +320,7 @@ export default function LoginPage() {
               <label className="auth-checkbox-row">
                 <input
                   type="checkbox"
+                  suppressHydrationWarning
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
                   className="auth-checkbox-input"
@@ -299,6 +336,7 @@ export default function LoginPage() {
               {/* Submit CTA */}
               <button
                 type="submit"
+                suppressHydrationWarning
                 disabled={loading}
                 className="auth-submit-btn"
               >
@@ -330,6 +368,7 @@ export default function LoginPage() {
           <div className="auth-modal-card" onClick={(e) => e.stopPropagation()}>
             <button
               type="button"
+              suppressHydrationWarning
               onClick={() => setShowForgotModal(false)}
               className="auth-modal-close"
               aria-label="Close modal"
@@ -361,7 +400,7 @@ export default function LoginPage() {
                 <span>{forgotMessage}</span>
               </div>
             ) : (
-              <form onSubmit={handleForgotPassword} className="auth-form">
+              <form onSubmit={handleForgotPassword} className="auth-form" suppressHydrationWarning>
                 <div className="auth-field-group">
                   <label className="auth-label" htmlFor="forgot-email">
                     Member Email
@@ -370,6 +409,7 @@ export default function LoginPage() {
                     <input
                       id="forgot-email"
                       type="email"
+                      suppressHydrationWarning
                       value={forgotEmail}
                       onChange={(e) => setForgotEmail(e.target.value)}
                       placeholder="name@example.com"
@@ -387,6 +427,7 @@ export default function LoginPage() {
 
                 <button
                   type="submit"
+                  suppressHydrationWarning
                   disabled={forgotLoading}
                   className="auth-submit-btn"
                   style={{ marginTop: '12px' }}

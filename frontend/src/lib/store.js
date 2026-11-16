@@ -196,6 +196,9 @@ export function saveDestination(destination) {
   }
 
   setLocalItem(DESTINATIONS_KEY, updated);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_destinations_updated', { detail: updated }));
+  }
   return updated;
 }
 
@@ -203,6 +206,9 @@ export function deleteStoredDestination(id) {
   const all = getStoredDestinations();
   const updated = all.filter((d) => d.id !== id && d.slug !== id);
   setLocalItem(DESTINATIONS_KEY, updated);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_destinations_updated', { detail: updated }));
+  }
   return updated;
 }
 
@@ -575,6 +581,64 @@ export function resetStoredTestimonialsSettings() {
 }
 
 /* ==========================================================================
+   AUTH SHOWCASE SETTINGS (LOGIN & SIGNUP PANELS)
+   ========================================================================== */
+
+export const DEFAULT_AUTH_SHOWCASE_SETTINGS = {
+  login: {
+    backdropImageUrl: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=85",
+    tagText: "Bespoke Journeys",
+    quote: "Slow trains, quiet mountain villages, and the best fondue of our lives. We didn’t want to come home.",
+    authorName: "Claire & Tom",
+    authorTrip: "Swiss Alps · 2026 Journey",
+    authorAvatarUrl: "https://framerusercontent.com/images/cwjju4oQ9SWH1nkXN95LfTNt94.jpg",
+    rating: "4.9",
+    footerLeft: "EST. 2014 — LISBON ATELIER",
+    footerRight: "PRIVATE MEMBER ACCESS"
+  },
+  signup: {
+    backdropImageUrl: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1600&q=85",
+    tagText: "Private Collective",
+    quote: "Travelyn doesn’t just book luxury rooms. They curate the quiet, irreplaceable memories of our lives.",
+    authorName: "Marcus Lindqvist",
+    authorTrip: "Stockholm · Patron Member",
+    authorAvatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    rating: "4.9",
+    footerLeft: "GLOBAL BESPOKE NETWORK",
+    footerRight: "100% PRIVATE & SECURE"
+  }
+};
+
+const AUTH_SHOWCASE_KEY = 'travelyn_auth_showcase_settings';
+
+export function getStoredAuthShowcaseSettings() {
+  return getLocalItem(AUTH_SHOWCASE_KEY, DEFAULT_AUTH_SHOWCASE_SETTINGS);
+}
+
+export function saveStoredAuthShowcaseSettings(settings) {
+  const current = getStoredAuthShowcaseSettings();
+  const merged = {
+    ...current,
+    ...settings,
+    login: { ...(current.login || DEFAULT_AUTH_SHOWCASE_SETTINGS.login), ...(settings.login || {}) },
+    signup: { ...(current.signup || DEFAULT_AUTH_SHOWCASE_SETTINGS.signup), ...(settings.signup || {}) }
+  };
+  setLocalItem(AUTH_SHOWCASE_KEY, merged);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_auth_showcase_updated', { detail: merged }));
+  }
+  return merged;
+}
+
+export function resetStoredAuthShowcaseSettings() {
+  setLocalItem(AUTH_SHOWCASE_KEY, DEFAULT_AUTH_SHOWCASE_SETTINGS);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_auth_showcase_updated', { detail: DEFAULT_AUTH_SHOWCASE_SETTINGS }));
+  }
+  return DEFAULT_AUTH_SHOWCASE_SETTINGS;
+}
+
+/* ==========================================================================
    AUTHENTICATION & USER STATE
    ========================================================================== */
 
@@ -721,6 +785,39 @@ export function registerUser({ name, email, password }) {
 export function logoutUser() {
   saveStoredUser(null);
   return true;
+}
+
+/* ==========================================================================
+   SAVED ITINERARIES (AI PLANNER)
+   ========================================================================== */
+
+const SAVED_ITINERARIES_KEY = 'travelyn_saved_itineraries';
+
+export function getStoredSavedItineraries() {
+  return getLocalItem(SAVED_ITINERARIES_KEY, []);
+}
+
+export function saveStoredItinerary(itinerary) {
+  const current = getStoredSavedItineraries();
+  const exists = current.some((it) => it.id === itinerary.id);
+  const updated = exists
+    ? current.map((it) => (it.id === itinerary.id ? itinerary : it))
+    : [itinerary, ...current];
+  setLocalItem(SAVED_ITINERARIES_KEY, updated);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_itineraries_updated', { detail: updated }));
+  }
+  return updated;
+}
+
+export function deleteStoredItinerary(id) {
+  const current = getStoredSavedItineraries();
+  const updated = current.filter((it) => it.id !== id);
+  setLocalItem(SAVED_ITINERARIES_KEY, updated);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('travelyn_itineraries_updated', { detail: updated }));
+  }
+  return updated;
 }
 
 

@@ -101,6 +101,7 @@ export default function Footer() {
               { label: 'Home', href: '/' },
               { label: 'Destinations', href: '/destinations' },
               { label: 'Experiences', href: '/experiences' },
+              { label: 'AI Planner', href: '/ai-planner' },
               { label: 'About', href: '/about' },
               { label: 'Contact', href: '/contact' },
             ].map((link, i) => (

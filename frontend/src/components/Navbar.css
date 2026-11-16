@@ -129,6 +129,55 @@
   transform: translateY(-1px);
 }
 
+.travelyn-nav-ai-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #0c0e12;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  border: none;
+}
+
+.travelyn-nav-ai-btn:hover,
+.travelyn-nav-ai-btn.is-active {
+  transform: scale(1.03);
+  background: #f2f2f2;
+  color: #0c0e12;
+  box-shadow: 0 6px 22px rgba(255, 255, 255, 0.28);
+}
+
+.travelyn-nav-ai-btn .travelyn-ai-sparkle {
+  color: #d97706;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.25s ease;
+}
+
+.travelyn-nav-ai-btn:hover .travelyn-ai-sparkle {
+  transform: rotate(20deg) scale(1.15);
+}
+
+.travelyn-nav-ai-btn .travelyn-cta-arrow {
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+  color: #0c0e12;
+}
+
+.travelyn-nav-ai-btn:hover .travelyn-cta-arrow {
+  transform: translateX(3px);
+}
+
 .travelyn-nav-user-avatar {
   width: 22px;
   height: 22px;
