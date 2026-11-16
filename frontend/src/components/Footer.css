@@ -165,14 +165,44 @@
   width: 100%;
   text-align: center;
   font-family: var(--font-display);
-  font-size: clamp(90px, 18vw, 240px);
-  fontWeight: 500;
+  font-size: clamp(60px, 16vw, 240px);
+  font-weight: 500;
   letter-spacing: -0.06em;
   line-height: 0.85;
   color: rgba(13, 13, 13, 0.04);
   user-select: none;
   pointer-events: none;
   margin-top: 10px;
-  margin-bottom: -20px;
+  margin-bottom: -10px;
 }
+
+@media (max-width: 640px) {
+  .voyara-footer {
+    padding: 50px 16px 24px;
+    gap: 32px;
+  }
+
+  .voyara-footer-content {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .voyara-footer-brand {
+    max-width: 100%;
+  }
+
+  .voyara-footer-nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    gap: 24px;
+  }
+
+  .voyara-footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+}
+
 

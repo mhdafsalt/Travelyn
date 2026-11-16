@@ -260,3 +260,51 @@
   }
 }
 
+/* ==========================================================================
+   Mobile Responsive Adjustments (<= 540px)
+   ========================================================================== */
+@media (max-width: 540px) {
+  .booking-modal-overlay {
+    padding: 10px;
+  }
+
+  .booking-modal-container {
+    border-radius: 20px;
+    max-height: 94vh;
+  }
+
+  .booking-modal-header {
+    height: 140px;
+  }
+
+  .booking-modal-banner-content {
+    left: 16px;
+    right: 16px;
+    bottom: 12px;
+  }
+
+  .booking-modal-title {
+    font-size: 20px;
+  }
+
+  .booking-modal-price-val {
+    font-size: 18px;
+  }
+
+  .booking-modal-body {
+    padding: 16px;
+  }
+
+  .booking-modal-row-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .booking-modal-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+

@@ -95,7 +95,26 @@
 .story-description {
   font-size: 18px;
   line-height: 1.6;
-  color: 'rgba(13, 13, 13, 0.65)';
+  color: rgba(13, 13, 13, 0.65);
   margin: 0;
 }
+
+@media (max-width: 640px) {
+  .story-section-wrapper {
+    padding: 60px 16px;
+    gap: 36px;
+  }
+
+  .story-photo-box {
+    height: 300px;
+    border-radius: 20px;
+    max-width: 100%;
+  }
+
+  .story-description {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+}
+
 

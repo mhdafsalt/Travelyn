@@ -143,3 +143,32 @@
   line-height: 1.4;
 }
 
+@media (max-width: 640px) {
+  .newsletter-wrapper {
+    padding: 28px 18px;
+    border-radius: 20px;
+    gap: 24px;
+  }
+
+  .newsletter-heading {
+    font-size: 28px;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .newsletter-input-wrap {
+    width: 100%;
+    flex: none;
+  }
+
+  .newsletter-submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+

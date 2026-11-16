@@ -12,8 +12,11 @@ export const metadata = {
     images: ['https://framerusercontent.com/images/gjP22E1figlGx4hfv5qEKoJpa4A.png'],
   },
   icons: {
-    icon: 'https://framerusercontent.com/images/qTL03v2CzdPcZCrSVkDOHzgwpc0.png',
-    apple: 'https://framerusercontent.com/images/1LfOHlgQTL0z2GsOjs5hwik.png',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-icon.svg',
   },
 };
 

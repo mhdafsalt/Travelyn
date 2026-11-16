@@ -313,6 +313,73 @@
   padding-bottom: 24px;
 }
 
+/* Quick Actions Row Inside Hamburger Drawer */
+.travelyn-overlay-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 8px 0 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+}
+
+.travelyn-overlay-ai-btn {
+  flex: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0c0e12;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+.travelyn-overlay-ai-btn:hover {
+  background: #f1f5f9;
+  transform: translateY(-1px);
+}
+
+.travelyn-overlay-ai-btn .travelyn-ai-sparkle {
+  color: #d97706;
+  font-size: 14px;
+}
+
+.travelyn-overlay-auth-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.travelyn-overlay-auth-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
 /* Overlay Main Content Grid */
 .travelyn-overlay-grid {
   width: 100%;
@@ -698,6 +765,14 @@
   }
 }
 
+@media (max-width: 860px) {
+  /* On mobile and tablet, move AI Planner and Sign In entirely into the hamburger menu */
+  .travelyn-navbar-actions .travelyn-nav-ai-btn,
+  .travelyn-navbar-actions .travelyn-nav-auth-btn {
+    display: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .travelyn-navbar {
     padding: 18px 0;
@@ -744,6 +819,18 @@
 }
 
 @media (max-width: 480px) {
+  .travelyn-overlay-quick-actions {
+    flex-direction: column;
+    gap: 10px;
+    margin: 6px 0 16px;
+    padding-bottom: 16px;
+  }
+
+  .travelyn-overlay-ai-btn,
+  .travelyn-overlay-auth-btn {
+    width: 100%;
+  }
+
   .travelyn-navbar {
     padding: 16px 0;
   }

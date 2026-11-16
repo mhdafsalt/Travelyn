@@ -5,6 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "node --watch src/server.js",
+    "seed": "node src/seed.js",
     "build": "node -e \"console.log('Build OK: Pure JavaScript backend requires no transpilation')\"",
     "start": "node src/server.js"
   },

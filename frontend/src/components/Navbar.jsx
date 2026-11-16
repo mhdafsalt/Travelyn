@@ -233,6 +233,64 @@ export default function Navbar() {
             </button>
           </div>
 
+          {/* Quick Actions inside Hamburger Menu */}
+          <div className="travelyn-overlay-quick-actions">
+            <a
+              href="/ai-planner"
+              onClick={() => setMenuOpen(false)}
+              className="travelyn-overlay-ai-btn"
+            >
+              <span className="travelyn-ai-sparkle">✦</span>
+              <span>AI Journey Planner</span>
+              <span className="travelyn-cta-arrow">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </span>
+            </a>
+
+            {currentUser ? (
+              <a
+                href={currentUser.role === 'admin' ? '/admin' : '#'}
+                onClick={(e) => {
+                  if (currentUser.role !== 'admin') {
+                    e.preventDefault();
+                  } else {
+                    setMenuOpen(false);
+                  }
+                }}
+                className="travelyn-overlay-auth-btn"
+              >
+                <span className="travelyn-nav-user-avatar">
+                  {currentUser.name ? currentUser.name.trim().charAt(0).toUpperCase() : 'U'}
+                </span>
+                <span>{currentUser.name ? currentUser.name.split(' ')[0] : 'Member'}</span>
+              </a>
+            ) : (
+              <a
+                href="/login"
+                onClick={() => setMenuOpen(false)}
+                className="travelyn-overlay-auth-btn"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span>Sign In</span>
+              </a>
+            )}
+          </div>
+
           {/* Main Overlay Body: Nav Links & Curated Details */}
           <div className="travelyn-overlay-grid">
             {/* Primary Nav Links */}

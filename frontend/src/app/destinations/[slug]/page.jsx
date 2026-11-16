@@ -38,13 +38,15 @@ export default function DestinationDetailPage() {
       {/* 1. Hero Image Header */}
       <section style={{
             position: 'relative',
-            height: '640px',
+            minHeight: '440px',
+            height: 'clamp(440px, 55vh, 620px)',
             width: '100%',
             overflow: 'hidden',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-end',
-            padding: '0 40px 60px',
+            padding: '90px 20px 40px',
+            boxSizing: 'border-box',
         }}>
         <div style={{
             position: 'absolute',
@@ -74,7 +76,7 @@ export default function DestinationDetailPage() {
             gap: '14px',
         }}>
           {/* Breadcrumb */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', opacity: 0.85, fontWeight: 500 }}>
+          <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px', fontSize: '13px', opacity: 0.85, fontWeight: 500 }}>
             <a href="/" style={{ color: '#fff', textDecoration: 'none', transition: 'opacity 0.2s' }}>Home</a>
             <span style={{ opacity: 0.5 }}>/</span>
             <a href="/destinations" style={{ color: '#fff', textDecoration: 'none', transition: 'opacity 0.2s' }}>Destinations</a>
@@ -89,17 +91,17 @@ export default function DestinationDetailPage() {
 
           <h1 style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(42px, 6vw, 76px)',
+            fontSize: 'clamp(32px, 5.5vw, 72px)',
             fontWeight: 500,
             letterSpacing: '-0.04em',
-            lineHeight: 1.05,
+            lineHeight: 1.08,
             margin: 0,
             textShadow: '0 2px 20px rgba(0, 0, 0, 0.4)',
         }}>
             {destination.title}
           </h1>
 
-          <p style={{ fontSize: '20px', maxWidth: '680px', margin: 0, opacity: 0.95, textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>
+          <p style={{ fontSize: 'clamp(15px, 2.5vw, 19px)', maxWidth: '680px', margin: 0, opacity: 0.95, textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>
             {destination.tagline}
           </p>
         </div>
@@ -109,47 +111,48 @@ export default function DestinationDetailPage() {
       <div style={{
             width: '100%',
             maxWidth: '1100px',
-            margin: '40px auto 0',
-            padding: '0 24px',
+            margin: '32px auto 0',
+            padding: '0 16px',
+            boxSizing: 'border-box',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '48px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gap: '32px',
             alignItems: 'start',
         }}>
         {/* Left Column: Story, Highlights, Itinerary, Inclusions */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '36px' }}>
           {/* Key Facts Pills */}
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '12px',
-            padding: '18px 24px',
+            gap: '16px',
+            padding: '16px 20px',
             backgroundColor: '#ffffff',
             borderRadius: '20px',
             border: '1px solid rgba(13, 13, 13, 0.08)',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
         }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', paddingRight: '20px', borderRight: '1px solid rgba(13, 13, 13, 0.08)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
               <span style={{ fontSize: '11px', textTransform: 'uppercase', color: 'rgba(13, 13, 13, 0.5)', fontWeight: 600 }}>
                 Duration
               </span>
-              <span style={{ fontSize: '16px', fontWeight: 600, color: '#17191c' }}>
+              <span style={{ fontSize: '15px', fontWeight: 600, color: '#17191c' }}>
                 {destination.durationDays} Days
               </span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', paddingRight: '20px', borderRight: '1px solid rgba(13, 13, 13, 0.08)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
               <span style={{ fontSize: '11px', textTransform: 'uppercase', color: 'rgba(13, 13, 13, 0.5)', fontWeight: 600 }}>
                 Best Season
               </span>
-              <span style={{ fontSize: '16px', fontWeight: 600, color: '#17191c' }}>
+              <span style={{ fontSize: '15px', fontWeight: 600, color: '#17191c' }}>
                 {destination.season}
               </span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', paddingRight: '20px', borderRight: '1px solid rgba(13, 13, 13, 0.08)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
               <span style={{ fontSize: '11px', textTransform: 'uppercase', color: 'rgba(13, 13, 13, 0.5)', fontWeight: 600 }}>
                 Group Size
               </span>
-              <span style={{ fontSize: '16px', fontWeight: 600, color: '#17191c' }}>
+              <span style={{ fontSize: '15px', fontWeight: 600, color: '#17191c' }}>
                 {destination.groupSize}
               </span>
             </div>
@@ -157,7 +160,7 @@ export default function DestinationDetailPage() {
               <span style={{ fontSize: '11px', textTransform: 'uppercase', color: 'rgba(13, 13, 13, 0.5)', fontWeight: 600 }}>
                 Guest Rating
               </span>
-              <span style={{ fontSize: '16px', fontWeight: 600, color: '#17191c', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span style={{ fontSize: '15px', fontWeight: 600, color: '#17191c', display: 'flex', alignItems: 'center', gap: '4px' }}>
                 ★ {destination.rating} ({destination.reviewCount} reviews)
               </span>
             </div>

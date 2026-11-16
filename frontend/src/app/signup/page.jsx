@@ -95,7 +95,7 @@ export default function SignUpPage() {
 
   const strength = getPasswordStrength(password);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');

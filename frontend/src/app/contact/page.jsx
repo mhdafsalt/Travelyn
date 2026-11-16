@@ -39,8 +39,8 @@ export default function ContactPage() {
             setStatusMessage(res.message || 'Something went wrong. Please try again.');
         }
     };
-    return (<div style={{ backgroundColor: '#faf9f6', minHeight: '100vh', padding: '140px 24px 90px' }}>
-      <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '56px' }}>
+    return (<div style={{ backgroundColor: '#faf9f6', minHeight: '100vh', padding: '110px 16px 80px', boxSizing: 'border-box' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '44px' }}>
         {/* Header */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           <div className="voyara-tag">
@@ -49,7 +49,7 @@ export default function ContactPage() {
           </div>
           <h1 style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(38px, 6vw, 72px)',
+            fontSize: 'clamp(32px, 5.5vw, 72px)',
             fontWeight: 500,
             letterSpacing: '-0.04em',
             lineHeight: 1.05,
@@ -58,7 +58,7 @@ export default function ContactPage() {
         }}>
             Plan your next story
           </h1>
-          <p style={{ fontSize: '19px', color: 'rgba(30, 38, 42, 0.7)', maxWidth: '640px', margin: 0 }}>
+          <p style={{ fontSize: '16.5px', lineHeight: 1.6, color: 'rgba(30, 38, 42, 0.7)', maxWidth: '640px', margin: 0 }}>
             Share your dreams, timings, and travel desires. Our dedicated travel designers will craft a bespoke itinerary suited to your pace.
           </p>
         </div>
@@ -66,17 +66,18 @@ export default function ContactPage() {
         {/* Split Container */}
         <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '48px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gap: '32px',
             alignItems: 'start',
         }}>
           {/* Left Column: Form */}
           <div style={{
             backgroundColor: '#ffffff',
-            borderRadius: '32px',
-            padding: '40px',
+            borderRadius: '24px',
+            padding: 'clamp(20px, 4vw, 40px)',
             border: '1px solid rgba(13, 13, 13, 0.08)',
             boxShadow: '0 12px 40px rgba(0, 0, 0, 0.04)',
+            boxSizing: 'border-box',
         }}>
             {status === 'success' ? (<div style={{ padding: '40px 20px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
                 <div style={{

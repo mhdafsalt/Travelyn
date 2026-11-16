@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <defs>
+    <linearGradient id="bgApple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141a1f"/>
+      <stop offset="100%" stop-color="#090d10"/>
+    </linearGradient>
+    <linearGradient id="goldApple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5e6c8"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#aa8214"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="44" fill="url(#bgApple)"/>
+  <rect x="3" y="3" width="174" height="174" rx="41" fill="none" stroke="rgba(212, 175, 55, 0.4)" stroke-width="2"/>
+  <text x="85" y="125" font-family="-apple-system, BlinkMacSystemFont, 'Playfair Display', 'Cinzel', 'Georgia', serif" font-size="96" font-weight="600" fill="#ffffff" letter-spacing="-0.02em" text-anchor="middle">T</text>
+  <circle cx="132" cy="118" r="9" fill="url(#goldApple)"/>
+</svg>

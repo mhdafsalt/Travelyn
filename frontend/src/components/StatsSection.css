@@ -165,3 +165,21 @@
   color: rgba(13, 13, 13, 0.62);
 }
 
+@media (max-width: 640px) {
+  .stats-breathe-section {
+    height: 440px;
+    padding: 60px 16px;
+  }
+
+  .stats-about-section {
+    padding: 50px 16px 60px;
+    gap: 32px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+

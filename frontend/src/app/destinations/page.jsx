@@ -44,8 +44,8 @@ export default function DestinationsPage() {
             result.sort((a, b) => a.durationDays - b.durationDays);
         return result;
     }, [search, selectedCategory, selectedRegion, sortBy]);
-    return (<div style={{ backgroundColor: '#faf9f6', minHeight: '100vh', padding: '140px 24px 80px' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '36px' }}>
+    return (<div style={{ backgroundColor: '#faf9f6', minHeight: '100vh', padding: '110px 16px 60px', boxSizing: 'border-box' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '32px' }}>
         {/* Header */}
         <div>
           <div className="voyara-tag" style={{ marginBottom: '14px' }}>
@@ -54,7 +54,7 @@ export default function DestinationsPage() {
           </div>
           <h1 style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(36px, 5vw, 64px)',
+            fontSize: 'clamp(32px, 5vw, 64px)',
             fontWeight: 500,
             letterSpacing: '-0.04em',
             lineHeight: 1.05,
@@ -63,7 +63,7 @@ export default function DestinationsPage() {
         }}>
             All Destinations
           </h1>
-          <p style={{ fontSize: '18px', color: 'rgba(30, 38, 42, 0.65)', maxWidth: '640px', margin: 0 }}>
+          <p style={{ fontSize: '16px', lineHeight: 1.6, color: 'rgba(30, 38, 42, 0.65)', maxWidth: '640px', margin: 0 }}>
             Handpicked journeys crafted with intimacy, slow luxury, and rare access. Search by region, travel style, or duration.
           </p>
         </div>
@@ -72,17 +72,17 @@ export default function DestinationsPage() {
         <div style={{
             backgroundColor: '#ffffff',
             borderRadius: '24px',
-            padding: '20px 24px',
+            padding: '16px 20px',
             border: '1px solid rgba(13, 13, 13, 0.08)',
             boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)',
             display: 'flex',
             flexWrap: 'wrap',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '16px',
+            gap: '12px',
         }}>
           {/* Search Box */}
-          <div style={{ flex: '1 1 240px', minWidth: '220px', position: 'relative' }}>
+          <div style={{ flex: '1 1 200px', minWidth: '180px', width: '100%', position: 'relative' }}>
             <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search country, place or style..." style={{
             width: '100%',
             height: '46px',
@@ -92,11 +92,12 @@ export default function DestinationsPage() {
             backgroundColor: 'rgba(13, 13, 13, 0.03)',
             fontSize: '14px',
             outline: 'none',
+            boxSizing: 'border-box',
         }}/>
           </div>
 
           {/* Region Filter */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
             <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(30, 38, 42, 0.6)' }}>Region:</span>
             <select value={selectedRegion} onChange={(e) => setSelectedRegion(e.target.value)} style={{
             height: '42px',
@@ -115,7 +116,7 @@ export default function DestinationsPage() {
           </div>
 
           {/* Category Filter */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
             <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(30, 38, 42, 0.6)' }}>Theme:</span>
             <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} style={{
             height: '42px',
@@ -135,7 +136,7 @@ export default function DestinationsPage() {
           </div>
 
           {/* Sort By */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
             <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(30, 38, 42, 0.6)' }}>Sort:</span>
             <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} style={{
             height: '42px',
@@ -164,8 +165,8 @@ export default function DestinationsPage() {
         {/* Destination Cards Grid */}
         <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-            gap: '28px',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))',
+            gap: '24px',
         }}>
           {filtered.map((dest) => (<DestinationCard key={dest.id} destination={dest} onBookClick={(d) => {
                 setBookingDest(d);
