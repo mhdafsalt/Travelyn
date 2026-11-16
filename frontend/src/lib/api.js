@@ -27,6 +27,7 @@ async function apiFetch(endpoint, options = {}) {
   const primary = getApiBaseUrl();
   const candidates = Array.from(new Set([
     primary,
+    'https://travelyn-s5a4.vercel.app/api',
     '/backend-api',
     'http://localhost:5000/api',
     'http://localhost:5001/api'

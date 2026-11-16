@@ -25,7 +25,7 @@ const nextConfig = {
     ],
   },
   async rewrites() {
-    const backendUrl = process.env.BACKEND_URL || 'http://localhost:5000';
+    const backendUrl = process.env.BACKEND_URL || 'https://travelyn-s5a4.vercel.app';
     return [
       {
         source: '/backend-api/:path*',
