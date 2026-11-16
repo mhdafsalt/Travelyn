@@ -12,8 +12,8 @@ const inMemorySubscribers = [
   }
 ];
 
-// POST subscribe to newsletter
-router.post('/subscribe', async (req, res) => {
+// POST subscribe to newsletter (supports both /subscribe and /)
+const handleSubscribe = async (req, res) => {
   try {
     const { email } = req.body;
 
@@ -74,7 +74,10 @@ router.post('/subscribe', async (req, res) => {
   } catch (err) {
     res.status(500).json({ success: false, message: 'Subscription failed', error: err.message });
   }
-});
+};
+
+router.post('/subscribe', handleSubscribe);
+router.post('/', handleSubscribe);
 
 // GET all subscribers (admin/internal)
 router.get('/', async (_req, res) => {

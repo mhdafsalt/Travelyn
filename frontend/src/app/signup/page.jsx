@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { registerUser, getStoredUser, getStoredAuthShowcaseSettings, DEFAULT_AUTH_SHOWCASE_SETTINGS } from '../../lib/store';
-import { fetchAuthShowcase } from '../../lib/api';
+import { fetchAuthShowcase, registerApi } from '../../lib/api';
 import '../auth.css';
 
 export default function SignUpPage() {
@@ -123,23 +123,38 @@ export default function SignUpPage() {
 
     setLoading(true);
 
-    setTimeout(() => {
-      const result = registerUser({
+    try {
+      const apiRes = await registerApi({
         name: fullName,
         email: email,
         password: password
       });
-
-      if (result.success) {
-        setSuccess(`Welcome to Travelyn, ${result.user.name}! Preparing your bespoke space...`);
+      if (apiRes && apiRes.success) {
+        setSuccess(`Welcome to Travelyn, ${apiRes.user.name}! Preparing your bespoke space...`);
         setTimeout(() => {
           router.push('/');
-        }, 1000);
-      } else {
-        setError(result.error || 'Registration failed.');
-        setLoading(false);
+        }, 900);
+        return;
       }
-    }, 700);
+    } catch {
+      // Proceed to fallback
+    }
+
+    const result = registerUser({
+      name: fullName,
+      email: email,
+      password: password
+    });
+
+    if (result.success) {
+      setSuccess(`Welcome to Travelyn, ${result.user.name}! Preparing your bespoke space...`);
+      setTimeout(() => {
+        router.push('/');
+      }, 900);
+    } else {
+      setError(result.error || 'Registration failed.');
+      setLoading(false);
+    }
   };
 
   return (

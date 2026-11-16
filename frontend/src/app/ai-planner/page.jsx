@@ -11,6 +11,7 @@ import {
   DEFAULT_HERO_SETTINGS,
   getStoredDestinations
 } from '@/lib/store';
+import { apiFetch } from '@/lib/api';
 import './ai-planner.css';
 
 const PRESET_PROMPTS = [
@@ -231,7 +232,7 @@ export default function AIPlannerPage() {
     }, 600);
 
     try {
-      const response = await fetch('/api/ai-planner', {
+      const response = await apiFetch('/ai-planner', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -245,13 +246,13 @@ export default function AIPlannerPage() {
         })
       });
 
-      const data = await response.json();
+      const data = response ? await response.json() : null;
       clearInterval(stepInterval);
       setLoaderStep(4);
 
       setTimeout(() => {
         setIsGenerating(false);
-        if (data.success && data.itinerary) {
+        if (data && data.success && data.itinerary) {
           setItinerary(data.itinerary);
           setTimeout(() => {
             resultRef.current?.scrollIntoView({ behavior: 'smooth' });

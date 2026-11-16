@@ -3,6 +3,7 @@ const Booking = require('./Booking');
 const Inquiry = require('./Inquiry');
 const Subscriber = require('./Subscriber');
 const AuthShowcase = require('./AuthShowcase');
+const User = require('./User');
 const destinationsData = require('../data/destinations.json');
 const bookingsData = require('../data/bookings.json');
 
@@ -78,6 +79,33 @@ async function seedDatabaseIfEmpty() {
         }
       ]);
       console.log(`✅ Seeded Auth Showcase settings into MongoDB Atlas collection 'authshowcases'!`);
+    }
+
+    const userCount = await User.countDocuments();
+    if (userCount === 0) {
+      await User.create([
+        {
+          id: 'user-demo-traveller',
+          name: 'Eleanor Vance',
+          email: 'traveller@travelyn.com',
+          password: 'password123',
+          role: 'traveller',
+          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+          memberSince: '2024',
+          tier: 'Patron of Travelyn'
+        },
+        {
+          id: 'user-demo-admin',
+          name: 'Laurent de Valois',
+          email: 'admin@travelyn.com',
+          password: 'admin',
+          role: 'admin',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+          memberSince: '2022',
+          tier: 'Founding Custodian (Admin)'
+        }
+      ]);
+      console.log(`✅ Seeded demo users into MongoDB Atlas collection 'users'!`);
     }
   } catch (err) {
     console.warn('⚠️ Seeding note:', err.message);

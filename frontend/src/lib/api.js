@@ -7,28 +7,28 @@ import {
   getStoredAuthShowcaseSettings,
   saveStoredAuthShowcaseSettings,
   DEFAULT_AUTH_SHOWCASE_SETTINGS,
+  saveStoredUser,
 } from './store';
 import { CATEGORIES, STORIES } from './data';
 
-const getApiBaseUrl = () => {
+export const getApiBaseUrl = () => {
   if (process.env.NEXT_PUBLIC_API_URL) {
-    return process.env.NEXT_PUBLIC_API_URL;
+    return process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, '');
   }
-  if (typeof window !== 'undefined') {
-    return '/backend-api';
-  }
-  return process.env.BACKEND_URL ? `${process.env.BACKEND_URL}/api` : 'http://localhost:5000/api';
+  // Production default to deployed backend on Vercel
+  return 'https://travelyn-s5a4.vercel.app/api';
 };
 
 /**
  * Robust fetch helper that tries primary URL, then Next.js proxy / fallback ports
  */
-async function apiFetch(endpoint, options = {}) {
+export async function apiFetch(endpoint, options = {}) {
   const primary = getApiBaseUrl();
   const candidates = Array.from(new Set([
     primary,
     'https://travelyn-s5a4.vercel.app/api',
     '/backend-api',
+    '/api',
     'http://localhost:5000/api',
     'http://localhost:5001/api'
   ]));
@@ -263,4 +263,72 @@ export async function saveAuthShowcase(settings) {
     // Saved locally, backend sync will retry next time
   }
   return { success: true, data: settings };
+}
+
+/**
+ * User login via backend API
+ */
+export async function loginApi({ email, password, rememberMe = true }) {
+  try {
+    const res = await apiFetch('/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password, rememberMe })
+    });
+    if (res && res.ok) {
+      const data = await res.json();
+      if (data.success && data.user) {
+        saveStoredUser(data.user);
+        return data;
+      }
+    }
+  } catch (e) {
+    // backend unavailable, fallback will handle
+  }
+  return null;
+}
+
+/**
+ * User registration via backend API
+ */
+export async function registerApi({ name, email, password }) {
+  try {
+    const res = await apiFetch('/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password })
+    });
+    if (res && res.ok) {
+      const data = await res.json();
+      if (data.success && data.user) {
+        saveStoredUser(data.user);
+        return data;
+      }
+    }
+  } catch (e) {
+    // backend unavailable, fallback will handle
+  }
+  return null;
+}
+
+/**
+ * Trip generation via AI Planner API
+ */
+export async function generateItineraryApi(payload) {
+  try {
+    const res = await apiFetch('/ai-planner', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (res && res.ok) {
+      const data = await res.json();
+      if (data.success && data.itinerary) {
+        return data;
+      }
+    }
+  } catch (e) {
+    // fallback
+  }
+  return null;
 }

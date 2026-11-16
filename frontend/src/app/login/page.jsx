@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { loginUser, getStoredUser, getStoredAuthShowcaseSettings, DEFAULT_AUTH_SHOWCASE_SETTINGS } from '../../lib/store';
-import { fetchAuthShowcase } from '../../lib/api';
+import { fetchAuthShowcase, loginApi } from '../../lib/api';
 import '../auth.css';
 
 export default function LoginPage() {
@@ -74,7 +74,7 @@ export default function LoginPage() {
     }
   }, [router]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
@@ -90,22 +90,37 @@ export default function LoginPage() {
 
     setLoading(true);
 
-    setTimeout(() => {
-      const result = loginUser({ email, password, rememberMe });
-      if (result.success) {
-        setSuccess(`Welcome back, ${result.user.name}. Redirecting...`);
+    try {
+      const apiRes = await loginApi({ email, password, rememberMe });
+      if (apiRes && apiRes.success) {
+        setSuccess(`Welcome back, ${apiRes.user.name}. Redirecting...`);
         setTimeout(() => {
-          if (result.user.role === 'admin') {
+          if (apiRes.user.role === 'admin') {
             router.push('/admin');
           } else {
             router.push('/');
           }
-        }, 900);
-      } else {
-        setError(result.error || 'Invalid credentials.');
-        setLoading(false);
+        }, 800);
+        return;
       }
-    }, 600);
+    } catch {
+      // Proceed to fallback
+    }
+
+    const result = loginUser({ email, password, rememberMe });
+    if (result.success) {
+      setSuccess(`Welcome back, ${result.user.name}. Redirecting...`);
+      setTimeout(() => {
+        if (result.user.role === 'admin') {
+          router.push('/admin');
+        } else {
+          router.push('/');
+        }
+      }, 800);
+    } else {
+      setError(result.error || 'Invalid credentials.');
+      setLoading(false);
+    }
   };
 
   const handleForgotPassword = (e) => {
