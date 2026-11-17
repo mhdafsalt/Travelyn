@@ -789,11 +789,16 @@ export default function AdminDashboardPage() {
   };
 
   // Delete Destination
-  const handleDeleteDestination = (id, name) => {
-    if (window.confirm(`Are you sure you want to delete "${name}" from the portfolio?`)) {
-      deleteStoredDestination(id);
-      loadAllData();
-      showToast('Destination removed');
+  const handleDeleteDestination = async (destOrId, name) => {
+    const id = typeof destOrId === 'object' ? (destOrId.id || destOrId.slug) : destOrId;
+    const title = typeof destOrId === 'object' ? destOrId.title : name;
+    if (window.confirm(`Are you sure you want to delete "${title || id}" from the portfolio?`)) {
+      const updated = deleteStoredDestination(id);
+      setDestinations(updated);
+      try {
+        await fetch(`/api/destinations/${id}`, { method: 'DELETE' });
+      } catch (err) {}
+      showToast(`"${title || id}" removed from portfolio`);
     }
   };
 
@@ -1707,7 +1712,7 @@ export default function AdminDashboardPage() {
                             </Link>
                             <button
                               type="button"
-                              onClick={() => handleDeleteDestination(dest.id, dest.title)}
+                              onClick={() => handleDeleteDestination(dest, dest.title)}
                               className="admin-btn admin-btn-danger"
                               style={{ height: '32px', padding: '0 10px', fontSize: '12px' }}
                             >

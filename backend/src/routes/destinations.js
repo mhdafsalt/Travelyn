@@ -155,4 +155,25 @@ router.get('/:identifier', async (req, res) => {
   }
 });
 
+// DELETE destination by slug or ID
+router.delete('/:identifier', async (req, res) => {
+  try {
+    const { identifier } = req.params;
+    const idStr = Array.isArray(identifier) ? identifier[0] : identifier;
+
+    if (mongoose.connection.readyState === 1) {
+      await Destination.deleteOne({
+        $or: [
+          { slug: idStr.toLowerCase() },
+          { id: idStr }
+        ]
+      });
+    }
+
+    res.json({ success: true, message: `Destination "${identifier}" removed.` });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Error deleting destination', error: error.message });
+  }
+});
+
 module.exports = router;

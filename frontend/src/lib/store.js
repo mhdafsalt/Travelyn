@@ -1,6 +1,9 @@
 import { INITIAL_DESTINATIONS, CATEGORIES, STORIES } from './data';
 
 const DESTINATIONS_KEY = 'travelyn_destinations';
+const DELETED_DESTINATIONS_KEY = 'travelyn_deleted_destinations';
+const DESTINATIONS_VERSION_KEY = 'travelyn_dest_version';
+const CURRENT_DEST_VERSION = 'v4_six_core_destinations';
 const BOOKINGS_KEY = 'travelyn_bookings';
 const INQUIRIES_KEY = 'travelyn_inquiries';
 const SUBSCRIBERS_KEY = 'travelyn_subscribers';
@@ -137,49 +140,31 @@ function setLocalItem(key, value) {
    ========================================================================== */
 
 export function getStoredDestinations() {
-  const list = getLocalItem(DESTINATIONS_KEY, INITIAL_DESTINATIONS);
-  // Auto-migrate any legacy USD records in localStorage to INR
-  let needsUpdate = false;
-  const migrated = list.map((d) => {
-    let item = { ...d };
-    if (item.currency === 'USD' || (item.price && item.price < 10000)) {
-      needsUpdate = true;
-      const initialMatch = INITIAL_DESTINATIONS.find((init) => init.id === item.id || init.slug === item.slug);
-      item.currency = 'INR';
-      item.price = initialMatch ? initialMatch.price : (item.price ? Math.round(item.price * 85) : 145000);
+  if (typeof window !== 'undefined') {
+    const version = window.localStorage.getItem(DESTINATIONS_VERSION_KEY);
+    if (version !== CURRENT_DEST_VERSION) {
+      // Sync cleanly to the 6 core destinations requested: Kashmir, Delhi, Mumbai, Meghalaya, Maldives, Rajasthan
+      window.localStorage.setItem(DESTINATIONS_KEY, JSON.stringify(INITIAL_DESTINATIONS));
+      window.localStorage.setItem(DELETED_DESTINATIONS_KEY, JSON.stringify([]));
+      window.localStorage.setItem(DESTINATIONS_VERSION_KEY, CURRENT_DEST_VERSION);
+      return INITIAL_DESTINATIONS;
     }
-    // Backfill starting & ending points from INITIAL_DESTINATIONS if missing in legacy localStorage
-    if (!item.startingPoint || !item.endingPoint) {
-      const match = INITIAL_DESTINATIONS.find((init) => init.id === item.id || init.slug === item.slug);
-      if (match) {
-        if (!item.startingPoint && match.startingPoint) {
-          item.startingPoint = match.startingPoint;
-          needsUpdate = true;
-        }
-        if (!item.endingPoint && match.endingPoint) {
-          item.endingPoint = match.endingPoint;
-          needsUpdate = true;
-        }
-      }
-    }
-    return {
-      ...item,
-      currency: item.currency || 'INR'
-    };
-  });
-
-  // Ensure any new initial destinations (Kashmir, Meghalaya, Mumbai, etc.) are included
-  INITIAL_DESTINATIONS.forEach((init) => {
-    if (!migrated.some((d) => d.id === init.id || d.slug === init.slug)) {
-      migrated.push(init);
-      needsUpdate = true;
-    }
-  });
-
-  if (needsUpdate) {
-    setLocalItem(DESTINATIONS_KEY, migrated);
   }
-  return migrated;
+
+  const list = getLocalItem(DESTINATIONS_KEY, INITIAL_DESTINATIONS);
+  const deletedList = getLocalItem(DELETED_DESTINATIONS_KEY, []);
+  const deletedSet = new Set(
+    deletedList.map((x) => String(x).toLowerCase().trim())
+  );
+
+  // Filter out any destination that the user has explicitly deleted
+  const activeList = list.filter((d) => {
+    const idLow = d.id ? String(d.id).toLowerCase().trim() : '';
+    const slugLow = d.slug ? String(d.slug).toLowerCase().trim() : '';
+    return !deletedSet.has(idLow) && !deletedSet.has(slugLow);
+  });
+
+  return activeList;
 }
 
 export function getStoredDestinationBySlug(slug) {
@@ -190,6 +175,20 @@ export function getStoredDestinationBySlug(slug) {
 }
 
 export function saveDestination(destination) {
+  // If destination was previously in deleted list, remove it from blacklist
+  if (typeof window !== 'undefined') {
+    try {
+      const deletedList = getLocalItem(DELETED_DESTINATIONS_KEY, []);
+      const idLow = destination.id ? String(destination.id).toLowerCase().trim() : '';
+      const slugLow = destination.slug ? String(destination.slug).toLowerCase().trim() : '';
+      const remainingDeleted = deletedList.filter((x) => {
+        const itemLow = String(x).toLowerCase().trim();
+        return itemLow !== idLow && itemLow !== slugLow;
+      });
+      setLocalItem(DELETED_DESTINATIONS_KEY, remainingDeleted);
+    } catch (e) {}
+  }
+
   const all = getStoredDestinations();
   const index = all.findIndex((d) => d.id === destination.id || d.slug === destination.slug);
 
@@ -225,8 +224,24 @@ export function saveDestination(destination) {
 
 export function deleteStoredDestination(id) {
   const all = getStoredDestinations();
+  const target = all.find((d) => d.id === id || d.slug === id);
   const updated = all.filter((d) => d.id !== id && d.slug !== id);
   setLocalItem(DESTINATIONS_KEY, updated);
+
+  // Permanently blacklist so it can never reappear from static initial list
+  if (typeof window !== 'undefined') {
+    try {
+      const deletedList = getLocalItem(DELETED_DESTINATIONS_KEY, []);
+      const toAdd = [String(id).toLowerCase().trim()];
+      if (target?.id) toAdd.push(String(target.id).toLowerCase().trim());
+      if (target?.slug) toAdd.push(String(target.slug).toLowerCase().trim());
+      const newDeleted = Array.from(new Set([...deletedList, ...toAdd]));
+      setLocalItem(DELETED_DESTINATIONS_KEY, newDeleted);
+    } catch (e) {
+      console.warn('Failed to record deleted destination:', e);
+    }
+  }
+
   if (typeof window !== 'undefined') {
     window.dispatchEvent(new CustomEvent('travelyn_destinations_updated', { detail: updated }));
   }

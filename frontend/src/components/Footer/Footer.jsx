@@ -1,12 +1,35 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import NewsletterSection from '@/components/NewsletterSection';
+import { getStoredDestinations } from '@/lib/store';
 import './Footer.css';
 
 export default function Footer() {
   const pathname = usePathname();
+  const [destinations, setDestinations] = useState([]);
+
+  useEffect(() => {
+    const load = () => {
+      try {
+        const stored = getStoredDestinations();
+        if (Array.isArray(stored) && stored.length > 0) {
+          setDestinations(stored.slice(0, 5));
+        }
+      } catch (err) {}
+    };
+
+    load();
+    window.addEventListener('travelyn_destinations_updated', load);
+    window.addEventListener('storage', load);
+
+    return () => {
+      window.removeEventListener('travelyn_destinations_updated', load);
+      window.removeEventListener('storage', load);
+    };
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -110,20 +133,31 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* Destinations */}
+          {/* Dynamic Destinations Column */}
           <div className="voyara-footer-col">
             <div className="voyara-footer-col-title">Destinations</div>
-            {[
-              { label: 'Santorini', href: '/destinations/kashmir' },
-              { label: 'Kyoto', href: '/destinations/mumbai' },
-              { label: 'Maldives', href: '/destinations/maldives' },
-              { label: 'Patagonia', href: '/destinations/megalaya' },
-              { label: 'Amalfi Coast', href: '/destinations/rajesthan' },
-            ].map((link, i) => (
-              <a key={i} href={link.href} className="voyara-footer-col-link">
-                {link.label}
+            {destinations.length > 0 ? (
+              destinations.map((d) => (
+                <a
+                  key={d.id || d.slug}
+                  href={`/destinations/${d.slug}`}
+                  className="voyara-footer-col-link"
+                >
+                  {d.title}
+                </a>
+              ))
+            ) : (
+              <a href="/destinations" className="voyara-footer-col-link">
+                All Destinations
               </a>
-            ))}
+            )}
+            <a
+              href="/destinations"
+              className="voyara-footer-col-link"
+              style={{ opacity: 0.75, fontSize: '12.5px', marginTop: '2px' }}
+            >
+              View All Destinations →
+            </a>
           </div>
 
           {/* Company */}

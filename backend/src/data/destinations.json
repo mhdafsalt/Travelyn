@@ -1,756 +1,18 @@
 [
   {
-    "id": "dest-swiss",
-    "slug": "swiss-alps",
-    "title": "Switzerland",
-    "country": "Switzerland",
-    "region": "Europe",
-    "startingPoint": "Zurich, Switzerland",
-    "endingPoint": "Zermatt, Switzerland",
-    "tagline": "A world of alpine beauty, charming villages, and breathtaking mountain views.",
-    "description": "A world of alpine beauty, charming villages, and breathtaking mountain views. Ride the legendary Glacier Express, hike beneath the iconic Matterhorn, and savor artisanal fondue by a crackling fireplace.",
-    "price": 155000,
-    "currency": "INR",
-    "durationDays": 8,
-    "rating": 4.9,
-    "reviewCount": 462,
-    "season": "June – September · Dec – Mar",
-    "groupSize": "2 – 8 guests",
-    "category": [
-      "trending",
-      "nature",
-      "luxury",
-      "wellness"
-    ],
-    "imageUrl": "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=80",
-      "https://framerusercontent.com/images/bOSiwPWm9Ldy6gOvZQC0GVAJDV8.jpg"
-    ],
-    "highlights": [
-      "Glacier Express Excellence Class journey across 291 bridges",
-      "Private chalet stay in car-free Zermatt facing the Matterhorn",
-      "Alpine fondue and raclette feast prepared by a Swiss master cheesemaker",
-      "Cable car ascent to Klein Matterhorn at 3,883 meters"
-    ],
-    "itinerary": [
-      {
-        "day": 1,
-        "title": "Zurich to Lucerne & Lake Steamer",
-        "description": "Scenic rail to Lucerne, vintage paddle-steamer crossing and ascent on the world's steepest cogwheel railway."
-      },
-      {
-        "day": 2,
-        "title": "Interlaken & Lauterbrunnen Waterfalls",
-        "description": "Walk among the 72 cascading waterfalls of the valley that inspired Tolkien's Rivendell."
-      },
-      {
-        "day": 3,
-        "title": "Jungfraujoch - Top of Europe",
-        "description": "Ascend to the highest railway station in Europe; walk inside the carved glacial Ice Palace."
-      },
-      {
-        "day": 4,
-        "title": "Glacier Express Excellence Class",
-        "description": "Indulge in 5-course gourmet dining with panoramic windows winding through the Swiss Grand Canyon."
-      },
-      {
-        "day": 5,
-        "title": "Arrival in Zermatt",
-        "description": "Arrive in car-free Zermatt; check into your private wooden chalet facing the iconic pyramid."
-      },
-      {
-        "day": 6,
-        "title": "Gornergrat Bahn & Alpine Reflection Lakes",
-        "description": "Ride the historic open-air cogwheel train, capturing the Matterhorn reflected in Riffelsee."
-      },
-      {
-        "day": 7,
-        "title": "Mountain Thermal Spa & Fondue Night",
-        "description": "Soak in heated outdoor cedar pools surrounded by snow, followed by an intimate fireside fondue dinner."
-      },
-      {
-        "day": 8,
-        "title": "Departure via Geneva or Zurich",
-        "description": "First class rail departure with panoramic valley views."
-      }
-    ],
-    "included": [
-      "Handpicked 5-star mountain hotels and historic Swiss chalets",
-      "Glacier Express Excellence Class reserved seating & dining",
-      "Swiss First Class Rail Pass covering all trains, boats and mountain lines",
-      "Daily gourmet breakfasts and curated regional dinners",
-      "Luggage door-to-door forwarding service"
-    ],
-    "featured": true
-  },
-  {
-    "id": "dest-2",
-    "slug": "kyoto",
-    "title": "Kyoto",
-    "country": "Japan",
-    "region": "Asia",
-    "startingPoint": "Kyoto, Japan",
-    "endingPoint": "Kyoto, Japan",
-    "tagline": "Discover ancient temples, peaceful gardens, and timeless Japanese traditions.",
-    "description": "Discover ancient temples, peaceful gardens, and timeless Japanese traditions. Experience traditional tea ceremonies with tea masters, private zen meditation at dawn, and kaiseki gastronomy in historic Gion ryokans.",
-    "price": 125000,
-    "currency": "INR",
-    "durationDays": 9,
-    "rating": 4.9,
-    "reviewCount": 384,
-    "season": "March – May · Oct – Nov",
-    "groupSize": "2 – 6 guests",
-    "category": [
-      "culture",
-      "trending",
-      "luxury",
-      "wellness"
-    ],
-    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80",
-      "https://framerusercontent.com/images/1i1SYez5flXAysor3K8yCCzcuo0.jpg",
-      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=80"
-    ],
-    "highlights": [
-      "Private sunrise meditation with a Zen monk in Daitoku-ji",
-      "Exclusive tea ceremony conducted by a 15th-generation master",
-      "Evening culinary walk through the preserved alleys of Gion",
-      "Strolls through Arashiyama bamboo forest before the crowds"
-    ],
-    "itinerary": [
-      {
-        "day": 1,
-        "title": "Arrival in Kyoto & Ryokan Check-in",
-        "description": "Settle into a centuries-old wooden ryokan with private cedar ofuro bath and Japanese garden."
-      },
-      {
-        "day": 2,
-        "title": "Higashiyama Heritage & Tea Ceremony",
-        "description": "Walk stone-paved lanes of Sannenzaka and Ninenzaka before an authentic private chado tea ceremony."
-      },
-      {
-        "day": 3,
-        "title": "Zen Sanctuaries & Stone Gardens",
-        "description": "Contemplate Ryoan-ji's rock garden and Kinkaku-ji's shimmering Golden Pavilion."
-      },
-      {
-        "day": 4,
-        "title": "Arashiyama Groves & Tenryu-ji",
-        "description": "Early morning in the bamboo grove, followed by a vegetarian shojin ryori temple feast."
-      },
-      {
-        "day": 5,
-        "title": "Fushimi Inari Torii Dawn Pilgrimage",
-        "description": "Ascend thousands of vermilion torii gates at twilight, admiring Kyoto waking below."
-      },
-      {
-        "day": 6,
-        "title": "Uji Green Tea & Byodo-in Temple",
-        "description": "Excursion to Uji for matcha grinding, tea picking and visiting the Phoenix Hall."
-      },
-      {
-        "day": 7,
-        "title": "Artisans & Kintsugi Masterclass",
-        "description": "Hands-on experience with master craftsmen practicing lacquerware and pottery restoration."
-      },
-      {
-        "day": 8,
-        "title": "Multi-Course Kaiseki in Gion",
-        "description": "A magnificent multi-course seasonal Kaiseki dinner accompanied by geisha traditional dance."
-      },
-      {
-        "day": 9,
-        "title": "Departure & Shinkansen Transfer",
-        "description": "Final morning matcha and peaceful garden moments before your journey onward."
-      }
-    ],
-    "included": [
-      "Historic luxury Ryokan stay with private onsen",
-      "Daily traditional breakfast and multi-course Kaiseki dinners",
-      "Private English-speaking cultural docents",
-      "Bullet train (Shinkansen) first-class arrangements",
-      "Exclusive access passes to private temple grounds"
-    ],
-    "featured": true
-  },
-  {
-    "id": "dest-bali",
-    "slug": "bali",
-    "title": "Bali",
-    "country": "Indonesia",
-    "region": "Southeast Asia",
-    "startingPoint": "Ubud, Bali",
-    "endingPoint": "Uluwatu, Bali",
-    "tagline": "Escape to tropical beaches, lush landscapes, and unforgettable island experiences.",
-    "description": "Escape to tropical beaches, lush landscapes, and unforgettable island experiences. Immerse yourself in Ubud's emerald rice terraces, cliffside Uluwatu ocean villas, and tranquil spiritual ceremonies.",
-    "price": 79000,
-    "currency": "INR",
-    "durationDays": 7,
-    "rating": 4.9,
-    "reviewCount": 412,
-    "season": "April – October",
-    "groupSize": "2 – 6 guests",
-    "category": [
-      "trending",
-      "islands",
-      "wellness",
-      "nature",
-      "romantic",
-      "luxury"
-    ],
-    "imageUrl": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1559628376-f3fe5f782a2e?auto=format&fit=crop&w=1200&q=80"
-    ],
-    "highlights": [
-      "Private sunrise yoga and meditation overlooking Ubud's sacred river valley",
-      "Traditional Balinese blessing ceremony at Tirta Empul water temple",
-      "Helicopter flight over Mount Batur volcanic caldera and Lake Batur",
-      "Sunset dinner at an exclusive clifftop infinity lounge in Uluwatu"
-    ],
-    "itinerary": [
-      {
-        "day": 1,
-        "title": "Arrival in Denpasar & Ubud Rainforest Haven",
-        "description": "Chauffeured arrival to your private luxury bamboo villa nestled in the lush Ubud canopy."
-      },
-      {
-        "day": 2,
-        "title": "Tegallalang Rice Terraces & Coffee Plantation",
-        "description": "Early morning private guided walk through stepped jade terraces followed by rare Luwak coffee tasting."
-      },
-      {
-        "day": 3,
-        "title": "Sacred Water Cleansing & Artisan Villages",
-        "description": "Participate in an authentic Melukat purification ritual and visit master silver carvers in Celuk."
-      },
-      {
-        "day": 4,
-        "title": "Mount Batur Dawn Trek & Hot Springs",
-        "description": "Ascend the volcanic summit for breakfast above the clouds, then soak in mineral thermal waters."
-      },
-      {
-        "day": 5,
-        "title": "Transfer to Uluwatu & Ocean Clifftop Villa",
-        "description": "Scenic transfer south to your private clifftop sanctuary suspended high above the Indian Ocean."
-      },
-      {
-        "day": 6,
-        "title": "Nusa Penida Yacht Charter & Manta Rays",
-        "description": "Private catamaran charter to crystal lagoons and swim alongside gentle giant manta rays."
-      },
-      {
-        "day": 7,
-        "title": "Farewell Bali Sunset Blessing",
-        "description": "Final oceanside massage and sunset champagne before private transfer to the airport."
-      }
-    ],
-    "included": [
-      "5-star private pool villa accommodations in Ubud & Uluwatu",
-      "Dedicated Balinese private chauffeur and certified English docent",
-      "All daily gourmet breakfasts and 3 bespoke cultural dining feasts",
-      "Private yacht day excursion to Nusa Penida with snorkeling gear",
-      "24/7 dedicated Travelyn concierge"
-    ],
-    "featured": true
-  },
-  {
-    "id": "dest-1",
-    "slug": "santorini",
-    "title": "Santorini",
-    "country": "Greece",
-    "region": "Europe",
-    "startingPoint": "Oia, Santorini",
-    "endingPoint": "Ammoudi, Santorini",
-    "tagline": "Whitewashed cliffs above the Aegean",
-    "description": "Perched on the rim of an ancient volcanic caldera, Santorini pairs timeless Cycladic architecture with sweeping Aegean panoramas. Indulge in sunset sails around volcanic isles, private wine tastings in sun-drenched vineyards, and secluded cave suites in Oia.",
-    "price": 285000,
-    "currency": "INR",
-    "durationDays": 7,
-    "rating": 4.9,
-    "reviewCount": 428,
-    "season": "May – October",
-    "groupSize": "2 – 8 guests",
-    "category": [
-      "trending",
-      "islands",
-      "romantic",
-      "luxury"
-    ],
-    "imageUrl": "https://framerusercontent.com/images/rK0AloWCjpfhC4P1yBcOFEdoxVg.jpg",
-    "gallery": [
-      "https://framerusercontent.com/images/rK0AloWCjpfhC4P1yBcOFEdoxVg.jpg",
-      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=80"
-    ],
-    "highlights": [
-      "Private catamaran sunset cruise along the caldera",
-      "Sommelier-guided tasting of indigenous Assyrtiko wines",
-      "Intimate cliffside dining overlooking Oia's caldera",
-      "Exploration of the ancient prehistoric city of Akrotiri"
-    ],
-    "itinerary": [
-      {
-        "day": 1,
-        "title": "Arrival in Oia & Sunset Welcome",
-        "description": "Private transfer to your cliffside cave suite. Enjoy sunset cocktails on your private terrace."
-      },
-      {
-        "day": 2,
-        "title": "Caldera Sailing & Hot Springs",
-        "description": "Charter a private catamaran across the caldera, swim in volcanic springs, and savor fresh grilled seafood."
-      },
-      {
-        "day": 3,
-        "title": "Ancient Akrotiri & Megalochori",
-        "description": "Discover the Bronze Age settlement with an archaeologist, followed by lunch in a quiet traditional village."
-      },
-      {
-        "day": 4,
-        "title": "Volcanic Wine Tasting Trail",
-        "description": "Tour historic vineyards with centuries-old basket vines, tasting rare vintages paired with local cheeses."
-      },
-      {
-        "day": 5,
-        "title": "Fira to Oia Cliff Hike & Spa",
-        "description": "Morning guided cliff walk with breathtaking views, followed by restorative thermal spa treatments."
-      },
-      {
-        "day": 6,
-        "title": "Hidden Beaches & Captain's Dinner",
-        "description": "Visit the red and black sand coves by water taxi, ending with an exclusive farewell feast in Ammoudi Bay."
-      },
-      {
-        "day": 7,
-        "title": "Farewell Aegean",
-        "description": "Breakfast with sunrise views before private transfer to the airport or ferry."
-      }
-    ],
-    "included": [
-      "Luxury cliffside suite accommodation with caldera views",
-      "Daily artisan breakfast and select gourmet dinners",
-      "Private yacht charter with onboard chef",
-      "Private chauffeured transfers throughout the stay",
-      "Dedicated 24/7 Travelyn concierge"
-    ],
-    "featured": true
-  },
-  {
-    "id": "dest-3",
-    "slug": "maldives",
-    "title": "Maldives",
-    "country": "Maldives",
-    "region": "Indian Ocean",
-    "startingPoint": "Malé, Maldives",
-    "endingPoint": "Private Atoll, Maldives",
-    "tagline": "Overwater villas on a turquoise lagoon",
-    "description": "A secluded tropical dream of crystalline atolls, vibrant coral reefs, and barefoot elegance. Wake to gentle waves underneath your overwater villa, swim alongside manta rays, and dine under canopy of southern stars.",
-    "price": 495000,
-    "currency": "INR",
-    "durationDays": 6,
-    "rating": 5,
-    "reviewCount": 512,
-    "season": "November – April",
-    "groupSize": "2 – 4 guests",
-    "category": [
-      "islands",
-      "luxury",
-      "romantic",
-      "wellness"
-    ],
-    "imageUrl": "https://framerusercontent.com/images/mYmxqjoJu3hOllz5QuhpEbhRR4U.jpg",
-    "gallery": [
-      "https://framerusercontent.com/images/mYmxqjoJu3hOllz5QuhpEbhRR4U.jpg",
-      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=1200&q=80"
-    ],
-    "highlights": [
-      "Overwater villa with glass floor and private infinity pool",
-      "Private seaplane transfers over turquoise atolls",
-      "Sunset dolphin safari aboard a wooden handcrafted dhoni",
-      "Snorkeling expedition in a UNESCO Biosphere Reserve"
-    ],
-    "itinerary": [
-      {
-        "day": 1,
-        "title": "Seaplane Arrival over Atolls",
-        "description": "Scenic seaplane flight to your private island resort; welcome massage and sunset champagne."
-      },
-      {
-        "day": 2,
-        "title": "House Reef Exploration & Overwater Dining",
-        "description": "Guided snorkeling among sea turtles and eagle rays; dinner suspended over glowing water."
-      },
-      {
-        "day": 3,
-        "title": "Sandbank Picnic & Desert Island Escape",
-        "description": "Cast away to a pristine sandbar for a gourmet lunch prepared exclusively for two."
-      },
-      {
-        "day": 4,
-        "title": "Ayurvedic Spa & Sunset Dhoni Cruise",
-        "description": "Deeply restorative marine-based spa rituals, followed by sailing with spinner dolphins."
-      },
-      {
-        "day": 5,
-        "title": "Subaquatic Wine Tasting & Stargazing",
-        "description": "Sommelier experience in an underwater cellar surrounded by marine life."
-      },
-      {
-        "day": 6,
-        "title": "Morning Lagoon Swim & Farewell",
-        "description": "Floating breakfast in your private villa pool before your scenic seaplane return."
-      }
-    ],
-    "included": [
-      "Overwater pool villa on an ultra-luxury private island",
-      "All gourmet meals, fine wines and signature cocktails",
-      "Round-trip scenic seaplane transfers",
-      "Daily unlimited non-motorized water sports & reef excursions",
-      "Dedicated personal Thakuru (butler) 24/7"
-    ],
-    "featured": true
-  },
-  {
-    "id": "dest-4",
-    "slug": "patagonia",
-    "title": "Patagonia",
-    "country": "Chile",
-    "region": "South America",
-    "startingPoint": "Punta Arenas, Chile",
-    "endingPoint": "Torres del Paine, Chile",
-    "tagline": "Granite peaks at the end of the world",
-    "description": "Untamed wilderness where glacial blue lakes meet the sky-scraping granite horns of Torres del Paine. Ride with gauchos across boundless steppes, kayak through electric blue icebergs, and sleep in geodesic luxury eco-domes under untarnished constellations.",
-    "price": 520000,
-    "currency": "INR",
-    "durationDays": 10,
-    "rating": 4.8,
-    "reviewCount": 296,
-    "season": "October – April",
-    "groupSize": "2 – 10 guests",
-    "category": [
-      "adventure",
-      "nature",
-      "luxury"
-    ],
-    "imageUrl": "https://framerusercontent.com/images/7EoyIkj4WCYIrr9nOccQVnJMI.jpg",
-    "gallery": [
-      "https://framerusercontent.com/images/7EoyIkj4WCYIrr9nOccQVnJMI.jpg",
-      "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
-    ],
-    "highlights": [
-      "Hike to the base of the iconic Torres del Paine towers",
-      "Ice trekking on Grey Glacier with crampons and ice axes",
-      "Horseback riding across estancias with Chilean gauchos",
-      "Gourmet Patagonian lamb asado roasted beneath open skies"
-    ],
-    "itinerary": [
-      {
-        "day": 1,
-        "title": "Punta Arenas to Puerto Natales",
-        "description": "Scenic overland journey across the Patagonian steppe to the edge of the fjords."
-      },
-      {
-        "day": 2,
-        "title": "Enter Torres del Paine National Park",
-        "description": "Check in to luxury eco-lodge overlooking Lake Pehoe and the Cuernos del Paine."
-      },
-      {
-        "day": 3,
-        "title": "Base of the Towers Trek",
-        "description": "Epic 8-hour guided trek ascending through beech forests to the turquoise tarn."
-      },
-      {
-        "day": 4,
-        "title": "Grey Glacier Boat Safari & Kayak",
-        "description": "Navigate between colossal floating icebergs on a private zodiac."
-      },
-      {
-        "day": 5,
-        "title": "French Valley Hanging Glaciers",
-        "description": "Trek deep into the natural amphitheater watching avalanches rumble safely in the distance."
-      },
-      {
-        "day": 6,
-        "title": "Gaucho Heritage & Estancia Asado",
-        "description": "Ride sturdy criollo horses across golden grasslands, followed by an open-fire feast."
-      },
-      {
-        "day": 7,
-        "title": "Puma Tracking with Wildlife Biologist",
-        "description": "Privileged early-morning safari tracking wild pumas, guanacos, and Andean condors."
-      },
-      {
-        "day": 8,
-        "title": "Lake Sarmiento & Thrombolites",
-        "description": "Walk among rare living calcium formations, admiring the contrast of desert and mountain."
-      },
-      {
-        "day": 9,
-        "title": "Milodon Cave & Twilight Fjord Sailing",
-        "description": "Explore prehistoric cavern discoveries, followed by sunset navigation through the fjords."
-      },
-      {
-        "day": 10,
-        "title": "Journey Home",
-        "description": "Final view of the granite towers before your private vehicle return to Punta Arenas."
-      }
-    ],
-    "included": [
-      "Full board luxury lodge accommodation with panoramic views",
-      "All park permits, specialist gear, and expert mountain guides",
-      "Private 4x4 overland transfers and glacier navigation boats",
-      "All meals, premium Chilean vintages and trail picnics",
-      "Travelyn round-the-clock expedition support"
-    ],
-    "featured": true
-  },
-  {
-    "id": "dest-5",
-    "slug": "marrakech",
-    "title": "Marrakech",
-    "country": "Morocco",
-    "region": "Africa",
-    "startingPoint": "Marrakech, Morocco",
-    "endingPoint": "Atlas Mountains, Morocco",
-    "tagline": "Riads, souks and desert stars",
-    "description": "An intoxicating sensory kaleidoscope of saffron-scented alleyways, intricate zellij tilework, and tranquil courtyard fountains. Journey from the vibrant heart of the Medina to the silence of the Agafay stone desert under a billion stars.",
-    "price": 240000,
-    "currency": "INR",
-    "durationDays": 6,
-    "rating": 4.8,
-    "reviewCount": 310,
-    "season": "March – May · Sept – Nov",
-    "groupSize": "2 – 8 guests",
-    "category": [
-      "culture",
-      "adventure",
-      "romantic"
-    ],
-    "imageUrl": "https://framerusercontent.com/images/G7iXc8Cto5GD6mgIWEhikd3XwnU.jpg",
-    "gallery": [
-      "https://framerusercontent.com/images/G7iXc8Cto5GD6mgIWEhikd3XwnU.jpg",
-      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=80"
-    ],
-    "highlights": [
-      "Exclusive private garden tour of Jardin Majorelle at sunrise",
-      "Luxury desert tent camp with candelit feast in the Agafay Desert",
-      "Masterclass with an elder spice merchant and culinary chef",
-      "Traditional hammam ritual with eucalyptus black soap and argan oil"
-    ],
-    "itinerary": [
-      {
-        "day": 1,
-        "title": "Arrival in the Red City & Medina Welcome",
-        "description": "Check in to a restored 18th-century riad; mint tea and almond pastries in the orange courtyard."
-      },
-      {
-        "day": 2,
-        "title": "Palaces, Tombs & Majorelle Gardens",
-        "description": "Explore Bahia Palace's marquetry ceilings and the Yves Saint Laurent Museum before opening hours."
-      },
-      {
-        "day": 3,
-        "title": "Souk Navigation & Artisan Ateliers",
-        "description": "Curated shopping for woven wool rugs, hand-hammered brass lamps, and leather goods."
-      },
-      {
-        "day": 4,
-        "title": "Atlas Mountains & Agafay Desert",
-        "description": "Drive through Berber mountain villages, arriving at your luxury tented desert outpost for stargazing."
-      },
-      {
-        "day": 5,
-        "title": "Hot Air Balloon Sunrise & Hammam",
-        "description": "Float over desert oases as the sun clears the Atlas peaks; afternoon royal hammam recovery."
-      },
-      {
-        "day": 6,
-        "title": "Farewell Morocco",
-        "description": "Rooftop breakfast overlooking the Koutoubia Mosque before private airport transfer."
-      }
-    ],
-    "included": [
-      "Historic luxury riad and private Agafay tented camp stay",
-      "Daily gourmet Moroccan breakfast and multi-course dinners",
-      "Private licensed city historian and desert logistics team",
-      "Hot air balloon flight with champagne breakfast",
-      "Chauffeured Mercedes V-Class throughout"
-    ],
-    "featured": true
-  },
-  {
-    "id": "dest-7",
-    "slug": "amalfi-coast",
-    "title": "Amalfi Coast",
-    "country": "Italy",
-    "region": "Europe",
-    "startingPoint": "Positano, Italy",
-    "endingPoint": "Capri, Italy",
-    "tagline": "Lemon groves and cliffside villages",
-    "description": "Pastel-hued villas clinging to sheer cliffs plunging into the sparkling Tyrrhenian Sea. Cruise on a private mahogany Riva boat to Capri, walk scented lemon orchards in Ravello, and dine on fresh burrata and handmade scialatielli on seaside terraces.",
-    "price": 350000,
-    "currency": "INR",
-    "durationDays": 7,
-    "rating": 4.9,
-    "reviewCount": 395,
-    "season": "May – September",
-    "groupSize": "2 – 8 guests",
-    "category": [
-      "romantic",
-      "trending",
-      "culture",
-      "luxury"
-    ],
-    "imageUrl": "https://framerusercontent.com/images/tcBXxNt21t4A8rlwMPTMHUZGkq8.jpg",
-    "gallery": [
-      "https://framerusercontent.com/images/tcBXxNt21t4A8rlwMPTMHUZGkq8.jpg",
-      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80"
-    ],
-    "highlights": [
-      "Private vintage Riva speedboat charter around the isle of Capri",
-      "Classical concert in the cliff-hanging gardens of Villa Rufolo, Ravello",
-      "Limoncello-making masterclass in a multi-generational family lemon grove",
-      "Sunset aperitivo overlooking Positano's illuminated hillside"
-    ],
-    "itinerary": [
-      {
-        "day": 1,
-        "title": "Naples to Positano Along the Costiera",
-        "description": "Private Mercedes transfer along the dramatic coastline; evening check-in to your sea-facing terrace room."
-      },
-      {
-        "day": 2,
-        "title": "Private Capri Boat Excursion",
-        "description": "Cruise past the Faraglioni rocks, explore hidden sea grottos and swim in translucent coves."
-      },
-      {
-        "day": 3,
-        "title": "Path of the Gods Hiking",
-        "description": "Walk high above the sea along the Sentiero degli Dei with sweeping coastal panoramas."
-      },
-      {
-        "day": 4,
-        "title": "Ravello Gardens & Classical Evening",
-        "description": "Wander the gardens of Villa Cimbrone and the Infinity Terrace; evening musical performance."
-      },
-      {
-        "day": 5,
-        "title": "Amalfi Town & Ancient Paper Mills",
-        "description": "Explore the medieval Maritime Republic, Byzantine cathedral and lush Ferriere Valley."
-      },
-      {
-        "day": 6,
-        "title": "Lemon Groves & Vineyard Dining",
-        "description": "Tour vertical vineyards climbing terraced limestone cliffs, enjoying wine paired with fresh sea catch."
-      },
-      {
-        "day": 7,
-        "title": "Arrivederci Amalfi",
-        "description": "Breakfast with espresso overlooking the bay before private transfer to Naples."
-      }
-    ],
-    "included": [
-      "Luxury 5-star cliffside hotel with private sea-facing balcony",
-      "Full-day private Riva boat charter with skipper and champagne",
-      "Chauffeured Mercedes transfers along the Amalfi Drive",
-      "Daily breakfast and handpicked Michelin-level dinners",
-      "Travelyn 24/7 dedicated Italian concierge"
-    ],
-    "featured": true
-  },
-  {
-    "id": "dest-8",
-    "slug": "lake-como",
-    "title": "Lake Como",
-    "country": "Italy",
-    "region": "Europe",
-    "startingPoint": "Milan, Italy",
-    "endingPoint": "Bellagio, Lake Como",
-    "tagline": "Villas, gardens and glassy water",
-    "description": "Aristocratic grandeur nestled beneath alpine foothills, where botanical gardens and neo-classical villas embrace tranquil shimmering waters. Navigate wooden water limousines past Bellagio and Varenna, sipping Franciacorta as twilight paints the Grigna mountain range violet.",
-    "price": 315000,
-    "currency": "INR",
-    "durationDays": 5,
-    "rating": 4.8,
-    "reviewCount": 341,
-    "season": "April – October",
-    "groupSize": "2 – 6 guests",
-    "category": [
-      "romantic",
-      "luxury",
-      "nature"
-    ],
-    "imageUrl": "https://framerusercontent.com/images/zDzqHDb5G2YmQjLEVyJfal9brwU.jpg",
-    "gallery": [
-      "https://framerusercontent.com/images/zDzqHDb5G2YmQjLEVyJfal9brwU.jpg",
-      "https://images.unsplash.com/photo-1543429776-2782fc8e1acd?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?auto=format&fit=crop&w=1200&q=80"
-    ],
-    "highlights": [
-      "Private wooden Venetian water taxi cruise across the lake",
-      "Exclusive access to the private loggia of Villa del Balbianello",
-      "Wine tasting of Valtellina Nebbiolos with lakefront sommelier",
-      "Cooking masterclass in a secluded centuries-old olive mill"
-    ],
-    "itinerary": [
-      {
-        "day": 1,
-        "title": "Milan to Tremezzo",
-        "description": "Private chauffeur from Milan Malpensa to your grand lakefront palace hotel; welcome Bellini."
-      },
-      {
-        "day": 2,
-        "title": "Villa Balbianello & Villa Carlotta",
-        "description": "Cruise to the famed villa seen in Star Wars and Casino Royale; tour 20 acres of azalea gardens."
-      },
-      {
-        "day": 3,
-        "title": "Bellagio & Varenna Strolls",
-        "description": "Discover cobbled stairways, artisan silk weavers, and lakeside aperitivi as dusk falls."
-      },
-      {
-        "day": 4,
-        "title": "Private Riva Water Taxi & Seaplane Tour",
-        "description": "Aerial seaplane flight over alpine peaks, followed by swimming in secluded lake bays."
-      },
-      {
-        "day": 5,
-        "title": "Farewell Lake Como",
-        "description": "Sunlit lakeside breakfast before private chauffeur transfer to Milan."
-      }
-    ],
-    "included": [
-      "Grand historic luxury palace hotel accommodation",
-      "Private mahogany water limousine transfers",
-      "Private guide and skip-the-line villa tickets",
-      "Daily breakfast and lakeside dining experiences",
-      "24/7 Travelyn concierge service"
-    ],
-    "featured": true
-  },
-  {
     "id": "dest-kashmir",
     "slug": "kashmir",
     "title": "Kashmir",
     "country": "India",
-    "region": "India",
-    "startingPoint": "Srinagar, Kashmir",
-    "endingPoint": "Gulmarg & Pahalgam, Kashmir",
+    "region": "Asia",
+    "startingPoint": "Srinagar Airport, Kashmir",
+    "endingPoint": "Srinagar Airport, Kashmir",
     "tagline": "Pristine Himalayan valleys, floating shikara sanctuaries, and snow-draped pine ridges.",
     "description": "Experience paradise on earth. Glide silently across Dal Lake in hand-carved cedar shikaras, explore the snowfields of Gulmarg, wander through saffron meadows in Pampore, and unwind beside roaring fireplaces in luxury walnut-wood cedar houseboats.",
-    "price": 95000,
+    "price": 25000,
     "currency": "INR",
     "durationDays": 7,
-    "rating": 4.95,
+    "rating": 4.9,
     "reviewCount": 318,
     "season": "April – October · Dec – Feb",
     "groupSize": "2 – 6 guests",
@@ -766,9 +28,9 @@
       "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
-      "Private hand-carved cedarwood luxury houseboat stay on serene Nigeen Lake",
+      "Private hand-carved cedarwood luxury houseboat stay on serene Dal Lake",
       "Sunset shikara ride across floating lotus gardens and water bazaars",
-      "Gulmarg Gondola Phase II ascent to Apharwat Peak at 4,200m",
+      "Gulmarg Gondola cable car ascent to Apharwat Peak at 4,200m",
       "Private culinary wazwan dining experience with master chefs in Srinagar"
     ],
     "itinerary": [
@@ -779,7 +41,7 @@
       },
       {
         "day": 2,
-        "title": "Mughal Gardens & Old City Machiyas",
+        "title": "Mughal Gardens & Old City Crafts",
         "description": "Explore Nishat and Shalimar gardens and private craft workshops of Pashmina and papier-mâché."
       },
       {
@@ -789,12 +51,12 @@
       },
       {
         "day": 4,
-        "title": "Aru Valley & Shepherd Meadows",
+        "title": "Aru Valley & Alpine Glades",
         "description": "Pony treks through pristine pine forests and glacial streams in Aru."
       },
       {
         "day": 5,
-        "title": "Gulmarg High Altitude Alpine Meadows",
+        "title": "Gulmarg High Altitude Meadows",
         "description": "Transfer to Gulmarg; check in to an alpine luxury resort with panoramic Himalayan views."
       },
       {
@@ -818,19 +80,172 @@
     "featured": true
   },
   {
+    "id": "dest-delhi",
+    "slug": "delhi",
+    "title": "Delhi",
+    "country": "India",
+    "region": "Asia",
+    "startingPoint": "Delhi Airport",
+    "endingPoint": "Old Delhi",
+    "tagline": "Timeless Mughal grandeur, tree-lined colonial boulevards, and vibrant heritage bazaars.",
+    "description": "Immerse yourself in India's historic capital. Discover centuries of architectural wonder from the imposing Red Fort and Humayun's Tomb to the tranquil Lotus Temple and lush Lodi Gardens, paired with private culinary expeditions through Chandni Chowk.",
+    "price": 79000,
+    "currency": "INR",
+    "durationDays": 7,
+    "rating": 4.9,
+    "reviewCount": 420,
+    "season": "October – March",
+    "groupSize": "2 – 6 guests",
+    "category": [
+      "culture",
+      "luxury",
+      "trending"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1592635196078-9fc3ed5c98d7?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "highlights": [
+      "Private architectural docent walk through Humayun's Tomb & Qutub Minar",
+      "Exclusive cycle rickshaw spice and food safari in Chandni Chowk",
+      "Stays at iconic luxury heritage hotels like The Imperial",
+      "Private shopping access to master textile weavers and jewelers"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Arrival in New Delhi",
+        "description": "Private airport chauffeur transfer to your heritage suite; evening high tea."
+      },
+      {
+        "day": 2,
+        "title": "Old Delhi & Mughal Landmarks",
+        "description": "Private guided tour of Jama Masjid, Red Fort, and rickshaw spice trail."
+      },
+      {
+        "day": 3,
+        "title": "Humayun's Tomb & Sunder Nursery",
+        "description": "Discover the precursor to the Taj Mahal and restored Persian gardens."
+      },
+      {
+        "day": 4,
+        "title": "Lutyens' Delhi & Modern Art",
+        "description": "Drive down Rashtrapati Bhavan, India Gate, and the National Gallery of Modern Art."
+      },
+      {
+        "day": 5,
+        "title": "Qutub Minar & Mehrauli Heritage Park",
+        "description": "Explore 12th-century victory towers and ancient Sufi shrines."
+      },
+      {
+        "day": 6,
+        "title": "Culinary & Textile Safari",
+        "description": "Exclusive tasting menu with celebrity chefs and private boutique atelier visits."
+      },
+      {
+        "day": 7,
+        "title": "Departure",
+        "description": "Private chauffeur transfer to Indira Gandhi International Airport."
+      }
+    ],
+    "included": [
+      "5-star luxury heritage hotel accommodation",
+      "Private air-conditioned luxury sedan & personal chauffeur",
+      "Curated private heritage docents & all entry tickets",
+      "Daily gourmet breakfasts and curated specialty dinners",
+      "24/7 dedicated Travelyn concierge support"
+    ],
+    "featured": true
+  },
+  {
+    "id": "dest-mumbai",
+    "slug": "mumbai",
+    "title": "Mumbai",
+    "country": "India",
+    "region": "Asia",
+    "startingPoint": "Gateway of India",
+    "endingPoint": "Mumbai Airport",
+    "tagline": "Arabian Sea sunsets, colonial heritage architecture, and vibrant coastal culture.",
+    "description": "Immerse yourself in the City of Dreams with unparalleled luxury. Sail on a private catamaran as the sun sets over the Arabian Sea, explore the grand Victorian Gothic and Art Deco heritage of South Mumbai with a private architectural historian, and enjoy table reservations at award-winning oceanfront dining rooms.",
+    "price": 35000,
+    "currency": "INR",
+    "durationDays": 6,
+    "rating": 4.8,
+    "reviewCount": 395,
+    "season": "October – March",
+    "groupSize": "2 – 6 guests",
+    "category": [
+      "culture",
+      "luxury",
+      "trending"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1566552881560-0be862a7c445?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "highlights": [
+      "Private yacht charter at sunset past the iconic Gateway of India",
+      "Curated heritage walk through Kala Ghoda and the UNESCO Victorian & Art Deco precinct",
+      "Exclusive access and private table at iconic oceanfront heritage dining spots",
+      "Private modern art gallery and boutique fashion studio tour in Bandra"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Arrival & Gateway Sunset Sail",
+        "description": "Private airport transfer to a luxury sea-facing hotel; late afternoon private yacht cruise on the Arabian Sea."
+      },
+      {
+        "day": 2,
+        "title": "Victorian Gothic & Art Deco Heritage",
+        "description": "Private docent walking tour through CST, Oval Maidan, and the heritage lanes of Fort."
+      },
+      {
+        "day": 3,
+        "title": "Art, Culinary & Bandra Lanes",
+        "description": "Explore Kala Ghoda art galleries followed by a coastal drive over the Bandra-Worli Sea Link to heritage Portuguese bungalows."
+      },
+      {
+        "day": 4,
+        "title": "Elephanta Caves & Harbour Cruise",
+        "description": "Private speedboat to UNESCO rock-cut cave temples on Elephanta Island."
+      },
+      {
+        "day": 5,
+        "title": "Coastal Gastronomy & Seaside Cocktails",
+        "description": "Curated seafood culinary tasting with master local chefs and rooftop sunset."
+      },
+      {
+        "day": 6,
+        "title": "Marine Drive Promenade & Departure",
+        "description": "Morning breakfast overlooking the Queen's Necklace; luxury airport chauffeur transfer."
+      }
+    ],
+    "included": [
+      "Iconic 5-star ocean-facing luxury hotel accommodation",
+      "Private luxury chauffeur transfers in premium sedans",
+      "Private catamaran yacht charter on the Arabian Sea",
+      "Private architectural and cultural docent guides",
+      "24/7 dedicated Travelyn concierge support"
+    ],
+    "featured": true
+  },
+  {
     "id": "dest-meghalaya",
     "slug": "meghalaya",
     "title": "Meghalaya",
     "country": "India",
-    "region": "India",
-    "startingPoint": "Guwahati, Assam",
+    "region": "Asia",
+    "startingPoint": "Guwahati Airport, Assam",
     "endingPoint": "Cherrapunji & Dawki, Meghalaya",
     "tagline": "The abode of clouds, sacred rainforests, and centuries-old living root bridges.",
     "description": "Venture deep into the sacred rainforests of the Khasi Hills. Walk across bio-engineered living root bridges grown over centuries, swim in the glass-clear waters of the Umngot River in Dawki, and witness thunderous waterfalls plunging into mist-filled gorges in Cherrapunji.",
-    "price": 85000,
+    "price": 45000,
     "currency": "INR",
     "durationDays": 6,
-    "rating": 4.92,
+    "rating": 4.9,
     "reviewCount": 240,
     "season": "October – May",
     "groupSize": "2 – 8 guests",
@@ -891,65 +306,146 @@
     "featured": true
   },
   {
-    "id": "dest-mumbai",
-    "slug": "mumbai",
-    "title": "Mumbai",
-    "country": "India",
-    "region": "India",
-    "startingPoint": "Chhatrapati Shivaji Terminal, Mumbai",
-    "endingPoint": "Marine Drive & Colaba, Mumbai",
-    "tagline": "Arabian Sea sunsets, colonial heritage architecture, and vibrant coastal culture.",
-    "description": "Immerse yourself in the City of Dreams with unparalleled luxury. Sail on a private catamaran as the sun sets over the Arabian Sea, explore the grand Victorian Gothic and Art Deco heritage of South Mumbai with a private architectural historian, and enjoy table reservations at award-winning oceanfront dining rooms.",
-    "price": 75000,
+    "id": "dest-maldives",
+    "slug": "maldives",
+    "title": "Maldives",
+    "country": "Maldives",
+    "region": "Indian Ocean",
+    "startingPoint": "Malé, Maldives",
+    "endingPoint": "Private Atoll, Maldives",
+    "tagline": "Ultra-luxury overwater villas, bioluminescent lagoons, and pristine coral atolls.",
+    "description": "Escape to an intimate sanctuary of overwater villas perched above shimmering turquoise lagoons. Cruise on private catamarans across crystal atolls, snorkel alongside manta rays, and enjoy sunset dining on secluded sandbanks.",
+    "price": 495000,
     "currency": "INR",
-    "durationDays": 4,
-    "rating": 4.88,
-    "reviewCount": 395,
+    "durationDays": 6,
+    "rating": 5,
+    "reviewCount": 520,
+    "season": "November – April",
+    "groupSize": "2 – 4 guests",
+    "category": [
+      "islands",
+      "luxury",
+      "romantic",
+      "wellness"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "highlights": [
+      "Overwater pool villa on an exclusive private atoll",
+      "Round-trip seaplane flight with panoramic aerial views",
+      "Private sunset sandbank dinner with private sommelier",
+      "Night snorkel with bioluminescent plankton and manta rays"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Arrival in Malé & Seaplane Flight",
+        "description": "Scenic flight over sapphire coral rings directly to your resort's overwater arrival jetty."
+      },
+      {
+        "day": 2,
+        "title": "Overwater Living & Lagoon Snorkeling",
+        "description": "Direct ocean ladder access to protected house reefs filled with sea turtles."
+      },
+      {
+        "day": 3,
+        "title": "Private Sandbank Picnic & Spa",
+        "description": "Midday boat transfer to an uninhabited sandbar followed by holistic spa treatments."
+      },
+      {
+        "day": 4,
+        "title": "Catamaran Sunset Cruise & Dolphin Watching",
+        "description": "Champagne cruise watching spinner dolphins play in the golden hour wake."
+      },
+      {
+        "day": 5,
+        "title": "Bioluminescent Night Dive",
+        "description": "Guided evening snorkeling under illuminated starry skies."
+      },
+      {
+        "day": 6,
+        "title": "Seaplane Transfer to Malé & Departure",
+        "description": "Morning villa breakfast before aerial seaplane transfer to Malé International Airport."
+      }
+    ],
+    "included": [
+      "Overwater pool villa accommodation",
+      "Round-trip seaplane transfers from Malé",
+      "All-inclusive gourmet dining & premium selections",
+      "Private marine biologist excursion",
+      "24/7 dedicated island butler & Travelyn concierge"
+    ],
+    "featured": true
+  },
+  {
+    "id": "dest-rajasthan",
+    "slug": "rajasthan",
+    "title": "Rajasthan",
+    "country": "India",
+    "region": "Asia",
+    "startingPoint": "Jaipur Airport",
+    "endingPoint": "Jaipur Airport",
+    "tagline": "Royal palaces of Maharajas, golden desert dunes, and timeless Mewar heritage.",
+    "description": "Experience the majestic land of kings. Stay in opulent royal palaces, witness the sunset over the golden sand dunes of Thar, explore the pink sandstone facades of Jaipur and the romantic lake palaces of Udaipur with private royal historians.",
+    "price": 12500,
+    "currency": "INR",
+    "durationDays": 5,
+    "rating": 4.9,
+    "reviewCount": 380,
     "season": "October – March",
     "groupSize": "2 – 6 guests",
     "category": [
       "culture",
       "luxury",
-      "trending"
+      "romantic"
     ],
-    "imageUrl": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    "imageUrl": "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
-      "Private yacht charter at sunset past the Gateway of India",
-      "Curated heritage walk through Kala Ghoda and the UNESCO Victorian & Art Deco precinct",
-      "Exclusive access and private table at iconic oceanfront heritage dining spots",
-      "Private modern art gallery and boutique fashion studio tour in Bandra"
+      "Stay inside historic converted royal palaces",
+      "Private sunrise access to Amber Fort & City Palace",
+      "Camel safari & luxury tented glamping in Sam Sand Dunes",
+      "Private Mewari royal dining experience with classical musicians"
     ],
     "itinerary": [
       {
         "day": 1,
-        "title": "Arrival & Gateway Sunset Sail",
-        "description": "Private airport transfer to a luxury sea-facing hotel; late afternoon private yacht cruise on the Arabian Sea."
+        "title": "Arrival in Pink City Jaipur",
+        "description": "Private airport chauffeur transfer to a royal heritage palace; evening stroll through Johari Bazaar."
       },
       {
         "day": 2,
-        "title": "Victorian Gothic & Art Deco Heritage",
-        "description": "Private docent walking tour through CST, Oval Maidan, and the heritage lanes of Fort."
+        "title": "Amber Fort & Hawa Mahal",
+        "description": "Morning ascent to Amber Fort with private royal historian; photo stop at the Palace of Winds."
       },
       {
         "day": 3,
-        "title": "Art, Culinary & Bandra Lanes",
-        "description": "Explore Kala Ghoda art galleries followed by a coastal drive over the Bandra-Worli Sea Link to heritage Portuguese bungalows."
+        "title": "Jodhpur Blue City & Mehrangarh Fort",
+        "description": "Scenic drive to Jodhpur; explore the towering cliffside fortress and Jaswant Thada."
       },
       {
         "day": 4,
-        "title": "Marine Drive Promenade & Departure",
-        "description": "Morning breakfast overlooking the Queen's Necklace; luxury airport chauffeur transfer."
+        "title": "Thar Desert Sunset & Royal Camp",
+        "description": "Private camel safari through desert dunes; night under desert stars with folk music."
+      },
+      {
+        "day": 5,
+        "title": "Royal Farewell & Departure",
+        "description": "Palace brunch and private chauffeur transfer to Jaipur Airport."
       }
     ],
     "included": [
-      "Iconic 5-star ocean-facing luxury hotel accommodation",
-      "Private luxury chauffeur transfers in premium sedans",
-      "Private catamaran yacht charter on the Arabian Sea",
-      "Private architectural and cultural docent guides",
-      "24/7 dedicated Travelyn concierge support"
+      "Heritage palace hotel accommodation",
+      "Private luxury chauffeur in air-conditioned SUV",
+      "Royal historian & local expert guides",
+      "All monument entry passes & cultural events",
+      "24/7 Travelyn concierge"
     ],
     "featured": true
   }

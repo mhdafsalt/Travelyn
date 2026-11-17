@@ -22,9 +22,25 @@ export default function HomePage() {
   const [selectedBookingDest, setSelectedBookingDest] = useState(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
-  // Sync with dynamic store on client
+  // Sync with dynamic store on client and listen for real-time updates
   useEffect(() => {
-    setDestinations(getStoredDestinations());
+    const refresh = () => {
+      try {
+        const stored = getStoredDestinations();
+        if (Array.isArray(stored) && stored.length > 0) {
+          setDestinations(stored);
+        }
+      } catch (err) {}
+    };
+
+    refresh();
+    window.addEventListener('travelyn_destinations_updated', refresh);
+    window.addEventListener('storage', refresh);
+
+    return () => {
+      window.removeEventListener('travelyn_destinations_updated', refresh);
+      window.removeEventListener('storage', refresh);
+    };
   }, []);
 
   // Filter destinations based on category and search
