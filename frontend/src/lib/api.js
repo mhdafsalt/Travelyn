@@ -33,15 +33,22 @@ export async function apiFetch(endpoint, options = {}) {
     'http://localhost:5001/api'
   ]));
 
+  let lastResponse = null;
+
   for (const baseUrl of candidates) {
     try {
       const res = await fetch(`${baseUrl}${endpoint}`, options);
-      if (res.ok) return res;
+      // If server responded with OK or a business logic client error (400, 401, 403, 409, 422),
+      // the endpoint definitely reached the live API server.
+      if (res.ok || [400, 401, 403, 409, 422].includes(res.status)) {
+        return res;
+      }
+      lastResponse = res;
     } catch (err) {
-      // Try next candidate
+      // Network/CORS failure on this candidate, try next
     }
   }
-  return null;
+  return lastResponse;
 }
 
 /**
@@ -275,15 +282,17 @@ export async function loginApi({ email, password, rememberMe = true }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password, rememberMe })
     });
-    if (res && res.ok) {
-      const data = await res.json();
-      if (data.success && data.user) {
-        saveStoredUser(data.user);
+    if (res) {
+      const data = await res.json().catch(() => null);
+      if (data) {
+        if (data.success && data.user) {
+          saveStoredUser(data.user);
+        }
         return data;
       }
     }
   } catch (e) {
-    // backend unavailable, fallback will handle
+    // backend network unavailable
   }
   return null;
 }
@@ -298,15 +307,17 @@ export async function registerApi({ name, email, password }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password })
     });
-    if (res && res.ok) {
-      const data = await res.json();
-      if (data.success && data.user) {
-        saveStoredUser(data.user);
+    if (res) {
+      const data = await res.json().catch(() => null);
+      if (data) {
+        if (data.success && data.user) {
+          saveStoredUser(data.user);
+        }
         return data;
       }
     }
   } catch (e) {
-    // backend unavailable, fallback will handle
+    // backend network unavailable
   }
   return null;
 }

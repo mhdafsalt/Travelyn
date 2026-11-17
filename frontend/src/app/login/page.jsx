@@ -92,19 +92,25 @@ export default function LoginPage() {
 
     try {
       const apiRes = await loginApi({ email, password, rememberMe });
-      if (apiRes && apiRes.success) {
-        setSuccess(`Welcome back, ${apiRes.user.name}. Redirecting...`);
-        setTimeout(() => {
-          if (apiRes.user.role === 'admin') {
-            router.push('/admin');
-          } else {
-            router.push('/');
-          }
-        }, 800);
-        return;
+      if (apiRes) {
+        if (apiRes.success && apiRes.user) {
+          setSuccess(`Welcome back, ${apiRes.user.name}. Redirecting...`);
+          setTimeout(() => {
+            if (apiRes.user.role === 'admin') {
+              router.push('/admin');
+            } else {
+              router.push('/');
+            }
+          }, 800);
+          return;
+        } else {
+          setError(apiRes.error || 'Invalid credentials. Please verify your email and password.');
+          setLoading(false);
+          return;
+        }
       }
     } catch {
-      // Proceed to fallback
+      // Offline fallback
     }
 
     const result = loginUser({ email, password, rememberMe });

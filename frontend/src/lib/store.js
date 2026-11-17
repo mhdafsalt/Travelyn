@@ -710,20 +710,15 @@ export function loginUser({ email, password, rememberMe = true }) {
       matched = DEMO_USERS[1];
     } else if (trimmedEmail === 'traveller@travelyn.com') {
       matched = DEMO_USERS[0];
-    } else {
-      // Auto-provision or allow guest traveller sign in if password is provided
-      matched = {
-        id: `user-${Date.now()}`,
-        name: trimmedEmail.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-        email: trimmedEmail,
-        password: password,
-        role: trimmedEmail.includes('admin') ? 'admin' : 'traveller',
-        avatar: `https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=400&q=80`,
-        memberSince: new Date().getFullYear().toString(),
-        tier: 'Voyager Member'
-      };
-      setLocalItem(USERS_LIST_KEY, [...users, matched]);
     }
+  }
+
+  if (!matched) {
+    return { success: false, error: 'No account found with this email. Please check your email or join Travelyn.' };
+  }
+
+  if (matched.password !== password) {
+    return { success: false, error: 'Invalid password. Please verify your credentials.' };
   }
 
   // Create session user object (omits password)

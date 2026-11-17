@@ -129,15 +129,21 @@ export default function SignUpPage() {
         email: email,
         password: password
       });
-      if (apiRes && apiRes.success) {
-        setSuccess(`Welcome to Travelyn, ${apiRes.user.name}! Preparing your bespoke space...`);
-        setTimeout(() => {
-          router.push('/');
-        }, 900);
-        return;
+      if (apiRes) {
+        if (apiRes.success && apiRes.user) {
+          setSuccess(`Welcome to Travelyn, ${apiRes.user.name}! Preparing your bespoke space...`);
+          setTimeout(() => {
+            router.push('/');
+          }, 900);
+          return;
+        } else {
+          setError(apiRes.error || 'Registration failed. Please check your details.');
+          setLoading(false);
+          return;
+        }
       }
     } catch {
-      // Proceed to fallback
+      // Offline fallback
     }
 
     const result = registerUser({
