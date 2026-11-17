@@ -16,18 +16,82 @@ const DESTINATION_KNOWLEDGE = {
       'Heritage walnut woodcarving and Pashmina weaving studio masterclass in Old Srinagar',
       'High-altitude alpine meadow picnic overlooking snow-clad Pir Panjal peaks'
     ],
+    places: [
+      {
+        name: 'Dal Lake & Nigeen Lake',
+        type: 'Sacred Waterways',
+        icon: '🛶',
+        description: 'Silent dawn shikara glides through floating flower and vegetable bazaars, lotus water canals, and quiet cedarwood houseboats.'
+      },
+      {
+        name: 'Gulmarg & Apharwat Peak',
+        type: 'Alpine Wilderness',
+        icon: '🏔️',
+        description: 'World-famous Gulmarg Gondola ascent to 4,200m powdery snowfields, pine forest nature trails, and panoramic Himalayan vistas.'
+      },
+      {
+        name: 'Pahalgam & Betaab Valley',
+        type: 'Glacial River Valley',
+        icon: '🌲',
+        description: 'Rushing turquoise Lidder River trails, pristine pine-wood glens, and pastoral Himalayan meadows under snow peaks.'
+      },
+      {
+        name: 'Mughal Gardens (Nishat & Shalimar Bagh)',
+        type: 'Historic Royal Terraces',
+        icon: '🌸',
+        description: 'Centuries-old terraced Persian water cascades, stone fountains, and giant Chinar trees planted by Emperor Jahangir.'
+      },
+      {
+        name: 'Old Srinagar & Shah-e-Hamdan',
+        type: 'Cultural Heritage Quarter',
+        icon: '🏛️',
+        description: 'Intricate 14th-century carved walnut architecture, aromatic saffron lanes, copper craftsmen, and Pashmina handlooms.'
+      }
+    ],
+    gastronomy: [
+      {
+        name: 'The Royal 36-Course Wazwan Banquet',
+        type: 'Iconic Feast',
+        highlight: 'Slow-cooked over wood fires',
+        description: 'The pinnacle of Kashmiri culinary artistry: Rogan Josh, yogurt-simmered Gushtaba, tender Rista, and caramelized Tabak Maaz ribs.'
+      },
+      {
+        name: 'Saffron Kashmiri Kahwa',
+        type: 'Signature Warm Beverage',
+        highlight: 'Pure Pampore Saffron',
+        description: 'Steaming green tea brewed in brass samovars with pure saffron strands, green cardamom, cinnamon, and slivered roasted almonds.'
+      },
+      {
+        name: 'Nadru Yakhni & Kashmiri Dum Aloo',
+        type: 'Valley Vegetarian Delicacy',
+        highlight: 'Lotus Root & Fennel',
+        description: 'Crisp lotus root stems from Dal Lake simmered in velvety spiced yogurt gravy, served with slow-cooked spiced baby potatoes.'
+      },
+      {
+        name: 'Morning Breads (Sheermal & Bakarkhani)',
+        type: 'Traditional Bakery & Tea',
+        highlight: 'Salted Pink Noon Chai',
+        description: 'Freshly baked saffron-brushed puff pastry and flaky sesame breads baked in clay tandoors, paired with traditional pink salted tea.'
+      }
+    ],
     staySuggestions: [
       {
         name: 'The Khyber Himalayan Resort & Spa',
-        type: 'Alpine Forest Sanctuary (Gulmarg)',
-        features: 'Heated indoor swimming pool overlooking snowy pine canopies, L’Occitane spa',
+        type: '5-Star Alpine Sanctuary (Gulmarg)',
+        features: 'Heated indoor glass pool overlooking snowy pine canopies, luxury L’Occitane spa, and direct ski access',
         image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80'
       },
       {
-        name: 'Heritage Cedar Houseboat on Nigeen Lake',
-        type: 'Private Floating Residence',
-        features: 'Hand-carved walnut interiors, private shikara boatman, traditional wazwan dining on the deck',
+        name: 'Sukoon Luxury Cedar Houseboat',
+        type: 'Eco-Heritage Floating Residence (Nigeen Lake)',
+        features: 'Hand-carved walnut wood interiors, private shikara boatman, and starlit rooftop sundeck dining',
         image: 'https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        name: 'The Lalit Grand Palace Srinagar',
+        type: 'Royal Heritage Palace (Gupkar Road)',
+        features: 'Former residence of the Maharaja of Jammu & Kashmir, set in rolling Chinar orchards overlooking Dal Lake',
+        image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80'
       }
     ],
     dailyThemes: [
@@ -81,18 +145,82 @@ const DESTINATION_KNOWLEDGE = {
       'Artisanal block printing and indigo dyeing workshop with 6th-generation royal craftsmen',
       'Private candlelit dinner in a mirror-worked palace courtyard with classical sitar'
     ],
+    places: [
+      {
+        name: 'Lake Pichola & City Palace (Udaipur)',
+        type: 'Royal Waterfront',
+        icon: '🏰',
+        description: 'Shimmering lake reflecting centuries of Mewar royal architecture, jharokha balconies, and the island water palace of Jag Mandir.'
+      },
+      {
+        name: 'Amber Fort & Hawa Mahal (Jaipur)',
+        type: 'Heritage Fortress',
+        icon: '👑',
+        description: 'Magnificent honey-hued fort atop the Aravalli hills with mirrored Sheesh Mahal, paired with the iconic Palace of Winds.'
+      },
+      {
+        name: 'Mehrangarh Fort & Blue City (Jodhpur)',
+        type: 'Cliffside Fortress',
+        icon: '🛡️',
+        description: 'Colossal fortress towering 400 feet above the ocean of indigo-blue homes, housing royal palanquins and weapons.'
+      },
+      {
+        name: 'Sam Sand Dunes (Jaisalmer)',
+        type: 'Thar Desert Encampment',
+        icon: '🐪',
+        description: 'Untouched sweeping golden desert dunes, tranquil camel rides, and fireside folk storytelling under celestial desert skies.'
+      },
+      {
+        name: 'Pushkar Sacred Lake & Ghats',
+        type: 'Spiritual Sanctuary',
+        icon: '✨',
+        description: 'Fifty-two sacred bathing ghats surrounded by desert hills, morning chants, and aromatic rose plantations.'
+      }
+    ],
+    gastronomy: [
+      {
+        name: 'Authentic Dal Baati Churma',
+        type: 'Signature Royal Dish',
+        highlight: 'Pure Desi Ghee & Panchmel Dal',
+        description: 'Golden baked wheat dumplings dipped in pure clarified butter, served with five-lentil dal and sweet powdered jaggery churma.'
+      },
+      {
+        name: 'Royal Rajput Laal Maas',
+        type: 'Historic Game Meat Recipe',
+        highlight: 'Mathania Red Chilies',
+        description: 'Tender mutton slow-braised for hours with fiery Mathania red chilies, mustard oil, garlic, and whole royal spices.'
+      },
+      {
+        name: 'Ker Sangri & Gatte ki Sabzi',
+        type: 'Desert Heritage Delicacy',
+        highlight: 'Wild Desert Berries',
+        description: 'Wild desert berries and tender dried beans tossed with dry spices, alongside steamed gram flour dumplings in curd gravy.'
+      },
+      {
+        name: 'Classic Ghevar & Pyaaz Kachori',
+        type: 'Iconic Confectionery',
+        highlight: 'Saffron Rabri Topping',
+        description: 'Crisp honeycomb disc pastry soaked in saffron sugar syrup topped with malai, alongside flaky spiced onion kachoris.'
+      }
+    ],
     staySuggestions: [
       {
         name: 'Taj Lake Palace, Udaipur',
         type: 'Floating Marble Palace',
-        features: 'Private heritage suites on Lake Pichola, 24-hour royal butler, heritage water taxi',
+        features: 'Private heritage suites on Lake Pichola, 24-hour royal butler, heritage water taxi, and sunset palace cruises',
         image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80'
       },
       {
         name: 'The Oberoi Udaivilas',
         type: 'Grand Rajasthani Estate',
-        features: 'Intricate domes and corridors, semi-private pool access, views of the City Palace',
+        features: 'Intricate dome corridors, semi-private pool access, views of the City Palace, and traditional spa therapies',
         image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        name: 'Rambagh Palace, Jaipur',
+        type: 'Former Royal Residence',
+        features: '47 acres of tranquil gardens with wandering peacocks, vintage Rolls-Royce transfers, and royal polo lounge',
+        image: 'https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=80'
       }
     ],
     dailyThemes: [
@@ -132,12 +260,76 @@ const DESTINATION_KNOWLEDGE = {
       'Architectural tour of Humayun’s Tomb and Agrasen Ki Baoli stepwell with a historian',
       'Evening classical music recital in an intimate Nizamuddin Sufi sanctuary'
     ],
+    places: [
+      {
+        name: 'Humayun’s Tomb & Sunder Nursery',
+        type: 'Mughal Architecture',
+        icon: '🕌',
+        description: '16th-century red sandstone Mughal masterpiece that inspired the Taj Mahal, surrounded by 90 acres of restored Persian paradise gardens.'
+      },
+      {
+        name: 'Old Delhi & Chandni Chowk',
+        type: 'Historic Walled City',
+        icon: '🏮',
+        description: 'Atmospheric 17th-century Shahjahanabad, Asia’s largest spice market (Khari Baoli), and the towering minarets of Jama Masjid.'
+      },
+      {
+        name: 'Lodhi Gardens & Agrasen Ki Baoli',
+        type: 'Heritage Monuments',
+        icon: '🌿',
+        description: 'Centuries-old 15th-century Sayyid and Lodhi dynasty garden tombs alongside an ancient 108-step stone stepwell.'
+      },
+      {
+        name: 'Qutub Minar Complex',
+        type: 'UNESCO Victory Monument',
+        icon: '🏛️',
+        description: 'World’s tallest brick minaret at 72.5 meters, surrounded by ancient ruins dating back to the 12th century.'
+      },
+      {
+        name: 'India Gate & Lutyens’ Avenues',
+        type: 'Ceremonial Boulevards',
+        icon: '🌳',
+        description: 'Tree-lined imperial avenues framed by Rashtrapati Bhavan, banyan trees, and grand colonial architecture.'
+      }
+    ],
+    gastronomy: [
+      {
+        name: 'Purani Dilli Slow-Cooked Nihari',
+        type: 'Old Delhi Classic',
+        highlight: 'Overnight Braised Shank',
+        description: 'Overnight slow-simmered bone shank stew infused with 50 spices, served with tender seekh kebabs and hot khameeri roti.'
+      },
+      {
+        name: 'Original Butter Chicken & Dal Makhani',
+        type: 'Iconic North Indian',
+        highlight: 'Smoked Tandoori & Tomato Cream',
+        description: 'Tandoori chicken simmered in rich velvety tomato, fresh butter, and fragrant fenugreek gravy, with 24-hour black lentils.'
+      },
+      {
+        name: 'Paranthe Wali Gali Delicacies',
+        type: 'Historic Street Breads',
+        highlight: 'Clay Tandoor & Fillings',
+        description: 'Crisp layered stuffed flatbreads filled with spiced paneer, peas, and rabri, served with sweet-and-sour pumpkin dip.'
+      },
+      {
+        name: 'Daulat Ki Chaat & Rabri Kulfi',
+        type: 'Ethereal Winter Dessert',
+        highlight: 'Morning Dew Foam & Saffron',
+        description: 'Ethereal winter foam dessert made from churned milk kissed by dew and saffron, alongside pistacio-studded rabri kulfi.'
+      }
+    ],
     staySuggestions: [
       {
         name: 'The Imperial New Delhi',
-        type: 'Colonial Heritage Landmark',
-        features: 'Victorian architecture, museum-grade art collection, tranquil palm gardens',
+        type: '1930s Art Deco Landmark',
+        features: 'Museum-grade British-India art collection, royal palm gardens, Italian marble colonnades, and heritage dining',
         image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        name: 'The Leela Palace New Delhi',
+        type: 'Modern Luxury Palace (Chanakyapuri)',
+        features: 'Lutyens-inspired palace architecture, rooftop infinity pool, and French Michelin-inspired dining',
+        image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80'
       }
     ],
     dailyThemes: [
@@ -163,12 +355,76 @@ const DESTINATION_KNOWLEDGE = {
       'Curated private tasting at Mumbai’s most celebrated coastal seafood institutions',
       'Evening cocktails on a heritage rooftop gazing over the illuminated Queen’s Necklace'
     ],
+    places: [
+      {
+        name: 'Gateway of India & Harbour',
+        type: 'Maritime Landmark',
+        icon: '⛵',
+        description: 'Grand Indo-Saracenic basalt arch overlooking the Arabian Sea, private departure jetty for morning sails and harbor cruises.'
+      },
+      {
+        name: 'Marine Drive & Queen’s Necklace',
+        type: 'Art Deco Coastal Boulevard',
+        icon: '🌊',
+        description: 'Sweeping 3.6-kilometer seaside promenade renowned for the world’s second-largest collection of UNESCO Art Deco heritage.'
+      },
+      {
+        name: 'Kala Ghoda & Fort Arts Precinct',
+        type: 'Art & Design District',
+        icon: '🎨',
+        description: 'Tree-shaded cobbled lanes filled with contemporary art galleries, indie fashion houses, and Victorian Gothic edifices.'
+      },
+      {
+        name: 'Elephanta Rock-Cut Caves',
+        type: 'UNESCO Ancient Island Temple',
+        icon: '🗿',
+        description: '5th-century rock-cut temple caves dedicated to Lord Shiva, accessible by private cruiser across Mumbai Harbour.'
+      },
+      {
+        name: 'Bandra Seaside & Ranwar Village',
+        type: 'Portuguese Heritage & Cafes',
+        icon: '🏘️',
+        description: 'Charming Portuguese heritage bungalows, seaside Bandstand promenade, and views of the Bandra-Worli Sea Link.'
+      }
+    ],
+    gastronomy: [
+      {
+        name: 'Coastal Malvani Butter Garlic Crab',
+        type: 'Seafood Masterpiece',
+        highlight: 'Fresh Arabian Sea Catch',
+        description: 'Succulent mud crab in rich butter-garlic emulsion, alongside crispy spiced Bombay Duck fry and coconut Surmai curry.'
+      },
+      {
+        name: 'Irani Café Bun Maska & Chai',
+        type: 'Colonial Nostalgia',
+        highlight: 'Soft Crust Buns & Berry Pulao',
+        description: 'Warm crusty bun smothered in salted churned butter dipped in cardamom tea, followed by fragrant Parsi mutton berry pulao.'
+      },
+      {
+        name: 'Iconic Bombay Street Chaat & Vada Pav',
+        type: 'City Street Classics',
+        highlight: 'Golden Potato & Garlic Chutney',
+        description: 'Golden spiced potato fritter in pillowy pav with dry garlic peanut chutney, followed by tangy seaside sev puri at Chowpatty.'
+      },
+      {
+        name: 'Parsi Salli Boti & Patra Ni Machhi',
+        type: 'Heritage Parsi Cuisine',
+        highlight: 'Steamed in Banana Leaves',
+        description: 'Tender meat simmered in sweet-and-sour gravy topped with crisp potato matchsticks, and pomfret coated in green chutney.'
+      }
+    ],
     staySuggestions: [
       {
-        name: 'The Taj Mahal Palace, Mumbai',
-        type: 'Grand Maritime Landmark',
-        features: 'Overlooking the Gateway of India, sea-facing luxury suites, iconic heritage wing',
+        name: 'The Taj Mahal Palace (Colaba)',
+        type: '1903 Maritime Heritage Palace',
+        features: 'Overlooking the Gateway of India, sea-facing luxury suites, private yacht charters, and heritage docent walks',
         image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        name: 'The Oberoi, Mumbai',
+        type: 'Seaside Luxury (Marine Drive)',
+        features: 'Floor-to-ceiling Arabian Sea vistas, luxury spa, and award-winning oceanfront dining on the Queen’s Necklace',
+        image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80'
       }
     ],
     dailyThemes: [
@@ -194,12 +450,76 @@ const DESTINATION_KNOWLEDGE = {
       'Traditional Khasi village homestay with wild botanical foraging and bamboo cooking',
       'Private cave meditation exploration inside ancient limestone caverns of Mawsmai'
     ],
+    places: [
+      {
+        name: 'Double Decker Living Root Bridge',
+        type: 'Bio-Engineering Wonder',
+        icon: '🌿',
+        description: '250-year-old living bridge grown by Khasi tribes from aerial rubber tree roots crossing cascading jungle torrents.'
+      },
+      {
+        name: 'Umngot River Glass Waters (Dawki)',
+        type: 'Crystal Emerald River',
+        icon: '🛶',
+        description: 'River waters so pristine and transparent that country wooden boats appear to float in mid-air above smooth river pebbles.'
+      },
+      {
+        name: 'Nohkalikai Falls (Cherrapunji)',
+        type: 'Plunge Waterfall',
+        icon: '💧',
+        description: 'India’s tallest plunge waterfall cascading 1,115 feet into an emerald pool amid dramatic swirling cloud gorges.'
+      },
+      {
+        name: 'Mawphlang Sacred Grove',
+        type: 'Ancient Cloud Rainforest',
+        icon: '🌲',
+        description: 'Pristine rainforest sanctuary protected by Khasi clans for over 800 years, home to sacred monoliths and rare orchids.'
+      },
+      {
+        name: 'Umiam Lake & Laitlum Canyons',
+        type: 'Highland Vistas',
+        icon: '🌄',
+        description: 'Serene highland lake framed by pine forests, leading to the dizzying knife-edge gorges of Laitlum.'
+      }
+    ],
+    gastronomy: [
+      {
+        name: 'Traditional Khasi Jadoh & Dohneiiong',
+        type: 'Tribal Specialty',
+        highlight: 'Hill Rice & Black Sesame',
+        description: 'Aromatic short-grain hill rice simmered with subtle spices and meat, accompanied by pork braised in rich black sesame paste.'
+      },
+      {
+        name: 'Tungrymbai & Fluffy Pumaloi',
+        type: 'Fermented Delicacy',
+        highlight: 'Fermented Soya & Rice Cakes',
+        description: 'Fermented indigenous soybeans sautéed with ginger, garlic, and wild herbs, served with steamed rice cakes in banana leaves.'
+      },
+      {
+        name: 'Smoked Bamboo Shoot Hill Curry',
+        type: 'Forest Foraging',
+        highlight: 'Smoked Mountain Herbs',
+        description: 'Slow-smoked hill meats and mountain mushrooms stewed with tender bamboo shoots and indigenous green herbs.'
+      },
+      {
+        name: 'Wild Berry Tea & Khasi Honey',
+        type: 'Highland Infusion',
+        highlight: 'Wild Forest Honeycomb',
+        description: 'High-altitude organic green and black tea flavored with wild Himalayan berries and pure indigenous forest honey.'
+      }
+    ],
     staySuggestions: [
       {
         name: 'Ri Kynjai — Serenity by the Lake',
-        type: 'Lakeside Boutique Retreat',
-        features: 'Traditional Khasi thatch architecture, pine spa overlooking Umiam Lake',
+        type: 'Lakeside Boutique Retreat (Umiam)',
+        features: 'Traditional Khasi thatch architecture, pine spa overlooking Umiam Lake, and lakeside organic dining',
         image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        name: 'Polo Orchid Resort (Cherrapunji)',
+        type: 'Cliffside Cloud Resort',
+        features: 'Perched on cliff edges with private balconies offering panoramic views of Seven Sisters waterfall and deep mist gorges',
+        image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80'
       }
     ],
     dailyThemes: [
@@ -225,12 +545,76 @@ const DESTINATION_KNOWLEDGE = {
       'Overwater hammock lounging suspended over crystalline turquoise waters',
       'Floating champagne breakfast served in your private overwater plunge pool'
     ],
+    places: [
+      {
+        name: 'Baa Atoll Biosphere Reserve',
+        type: 'Marine Sanctuary',
+        icon: '🦈',
+        description: 'Hanifaru Bay gathering site where hundreds of gentle manta rays and harmless whale sharks congregate in sapphire waters.'
+      },
+      {
+        name: 'Virgin Desert Sandbanks',
+        type: 'Secluded Sandbar',
+        icon: '🏝️',
+        description: 'Blindingly white coral sandbars encircled by turquoise lagoons, accessible only by private wooden catamaran.'
+      },
+      {
+        name: 'Vaadhoo Island "Sea of Stars"',
+        type: 'Bioluminescent Shore',
+        icon: '✨',
+        description: 'Magical nighttime shoreline glowing with electric-blue bioluminescent phytoplankton as gentle waves break on the sand.'
+      },
+      {
+        name: 'Protected Coral House Reefs',
+        type: 'Underwater Gardens',
+        icon: '🤿',
+        description: 'Direct access from overwater villa ladders to kaleidoscopic coral formations teeming with sea turtles and reef fish.'
+      },
+      {
+        name: 'North & South Malé Atolls',
+        type: 'Lagoon Archipelago',
+        icon: '🌊',
+        description: 'Idyllic turquoise lagoons connected by glass-bottom boats, private seaplane channels, and sunset dolphin routes.'
+      }
+    ],
+    gastronomy: [
+      {
+        name: 'Traditional Mas Huni & Roshi',
+        type: 'Signature Island Breakfast',
+        highlight: 'Fresh Yellowfin Tuna & Coconut',
+        description: 'Fresh shredded yellowfin tuna gently mixed with fresh grated coconut, red onion, lime, and chili wrapped in warm flatbread.'
+      },
+      {
+        name: 'Fragrant Garudhiya Broth',
+        type: 'National Dish',
+        highlight: 'Curry Leaves & Lime',
+        description: 'Clear comforting tuna broth simmered with fresh curry leaves, lime, and chilies, served with jasmine rice and shallots.'
+      },
+      {
+        name: 'Bis Keemiya & Kulhi Boakibaa',
+        type: 'Traditional Hedhikaa Pastries',
+        highlight: 'Smoked Fish & Spices',
+        description: 'Crispy golden pastries stuffed with spiced tuna and cabbage, alongside savory smoked-tuna coconut fish cakes.'
+      },
+      {
+        name: 'Private Sandbank Seafood Barbecue',
+        type: 'Sunset Dining',
+        highlight: 'Grilled Lobster & Champagne',
+        description: 'Freshly caught grilled Maldivian lobster, king prawns, and yellowfin tuna served with chilled champagne on an isolated sandbank.'
+      }
+    ],
     staySuggestions: [
       {
-        name: 'Soneva Fushi / Jani',
+        name: 'Soneva Jani / Soneva Fushi',
         type: 'Barefoot Luxury Atoll Estate',
-        features: 'Retractable roofs for bedroom stargazing, private ocean slide, dedicated barefoot butler',
+        features: 'Retractable roofs for bedroom stargazing, private ocean slide, dedicated barefoot butler, and overwater cinema',
         image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        name: 'The Ritz-Carlton Maldives (Fari Islands)',
+        type: 'Minimalist Overwater Sanctuary',
+        features: 'Iconic circular overwater villas designed by Kerry Hill, private infinity pools, and ocean-perched spa pavilions',
+        image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=800&q=80'
       }
     ],
     dailyThemes: [
@@ -240,37 +624,6 @@ const DESTINATION_KNOWLEDGE = {
         afternoon: '15:00 — Settle into your overwater villa; listen to gentle waves lap against the wooden stilts.',
         evening: '19:30 — Sandbank dinner under the equatorial stars with fresh grilled yellowfin tuna and chilled vintage champagne.',
         slowMoment: 'Floating peacefully on the still turquoise lagoon as baby reef sharks drift harmlessly by.'
-      }
-    ]
-  },
-  'swiss-alps': {
-    name: 'Swiss Alps & Zermatt',
-    country: 'Switzerland',
-    region: 'Valais & Bernese Oberland',
-    heroImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=85',
-    tagline: 'Granite peaks, wood-smoke chimneys, and slow panoramic rails.',
-    bestSeason: 'December – April for snow & fireside; June – September for wildflower meadows',
-    highlights: [
-      'First-class panoramic car on the Glacier Express through snowbound gorges',
-      'Private raclette & fondue dinner in a 200-year-old alpine hay barn',
-      'Dawn stroll in car-free Zermatt with unobstructed Matterhorn reflection',
-      'Cedar hot tub soak while pine needles gather fresh snow'
-    ],
-    staySuggestions: [
-      {
-        name: 'The Chedi Andermatt',
-        type: 'Alpine Luxury Pavilion',
-        features: 'Fireplaces in every suite, 2,400m² Tibetan-inspired spa, private ski butler',
-        image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80'
-      }
-    ],
-    dailyThemes: [
-      {
-        theme: 'Arrival & Lakeside Stillness',
-        morning: '09:30 — Arrival into Zurich, private saloon transfer to Lake Lucerne. Espresso & warm brioche overlooking misty waters.',
-        afternoon: '14:00 — Board the panoramic cogwheel rail ascending to your alpine haven. Unpack among pine and cedar scents.',
-        evening: '19:30 — Welcome fireside dinner with roasted Valais squash and local crisp Fendant wine.',
-        slowMoment: 'Sitting quietly on the cedar balcony as church bells ring softly through the valley at dusk.'
       }
     ]
   }
@@ -291,6 +644,28 @@ function generateCustomItinerary({ destination, days, pace, vibe, travelers, bud
       'Exclusive sunset journey away from mainstream tourist trails',
       'Private wellness and restorative retreat day in signature surroundings'
     ],
+    places: [
+      {
+        name: `${destName} Historic Quarter`,
+        type: 'Architectural Landmark',
+        icon: '🏛️',
+        description: `Explore the celebrated historic monuments, heritage alleys, and cultural viewpoints of ${destName}.`
+      },
+      {
+        name: `${destName} Scenic Sanctuary`,
+        type: 'Natural Wonder',
+        icon: '🌄',
+        description: `Unspoiled nature reserves, serene waterfronts, and secret viewpoints off the beaten path in ${destName}.`
+      }
+    ],
+    gastronomy: [
+      {
+        name: `${destName} Signature Tasting Experience`,
+        type: 'Heritage Gastronomy',
+        highlight: 'Artisanal Preparation',
+        description: `Traditional dishes and local delicacies slow-crafted by master culinary artisans in ${destName}.`
+      }
+    ],
     staySuggestions: [
       {
         name: `${destName} Signature Grand Residence`,
@@ -309,6 +684,95 @@ function generateCustomItinerary({ destination, days, pace, vibe, travelers, bud
   };
 }
 
+// Helper to look up or generate itinerary
+function getItineraryForDestination({ destination, days = 7, pace = 'Relaxed & Slow', vibes = [], travelers = 'Couple', budgetTier = 'Ultra Luxury' }) {
+  let matchedDest = null;
+  const cleanDest = (destination || '').trim().toLowerCase();
+
+  if (cleanDest.includes('kashmir') || cleanDest.includes('srinagar')) {
+    matchedDest = DESTINATION_KNOWLEDGE['kashmir'];
+  } else if (cleanDest.includes('rajasthan') || cleanDest.includes('jaipur') || cleanDest.includes('udaipur')) {
+    matchedDest = DESTINATION_KNOWLEDGE['rajasthan'];
+  } else if (cleanDest.includes('delhi')) {
+    matchedDest = DESTINATION_KNOWLEDGE['delhi'];
+  } else if (cleanDest.includes('mumbai') || cleanDest.includes('bombay')) {
+    matchedDest = DESTINATION_KNOWLEDGE['mumbai'];
+  } else if (cleanDest.includes('meghalaya') || cleanDest.includes('shillong')) {
+    matchedDest = DESTINATION_KNOWLEDGE['meghalaya'];
+  } else if (cleanDest.includes('maldives') || cleanDest.includes('male')) {
+    matchedDest = DESTINATION_KNOWLEDGE['maldives'];
+  }
+
+  if (!matchedDest) {
+    const extractedName = destination.trim() || 'Kashmir';
+    matchedDest = generateCustomItinerary({
+      destination: extractedName,
+      days: Number(days) || 7,
+      pace,
+      vibe: vibes,
+      travelers,
+      budgetTier
+    });
+  }
+
+  const dayCount = Math.min(Math.max(Number(days) || 7, 3), 14);
+  const slicedSchedule = matchedDest.dailyThemes.slice(0, dayCount);
+
+  // If requested more days than defined dailyThemes, repeat gracefully
+  while (slicedSchedule.length < dayCount) {
+    const baseTheme = matchedDest.dailyThemes[slicedSchedule.length % matchedDest.dailyThemes.length];
+    slicedSchedule.push({
+      ...baseTheme,
+      theme: `Day ${slicedSchedule.length + 1} — ${baseTheme.theme}`
+    });
+  }
+
+  const baseDailyRate = budgetTier.includes('Ultra') ? 45000 : (budgetTier.includes('Atelier') ? 75000 : 28000);
+  const estimatedTotal = Math.round(baseDailyRate * dayCount);
+
+  return {
+    id: `ai-itin-${Date.now()}`,
+    destinationTitle: matchedDest.name,
+    country: matchedDest.country,
+    region: matchedDest.region,
+    heroImage: matchedDest.heroImage,
+    tagline: matchedDest.tagline,
+    bestSeason: matchedDest.bestSeason,
+    durationDays: dayCount,
+    pace,
+    travelers,
+    budgetTier,
+    estimatedPriceINR: estimatedTotal,
+    highlights: matchedDest.highlights || [],
+    places: matchedDest.places || [],
+    gastronomy: matchedDest.gastronomy || [],
+    staySuggestions: matchedDest.staySuggestions || [],
+    schedule: slicedSchedule.map((day, idx) => ({
+      dayNumber: idx + 1,
+      theme: day.theme,
+      morning: day.morning,
+      afternoon: day.afternoon,
+      evening: day.evening,
+      slowMoment: day.slowMoment
+    })),
+    luggageAdvice: 'Bring layers of natural fibers (cashmere, merino wool, linen). Comfortable leather walking shoes for stone streets and quiet trails.',
+    createdAt: new Date().toISOString()
+  };
+}
+
+// GET /api/ai-planner
+router.get('/', (req, res) => {
+  try {
+    const destination = req.query.destination || 'Kashmir';
+    const days = Number(req.query.days) || 7;
+    const itinerary = getItineraryForDestination({ destination, days });
+    return res.json({ success: true, itinerary });
+  } catch (err) {
+    console.error('AI Planner GET error:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // POST /api/ai-planner
 router.post('/', async (req, res) => {
   try {
@@ -322,74 +786,19 @@ router.post('/', async (req, res) => {
       budgetTier = 'Ultra Luxury'
     } = req.body;
 
-    let matchedDest = null;
-    const cleanDest = (destination || '').trim().toLowerCase();
-    const cleanPrompt = (prompt || '').trim().toLowerCase();
-
-    if (cleanDest.includes('kashmir') || cleanPrompt.includes('kashmir') || cleanDest.includes('srinagar') || cleanPrompt.includes('srinagar')) {
-      matchedDest = DESTINATION_KNOWLEDGE['kashmir'];
-    } else if (cleanDest.includes('rajasthan') || cleanPrompt.includes('rajasthan') || cleanDest.includes('jaipur') || cleanDest.includes('udaipur')) {
-      matchedDest = DESTINATION_KNOWLEDGE['rajasthan'];
-    } else if (cleanDest.includes('delhi') || cleanPrompt.includes('delhi')) {
-      matchedDest = DESTINATION_KNOWLEDGE['delhi'];
-    } else if (cleanDest.includes('mumbai') || cleanPrompt.includes('mumbai') || cleanDest.includes('bombay')) {
-      matchedDest = DESTINATION_KNOWLEDGE['mumbai'];
-    } else if (cleanDest.includes('meghalaya') || cleanPrompt.includes('meghalaya') || cleanDest.includes('shillong')) {
-      matchedDest = DESTINATION_KNOWLEDGE['meghalaya'];
-    } else if (cleanDest.includes('maldives') || cleanPrompt.includes('maldives') || cleanDest.includes('male')) {
-      matchedDest = DESTINATION_KNOWLEDGE['maldives'];
-    } else if (cleanDest.includes('swiss') || cleanDest.includes('alps') || cleanDest.includes('zermatt') || cleanPrompt.includes('swiss') || cleanPrompt.includes('alps') || cleanPrompt.includes('switzerland')) {
-      matchedDest = DESTINATION_KNOWLEDGE['swiss-alps'];
-    }
-
-    if (!matchedDest) {
-      const extractedName = destination.trim() || (prompt ? prompt.split(' ')[0] : 'Curated Haven');
-      matchedDest = generateCustomItinerary({
-        destination: extractedName,
-        days: Number(days) || 7,
-        pace,
-        vibe: vibes,
-        travelers,
-        budgetTier
-      });
-    }
-
-    const dayCount = Math.min(Math.max(Number(days) || 7, 3), 14);
-    const slicedSchedule = matchedDest.dailyThemes.slice(0, dayCount);
-
-    const baseDailyRate = budgetTier.includes('Ultra') ? 45000 : (budgetTier.includes('Atelier') ? 75000 : 28000);
-    const estimatedTotal = Math.round(baseDailyRate * dayCount);
-
-    const generatedItinerary = {
-      id: `ai-itin-${Date.now()}`,
-      destinationTitle: matchedDest.name,
-      country: matchedDest.country,
-      region: matchedDest.region,
-      heroImage: matchedDest.heroImage,
-      tagline: matchedDest.tagline,
-      bestSeason: matchedDest.bestSeason,
-      durationDays: dayCount,
+    const targetDest = destination.trim() || (prompt ? prompt.split(' ')[0] : 'Kashmir');
+    const itinerary = getItineraryForDestination({
+      destination: targetDest,
+      days,
       pace,
+      vibes,
       travelers,
-      budgetTier,
-      estimatedPriceINR: estimatedTotal,
-      highlights: matchedDest.highlights,
-      staySuggestions: matchedDest.staySuggestions,
-      schedule: slicedSchedule.map((day, idx) => ({
-        dayNumber: idx + 1,
-        theme: day.theme,
-        morning: day.morning,
-        afternoon: day.afternoon,
-        evening: day.evening,
-        slowMoment: day.slowMoment
-      })),
-      luggageAdvice: 'Bring layers of natural fibers (cashmere, merino wool, linen). Comfortable leather walking shoes for stone streets and quiet trails.',
-      createdAt: new Date().toISOString()
-    };
+      budgetTier
+    });
 
     return res.json({
       success: true,
-      itinerary: generatedItinerary
+      itinerary
     });
   } catch (err) {
     console.error('AI Planner error:', err);

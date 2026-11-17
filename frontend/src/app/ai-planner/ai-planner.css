@@ -197,6 +197,91 @@
   width: 100%;
 }
 
+/* Quick Destination Switcher Pills */
+.ai-dest-switcher-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(23, 25, 28, 0.08);
+  width: 100%;
+}
+
+.ai-dest-switcher-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ai-dest-switcher-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #17191c;
+}
+
+.ai-dest-switcher-hint {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.ai-dest-switcher-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+.ai-dest-switcher-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #fbfbf9;
+  border: 1.5px solid rgba(23, 25, 28, 0.12);
+  color: #334155;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 42px;
+  box-sizing: border-box;
+  touch-action: manipulation;
+}
+
+.ai-dest-switcher-pill:hover {
+  border-color: rgba(23, 25, 28, 0.35);
+  background: #ffffff;
+  transform: translateY(-1px);
+}
+
+.ai-dest-switcher-pill.is-active {
+  background: #17191c;
+  color: #ffffff;
+  border-color: #17191c;
+  box-shadow: 0 4px 14px rgba(23, 25, 28, 0.18);
+}
+
+.ai-dest-pill-icon {
+  font-size: 15px;
+}
+
+.ai-dest-pill-text {
+  letter-spacing: -0.01em;
+}
+
+.ai-dest-pill-active-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
+}
+
 /* Natural Language Input */
 .ai-prompt-box-wrap {
   display: flex;
@@ -677,6 +762,154 @@
   line-height: 1.5;
   color: #334155;
   font-weight: 500;
+}
+
+/* Must-Visit Places & Sacred Landscapes */
+.ai-places-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.ai-section-subtitle {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.ai-places-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 18px;
+  width: 100%;
+}
+
+.ai-place-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(23, 25, 28, 0.08);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+  transition: all 0.22s ease;
+  box-sizing: border-box;
+}
+
+.ai-place-card:hover {
+  border-color: rgba(23, 25, 28, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.ai-place-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ai-place-icon {
+  font-size: 20px;
+}
+
+.ai-place-type {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5b8291;
+}
+
+.ai-place-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #17191c;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.ai-place-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #475569;
+  margin: 0;
+}
+
+/* Authentic Gastronomy & Local Delicacies */
+.ai-gastronomy-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.ai-gastronomy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 18px;
+  width: 100%;
+}
+
+.ai-food-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(23, 25, 28, 0.08);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+  transition: all 0.22s ease;
+  box-sizing: border-box;
+}
+
+.ai-food-card:hover {
+  border-color: rgba(23, 25, 28, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.ai-food-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ai-food-type {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #d97706;
+}
+
+.ai-food-highlight-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #059669;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.ai-food-title {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #17191c;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.ai-food-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #475569;
+  margin: 0;
 }
 
 /* Day by Day Itinerary Schedule */
@@ -1238,6 +1471,17 @@
     grid-template-columns: 1fr;
   }
 
+  .ai-places-grid,
+  .ai-gastronomy-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .ai-dest-switcher-pill {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
   .ai-action-bar-card {
     padding: 18px 16px;
     border-radius: 18px;
@@ -1380,6 +1624,22 @@
     padding: 14px;
     border-radius: 14px;
     gap: 10px;
+  }
+
+  .ai-dest-switcher-pill {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  .ai-place-card,
+  .ai-food-card {
+    padding: 16px 14px;
+    border-radius: 16px;
+  }
+
+  .ai-place-name,
+  .ai-food-title {
+    font-size: 15.5px;
   }
 
   .ai-day-card {

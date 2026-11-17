@@ -15,6 +15,15 @@ import {
 import { apiFetch } from '@/lib/api';
 import './ai-planner.css';
 
+const CORE_DESTINATIONS = [
+  { key: 'Kashmir', title: 'Kashmir', subtitle: 'Valleys & Dal Lake', icon: '🏔️', days: 7, pace: 'Relaxed & Slow', vibes: ['Alpine Chalets', 'Quiet Nature', 'Wellness & Thermal'] },
+  { key: 'Rajasthan', title: 'Rajasthan', subtitle: 'Palaces & Thar Dunes', icon: '🏰', days: 6, pace: 'Balanced Exploration', vibes: ['Historic Culture', 'Fine Dining & Wine'] },
+  { key: 'Delhi', title: 'Delhi', subtitle: 'Mughal Heritage', icon: '🕌', days: 5, pace: 'Balanced Exploration', vibes: ['Historic Culture', 'Fine Dining & Wine'] },
+  { key: 'Mumbai', title: 'Mumbai', subtitle: 'Arabian Sea Coast', icon: '🌊', days: 4, pace: 'Balanced Exploration', vibes: ['Coastal Romance', 'Historic Culture', 'Fine Dining & Wine'] },
+  { key: 'Meghalaya', title: 'Meghalaya', subtitle: 'Living Root Bridges', icon: '🌿', days: 5, pace: 'Relaxed & Slow', vibes: ['Quiet Nature', 'Scenic Rails'] },
+  { key: 'Maldives', title: 'Maldives', subtitle: 'Overwater Sanctuaries', icon: '🏝️', days: 5, pace: 'Relaxed & Slow', vibes: ['Coastal Romance', 'Private Yachting', 'Wellness & Thermal'] }
+];
+
 const POPULAR_DESTINATIONS = [
   'Kashmir',
   'Rajasthan',
@@ -63,10 +72,54 @@ export default function AIPlannerPage() {
   const [customDestText, setCustomDestText] = useState('');
   const resultRef = useRef(null);
 
+  // Load exact itinerary data for a selected destination
+  const loadDestinationData = async (destKey, currentDays = days, currentPace = pace, currentVibes = selectedVibes) => {
+    try {
+      const response = await apiFetch('/ai-planner', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt: '',
+          destination: destKey,
+          days: currentDays,
+          pace: currentPace,
+          vibes: currentVibes,
+          travelers,
+          budgetTier
+        })
+      });
+      const data = response ? await response.json() : null;
+      if (data?.success && data?.itinerary) {
+        setItinerary(data.itinerary);
+      }
+    } catch (err) {
+      console.error('Failed to load destination data:', err);
+    }
+  };
+
+  const handleQuickDestinationClick = (destKey) => {
+    const found = CORE_DESTINATIONS.find((c) => c.key === destKey);
+    const targetDays = found ? found.days : 7;
+    const targetPace = found ? found.pace : 'Relaxed & Slow';
+    const targetVibes = found ? found.vibes : selectedVibes;
+
+    setIsCustomDest(false);
+    setDestination(destKey);
+    setDays(targetDays);
+    setPace(targetPace);
+    setSelectedVibes(targetVibes);
+
+    // Immediately load & show exact place, food, stays and schedule for this destination!
+    loadDestinationData(destKey, targetDays, targetPace, targetVibes);
+  };
+
   // Mount guard & load saved itineraries + hero settings + dynamic destinations
   useEffect(() => {
     setIsMounted(true);
     setSavedItineraries(getStoredSavedItineraries());
+
+    // Pre-load Kashmir exact data immediately on page load
+    loadDestinationData('Kashmir', 7, 'Relaxed & Slow', ['Alpine Chalets', 'Quiet Nature', 'Wellness & Thermal']);
 
     try {
       const heroConfig = getStoredHeroSettings();
@@ -127,44 +180,55 @@ export default function AIPlannerPage() {
     setDestination(val);
 
     // Dynamic smart matching for vibes/days based on destination
+    let targetDays = days;
+    let targetPace = pace;
+    let targetVibes = selectedVibes;
+
     const lower = val.toLowerCase();
     if (lower.includes('kashmir') || lower.includes('srinagar')) {
-      setDays(7);
-      setPace('Relaxed & Slow');
-      setSelectedVibes(['Alpine Chalets', 'Quiet Nature', 'Wellness & Thermal']);
+      targetDays = 7;
+      targetPace = 'Relaxed & Slow';
+      targetVibes = ['Alpine Chalets', 'Quiet Nature', 'Wellness & Thermal'];
     } else if (lower.includes('rajasthan') || lower.includes('jaipur') || lower.includes('udaipur')) {
-      setDays(6);
-      setPace('Balanced Exploration');
-      setSelectedVibes(['Historic Culture', 'Fine Dining & Wine']);
+      targetDays = 6;
+      targetPace = 'Balanced Exploration';
+      targetVibes = ['Historic Culture', 'Fine Dining & Wine'];
     } else if (lower.includes('meghalaya') || lower.includes('shillong')) {
-      setDays(5);
-      setPace('Relaxed & Slow');
-      setSelectedVibes(['Quiet Nature', 'Scenic Rails']);
+      targetDays = 5;
+      targetPace = 'Relaxed & Slow';
+      targetVibes = ['Quiet Nature', 'Scenic Rails'];
     } else if (lower.includes('maldives')) {
-      setDays(5);
-      setPace('Relaxed & Slow');
-      setSelectedVibes(['Coastal Romance', 'Private Yachting', 'Wellness & Thermal']);
+      targetDays = 5;
+      targetPace = 'Relaxed & Slow';
+      targetVibes = ['Coastal Romance', 'Private Yachting', 'Wellness & Thermal'];
     } else if (lower.includes('mumbai') || lower.includes('bombay')) {
-      setDays(4);
-      setPace('Balanced Exploration');
-      setSelectedVibes(['Coastal Romance', 'Historic Culture', 'Fine Dining & Wine']);
+      targetDays = 4;
+      targetPace = 'Balanced Exploration';
+      targetVibes = ['Coastal Romance', 'Historic Culture', 'Fine Dining & Wine'];
     } else if (lower.includes('delhi')) {
-      setDays(5);
-      setPace('Balanced Exploration');
-      setSelectedVibes(['Historic Culture', 'Fine Dining & Wine']);
+      targetDays = 5;
+      targetPace = 'Balanced Exploration';
+      targetVibes = ['Historic Culture', 'Fine Dining & Wine'];
     } else if (lower.includes('swiss') || lower.includes('alps') || lower.includes('switzerland')) {
-      setDays(7);
-      setPace('Relaxed & Slow');
-      setSelectedVibes(['Alpine Chalets', 'Quiet Nature', 'Fine Dining & Wine']);
+      targetDays = 7;
+      targetPace = 'Relaxed & Slow';
+      targetVibes = ['Alpine Chalets', 'Quiet Nature', 'Fine Dining & Wine'];
     } else if (lower.includes('kyoto') || lower.includes('japan')) {
-      setDays(5);
-      setPace('Slow & Contemplative');
-      setSelectedVibes(['Historic Culture', 'Quiet Nature', 'Wellness & Thermal']);
+      targetDays = 5;
+      targetPace = 'Slow & Contemplative';
+      targetVibes = ['Historic Culture', 'Quiet Nature', 'Wellness & Thermal'];
     } else if (lower.includes('santorini') || lower.includes('greece')) {
-      setDays(6);
-      setPace('Coastal Romance'); 
-      setSelectedVibes(['Coastal Romance', 'Fine Dining & Wine']);
+      targetDays = 6;
+      targetPace = 'Coastal Romance'; 
+      targetVibes = ['Coastal Romance', 'Fine Dining & Wine'];
     }
+
+    setDays(targetDays);
+    setPace(targetPace);
+    setSelectedVibes(targetVibes);
+
+    // Immediately load & show exact place, food, stays and schedule for selected destination
+    loadDestinationData(val, targetDays, targetPace, targetVibes);
   };
 
   const toggleVibe = (vibe) => {
@@ -271,6 +335,32 @@ export default function AIPlannerPage() {
       {/* 2. Interactive Generator Console */}
       <section className="ai-planner-console-container" suppressHydrationWarning>
         <form onSubmit={handleGenerate} className="ai-planner-card" suppressHydrationWarning>
+          {/* Quick Destination Switcher Pills */}
+          <div className="ai-dest-switcher-wrap" suppressHydrationWarning>
+            <div className="ai-dest-switcher-top">
+              <span className="ai-dest-switcher-label">Instant Atelier Destination Explorer</span>
+              <span className="ai-dest-switcher-hint">Click any destination to view exact places, authentic gastronomy &amp; luxury stays</span>
+            </div>
+            <div className="ai-dest-switcher-pills" suppressHydrationWarning>
+              {CORE_DESTINATIONS.map((cd) => {
+                const isActive = destination.toLowerCase().includes(cd.key.toLowerCase());
+                return (
+                  <button
+                    key={cd.key}
+                    type="button"
+                    suppressHydrationWarning
+                    onClick={() => handleQuickDestinationClick(cd.key)}
+                    className={`ai-dest-switcher-pill ${isActive ? 'is-active' : ''}`}
+                  >
+                    <span className="ai-dest-pill-icon">{cd.icon}</span>
+                    <span className="ai-dest-pill-text">{cd.title}</span>
+                    {isActive && <span className="ai-dest-pill-active-dot" />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           {/* Natural Language Prompt */}
           <div className="ai-prompt-box-wrap">
             <div className="ai-prompt-label">
@@ -563,6 +653,54 @@ export default function AIPlannerPage() {
               ))}
             </div>
           </div>
+
+          {/* Must-Visit Places & Sacred Landscapes */}
+          {itinerary.places && itinerary.places.length > 0 && (
+            <div className="ai-places-section">
+              <div className="ai-section-title-row">
+                <h3 className="ai-section-title">Must-Visit Places &amp; Sacred Landscapes</h3>
+                <span className="ai-section-subtitle">
+                  {itinerary.places.length} Iconic Locations Curated
+                </span>
+              </div>
+              <div className="ai-places-grid">
+                {itinerary.places.map((place, idx) => (
+                  <div key={idx} className="ai-place-card">
+                    <div className="ai-place-card-header">
+                      <span className="ai-place-icon">{place.icon || '✦'}</span>
+                      <span className="ai-place-type">{place.type}</span>
+                    </div>
+                    <h4 className="ai-place-name">{place.name}</h4>
+                    <p className="ai-place-desc">{place.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Authentic Gastronomy & Local Delicacies */}
+          {itinerary.gastronomy && itinerary.gastronomy.length > 0 && (
+            <div className="ai-gastronomy-section">
+              <div className="ai-section-title-row">
+                <h3 className="ai-section-title">Authentic Gastronomy &amp; Local Delicacies</h3>
+                <span className="ai-section-subtitle">
+                  Heritage recipes, signature teas &amp; private dining masterclasses
+                </span>
+              </div>
+              <div className="ai-gastronomy-grid">
+                {itinerary.gastronomy.map((item, idx) => (
+                  <div key={idx} className="ai-food-card">
+                    <div className="ai-food-card-top">
+                      <span className="ai-food-type">{item.type}</span>
+                      {item.highlight && <span className="ai-food-highlight-badge">{item.highlight}</span>}
+                    </div>
+                    <h4 className="ai-food-title">{item.name}</h4>
+                    <p className="ai-food-desc">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Day-by-Day Schedule */}
           <div className="ai-schedule-section">
