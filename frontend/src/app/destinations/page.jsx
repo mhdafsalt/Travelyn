@@ -1,11 +1,13 @@
 'use client';
 import React, { useState, useMemo, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import DestinationCard from '@/components/DestinationCard';
 import BookingModal from '@/components/BookingModal';
 import { INITIAL_DESTINATIONS, CATEGORIES } from '@/lib/data';
 import { getStoredDestinations } from '@/lib/store';
 
 export default function DestinationsPage() {
+    const router = useRouter();
     const [destinations, setDestinations] = useState(INITIAL_DESTINATIONS);
     const [search, setSearch] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('all');

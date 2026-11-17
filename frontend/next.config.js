@@ -9,6 +9,7 @@ const nextConfig = {
   },
   experimental: {
     cpus: 1,
+    workerThreads: false,
   },
   images: {
     remotePatterns: [
@@ -23,6 +24,27 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/booking',
+        has: [
+          {
+            type: 'query',
+            key: 'slug',
+            value: '(?<slug>.*)',
+          },
+        ],
+        destination: '/destinations/:slug',
+        permanent: false,
+      },
+      {
+        source: '/booking',
+        destination: '/destinations',
+        permanent: false,
+      },
+    ];
   },
   async rewrites() {
     const backendUrl = process.env.BACKEND_URL || 'https://travelyn-s5a4.vercel.app';

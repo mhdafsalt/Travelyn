@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { INITIAL_DESTINATIONS } from '@/lib/data';
 import { getStoredDestinations } from '@/lib/store';
 import BookingModal from '@/components/BookingModal';
@@ -9,6 +9,7 @@ import '@/components/HikeBookingCard.css';
 
 export default function DestinationDetailPage() {
     const params = useParams();
+    const router = useRouter();
     const slug = params?.slug;
     const [destinations, setDestinations] = useState(INITIAL_DESTINATIONS);
 
@@ -34,6 +35,7 @@ export default function DestinationDetailPage() {
     ) || destinations[0] || INITIAL_DESTINATIONS[0];
     const [activeImage, setActiveImage] = useState(destination.imageUrl);
     const [isBookingOpen, setIsBookingOpen] = useState(false);
+    const [bookingPrefill, setBookingPrefill] = useState(null);
     const [activeDay, setActiveDay] = useState(1);
     return (<div suppressHydrationWarning style={{ backgroundColor: '#faf9f6', minHeight: '100vh', paddingBottom: '90px' }}>
       {/* 1. Hero Image Header */}
@@ -307,11 +309,19 @@ export default function DestinationDetailPage() {
         <div className="dest-sidebar-sticky">
           <HikeBookingCard
             destination={destination}
-            onBookClick={() => setIsBookingOpen(true)}
+            onBookClick={(data) => {
+              setBookingPrefill(data);
+              setIsBookingOpen(true);
+            }}
           />
         </div>
       </div>
 
-      <BookingModal destination={destination} isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)}/>
+      <BookingModal
+        destination={destination}
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+        initialData={bookingPrefill}
+      />
     </div>);
 }

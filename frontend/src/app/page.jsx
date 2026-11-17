@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import HeroSection from '@/components/HeroSection';
 import CategoryBar from '@/components/CategoryBar';
 import DestinationCard from '@/components/DestinationCard';
@@ -14,6 +15,7 @@ import { INITIAL_DESTINATIONS } from '@/lib/data';
 import { getStoredDestinations } from '@/lib/store';
 
 export default function HomePage() {
+  const router = useRouter();
   const [destinations, setDestinations] = useState(INITIAL_DESTINATIONS);
   const [selectedCategory, setSelectedCategory] = useState('trending');
   const [searchQuery, setSearchQuery] = useState('');
@@ -58,7 +60,10 @@ export default function HomePage() {
       {/* 1. HERO SECTION - Nomia Style */}
       <HeroSection
         onSearch={handleHeroSearch}
-        onOpenBooking={() => setIsBookingOpen(true)}
+        onOpenBooking={() => {
+          setSelectedBookingDest(destinations[0] || INITIAL_DESTINATIONS[0]);
+          setIsBookingOpen(true);
+        }}
       />
 
       {/* 2. CATEGORIES SELECTOR */}

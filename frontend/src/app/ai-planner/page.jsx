@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import BookingModal from '@/components/BookingModal';
 import { 
   getStoredSavedItineraries, 
@@ -82,6 +83,7 @@ const AVAILABLE_VIBES = [
 ];
 
 export default function AIPlannerPage() {
+  const router = useRouter();
   // Input form state
   const [prompt, setPrompt] = useState('');
   const [destination, setDestination] = useState('Swiss Alps');
