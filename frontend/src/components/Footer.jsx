@@ -100,7 +100,6 @@ export default function Footer() {
             {[
               { label: 'Home', href: '/' },
               { label: 'Destinations', href: '/destinations' },
-              { label: 'Experiences', href: '/experiences' },
               { label: 'AI Planner', href: '/ai-planner' },
               { label: 'About', href: '/about' },
               { label: 'Contact', href: '/contact' },
@@ -150,7 +149,7 @@ export default function Footer() {
             </a>
             <span className="voyara-footer-col-text">+1 (555) 012 3456</span>
             <span className="voyara-footer-col-text">Mon – Fri · 9am – 6pm</span>
-            <span className="voyara-footer-col-text">Lisbon · New York</span>
+            <span className="voyara-footer-col-text">Kerala · India</span>
           </div>
         </div>
       </div>

@@ -55,14 +55,13 @@ export default function StatsSection() {
 
           {/* Content */}
           <div className="stats-breathe-content">
-            <div className="voyara-tag voyara-tag-dark">
-              <div className="voyara-dot" />
+            <div className="stats-breathe-tag">
+              <span className="stats-breathe-dot" />
               <span>{config.breatheTag || 'Breathe'}</span>
             </div>
 
             <h2 className="stats-breathe-heading">
-              {config.breatheHeading || 'Slow down.'}
-              <br />
+              <span>{config.breatheHeading || 'Slow down.'}</span>
               <span className="stats-breathe-subtext">{config.breatheSubtext || 'The world will wait.'}</span>
             </h2>
           </div>
@@ -78,7 +77,7 @@ export default function StatsSection() {
               <div className="voyara-dot" />
               <span>{config.aboutTag || 'About Travelyn'}</span>
             </div>
-            <div className="stats-about-est">{config.aboutEst || 'Est. 2014 — Lisbon'}</div>
+            <div className="stats-about-est">{config.aboutEst || 'EST. 2024 — KERALA'}</div>
           </div>
 
           {/* Right Column Statement */}

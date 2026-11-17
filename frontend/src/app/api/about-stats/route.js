@@ -8,7 +8,7 @@ let serverAboutStatsSettings = {
   breatheBgUrl: "https://framerusercontent.com/images/PMSlK6mTGdx9DcWYaJZiAMBFv4.jpg",
 
   aboutTag: "About Travelyn",
-  aboutEst: "Est. 2014 — Lisbon",
+  aboutEst: "Est. 2024 — Kerala",
   statementPrefix: "A boutique travel studio crafting ",
   statementHighlight: "tailor-made journeys",
   statementSuffix: " for curious travellers who would rather feel a place than simply see it.",

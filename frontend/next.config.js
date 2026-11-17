@@ -44,6 +44,11 @@ const nextConfig = {
         destination: '/destinations',
         permanent: false,
       },
+      {
+        source: '/experiences',
+        destination: '/destinations',
+        permanent: false,
+      },
     ];
   },
   async rewrites() {

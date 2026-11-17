@@ -167,6 +167,15 @@ export function getStoredDestinations() {
       currency: item.currency || 'INR'
     };
   });
+
+  // Ensure any new initial destinations (Kashmir, Meghalaya, Mumbai, etc.) are included
+  INITIAL_DESTINATIONS.forEach((init) => {
+    if (!migrated.some((d) => d.id === init.id || d.slug === init.slug)) {
+      migrated.push(init);
+      needsUpdate = true;
+    }
+  });
+
   if (needsUpdate) {
     setLocalItem(DESTINATIONS_KEY, migrated);
   }
@@ -477,7 +486,7 @@ export const DEFAULT_ABOUT_STATS_SETTINGS = {
 
   // About Studio Intro
   aboutTag: "About Travelyn",
-  aboutEst: "Est. 2014 — Lisbon",
+  aboutEst: "Est. 2024 — Kerala",
   statementPrefix: "A boutique travel studio crafting ",
   statementHighlight: "tailor-made journeys",
   statementSuffix: " for curious travellers who would rather feel a place than simply see it.",

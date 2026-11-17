@@ -100,7 +100,7 @@ export default function Footer() {
             {[
               { label: 'Home', href: '/' },
               { label: 'Destinations', href: '/destinations' },
-              { label: 'Experiences', href: '/experiences' },
+              { label: 'AI Planner', href: '/ai-planner' },
               { label: 'About', href: '/about' },
               { label: 'Contact', href: '/contact' },
             ].map((link, i) => (
@@ -114,11 +114,11 @@ export default function Footer() {
           <div className="voyara-footer-col">
             <div className="voyara-footer-col-title">Destinations</div>
             {[
-              { label: 'Santorini', href: '/destinations/santorini' },
-              { label: 'Kyoto', href: '/destinations/kyoto' },
+              { label: 'Santorini', href: '/destinations/kashmir' },
+              { label: 'Kyoto', href: '/destinations/mumbai' },
               { label: 'Maldives', href: '/destinations/maldives' },
-              { label: 'Patagonia', href: '/destinations/patagonia' },
-              { label: 'Amalfi Coast', href: '/destinations/amalfi-coast' },
+              { label: 'Patagonia', href: '/destinations/megalaya' },
+              { label: 'Amalfi Coast', href: '/destinations/rajesthan' },
             ].map((link, i) => (
               <a key={i} href={link.href} className="voyara-footer-col-link">
                 {link.label}
@@ -147,9 +147,9 @@ export default function Footer() {
             <a href="mailto:hello@travelyn.com" className="voyara-footer-col-link">
               hello@travelyn.com
             </a>
-            <span className="voyara-footer-col-text">+1 (555) 012 3456</span>
+            <span className="voyara-footer-col-text">+1 6551236545</span>
             <span className="voyara-footer-col-text">Mon – Fri · 9am – 6pm</span>
-            <span className="voyara-footer-col-text">Lisbon · New York</span>
+            <span className="voyara-footer-col-text">Kerala · India</span>
           </div>
         </div>
       </div>

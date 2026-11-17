@@ -319,7 +319,7 @@ export default function UserBookingsPage() {
                   <span className="invoice-tag">OFFICIAL TRAVELYN TAX INVOICE & DISPATCH</span>
                   <div className="invoice-brand">travelyn.</div>
                   <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>
-                    Travelyn Global Expeditions Ltd. · Chiado Studio, Lisbon · GSTIN: 27AABCT1332L1Z8
+                    Travelyn Global Expeditions Ltd. · Kerala Studio, India · GSTIN: 27AABCT1332L1Z8
                   </div>
                 </div>
                 <div style={{ textAlign: 'right' }}>

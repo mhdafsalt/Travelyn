@@ -692,6 +692,141 @@ export const INITIAL_DESTINATIONS = [
       "24/7 Travelyn concierge service"
     ],
     featured: true
+  },
+  {
+    id: "dest-kashmir",
+    slug: "kashmir",
+    title: "Kashmir",
+    country: "India",
+    region: "India",
+    startingPoint: "Srinagar, Kashmir",
+    endingPoint: "Gulmarg & Pahalgam, Kashmir",
+    tagline: "Pristine Himalayan valleys, floating shikara sanctuaries, and snow-draped pine ridges.",
+    description: "Experience paradise on earth. Glide silently across Dal Lake in hand-carved cedar shikaras, explore the snowfields of Gulmarg, wander through saffron meadows in Pampore, and unwind beside roaring fireplaces in luxury walnut-wood cedar houseboats.",
+    price: 95000,
+    currency: "INR",
+    durationDays: 7,
+    rating: 4.95,
+    reviewCount: 318,
+    season: "April – October · Dec – Feb",
+    groupSize: "2 – 6 guests",
+    category: ["trending", "nature", "romantic", "luxury"],
+    imageUrl: "https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1200&q=80"
+    ],
+    highlights: [
+      "Private hand-carved cedarwood luxury houseboat stay on serene Nigeen Lake",
+      "Sunset shikara ride across floating lotus gardens and water bazaars",
+      "Gulmarg Gondola Phase II ascent to Apharwat Peak at 4,200m",
+      "Private culinary wazwan dining experience with master chefs in Srinagar"
+    ],
+    itinerary: [
+      { day: 1, title: "Arrival in Srinagar & Sunset Shikara", description: "Private airport transfer to your luxury heritage houseboat, followed by evening chai on Dal Lake." },
+      { day: 2, title: "Mughal Gardens & Old City Machiyas", description: "Explore Nishat and Shalimar gardens and private craft workshops of Pashmina and papier-mâché." },
+      { day: 3, title: "Pahalgam & Betaab Valley", description: "Drive along saffron fields to Pahalgam; riverside walks along the Lidder river." },
+      { day: 4, title: "Aru Valley & Shepherd Meadows", description: "Pony treks through pristine pine forests and glacial streams in Aru." },
+      { day: 5, title: "Gulmarg High Altitude Alpine Meadows", description: "Transfer to Gulmarg; check in to an alpine luxury resort with panoramic Himalayan views." },
+      { day: 6, title: "Gulmarg Gondola & Apharwat Peak", description: "Ride the world's second-highest cable car to powdery snowfields and ski trails." },
+      { day: 7, title: "Srinagar Departure", description: "Farewell Kashmiri kahwa and private chauffeur transfer to Srinagar Airport." }
+    ],
+    included: [
+      "Heritage luxury houseboat and 5-star mountain resort stays",
+      "Private chauffeurs and dedicated local expert docents",
+      "All meals including traditional multicourse Wazwan dinners",
+      "VIP Shikara and Gondola passes",
+      "24/7 dedicated Travelyn concierge assistance"
+    ],
+    featured: true
+  },
+  {
+    id: "dest-meghalaya",
+    slug: "meghalaya",
+    title: "Meghalaya",
+    country: "India",
+    region: "India",
+    startingPoint: "Guwahati, Assam",
+    endingPoint: "Cherrapunji & Dawki, Meghalaya",
+    tagline: "The abode of clouds, sacred rainforests, and centuries-old living root bridges.",
+    description: "Venture deep into the sacred rainforests of the Khasi Hills. Walk across bio-engineered living root bridges grown over centuries, swim in the glass-clear waters of the Umngot River in Dawki, and witness thunderous waterfalls plunging into mist-filled gorges in Cherrapunji.",
+    price: 85000,
+    currency: "INR",
+    durationDays: 6,
+    rating: 4.92,
+    reviewCount: 240,
+    season: "October – May",
+    groupSize: "2 – 8 guests",
+    category: ["nature", "adventure", "culture"],
+    imageUrl: "https://images.unsplash.com/photo-1626014303757-6466336e7655?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1626014303757-6466336e7655?auto=format&fit=crop&w=1200&q=80"
+    ],
+    highlights: [
+      "Trek to the iconic Double Decker Living Root Bridge in Nongriat",
+      "Boat over crystal-clear floating reflections on the Umngot River in Dawki",
+      "Watch the majestic Nohkalikai and Seven Sisters waterfalls plunge through cloud gorges",
+      "Explore the sacred groves of Mawphlang with indigenous Khasi wisdom keepers"
+    ],
+    itinerary: [
+      { day: 1, title: "Guwahati to Shillong", description: "Scenic hill drive past Umiam Lake to the colonial hill station of Shillong." },
+      { day: 2, title: "Mawphlang Sacred Forest & Khasi Heritage", description: "Guided walk inside centuries-old pristine sacred rainforests." },
+      { day: 3, title: "Cherrapunji & Nohkalikai Falls", description: "Dramatic journey to Cherrapunji; stand atop cliffside viewing platforms above the clouds." },
+      { day: 4, title: "Double Decker Living Root Bridge Expedition", description: "Descend ancient stone stairways through lush jungle to witness living architectural wonders." },
+      { day: 5, title: "Dawki Crystal Waters & Shnongpdeng", description: "Glide across the emerald glass waters of Dawki near the Indo-Bangladesh border." },
+      { day: 6, title: "Return via Guwahati", description: "Scenic morning drive back to Guwahati for flight departure." }
+    ],
+    included: [
+      "Boutique eco-luxury resort accommodation",
+      "Private 4x4 vehicles and specialized hiking guides",
+      "All entry permits, village conservation passes, and boat charters",
+      "Authentic Khasi gastronomic lunches and daily organic breakfasts",
+      "24/7 dedicated Travelyn concierge support"
+    ],
+    featured: true
+  },
+  {
+    id: "dest-mumbai",
+    slug: "mumbai",
+    title: "Mumbai",
+    country: "India",
+    region: "India",
+    startingPoint: "Chhatrapati Shivaji Terminal, Mumbai",
+    endingPoint: "Marine Drive & Colaba, Mumbai",
+    tagline: "Arabian Sea sunsets, colonial heritage architecture, and vibrant coastal culture.",
+    description: "Immerse yourself in the City of Dreams with unparalleled luxury. Sail on a private catamaran as the sun sets over the Arabian Sea, explore the grand Victorian Gothic and Art Deco heritage of South Mumbai with a private architectural historian, and enjoy table reservations at award-winning oceanfront dining rooms.",
+    price: 75000,
+    currency: "INR",
+    durationDays: 4,
+    rating: 4.88,
+    reviewCount: 395,
+    season: "October – March",
+    groupSize: "2 – 6 guests",
+    category: ["culture", "luxury", "trending"],
+    imageUrl: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80"
+    ],
+    highlights: [
+      "Private yacht charter at sunset past the Gateway of India",
+      "Curated heritage walk through Kala Ghoda and the UNESCO Victorian & Art Deco precinct",
+      "Exclusive access and private table at iconic oceanfront heritage dining spots",
+      "Private modern art gallery and boutique fashion studio tour in Bandra"
+    ],
+    itinerary: [
+      { day: 1, title: "Arrival & Gateway Sunset Sail", description: "Private airport transfer to a luxury sea-facing hotel; late afternoon private yacht cruise on the Arabian Sea." },
+      { day: 2, title: "Victorian Gothic & Art Deco Heritage", description: "Private docent walking tour through CST, Oval Maidan, and the heritage lanes of Fort." },
+      { day: 3, title: "Art, Culinary & Bandra Lanes", description: "Explore Kala Ghoda art galleries followed by a coastal drive over the Bandra-Worli Sea Link to heritage Portuguese bungalows." },
+      { day: 4, title: "Marine Drive Promenade & Departure", description: "Morning breakfast overlooking the Queen's Necklace; luxury airport chauffeur transfer." }
+    ],
+    included: [
+      "Iconic 5-star ocean-facing luxury hotel accommodation",
+      "Private luxury chauffeur transfers in premium sedans",
+      "Private catamaran yacht charter on the Arabian Sea",
+      "Private architectural and cultural docent guides",
+      "24/7 dedicated Travelyn concierge support"
+    ],
+    featured: true
   }
 ];
 

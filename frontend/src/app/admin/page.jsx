@@ -3276,7 +3276,7 @@ export default function AdminDashboardPage() {
                           <span>{aboutStatsSettings.aboutTag || 'About Travelyn'}</span>
                         </div>
                         <span style={{ fontSize: '10.5px', fontWeight: 600, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                          {aboutStatsSettings.aboutEst || 'Est. 2014 — Lisbon'}
+                          {aboutStatsSettings.aboutEst || 'EST. 2024 — KERALA'}
                         </span>
                       </div>
 
@@ -3363,7 +3363,7 @@ export default function AdminDashboardPage() {
                           value={aboutStatsSettings.aboutEst || ''}
                           onChange={(e) => setAboutStatsSettings({ ...aboutStatsSettings, aboutEst: e.target.value })}
                           className="admin-input"
-                          placeholder="e.g. Est. 2014 — Lisbon"
+                          placeholder="e.g. EST. 2024 — KERALA"
                         />
                       </div>
                     </div>

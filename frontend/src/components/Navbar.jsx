@@ -115,11 +115,10 @@ export default function Navbar() {
   const navLinks = [
     { num: '01', label: 'Home', href: '/' },
     { num: '02', label: 'Destinations', href: '/destinations' },
-    { num: '03', label: 'Curated Experiences', href: '/experiences' },
-    { num: '04', label: 'AI Journey Planner', href: '/ai-planner' },
-    { num: '05', label: 'About Travelyn', href: '/about' },
-    { num: '06', label: 'Plan a Journey', href: '/contact' },
-    { num: '07', label: 'My Bookings', href: '/bookings' },
+    { num: '03', label: 'AI Journey Planner', href: '/ai-planner' },
+    { num: '04', label: 'About Travelyn', href: '/about' },
+    { num: '05', label: 'Plan a Journey', href: '/contact' },
+    { num: '06', label: 'My Bookings', href: '/bookings' },
   ];
 
   if (pathname?.startsWith('/admin') || pathname === '/login' || pathname === '/signup') {
