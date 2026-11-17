@@ -119,6 +119,7 @@ export default function Navbar() {
     { num: '04', label: 'AI Journey Planner', href: '/ai-planner' },
     { num: '05', label: 'About Travelyn', href: '/about' },
     { num: '06', label: 'Plan a Journey', href: '/contact' },
+    { num: '07', label: 'My Bookings', href: '/bookings' },
   ];
 
   if (pathname?.startsWith('/admin') || pathname === '/login' || pathname === '/signup') {
@@ -166,15 +167,9 @@ export default function Navbar() {
 
             {currentUser ? (
               <a
-                href={currentUser.role === 'admin' ? '/admin' : '#'}
-                onClick={(e) => {
-                  if (currentUser.role !== 'admin') {
-                    e.preventDefault();
-                    setMenuOpen(true);
-                  }
-                }}
+                href={currentUser.role === 'admin' ? '/admin' : '/bookings'}
                 className="travelyn-nav-auth-btn"
-                title={`Signed in as ${currentUser.name}`}
+                title={`Signed in as ${currentUser.name} · View My Bookings`}
               >
                 <span className="travelyn-nav-user-avatar">
                   {currentUser.name ? currentUser.name.trim().charAt(0).toUpperCase() : 'U'}
@@ -277,20 +272,14 @@ export default function Navbar() {
 
             {currentUser ? (
               <a
-                href={currentUser.role === 'admin' ? '/admin' : '#'}
-                onClick={(e) => {
-                  if (currentUser.role !== 'admin') {
-                    e.preventDefault();
-                  } else {
-                    setMenuOpen(false);
-                  }
-                }}
+                href={currentUser.role === 'admin' ? '/admin' : '/bookings'}
+                onClick={() => setMenuOpen(false)}
                 className="travelyn-overlay-auth-btn"
               >
                 <span className="travelyn-nav-user-avatar">
                   {currentUser.name ? currentUser.name.trim().charAt(0).toUpperCase() : 'U'}
                 </span>
-                <span>{currentUser.name ? currentUser.name.split(' ')[0] : 'Member'}</span>
+                <span>{currentUser.name ? currentUser.name.split(' ')[0] : 'Member'} · Bookings</span>
               </a>
             ) : (
               <a

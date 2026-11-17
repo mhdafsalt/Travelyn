@@ -25,11 +25,11 @@ export const getApiBaseUrl = () => {
 export async function apiFetch(endpoint, options = {}) {
   const primary = getApiBaseUrl();
   const candidates = Array.from(new Set([
-    primary,
-    'https://travelyn-s5a4.vercel.app/api',
-    '/backend-api',
     '/api',
     'http://localhost:5000/api',
+    '/backend-api',
+    primary,
+    'https://travelyn-s5a4.vercel.app/api',
     'http://localhost:5001/api'
   ]));
 
@@ -342,4 +342,119 @@ export async function generateItineraryApi(payload) {
     // fallback
   }
   return null;
+}
+
+/**
+ * ============================================================================
+ * RAZORPAY PAYMENT GATEWAY HELPERS
+ * ============================================================================
+ */
+
+/**
+ * Create a Razorpay Order through the secure backend
+ */
+export async function createRazorpayOrder(data) {
+  try {
+    const res = await apiFetch('/payment/create-order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (res && res.ok) {
+      return await res.json();
+    }
+
+    if (res) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.message || 'Failed to create payment order.');
+    }
+    throw new Error('Unable to connect to payment server.');
+  } catch (error) {
+    throw error;
+  }
+}
+
+/**
+ * Verify Razorpay payment signature & confirm booking server-side
+ */
+export async function verifyRazorpayPayment(data) {
+  try {
+    const res = await apiFetch('/payment/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (res && res.ok) {
+      const result = await res.json();
+      if (result.booking) {
+        addStoredBooking(result.booking);
+      }
+      return result;
+    }
+
+    if (res) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.message || 'Payment verification failed.');
+    }
+    throw new Error('Payment verification could not reach server.');
+  } catch (error) {
+    throw error;
+  }
+}
+
+/**
+ * Get booking & payment status by bookingId
+ */
+export async function getPaymentStatus(bookingId) {
+  try {
+    const res = await apiFetch(`/payment/status/${encodeURIComponent(bookingId)}`);
+    if (res && res.ok) {
+      return await res.json();
+    }
+    return null;
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * Get payment transactions history (for user or admin)
+ */
+export async function getPaymentHistory(params = {}) {
+  try {
+    const query = new URLSearchParams(params).toString();
+    const res = await apiFetch(`/payment/history${query ? `?${query}` : ''}`);
+    if (res && res.ok) {
+      return await res.json();
+    }
+    return { success: false, total: 0, totalRevenueINR: 0, payments: [] };
+  } catch (e) {
+    return { success: false, total: 0, totalRevenueINR: 0, payments: [] };
+  }
+}
+
+/**
+ * Admin: initiate refund
+ */
+export async function requestPaymentRefund(paymentId, amount, reason) {
+  try {
+    const res = await apiFetch('/payment/refund', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ paymentId, amount, reason }),
+    });
+    if (res && res.ok) {
+      return await res.json();
+    }
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || 'Refund failed');
+  } catch (e) {
+    throw e;
+  }
 }

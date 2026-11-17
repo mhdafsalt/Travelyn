@@ -17,6 +17,7 @@ const contactRouter = require('./routes/contact');
 const showcaseRouter = require('./routes/showcase');
 const authRouter = require('./routes/auth');
 const aiPlannerRouter = require('./routes/aiPlanner');
+const paymentRouter = require('./routes/payment');
 
 const app = express();
 const DESIRED_PORT = Number(process.env.PORT) || 5001;
@@ -58,7 +59,12 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   credentials: true
 }));
-app.use(express.json());
+app.use(express.json({
+  verify: (req, _res, buf) => {
+    req.rawBody = buf;
+  }
+}));
+app.use(express.urlencoded({ extended: true }));
 
 // Serverless cached MongoDB Atlas connection
 let cachedDb = null;
@@ -166,6 +172,7 @@ app.use('/api/inquiries', contactRouter);
 app.use('/api/showcase', showcaseRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/ai-planner', aiPlannerRouter);
+app.use('/api/payment', paymentRouter);
 
 // 404 handler
 app.use((req, res) => {

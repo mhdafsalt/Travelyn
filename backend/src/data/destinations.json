@@ -14,7 +14,12 @@
     "reviewCount": 428,
     "season": "May – October",
     "groupSize": "2 – 8 guests",
-    "category": ["trending", "islands", "romantic", "luxury"],
+    "category": [
+      "trending",
+      "islands",
+      "romantic",
+      "luxury"
+    ],
     "imageUrl": "https://framerusercontent.com/images/rK0AloWCjpfhC4P1yBcOFEdoxVg.jpg",
     "gallery": [
       "https://framerusercontent.com/images/rK0AloWCjpfhC4P1yBcOFEdoxVg.jpg",
@@ -88,7 +93,12 @@
     "reviewCount": 384,
     "season": "March – May · Oct – Nov",
     "groupSize": "2 – 6 guests",
-    "category": ["culture", "trending", "luxury", "wellness"],
+    "category": [
+      "culture",
+      "trending",
+      "luxury",
+      "wellness"
+    ],
     "imageUrl": "https://framerusercontent.com/images/1i1SYez5flXAysor3K8yCCzcuo0.jpg",
     "gallery": [
       "https://framerusercontent.com/images/1i1SYez5flXAysor3K8yCCzcuo0.jpg",
@@ -168,11 +178,16 @@
     "price": 495000,
     "currency": "INR",
     "durationDays": 6,
-    "rating": 5.0,
+    "rating": 5,
     "reviewCount": 512,
     "season": "November – April",
     "groupSize": "2 – 4 guests",
-    "category": ["islands", "luxury", "romantic", "wellness"],
+    "category": [
+      "islands",
+      "luxury",
+      "romantic",
+      "wellness"
+    ],
     "imageUrl": "https://framerusercontent.com/images/mYmxqjoJu3hOllz5QuhpEbhRR4U.jpg",
     "gallery": [
       "https://framerusercontent.com/images/mYmxqjoJu3hOllz5QuhpEbhRR4U.jpg",
@@ -241,7 +256,11 @@
     "reviewCount": 296,
     "season": "October – April",
     "groupSize": "2 – 10 guests",
-    "category": ["adventure", "nature", "luxury"],
+    "category": [
+      "adventure",
+      "nature",
+      "luxury"
+    ],
     "imageUrl": "https://framerusercontent.com/images/7EoyIkj4WCYIrr9nOccQVnJMI.jpg",
     "gallery": [
       "https://framerusercontent.com/images/7EoyIkj4WCYIrr9nOccQVnJMI.jpg",
@@ -330,7 +349,11 @@
     "reviewCount": 310,
     "season": "March – May · Sept – Nov",
     "groupSize": "2 – 8 guests",
-    "category": ["culture", "adventure", "romantic"],
+    "category": [
+      "culture",
+      "adventure",
+      "romantic"
+    ],
     "imageUrl": "https://framerusercontent.com/images/G7iXc8Cto5GD6mgIWEhikd3XwnU.jpg",
     "gallery": [
       "https://framerusercontent.com/images/G7iXc8Cto5GD6mgIWEhikd3XwnU.jpg",
@@ -399,7 +422,12 @@
     "reviewCount": 462,
     "season": "June – September · Dec – Mar",
     "groupSize": "2 – 8 guests",
-    "category": ["nature", "trending", "luxury", "wellness"],
+    "category": [
+      "nature",
+      "trending",
+      "luxury",
+      "wellness"
+    ],
     "imageUrl": "https://framerusercontent.com/images/bOSiwPWm9Ldy6gOvZQC0GVAJDV8.jpg",
     "gallery": [
       "https://framerusercontent.com/images/bOSiwPWm9Ldy6gOvZQC0GVAJDV8.jpg",
@@ -461,7 +489,10 @@
       "Daily gourmet breakfasts and curated regional dinners",
       "Luggage door-to-door forwarding service"
     ],
-    "featured": true
+    "featured": true,
+    "aliases": [
+      "dest-swiss"
+    ]
   },
   {
     "id": "dest-7",
@@ -478,7 +509,12 @@
     "reviewCount": 395,
     "season": "May – September",
     "groupSize": "2 – 8 guests",
-    "category": ["romantic", "trending", "culture", "luxury"],
+    "category": [
+      "romantic",
+      "trending",
+      "culture",
+      "luxury"
+    ],
     "imageUrl": "https://framerusercontent.com/images/tcBXxNt21t4A8rlwMPTMHUZGkq8.jpg",
     "gallery": [
       "https://framerusercontent.com/images/tcBXxNt21t4A8rlwMPTMHUZGkq8.jpg",
@@ -552,7 +588,11 @@
     "reviewCount": 341,
     "season": "April – October",
     "groupSize": "2 – 6 guests",
-    "category": ["romantic", "luxury", "nature"],
+    "category": [
+      "romantic",
+      "luxury",
+      "nature"
+    ],
     "imageUrl": "https://framerusercontent.com/images/zDzqHDb5G2YmQjLEVyJfal9brwU.jpg",
     "gallery": [
       "https://framerusercontent.com/images/zDzqHDb5G2YmQjLEVyJfal9brwU.jpg",
@@ -598,6 +638,87 @@
       "Private guide and skip-the-line villa tickets",
       "Daily breakfast and lakeside dining experiences",
       "24/7 Travelyn concierge service"
+    ],
+    "featured": true
+  },
+  {
+    "id": "dest-bali",
+    "slug": "bali",
+    "title": "Bali",
+    "country": "Indonesia",
+    "region": "Southeast Asia",
+    "tagline": "Escape to tropical beaches, lush landscapes, and unforgettable island experiences.",
+    "description": "Escape to tropical beaches, lush landscapes, and unforgettable island experiences. Immerse yourself in Ubud's emerald rice terraces, cliffside Uluwatu ocean villas, and tranquil spiritual ceremonies.",
+    "price": 79000,
+    "currency": "INR",
+    "durationDays": 7,
+    "rating": 4.9,
+    "reviewCount": 412,
+    "season": "April – October",
+    "groupSize": "2 – 6 guests",
+    "category": [
+      "trending",
+      "islands",
+      "wellness",
+      "nature",
+      "romantic",
+      "luxury"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1559628376-f3fe5f782a2e?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "highlights": [
+      "Private sunrise yoga and meditation overlooking Ubud's sacred river valley",
+      "Traditional Balinese blessing ceremony at Tirta Empul water temple",
+      "Helicopter flight over Mount Batur volcanic caldera and Lake Batur",
+      "Sunset dinner at an exclusive clifftop infinity lounge in Uluwatu"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Arrival in Denpasar & Ubud Rainforest Haven",
+        "description": "Chauffeured arrival to your private luxury bamboo villa nestled in the lush Ubud canopy."
+      },
+      {
+        "day": 2,
+        "title": "Tegallalang Rice Terraces & Coffee Plantation",
+        "description": "Early morning private guided walk through stepped jade terraces followed by rare Luwak coffee tasting."
+      },
+      {
+        "day": 3,
+        "title": "Sacred Water Cleansing & Artisan Villages",
+        "description": "Participate in an authentic Melukat purification ritual and visit master silver carvers in Celuk."
+      },
+      {
+        "day": 4,
+        "title": "Mount Batur Dawn Trek & Hot Springs",
+        "description": "Ascend the volcanic summit for breakfast above the clouds, then soak in mineral thermal waters."
+      },
+      {
+        "day": 5,
+        "title": "Transfer to Uluwatu & Ocean Clifftop Villa",
+        "description": "Scenic transfer south to your private clifftop sanctuary suspended high above the Indian Ocean."
+      },
+      {
+        "day": 6,
+        "title": "Nusa Penida Yacht Charter & Manta Rays",
+        "description": "Private catamaran charter to crystal lagoons and swim alongside gentle giant manta rays."
+      },
+      {
+        "day": 7,
+        "title": "Farewell Bali Sunset Blessing",
+        "description": "Final oceanside massage and sunset champagne before private transfer to the airport."
+      }
+    ],
+    "included": [
+      "5-star private pool villa accommodations in Ubud & Uluwatu",
+      "Dedicated Balinese private chauffeur and certified English docent",
+      "All daily gourmet breakfasts and 3 bespoke cultural dining feasts",
+      "Private yacht day excursion to Nusa Penida with snorkeling gear",
+      "24/7 dedicated Travelyn concierge"
     ],
     "featured": true
   }
