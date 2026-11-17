@@ -10,8 +10,8 @@ export default function HikeBookingCard({ destination, onBookClick }) {
   const [travelDate, setTravelDate] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Dynamic route starting & ending points per destination
-  const routePoints = {
+  // Dynamic route starting & ending points per destination (reads directly from destination, with graceful fallbacks)
+  const fallbackRoutePoints = {
     'swiss-alps': { start: 'Zurich, Switzerland', end: 'Zermatt, Switzerland' },
     'kyoto': { start: 'Kyoto, Japan', end: 'Kyoto, Japan' },
     'bali': { start: 'Ubud, Bali', end: 'Uluwatu, Bali' },
@@ -23,8 +23,11 @@ export default function HikeBookingCard({ destination, onBookClick }) {
     'lake-como': { start: 'Milan, Italy', end: 'Bellagio, Lake Como' },
   };
 
-  const startLoc = routePoints[destination?.slug]?.start || `${destination?.title || 'Pokhara'}, ${destination?.country || 'Nepal'}`;
-  const endLoc = routePoints[destination?.slug]?.end || `${destination?.title || 'Pokhara'}, ${destination?.country || 'Nepal'}`;
+  const defaultStart = fallbackRoutePoints[destination?.slug]?.start || `${destination?.title || 'Origin'}${destination?.country ? ', ' + destination.country : ''}`;
+  const defaultEnd = fallbackRoutePoints[destination?.slug]?.end || `${destination?.title || 'Destination'}${destination?.country ? ', ' + destination.country : ''}`;
+
+  const startLoc = (destination?.startingPoint && destination.startingPoint.trim()) || defaultStart;
+  const endLoc = (destination?.endingPoint && destination.endingPoint.trim()) || defaultEnd;
 
   const handleSubmit = (e) => {
     e.preventDefault();

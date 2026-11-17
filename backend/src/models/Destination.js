@@ -6,6 +6,8 @@ const destinationSchema = new mongoose.Schema({
   title: { type: String, required: true },
   country: { type: String, required: true },
   region: { type: String, required: true },
+  startingPoint: { type: String, default: '' },
+  endingPoint: { type: String, default: '' },
   tagline: { type: String, default: '' },
   description: { type: String, default: '' },
   price: { type: Number, required: true },

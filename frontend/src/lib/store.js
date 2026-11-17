@@ -141,18 +141,30 @@ export function getStoredDestinations() {
   // Auto-migrate any legacy USD records in localStorage to INR
   let needsUpdate = false;
   const migrated = list.map((d) => {
-    if (d.currency === 'USD' || (d.price && d.price < 10000)) {
+    let item = { ...d };
+    if (item.currency === 'USD' || (item.price && item.price < 10000)) {
       needsUpdate = true;
-      const initialMatch = INITIAL_DESTINATIONS.find((init) => init.id === d.id || init.slug === d.slug);
-      return {
-        ...d,
-        currency: 'INR',
-        price: initialMatch ? initialMatch.price : (d.price ? Math.round(d.price * 85) : 145000)
-      };
+      const initialMatch = INITIAL_DESTINATIONS.find((init) => init.id === item.id || init.slug === item.slug);
+      item.currency = 'INR';
+      item.price = initialMatch ? initialMatch.price : (item.price ? Math.round(item.price * 85) : 145000);
+    }
+    // Backfill starting & ending points from INITIAL_DESTINATIONS if missing in legacy localStorage
+    if (!item.startingPoint || !item.endingPoint) {
+      const match = INITIAL_DESTINATIONS.find((init) => init.id === item.id || init.slug === item.slug);
+      if (match) {
+        if (!item.startingPoint && match.startingPoint) {
+          item.startingPoint = match.startingPoint;
+          needsUpdate = true;
+        }
+        if (!item.endingPoint && match.endingPoint) {
+          item.endingPoint = match.endingPoint;
+          needsUpdate = true;
+        }
+      }
     }
     return {
-      ...d,
-      currency: d.currency || 'INR'
+      ...item,
+      currency: item.currency || 'INR'
     };
   });
   if (needsUpdate) {

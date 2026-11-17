@@ -76,7 +76,9 @@
       "Private chauffeured transfers throughout the stay",
       "Dedicated 24/7 Travelyn concierge"
     ],
-    "featured": true
+    "featured": true,
+    "startingPoint": "Oia, Santorini",
+    "endingPoint": "Ammoudi, Santorini"
   },
   {
     "id": "dest-2",
@@ -165,7 +167,9 @@
       "Bullet train (Shinkansen) first-class arrangements",
       "Exclusive access passes to private temple grounds"
     ],
-    "featured": true
+    "featured": true,
+    "startingPoint": "Kyoto, Japan",
+    "endingPoint": "Kyoto, Japan"
   },
   {
     "id": "dest-3",
@@ -239,7 +243,9 @@
       "Daily unlimited non-motorized water sports & reef excursions",
       "Dedicated personal Thakuru (butler) 24/7"
     ],
-    "featured": true
+    "featured": true,
+    "startingPoint": "Malé, Maldives",
+    "endingPoint": "Private Atoll, Maldives"
   },
   {
     "id": "dest-4",
@@ -332,7 +338,9 @@
       "All meals, premium Chilean vintages and trail picnics",
       "Travelyn round-the-clock expedition support"
     ],
-    "featured": true
+    "featured": true,
+    "startingPoint": "Punta Arenas, Chile",
+    "endingPoint": "Torres del Paine, Chile"
   },
   {
     "id": "dest-5",
@@ -405,7 +413,9 @@
       "Hot air balloon flight with champagne breakfast",
       "Chauffeured Mercedes V-Class throughout"
     ],
-    "featured": true
+    "featured": true,
+    "startingPoint": "Marrakech, Morocco",
+    "endingPoint": "Atlas Mountains, Morocco"
   },
   {
     "id": "dest-6",
@@ -492,7 +502,9 @@
     "featured": true,
     "aliases": [
       "dest-swiss"
-    ]
+    ],
+    "startingPoint": "Zurich, Switzerland",
+    "endingPoint": "Zermatt, Switzerland"
   },
   {
     "id": "dest-7",
@@ -571,7 +583,9 @@
       "Daily breakfast and handpicked Michelin-level dinners",
       "Travelyn 24/7 dedicated Italian concierge"
     ],
-    "featured": true
+    "featured": true,
+    "startingPoint": "Positano, Italy",
+    "endingPoint": "Capri, Italy"
   },
   {
     "id": "dest-8",
@@ -639,7 +653,9 @@
       "Daily breakfast and lakeside dining experiences",
       "24/7 Travelyn concierge service"
     ],
-    "featured": true
+    "featured": true,
+    "startingPoint": "Milan, Italy",
+    "endingPoint": "Bellagio, Lake Como"
   },
   {
     "id": "dest-bali",
@@ -720,6 +736,8 @@
       "Private yacht day excursion to Nusa Penida with snorkeling gear",
       "24/7 dedicated Travelyn concierge"
     ],
-    "featured": true
+    "featured": true,
+    "startingPoint": "Ubud, Bali",
+    "endingPoint": "Uluwatu, Bali"
   }
 ]

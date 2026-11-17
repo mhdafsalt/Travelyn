@@ -48,7 +48,17 @@ const AVAILABLE_CATEGORIES = [
   'luxury'
 ];
 
-const REGIONS = ['Europe', 'Asia', 'South America', 'Africa', 'Indian Ocean', 'North America'];
+const REGIONS = [
+  'Europe',
+  'Asia',
+  'Southeast Asia',
+  'South America',
+  'Africa',
+  'Indian Ocean',
+  'North America',
+  'Middle East',
+  'Oceania'
+];
 
 const HERO_BACKDROP_PRESETS = [
   { label: 'Lisbon Twilight (Original)', url: 'https://framerusercontent.com/images/TSiGMGJHmapQIwKIzHneadv3LM.png' },
@@ -231,6 +241,8 @@ export default function AdminDashboardPage() {
     price: 145000,
     durationDays: 7,
     rating: 4.9,
+    startingPoint: '',
+    endingPoint: '',
     tagline: '',
     description: '',
     imageUrl: '',
@@ -616,6 +628,8 @@ export default function AdminDashboardPage() {
       price: 145000,
       durationDays: 7,
       rating: 4.9,
+      startingPoint: '',
+      endingPoint: '',
       tagline: '',
       description: '',
       imageUrl: defaultCover,
@@ -645,6 +659,8 @@ export default function AdminDashboardPage() {
       price: dest.price || 145000,
       durationDays: dest.durationDays || 7,
       rating: dest.rating || 4.9,
+      startingPoint: dest.startingPoint || '',
+      endingPoint: dest.endingPoint || '',
       tagline: dest.tagline || '',
       description: dest.description || '',
       imageUrl: dest.imageUrl || existingGallery[0] || '',
@@ -756,6 +772,8 @@ export default function AdminDashboardPage() {
       price: Number(destForm.price),
       durationDays: Number(destForm.durationDays),
       rating: Number(destForm.rating),
+      startingPoint: destForm.startingPoint ? destForm.startingPoint.trim() : '',
+      endingPoint: destForm.endingPoint ? destForm.endingPoint.trim() : '',
       tagline: destForm.tagline || 'Bespoke journey through extraordinary landscapes.',
       description: destForm.description || 'Curated journey designed for slow contemplation and luxury.',
       imageUrl: finalCover,
@@ -1636,7 +1654,14 @@ export default function AdminDashboardPage() {
                             />
                             <div>
                               <div className="admin-dest-name">{dest.title}</div>
-                              <div className="admin-dest-sub">{dest.country} · /{dest.slug}</div>
+                              <div className="admin-dest-sub">
+                                {dest.country} · /{dest.slug}
+                                {(dest.startingPoint || dest.endingPoint) && (
+                                  <span style={{ display: 'block', fontSize: '11px', color: '#1a4d2e', fontWeight: 600, marginTop: '2px' }}>
+                                    Route: {dest.startingPoint || dest.country} → {dest.endingPoint || dest.country}
+                                  </span>
+                                )}
+                              </div>
                             </div>
                           </div>
                         </td>
@@ -4592,6 +4617,76 @@ export default function AdminDashboardPage() {
                     onChange={(e) => setDestForm({ ...destForm, rating: e.target.value })}
                     className="admin-form-input"
                   />
+                </div>
+
+                {/* Route Starting Point & Ending Point */}
+                <div className="admin-form-group">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <label className="admin-form-label" style={{ margin: 0 }}>Starting Point</label>
+                    <span style={{ fontSize: '11px', color: '#1a4d2e', fontWeight: 600 }}>● Route Origin</span>
+                  </div>
+                  <input
+                    type="text"
+                    value={destForm.startingPoint}
+                    onChange={(e) => setDestForm({ ...destForm, startingPoint: e.target.value })}
+                    placeholder="e.g. Zurich, Switzerland or Kyoto, Japan"
+                    className="admin-form-input"
+                  />
+                  <div style={{ fontSize: '11px', color: '#718096', marginTop: '3px' }}>
+                    Shown as "Starting Point" on the journey booking card
+                  </div>
+                </div>
+
+                <div className="admin-form-group">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <label className="admin-form-label" style={{ margin: 0 }}>Ending Point</label>
+                    <span style={{ fontSize: '11px', color: '#1a4d2e', fontWeight: 600 }}>● Route Endpoint</span>
+                  </div>
+                  <input
+                    type="text"
+                    value={destForm.endingPoint}
+                    onChange={(e) => setDestForm({ ...destForm, endingPoint: e.target.value })}
+                    placeholder="e.g. Zermatt, Switzerland or Kyoto, Japan"
+                    className="admin-form-input"
+                  />
+                  <div style={{ fontSize: '11px', color: '#718096', marginTop: '3px' }}>
+                    Shown as "Ending Point" on the journey booking card
+                  </div>
+                </div>
+
+                {/* Live Route Endpoints Preview Card */}
+                <div style={{ gridColumn: '1 / -1', background: '#faf9f6', border: '1px solid rgba(23, 25, 28, 0.1)', borderRadius: '16px', padding: '14px 18px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                    <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', color: '#8c8275', textTransform: 'uppercase' }}>
+                      Expedition Route Live Preview
+                    </span>
+                    <span style={{ fontSize: '11px', color: '#1a4d2e', fontWeight: 600 }}>
+                      Live in Hike & Booking Card
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '12px 18px', gap: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ fontWeight: 700, fontSize: '14.5px', color: '#17191c', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {destForm.startingPoint || (destForm.country ? `${destForm.title || 'Origin'}, ${destForm.country}` : 'Starting Point')}
+                      </div>
+                      <div style={{ fontSize: '10.5px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8c8275', marginTop: '2px' }}>
+                        STARTING POINT
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#1a4d2e', flexShrink: 0, padding: '0 10px' }}>
+                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#1a4d2e' }} />
+                      <span style={{ width: '40px', height: '1px', background: '#cbd5e1', borderTop: '1px dashed #1a4d2e' }} />
+                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#1a4d2e' }} />
+                    </div>
+                    <div style={{ textAlign: 'right', minWidth: 0 }}>
+                      <div style={{ fontWeight: 700, fontSize: '14.5px', color: '#17191c', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {destForm.endingPoint || (destForm.country ? `${destForm.title || 'Destination'}, ${destForm.country}` : 'Ending Point')}
+                      </div>
+                      <div style={{ fontSize: '10.5px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8c8275', marginTop: '2px' }}>
+                        ENDING POINT
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
