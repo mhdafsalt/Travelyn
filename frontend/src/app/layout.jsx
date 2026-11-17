@@ -3,13 +3,56 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Travelyn | Tailor-Made Luxury Travel & Journeys',
-  description: "Handpicked journeys to the world's most extraordinary places, designed by real travel experts. Search trips by date and plan your next escape.",
+  metadataBase: new URL('https://travelyn-nu.vercel.app'),
+  title: {
+    default: 'Travelyn | Tailor-Made Luxury Travel & Journeys',
+    template: '%s | Travelyn',
+  },
+  description: "Handpicked journeys to the world's most extraordinary places, designed by real travel experts. Tailor-made itineraries, boutique stays, and slow travel across the globe.",
+  applicationName: 'Travelyn',
+  authors: [{ name: 'Travelyn Luxury Studio' }],
+  keywords: [
+    'Travelyn',
+    'luxury travel',
+    'bespoke journeys',
+    'tailor-made travel',
+    'boutique hotels',
+    'slow travel',
+    'Swiss Alps',
+    'Kyoto',
+    'Amalfi Coast',
+    'Santorini',
+    'Patagonia',
+  ],
   openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://travelyn-nu.vercel.app',
+    siteName: 'Travelyn',
+    title: 'Travelyn | Tailor-Made Luxury Travel & Journeys',
+    description: "Handpicked journeys to the world's most extraordinary places, designed by real travel experts. Tailor-made itineraries, boutique stays, and slow travel across the globe.",
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Travelyn — Bespoke Luxury Journeys',
+        type: 'image/png',
+      },
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Travelyn — Bespoke Luxury Journeys',
+        type: 'image/jpeg',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
     title: 'Travelyn | Tailor-Made Luxury Travel & Journeys',
     description: "Handpicked journeys to the world's most extraordinary places, designed by real travel experts.",
-    type: 'website',
-    images: ['https://framerusercontent.com/images/gjP22E1figlGx4hfv5qEKoJpa4A.png'],
+    images: ['/og-image.png'],
   },
   icons: {
     icon: [

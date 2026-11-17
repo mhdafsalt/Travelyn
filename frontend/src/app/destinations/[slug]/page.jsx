@@ -5,6 +5,7 @@ import { INITIAL_DESTINATIONS } from '@/lib/data';
 import { getStoredDestinations } from '@/lib/store';
 import BookingModal from '@/components/BookingModal';
 import HikeBookingCard from '@/components/HikeBookingCard';
+import '@/components/HikeBookingCard.css';
 
 export default function DestinationDetailPage() {
     const params = useParams();
@@ -108,19 +109,9 @@ export default function DestinationDetailPage() {
       </section>
 
       {/* 2. Main Content Split */}
-      <div style={{
-            width: '100%',
-            maxWidth: '1100px',
-            margin: '32px auto 0',
-            padding: '0 16px',
-            boxSizing: 'border-box',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
-            gap: '32px',
-            alignItems: 'start',
-        }}>
+      <div className="dest-content-grid">
         {/* Left Column: Story, Highlights, Itinerary, Inclusions */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '36px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '36px', minWidth: 0, width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
           {/* Key Facts Pills */}
           <div style={{
             display: 'flex',
@@ -131,6 +122,8 @@ export default function DestinationDetailPage() {
             borderRadius: '20px',
             border: '1px solid rgba(13, 13, 13, 0.08)',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
+            boxSizing: 'border-box',
+            maxWidth: '100%',
         }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
               <span style={{ fontSize: '11px', textTransform: 'uppercase', color: 'rgba(13, 13, 13, 0.5)', fontWeight: 600 }}>
@@ -291,10 +284,12 @@ export default function DestinationDetailPage() {
 
           {/* Inclusions */}
           <div style={{
-            padding: '28px',
+            padding: 'clamp(18px, 4vw, 28px)',
             backgroundColor: '#ffffff',
             borderRadius: '24px',
             border: '1px solid rgba(13, 13, 13, 0.08)',
+            boxSizing: 'border-box',
+            maxWidth: '100%',
         }}>
             <h3 style={{ fontSize: '20px', fontWeight: 600, color: '#17191c', marginBottom: '16px' }}>
               What’s Included in This Journey
@@ -309,7 +304,7 @@ export default function DestinationDetailPage() {
         </div>
 
         {/* Right Column: Sticky Hike & Expedition Booking Card (Nomia Style) */}
-        <div style={{ position: 'sticky', top: '100px' }}>
+        <div className="dest-sidebar-sticky">
           <HikeBookingCard
             destination={destination}
             onBookClick={() => setIsBookingOpen(true)}

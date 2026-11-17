@@ -139,18 +139,18 @@ export default function HikeBookingCard({ destination, onBookClick }) {
 
       {/* 2. Route Endpoints Row */}
       <div className="hike-route-row">
-        <div className="hike-route-endpoint left">
+        <div className="hike-route-endpoint left" title={startLoc}>
           <div className="hike-endpoint-title">{startLoc}</div>
           <div className="hike-endpoint-sub">Starting Point</div>
         </div>
 
-        <div className="hike-route-divider">
+        <div className="hike-route-divider" aria-hidden="true">
           <span className="hike-divider-dot" />
           <span className="hike-divider-line" />
           <span className="hike-divider-dot" />
         </div>
 
-        <div className="hike-route-endpoint right">
+        <div className="hike-route-endpoint right" title={endLoc}>
           <div className="hike-endpoint-title">{endLoc}</div>
           <div className="hike-endpoint-sub">Ending Point</div>
         </div>
