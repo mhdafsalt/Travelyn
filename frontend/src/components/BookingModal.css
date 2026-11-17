@@ -1,310 +1,804 @@
 /* ==========================================================================
-   BookingModal.css - Voyara Booking & Inquire Modal
+   BookingModal.css - Luxury Flight Ticket & Boarding Pass Booking Style
    ========================================================================== */
 
 .booking-modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(13, 18, 22, 0.65);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 100;
+  background-color: rgba(11, 15, 19, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  animation: bookingFadeIn 0.25s ease;
+  padding: 18px;
+  animation: ticketModalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.booking-modal-container {
+/* ==========================================================================
+   1. MAIN PLANE TICKET CARD
+   ========================================================================== */
+
+.plane-ticket-card {
   width: 100%;
-  max-width: 620px;
+  max-width: 580px;
   background-color: #ffffff;
-  border-radius: 32px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  border-radius: 26px;
+  border: 1px solid rgba(215, 205, 190, 0.8);
+  box-shadow: 0 28px 75px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(255, 255, 255, 0.08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-height: 90vh;
-}
-
-.booking-modal-header {
+  max-height: 92vh;
   position: relative;
-  height: 180px;
-  overflow: hidden;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  color: #17191c;
+  box-sizing: border-box;
 }
 
-.booking-modal-banner-img {
+/* ==========================================================================
+   2. TOP AIRLINE STRIP
+   ========================================================================== */
+
+.ticket-airline-bar {
+  background-color: #0d1014;
+  color: #ffffff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  font-size: 11px;
+}
+
+.ticket-airline-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.1em;
+}
+
+.ticket-plane-glyph {
+  color: #cbb494;
+  font-size: 12px;
+}
+
+.ticket-airline-name {
+  font-family: var(--font-display, inherit);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.12em;
+}
+
+.ticket-brand-sep {
+  color: #cbb494;
+}
+
+.ticket-service-tier {
+  color: #94a3b8;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ticket-airline-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticket-flight-no {
+  background: rgba(203, 180, 148, 0.15);
+  color: #cbb494;
+  border: 1px solid rgba(203, 180, 148, 0.3);
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-family: monospace, sans-serif;
+  letter-spacing: 0.06em;
+  font-size: 10.5px;
+}
+
+.ticket-class-pill {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   3. DESTINATION FLIGHT ROUTE BANNER
+   ========================================================================== */
+
+.ticket-hero-banner {
+  position: relative;
+  height: 155px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #17191c;
+}
+
+.ticket-banner-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  filter: brightness(0.9);
 }
 
-.booking-modal-banner-gradient {
+.ticket-banner-shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.7) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(12, 14, 18, 0.35) 0%,
+    rgba(12, 14, 18, 0.72) 55%,
+    rgba(12, 14, 18, 0.94) 100%
+  );
 }
 
-.booking-modal-banner-content {
+.ticket-close-button {
   position: absolute;
-  bottom: 16px;
-  left: 24px;
-  right: 24px;
-  color: #ffffff;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.booking-modal-country {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.85;
-}
-
-.booking-modal-title {
-  font-size: 28px;
-  font-weight: 600;
-  margin: 0;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-}
-
-.booking-modal-price-box {
-  text-align: right;
-}
-
-.booking-modal-price-from {
-  font-size: 12px;
-  opacity: 0.85;
-}
-
-.booking-modal-price-val {
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.booking-modal-close-btn {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 36px;
-  height: 36px;
+  top: 12px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
   border-radius: 999px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: #ffffff;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  transition: background-color 0.2s ease;
+  font-size: 13px;
+  z-index: 10;
+  transition: all 0.2s ease;
 }
 
-.booking-modal-close-btn:hover {
-  background-color: rgba(0, 0, 0, 0.6);
+.ticket-close-button:hover {
+  background-color: #000000;
+  transform: scale(1.06);
 }
 
-.booking-modal-body {
-  padding: 24px;
-  overflow-y: auto;
+/* Flight Route Overlay */
+.ticket-route-container {
+  position: absolute;
+  bottom: 12px;
+  left: 20px;
+  right: 20px;
+  color: #ffffff;
+  z-index: 2;
 }
 
-/* Success View */
-.booking-modal-success {
-  text-align: center;
-  padding: 30px 10px;
+.ticket-route-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ticket-route-node {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ticket-route-node-right {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.ticket-node-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #cbb494;
+  text-transform: uppercase;
+}
+
+.ticket-node-city {
+  font-family: var(--font-display, inherit);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.ticket-node-sub {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+}
+
+/* Flight Mid Line */
+.ticket-route-mid {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 2px;
+  flex: 1;
+  max-width: 155px;
 }
 
-.booking-modal-success-check {
-  width: 60px;
-  height: 60px;
+.ticket-duration-pill {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.14);
+  padding: 1.5px 7px;
   border-radius: 999px;
-  background-color: rgba(47, 133, 90, 0.12);
-  color: #2f855a;
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+}
+
+.ticket-flight-path {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 28px;
+  width: 100%;
+  gap: 5px;
+  color: #cbb494;
 }
 
-.booking-modal-success-title {
-  font-size: 24px;
-  font-weight: 600;
-  color: #1e262a;
-  margin: 0;
+.ticket-path-dash {
+  flex: 1;
+  height: 1px;
+  border-top: 1.5px dashed rgba(203, 180, 148, 0.65);
 }
 
-.booking-modal-success-msg {
-  font-size: 15px;
-  color: rgba(13, 13, 13, 0.65);
-  max-width: 420px;
-  line-height: 1.5;
+.ticket-path-jet {
+  font-size: 12px;
+  color: #cbb494;
+  display: inline-block;
 }
 
-/* Form */
-.booking-modal-form {
+.ticket-charter-tag {
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   4. SCROLLABLE TICKET FORM BODY
+   ========================================================================== */
+
+.ticket-scroll-body {
+  padding: 18px 22px 22px;
+  overflow-y: auto;
+  flex: 1;
+  background-color: #faf9f6;
+  box-sizing: border-box;
+}
+
+/* Custom scrollbar */
+.ticket-scroll-body::-webkit-scrollbar {
+  width: 5px;
+}
+.ticket-scroll-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.ticket-scroll-body::-webkit-scrollbar-thumb {
+  background: rgba(30, 38, 42, 0.18);
+  border-radius: 99px;
+}
+
+.ticket-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 13px;
 }
 
-.booking-modal-row-grid {
+.ticket-row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 12px;
 }
 
-.booking-modal-field {
+.ticket-field-group {
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
-.booking-modal-label {
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-  color: #1e262a;
-  margin-bottom: 6px;
+.ticket-field-label {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #555f6d;
+  text-transform: uppercase;
 }
 
-.booking-modal-input,
-.booking-modal-select {
+/* Inputs */
+.ticket-text-input,
+.ticket-select-input {
   width: 100%;
-  height: 46px;
-  padding: 0 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(13, 13, 13, 0.15);
-  font-size: 14px;
-  color: #1e262a;
+  height: 42px;
+  padding: 0 13px;
+  border-radius: 9px;
+  border: 1px solid #ded8cb;
+  font-size: 13.5px;
+  color: #17191c;
   background-color: #ffffff;
   outline: none;
   font-family: inherit;
-  transition: border-color 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: all 0.18s ease;
+  box-sizing: border-box;
 }
 
-.booking-modal-input:focus,
-.booking-modal-select:focus,
-.booking-modal-textarea:focus {
-  border-color: #1e262a;
+.ticket-text-input:focus,
+.ticket-select-input:focus,
+.ticket-textarea-input:focus {
+  border-color: #17191c;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(203, 180, 148, 0.22);
 }
 
-.booking-modal-textarea {
+.ticket-textarea-input {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(13, 13, 13, 0.15);
-  font-size: 14px;
-  color: #1e262a;
+  padding: 9px 13px;
+  border-radius: 9px;
+  border: 1px solid #ded8cb;
+  font-size: 13px;
+  color: #17191c;
   resize: none;
   background-color: #ffffff;
   outline: none;
   font-family: inherit;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: all 0.18s ease;
+  box-sizing: border-box;
 }
 
-.booking-modal-summary {
-  padding: 14px 18px;
-  border-radius: 16px;
-  background-color: #f2efe9;
+/* ==========================================================================
+   5. PERFORATED TEAR-OFF DIVIDER WITH ACCURATE EDGE NOTCHES
+   ========================================================================== */
+
+.ticket-perforated-tear {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  margin: 14px -22px 10px;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+/* Semicircular notches that punch into the ticket from the overlay */
+.ticket-edge-notch {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 13px;
+  height: 24px;
+  background-color: rgba(11, 15, 19, 0.75);
+  z-index: 5;
+}
+
+.ticket-edge-notch-left {
+  left: 0;
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+  box-shadow: inset -1px 0 2px rgba(0, 0, 0, 0.25);
+}
+
+.ticket-edge-notch-right {
+  right: 0;
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
+  box-shadow: inset 1px 0 2px rgba(0, 0, 0, 0.25);
+}
+
+.ticket-perforated-line {
+  width: 100%;
+  margin: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.ticket-perforated-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border-top: 1.5px dashed rgba(23, 25, 28, 0.22);
+}
+
+.ticket-perforated-tag {
+  position: relative;
+  background-color: #faf9f6;
+  padding: 0 9px;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #718096;
+  text-transform: uppercase;
+  font-family: monospace, sans-serif;
+}
+
+/* ==========================================================================
+   6. FARE RECEIPT STUB & BARCODE
+   ========================================================================== */
+
+.ticket-stub-receipt {
+  padding: 13px 16px;
+  border-radius: 13px;
+  background-color: #f1eee6;
+  border: 1px solid rgba(215, 205, 190, 0.85);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 14px;
+  margin-top: 2px;
 }
 
-.booking-modal-summary-title {
-  font-size: 14px;
+.ticket-receipt-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.ticket-receipt-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ticket-receipt-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.ticket-receipt-badge {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: rgba(16, 185, 129, 0.14);
+  color: #059669;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.ticket-receipt-calc {
+  font-size: 11.5px;
+  color: #475569;
+}
+
+.ticket-receipt-taxes {
+  color: #64748b;
+  font-size: 10px;
+}
+
+.ticket-receipt-price {
+  font-family: var(--font-display, inherit);
+  font-size: 23px;
+  font-weight: 700;
+  color: #17191c;
+  line-height: 1.15;
+  margin-top: 1px;
+}
+
+/* Barcode */
+.ticket-receipt-barcode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+  padding: 5px 10px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid rgba(215, 205, 190, 0.7);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.ticket-barcode-svg {
+  width: 100px;
+  height: 28px;
+  color: #17191c;
+}
+
+.ticket-barcode-num {
+  font-family: monospace, sans-serif;
+  font-size: 8.5px;
   font-weight: 600;
-  color: #1e262a;
+  letter-spacing: 0.06em;
+  color: #64748b;
 }
 
-.booking-modal-summary-sub {
+.ticket-error-banner {
   font-size: 12px;
-  color: rgba(13, 13, 13, 0.6);
+  color: #c53030;
+  font-weight: 500;
+  background: rgba(229, 62, 62, 0.08);
+  padding: 7px 11px;
+  border-radius: 7px;
+  border: 1px solid rgba(229, 62, 62, 0.2);
 }
 
-.booking-modal-summary-price {
-  font-size: 24px;
+/* ==========================================================================
+   7. CONFIRMATION & ISSUE BUTTON
+   ========================================================================== */
+
+.ticket-confirm-btn {
+  width: 100%;
+  height: 48px;
+  background-color: #17191c;
+  color: #ffffff;
+  border-radius: 999px;
+  border: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  margin-top: 3px;
+}
+
+.ticket-confirm-btn:hover:not(:disabled) {
+  background-color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.28);
+}
+
+.ticket-confirm-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.ticket-btn-plane {
+  color: #cbb494;
+  font-size: 13px;
+}
+
+.ticket-btn-arrow {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: transform 0.2s ease;
+}
+
+.ticket-confirm-btn:hover .ticket-btn-arrow {
+  transform: translateX(2px);
+  background-color: #cbb494;
+  color: #0c0e12;
+}
+
+/* ==========================================================================
+   8. ISSUED BOARDING PASS VIEW
+   ========================================================================== */
+
+.ticket-confirmed-view {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.ticket-confirmed-seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 4px 13px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ticket-confirmed-headline {
+  font-family: var(--font-display, inherit);
+  font-size: 22px;
+  font-weight: 700;
+  color: #17191c;
+  margin: 0;
+}
+
+.ticket-confirmed-sub {
+  font-size: 13.5px;
+  color: #64748b;
+  max-width: 420px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.ticket-issued-stub {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid rgba(215, 205, 190, 0.9);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+
+.ticket-issued-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed #e2e8f0;
+  padding-bottom: 10px;
+}
+
+.ticket-issued-airline {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #cbb494;
+}
+
+.ticket-issued-code {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #17191c;
+  font-family: monospace, sans-serif;
+}
+
+.ticket-issued-route-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ticket-issued-k {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.ticket-issued-v {
+  font-size: 14.5px;
   font-weight: 700;
   color: #17191c;
 }
 
-.booking-modal-error {
-  font-size: 13px;
-  color: #c53030;
-  font-weight: 500;
+.ticket-issued-plane-icon {
+  color: #cbb494;
+  font-size: 16px;
 }
 
-.booking-modal-submit-btn {
-  width: 100%;
-  justify-content: center;
-  height: 52px;
-  margin-top: 8px;
+.ticket-issued-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  background: #faf9f5;
+  padding: 10px 12px;
+  border-radius: 9px;
 }
 
-@keyframes bookingFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.ticket-issued-barcode-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding-top: 8px;
+  border-top: 1px dashed #e2e8f0;
 }
 
 /* ==========================================================================
-   Mobile Responsive Adjustments (<= 540px)
+   9. ANIMATION & MOBILE RESPONSIVE
    ========================================================================== */
+
+@keyframes ticketModalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
 @media (max-width: 540px) {
   .booking-modal-overlay {
     padding: 10px;
   }
 
-  .booking-modal-container {
-    border-radius: 20px;
-    max-height: 94vh;
+  .plane-ticket-card {
+    border-radius: 18px;
+    max-height: 96vh;
   }
 
-  .booking-modal-header {
-    height: 140px;
+  .ticket-airline-bar {
+    padding: 8px 14px;
+    font-size: 10px;
   }
 
-  .booking-modal-banner-content {
-    left: 16px;
-    right: 16px;
-    bottom: 12px;
+  .ticket-service-tier {
+    display: none;
   }
 
-  .booking-modal-title {
-    font-size: 20px;
+  .ticket-hero-banner {
+    height: 135px;
   }
 
-  .booking-modal-price-val {
-    font-size: 18px;
+  .ticket-route-container {
+    left: 14px;
+    right: 14px;
+    bottom: 9px;
   }
 
-  .booking-modal-body {
-    padding: 16px;
+  .ticket-node-city {
+    font-size: 17px;
   }
 
-  .booking-modal-row-grid {
+  .ticket-scroll-body {
+    padding: 14px 16px 18px;
+  }
+
+  .ticket-row-2 {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 10px;
   }
 
-  .booking-modal-summary {
+  .ticket-perforated-tear {
+    margin: 12px -16px 8px;
+  }
+
+  .ticket-stub-receipt {
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
+    gap: 10px;
+    padding: 11px 13px;
+  }
+
+  .ticket-receipt-barcode {
+    width: 100%;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .ticket-text-input,
+  .ticket-select-input,
+  .ticket-textarea-input {
+    font-size: 16px !important; /* Prevent iOS zoom */
   }
 }
-
-

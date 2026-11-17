@@ -11,6 +11,7 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
+  overflow: visible;
 }
 
 /* ==========================================================================
@@ -289,6 +290,7 @@
   margin-left: 275px;
   width: calc(100% - 275px);
   box-sizing: border-box;
+  overflow: visible;
 }
 
 /* Topbar */
@@ -1234,17 +1236,12 @@ textarea.admin-input,
   grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
-}
-
-@media (min-width: 1120px) {
-  .admin-hero-studio-grid {
-    grid-template-columns: 380px 1fr;
-  }
+  position: relative;
+  width: 100%;
 }
 
 .admin-hero-preview-card {
-  position: sticky;
-  top: 90px;
+  position: relative;
   background: #0d0f12;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1253,6 +1250,43 @@ textarea.admin-input,
   color: #ffffff;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+  .admin-hero-studio-grid {
+    grid-template-columns: 380px 1fr;
+  }
+
+  .admin-hero-preview-card {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 88px;
+    align-self: start;
+    height: fit-content;
+    max-height: calc(100vh - 104px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    z-index: 30;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(150, 150, 150, 0.3) transparent;
+  }
+
+  .admin-hero-preview-card::-webkit-scrollbar {
+    width: 5px;
+  }
+  .admin-hero-preview-card::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .admin-hero-preview-card::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 4px;
+  }
+  .admin-hero-preview-card::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
 }
 
 .admin-hero-preview-screen {

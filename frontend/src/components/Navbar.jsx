@@ -13,14 +13,30 @@ export default function Navbar() {
   const lastScrollY = useRef(0);
   const pathname = usePathname();
 
-  // Load and subscribe to auth changes
+  // Load and subscribe to auth changes & catch unhandled HMR / WebSocket Event rejections
   useEffect(() => {
     setCurrentUser(getStoredUser());
     const handleAuthChange = (e) => {
       setCurrentUser(e.detail || null);
     };
     window.addEventListener('travelyn_auth_changed', handleAuthChange);
-    return () => window.removeEventListener('travelyn_auth_changed', handleAuthChange);
+
+    const handleUnhandledRejection = (e) => {
+      if (
+        e.reason &&
+        (e.reason instanceof Event ||
+          e.reason.constructor?.name === 'Event' ||
+          Object.prototype.toString.call(e.reason) === '[object Event]')
+      ) {
+        e.preventDefault();
+      }
+    };
+    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+
+    return () => {
+      window.removeEventListener('travelyn_auth_changed', handleAuthChange);
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+    };
   }, []);
 
   // Smart Hide on Scroll Down, Reveal on Scroll Up
