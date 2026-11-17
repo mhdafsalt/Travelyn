@@ -15,57 +15,6 @@ import {
 import { apiFetch } from '@/lib/api';
 import './ai-planner.css';
 
-const PRESET_PROMPTS = [
-  {
-    label: '7 Days Kashmir Valley',
-    destination: 'Kashmir',
-    days: 7,
-    pace: 'Relaxed & Slow',
-    vibes: ['Alpine Chalets', 'Quiet Nature', 'Wellness & Thermal'],
-    prompt: 'Private cedar houseboat on Nigeen Lake, dawn floating market glide on silent shikaras, artisanal saffron harvesting, and snow-draped pine meadows of Gulmarg.'
-  },
-  {
-    label: '6 Days Royal Rajasthan',
-    destination: 'Rajasthan',
-    days: 6,
-    pace: 'Balanced Exploration',
-    vibes: ['Historic Culture', 'Fine Dining & Wine'],
-    prompt: 'Floating marble palace on Lake Pichola in Udaipur, private sunset terrace champagne, miniature art masters in Old Haveli courtyards, and silent golden Thar desert dunes.'
-  },
-  {
-    label: '5 Days Meghalaya Sanctuaries',
-    destination: 'Meghalaya',
-    days: 5,
-    pace: 'Relaxed & Slow',
-    vibes: ['Quiet Nature', 'Scenic Rails'],
-    prompt: 'Descending through misty Khasi cloud forests to sacred living root bridges, floating on glass-clear waters of Umngot river, and quiet pine cottage stays overlooking Umiam Lake.'
-  },
-  {
-    label: '5 Days Maldives Overwater Haven',
-    destination: 'Maldives',
-    days: 5,
-    pace: 'Relaxed & Slow',
-    vibes: ['Coastal Romance', 'Private Yachting', 'Wellness & Thermal'],
-    prompt: 'Overwater wooden villa suspended above turquoise lagoons, private sandbank sunset champagne dinners, and night snorkeling with marine biologists over glowing reefs.'
-  },
-  {
-    label: '4 Days Mumbai Heritage Coast',
-    destination: 'Mumbai',
-    days: 4,
-    pace: 'Balanced Exploration',
-    vibes: ['Coastal Romance', 'Historic Culture', 'Fine Dining & Wine'],
-    prompt: 'Sunrise private yacht sail past historic lighthouses, Art Deco promenades along Marine Drive, and private tastings at legendary coastal seafood institutions.'
-  },
-  {
-    label: '5 Days Delhi Mughal Splendour',
-    destination: 'Delhi',
-    days: 5,
-    pace: 'Balanced Exploration',
-    vibes: ['Historic Culture', 'Fine Dining & Wine'],
-    prompt: 'Sunrise walks through Lodhi Gardens, private architectural historian tours of Humayun’s Tomb and Agrasen Ki Baoli stepwell, and intimate Sufi acoustic evenings.'
-  }
-];
-
 const POPULAR_DESTINATIONS = [
   'Kashmir',
   'Rajasthan',
@@ -218,15 +167,6 @@ export default function AIPlannerPage() {
     }
   };
 
-  const handleApplyPreset = (preset) => {
-    setIsCustomDest(false);
-    setDestination(preset.destination);
-    setDays(preset.days);
-    setPace(preset.pace);
-    setSelectedVibes(preset.vibes);
-    setPrompt(preset.prompt);
-  };
-
   const toggleVibe = (vibe) => {
     if (selectedVibes.includes(vibe)) {
       setSelectedVibes(selectedVibes.filter((v) => v !== vibe));
@@ -325,25 +265,6 @@ export default function AIPlannerPage() {
           <p className="ai-planner-subhead">
             Slow, tailor-made itineraries shaped around rhythm, seasonal daylight, private chalets, and authentic local culture in seconds.
           </p>
-
-          {/* Quick Presets */}
-          <div className="ai-planner-presets-wrap" suppressHydrationWarning>
-            <span className="ai-planner-presets-label">Curated Inspirations</span>
-            <div className="ai-planner-presets-list" suppressHydrationWarning>
-              {PRESET_PROMPTS.map((preset, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  suppressHydrationWarning
-                  onClick={() => handleApplyPreset(preset)}
-                  className="ai-preset-chip"
-                >
-                  <span>✦</span>
-                  <span>{preset.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
