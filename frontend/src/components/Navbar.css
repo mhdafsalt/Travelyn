@@ -313,9 +313,9 @@
   padding-bottom: 24px;
 }
 
-/* Quick Actions Row Inside Hamburger Drawer */
+/* Quick Actions Row Inside Hamburger Drawer (Mobile Only) */
 .travelyn-overlay-quick-actions {
-  display: flex;
+  display: none; /* Hidden on laptop and desktop */
   align-items: center;
   gap: 12px;
   width: 100%;
@@ -770,6 +770,11 @@
   .travelyn-navbar-actions .travelyn-nav-ai-btn,
   .travelyn-navbar-actions .travelyn-nav-auth-btn {
     display: none !important;
+  }
+
+  /* Show quick actions inside the mobile overlay menu */
+  .travelyn-overlay-quick-actions {
+    display: flex;
   }
 }
 
