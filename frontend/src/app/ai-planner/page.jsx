@@ -17,58 +17,65 @@ import './ai-planner.css';
 
 const PRESET_PROMPTS = [
   {
-    label: '7 Days Swiss Alps',
-    destination: 'Swiss Alps',
+    label: '7 Days Kashmir Valley',
+    destination: 'Kashmir',
     days: 7,
     pace: 'Relaxed & Slow',
-    vibes: ['Alpine Chalets', 'Quiet Nature', 'Fine Dining & Wine'],
-    prompt: 'A slow winter journey through Zermatt and Bernese Oberland with private fireside fondue, first-class Glacier Express scenic train, and wood-timbered chalets with cedar hot tubs.'
+    vibes: ['Alpine Chalets', 'Quiet Nature', 'Wellness & Thermal'],
+    prompt: 'Private cedar houseboat on Nigeen Lake, dawn floating market glide on silent shikaras, artisanal saffron harvesting, and snow-draped pine meadows of Gulmarg.'
   },
   {
-    label: '5 Days Kyoto Sanctuaries',
-    destination: 'Kyoto',
-    days: 5,
-    pace: 'Slow & Contemplative',
-    vibes: ['Historic Culture', 'Quiet Nature', 'Wellness & Thermal'],
-    prompt: 'Private morning entries into secluded Zen moss gardens, authentic tea ceremonies with a 15th-generation master, and staying in a 200-year-old riverfront machiya.'
-  },
-  {
-    label: '6 Days Santorini Sunset Sail',
-    destination: 'Santorini',
+    label: '6 Days Royal Rajasthan',
+    destination: 'Rajasthan',
     days: 6,
-    pace: 'Coastal Romance',
-    vibes: ['Coastal Romance', 'Fine Dining & Wine'],
-    prompt: 'Caldera cliffside cave pool suites, private sunset catamaran sailing over volcanic craters, and tastings of ancient Assyrtiko basket vines.'
-  },
-  {
-    label: '8 Days Amalfi & Capri',
-    destination: 'Amalfi Coast',
-    days: 8,
     pace: 'Balanced Exploration',
-    vibes: ['Coastal Romance', 'Fine Dining & Wine'],
-    prompt: 'Vintage Riva wooden boat charters to hidden sea grottos, cliffside villa in Positano, and candlelit dinners under aromatic lemon groves.'
+    vibes: ['Historic Culture', 'Fine Dining & Wine'],
+    prompt: 'Floating marble palace on Lake Pichola in Udaipur, private sunset terrace champagne, miniature art masters in Old Haveli courtyards, and silent golden Thar desert dunes.'
   },
   {
-    label: '10 Days Patagonia Expedition',
-    destination: 'Patagonia',
-    days: 10,
-    pace: 'Immersive Exploration',
-    vibes: ['Quiet Nature', 'Alpine Chalets'],
-    prompt: 'Slow trekking along granite towers, luxury geodesic dome stays, glacier navigation in Torres del Paine, and pristine midnight stargazing.'
+    label: '5 Days Meghalaya Sanctuaries',
+    destination: 'Meghalaya',
+    days: 5,
+    pace: 'Relaxed & Slow',
+    vibes: ['Quiet Nature', 'Scenic Rails'],
+    prompt: 'Descending through misty Khasi cloud forests to sacred living root bridges, floating on glass-clear waters of Umngot river, and quiet pine cottage stays overlooking Umiam Lake.'
+  },
+  {
+    label: '5 Days Maldives Overwater Haven',
+    destination: 'Maldives',
+    days: 5,
+    pace: 'Relaxed & Slow',
+    vibes: ['Coastal Romance', 'Private Yachting', 'Wellness & Thermal'],
+    prompt: 'Overwater wooden villa suspended above turquoise lagoons, private sandbank sunset champagne dinners, and night snorkeling with marine biologists over glowing reefs.'
+  },
+  {
+    label: '4 Days Mumbai Heritage Coast',
+    destination: 'Mumbai',
+    days: 4,
+    pace: 'Balanced Exploration',
+    vibes: ['Coastal Romance', 'Historic Culture', 'Fine Dining & Wine'],
+    prompt: 'Sunrise private yacht sail past historic lighthouses, Art Deco promenades along Marine Drive, and private tastings at legendary coastal seafood institutions.'
+  },
+  {
+    label: '5 Days Delhi Mughal Splendour',
+    destination: 'Delhi',
+    days: 5,
+    pace: 'Balanced Exploration',
+    vibes: ['Historic Culture', 'Fine Dining & Wine'],
+    prompt: 'Sunrise walks through Lodhi Gardens, private architectural historian tours of Humayun’s Tomb and Agrasen Ki Baoli stepwell, and intimate Sufi acoustic evenings.'
   }
 ];
 
 const POPULAR_DESTINATIONS = [
+  'Kashmir',
+  'Rajasthan',
+  'Meghalaya',
+  'Maldives',
+  'Mumbai',
+  'Delhi',
   'Swiss Alps',
   'Kyoto',
-  'Santorini',
-  'Amalfi Coast',
-  'Patagonia',
-  'Maldives',
-  'Tuscany',
-  'Lapland & Northern Lights',
-  'Lake Como',
-  'Provence'
+  'Santorini'
 ];
 
 const AVAILABLE_VIBES = [
@@ -86,7 +93,7 @@ export default function AIPlannerPage() {
   const router = useRouter();
   // Input form state
   const [prompt, setPrompt] = useState('');
-  const [destination, setDestination] = useState('Swiss Alps');
+  const [destination, setDestination] = useState('Kashmir');
   const [days, setDays] = useState(7);
   const [pace, setPace] = useState('Relaxed & Slow');
   const [selectedVibes, setSelectedVibes] = useState(['Alpine Chalets', 'Quiet Nature']);
@@ -172,7 +179,31 @@ export default function AIPlannerPage() {
 
     // Dynamic smart matching for vibes/days based on destination
     const lower = val.toLowerCase();
-    if (lower.includes('swiss') || lower.includes('alps') || lower.includes('switzerland')) {
+    if (lower.includes('kashmir') || lower.includes('srinagar')) {
+      setDays(7);
+      setPace('Relaxed & Slow');
+      setSelectedVibes(['Alpine Chalets', 'Quiet Nature', 'Wellness & Thermal']);
+    } else if (lower.includes('rajasthan') || lower.includes('jaipur') || lower.includes('udaipur')) {
+      setDays(6);
+      setPace('Balanced Exploration');
+      setSelectedVibes(['Historic Culture', 'Fine Dining & Wine']);
+    } else if (lower.includes('meghalaya') || lower.includes('shillong')) {
+      setDays(5);
+      setPace('Relaxed & Slow');
+      setSelectedVibes(['Quiet Nature', 'Scenic Rails']);
+    } else if (lower.includes('maldives')) {
+      setDays(5);
+      setPace('Relaxed & Slow');
+      setSelectedVibes(['Coastal Romance', 'Private Yachting', 'Wellness & Thermal']);
+    } else if (lower.includes('mumbai') || lower.includes('bombay')) {
+      setDays(4);
+      setPace('Balanced Exploration');
+      setSelectedVibes(['Coastal Romance', 'Historic Culture', 'Fine Dining & Wine']);
+    } else if (lower.includes('delhi')) {
+      setDays(5);
+      setPace('Balanced Exploration');
+      setSelectedVibes(['Historic Culture', 'Fine Dining & Wine']);
+    } else if (lower.includes('swiss') || lower.includes('alps') || lower.includes('switzerland')) {
       setDays(7);
       setPace('Relaxed & Slow');
       setSelectedVibes(['Alpine Chalets', 'Quiet Nature', 'Fine Dining & Wine']);
@@ -184,26 +215,6 @@ export default function AIPlannerPage() {
       setDays(6);
       setPace('Coastal Romance'); 
       setSelectedVibes(['Coastal Romance', 'Fine Dining & Wine']);
-    } else if (lower.includes('maldives')) {
-      setDays(5);
-      setPace('Relaxed & Slow');
-      setSelectedVibes(['Coastal Romance', 'Private Yachting', 'Wellness & Thermal']);
-    } else if (lower.includes('patagonia') || lower.includes('chile')) {
-      setDays(10);
-      setPace('Immersive Expedition');
-      setSelectedVibes(['Quiet Nature', 'Scenic Rails']);
-    } else if (lower.includes('amalfi') || lower.includes('como') || lower.includes('italy')) {
-      setDays(8);
-      setPace('Coastal Romance');
-      setSelectedVibes(['Coastal Romance', 'Fine Dining & Wine', 'Historic Culture']);
-    } else if (lower.includes('bali') || lower.includes('indonesia')) {
-      setDays(7);
-      setPace('Relaxed & Slow');
-      setSelectedVibes(['Wellness & Thermal', 'Quiet Nature']);
-    } else if (lower.includes('marrakech') || lower.includes('morocco')) {
-      setDays(6);
-      setPace('Balanced Exploration');
-      setSelectedVibes(['Historic Culture', 'Fine Dining & Wine']);
     }
   };
 
@@ -703,19 +714,11 @@ export default function AIPlannerPage() {
           </div>
 
           {/* Luggage & Advice */}
-          <div style={{
-            background: '#ffffff',
-            borderRadius: '20px',
-            border: '1px solid rgba(23, 25, 28, 0.08)',
-            padding: '24px 28px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '8px'
-          }}>
-            <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#5b8291' }}>
+          <div className="ai-advice-card">
+            <span className="ai-advice-label">
               Concierge Packing &amp; Climate Dispatch
             </span>
-            <p style={{ margin: 0, fontSize: '14.5px', color: '#334155', lineHeight: 1.6 }}>
+            <p className="ai-advice-desc">
               {itinerary.luggageAdvice}
             </p>
           </div>
@@ -725,7 +728,7 @@ export default function AIPlannerPage() {
             <div className="ai-action-bar-left">
               <span className="ai-action-bar-price">
                 ₹{itinerary.estimatedPriceINR.toLocaleString('en-IN')}{' '}
-                <span style={{ fontSize: '13px', fontWeight: 400, opacity: 0.8 }}>/ traveller</span>
+                <span className="ai-action-bar-price-sub">/ traveller</span>
               </span>
               <span className="ai-action-bar-sub">Includes private transfers, curated docents &amp; luxury suites</span>
             </div>
@@ -764,19 +767,7 @@ export default function AIPlannerPage() {
           </div>
 
           {saveToast && (
-            <div style={{
-              position: 'fixed',
-              bottom: '24px',
-              right: '24px',
-              background: '#17191c',
-              color: '#ffffff',
-              padding: '14px 22px',
-              borderRadius: '999px',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-              fontSize: '13.5px',
-              fontWeight: 500,
-              zIndex: 1000
-            }}>
+            <div className="ai-saved-toast">
               {saveToast}
             </div>
           )}
@@ -785,28 +776,19 @@ export default function AIPlannerPage() {
 
       {/* 5. Saved Itineraries Gallery (Client Only) */}
       {isMounted && savedItineraries.length > 0 && (
-        <section style={{ maxWidth: '1080px', margin: '60px auto 0', padding: '0 24px' }} suppressHydrationWarning>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+        <section className="ai-saved-itineraries-wrap" suppressHydrationWarning>
+          <div className="ai-saved-header-row">
             <h3 className="ai-section-title">Your Saved Atelier Itineraries ({savedItineraries.length})</h3>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }} suppressHydrationWarning>
+          <div className="ai-saved-grid" suppressHydrationWarning>
             {savedItineraries.map((saved) => (
               <div
                 key={saved.id}
-                style={{
-                  background: '#ffffff',
-                  borderRadius: '16px',
-                  border: '1px solid rgba(23, 25, 28, 0.08)',
-                  padding: '20px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px'
-                }}
+                className="ai-saved-card"
                 onClick={() => handleSelectSaved(saved)}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '11px', fontWeight: 600, color: '#5b8291', textTransform: 'uppercase' }}>
+                <div className="ai-saved-card-top">
+                  <span className="ai-saved-badge">
                     {saved.durationDays} Days · {saved.country}
                   </span>
                   <button
@@ -816,15 +798,16 @@ export default function AIPlannerPage() {
                       e.stopPropagation();
                       deleteStoredItinerary(saved.id);
                     }}
-                    style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '12px' }}
+                    className="ai-saved-delete-btn"
+                    title="Remove saved itinerary"
                   >
                     ✕
                   </button>
                 </div>
-                <h4 style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: '#17191c' }}>
+                <h4 className="ai-saved-card-title">
                   {saved.destinationTitle}
                 </h4>
-                <span style={{ fontSize: '13px', fontWeight: 600, color: '#17191c' }}>
+                <span className="ai-saved-card-price">
                   ₹{saved.estimatedPriceINR?.toLocaleString('en-IN')}
                 </span>
               </div>
